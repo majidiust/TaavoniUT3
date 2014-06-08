@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>ورود اعضا</title>
+	<meta charset="utf-8">
+	
+	<!-- Global stylesheets -->
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+	<link href="css/common.css" rel="stylesheet" type="text/css">
+	<link href="css/form.css" rel="stylesheet" type="text/css">
+	<link href="css/standard.css" rel="stylesheet" type="text/css">
+	<link href="css/special-pages.css" rel="stylesheet" type="text/css">
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link rel="icon" type="image/png" href="favicon-large.png">
+	
+	<!-- Generic libs -->
+	<script type="text/javascript" src="js/html5.js"></script><!-- this has to be loaded before anything else -->
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/old-browsers.js"></script>		<!-- remove if you do not need older browsers detection -->
+	
+	<!-- Template core functions -->
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/standard.js"></script>
+	<!--[if lte IE 8]><script type="text/javascript" src="js/standard.ie.js"></script><![endif]-->
+	<script type="text/javascript" src="js/jquery.tip.js"></script>
+	
+	<!-- example login script -->
+	<script type="text/javascript">
+	
+		$(document).ready(function()
+		{
+			$('#login-block').removeBlockMessages();
+			// We'll catch form submission to do it in AJAX, but this works also with JS disabled
+			$('#login-form').submit(function(event)
+			{
+				// Stop full page load
+				event.preventDefault();
+				
+				// Check fields
+				var login = $('#login').val();
+				var pass = $('#pass').val();
+				
+				if (!login || login.length == 0)
+				{
+					$('#login-block').removeBlockMessages().blockMessage('لطفا نام کاربری خود را وارد کنید', {type: 'error'});
+				}
+				else if (!pass || pass.length == 0)
+				{
+					$('#login-block').removeBlockMessages().blockMessage('لطفا کلمه عبور خود را وارد کنید', {type: 'error'});
+				}
+				else
+				{
+					var submitBt = $(this).find('button[type=submit]');
+					submitBt.disableBt();
+					
+					// Target url
+					var ServerURL = "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOn";
+					var target = ServerURL;
+					if (!target || target == '')
+					{
+						// Page url without hash
+						target = document.location.href.match(/^([^#]+)/)[1];
+					}
+					
+					// Request
+					var data = {
+						username: login,
+						pass: pass
+					};
+					
+					var redirect = "http://taavoniut3.ir/Panels/blank.html";
+					
+					// Start timer
+					var sendTimer = new Date().getTime();
+					
+					// Send
+					$.ajax({
+						url: target,
+						dataType: 'json',
+						type: 'POST',
+						data: data,
+						success: function(data, textStatus, XMLHttpRequest)
+						{
+							if(data.Status == true)
+							{
+								// Small timer to allow the 'cheking login' message to show when server is too fast
+								var receiveTimer = new Date().getTime();
+								if (receiveTimer-sendTimer < 500)
+								{
+									setTimeout(function()
+									{
+										document.location.href = redirect;
+										
+									}, 500-(receiveTimer-sendTimer));
+								}
+								else
+								{
+									document.location.href = redirect;
+								}
+							}
+							else
+							{
+								// Message
+								$('#login-block').removeBlockMessages().blockMessage(data.error || 'خطایی در هنگام ورود رخ داده است. مجددا تلاش نمایید.', {type: 'error'});
+								
+								submitBt.enableBt();
+							}
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown)
+						{
+							// Message
+							$('#login-block').removeBlockMessages().blockMessage('خطا در برقراری ارتباط با سرور، مجددا تلاش نمایید.', {type: 'error'});
+							
+							submitBt.enableBt();
+						}
+					});
+					
+					// Message
+					$('#login-block').removeBlockMessages().blockMessage('لطفا منتظر بمانید، در حال بررسی اطلاعات ورود ....', {type: 'loading'});
+				}
+			});
+		});
+	
+	</script>
+	
+</head>
+
+<!-- the 'special-page' class is only an identifier for scripts -->
+<body class="special-page login-bg dark">
+<!-- The template uses conditional comments to add wrappers div for ie8 and ie7 - just add .ie, .ie7 or .ie6 prefix to your css selectors when needed -->
+<!--[if lt IE 9]><div class="ie"><![endif]-->
+<!--[if lt IE 8]><div class="ie7"><![endif]-->
+
+	<section id="message" style="direction:rtl;font-family:tahoma;">
+		<div class="block-border"><div class="block-content no-title dark-bg">
+       
+			<p  style="direction:rtl;text-align:justify;"> <center>
+            سامانه مدیریت اعضا تعاونی شماره 3 دانشگاه تهران
+            </center></p>
+		</div></div>
+	</section>
+	
+	<section id="login-block">
+		<div class="block-border"><div class="block-content">
+				
+			<h1 style="font-family:tahoma;font-size:12px;">مدیریت</h1>
+			<div class="block-header" style="direction:rtl;font-family:Tahoma, Geneva, sans-serif">درگاه ورود</div>
+				
+			<p class="message error no-margin" style="direction:rtl;" style="font-family:Tahoma, Geneva, sans-serif;">پیام فارسی</p>
+			
+			<form class="form with-margin" name="login-form" id="login-form" method="post" action=""  >
+				<input type="hidden" name="a" id="a" value="send">
+				<p class="inline-small-label inline-fields-text-custom">
+					<label for="login"><span class="medium-margin">نام کاربری</span></label>
+					<input type="text" name="login" id="login" class="full-width" value="">
+				</p>
+				<p class="inline-small-label inline-fields-text-custom" >
+					<label for="pass"><span class="medium-margin">کلمه عبور</span></label>
+					<input type="password" name="pass" id="pass" class="full-width" value="">
+				</p>
+				<center>
+				<button type="submit" class="submit-button" class="float-right">ورود</button>
+                </center>
+				
+			</form>
+			<center>
+			<form class="form" id="password-recovery" method="post" action="">
+				<fieldset class="grey-bg no-margin collapse">
+					<legend><a href="#">کلمه عبور را فراموش کردم</a></legend>
+					<p class="input-with-button">
+						<label for="recovery-mail" dir="rtl">آدرس پست الکترونیکی خود را وارد کنید.</label>
+						<input type="text" name="recovery-mail" id="recovery-mail" value="">
+						<button type="button" class="submit-button" >بازیابی</button>
+					</p>
+				</fieldset>
+			</form>
+            </center>
+		</div></div>
+	</section>
+    <div style="position:fixed;bottom:0px;width:100%;">
+        <center>
+            <div class="block-border button" style="color:#FFF;	font-family:tahoma;
+	direction:rtl;"><p>
+	               تمامی حقوق برای تعاونی شماره 3 دانشگاه تهران محفوظ است.
+    
+    	http://www.tavooniut3.ir
+    </p>
+            </div>
+        </center>
+	</div>
+<!--[if lt IE 8]></div><![endif]-->
+<!--[if lt IE 9]></div><![endif]-->
+</body>
+</html>
