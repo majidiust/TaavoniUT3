@@ -111,7 +111,7 @@ namespace TavooniUT3.Models
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TavooniUT3ConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
