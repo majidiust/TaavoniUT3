@@ -53,3 +53,11 @@ C:\Users\majid\Desktop\Projects\CHMS\trunk\trunk\ServerSide\TavooniUT3\TavooniUT
 C:\Users\majid\Desktop\Projects\CHMS\trunk\trunk\ServerSide\TavooniUT3\TavooniUT3\bin\Microsoft.Web.Mvc.pdb
 C:\Users\majid\Desktop\Projects\CHMS\trunk\trunk\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Json.pdb
 C:\Users\majid\Desktop\Projects\CHMS\trunk\trunk\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Json.xml
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\TavooniUT3.dll
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\TavooniUT3.pdb
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Microsoft.Web.Mvc.pdb
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Json.pdb
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Json.xml
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.csprojResolveAssemblyReference.cache
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.dll
+F:\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.pdb
