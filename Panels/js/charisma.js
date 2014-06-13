@@ -831,7 +831,7 @@ function SendRecom() {
 
 function LogoutFromServer() {
     $.getJSON(ServerURL + "Account/LogOutOfServer", {}, function (result) {
-        window.location = BaseURL + "/html/login.html";
+        window.location = "http://taavoniut3.ir/Public/index.htm";
     });
 }
 
