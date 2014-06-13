@@ -446,14 +446,14 @@ function DetectLoggedInUser() {
 
 function GoToPanel() {
     if (userName != "") {
-        window.location = "Panels/blank.html";
+        window.location = "http:///taavoniut3.ir/Panels/blank.html";
     } else {
         DetectLoggedInUser();
     }
 }
 
 function LogOut() {
-    $.getJSON(ServerURL + "Account/LogOutOfServer", {}, function (result) {
+    $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOutOfServer", {}, function (result) {
         userName = "";
         $("#username").val("");
         $("#password").val("");
