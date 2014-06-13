@@ -72,3 +72,8 @@ C:\inetpub\wwwroot\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\Tavooni
 C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.dll
 C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.pdb
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\TavooniUT3.dll
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\TavooniUT3.pdb
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Microsoft.Web.Mvc.pdb
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Json.pdb
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Json.xml

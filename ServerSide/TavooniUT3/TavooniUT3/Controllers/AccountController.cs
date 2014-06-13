@@ -85,29 +85,6 @@ namespace TavooniUT3.Controllers
 
         //New Codes
 
-        [HttpGet]
-        public ActionResult IsLoggedIn()
-        {
-            try
-            {
-                if (Request.IsAuthenticated == false)
-                {
-                    return Json(new { Status = false, Message = "Does not Authenticated" });
-                }
-                else
-                {
-                    String userName = User.Identity.Name;
-                    var user = m_model.aspnet_Users.Single(P=>P.UserName == userName);
-                    string email = user.aspnet_Membership.Email;
-                    string mobile = user.aspnet_Membership.MobilePIN;
-                    return Json(new { Status = true, user = userName, email = email, mobile = mobile, Message = " Logged in successfully." });
-                }
-            }
-            catch(Exception ex)
-            {
-                return Json(new { Status = false, Message = ex.Message});
-            }
-        }
 
         [Authorize(Roles = "Admin, ViewUsers")]
         public ActionResult GetListOfUsers()
