@@ -401,7 +401,7 @@ function DetectLoggedInUser() {
     $("#LoginMessage").hide();
     $("#LogInDetails").hide();
 
-    $.getJSON(ServerURL + "Account/IsLoggedIn", {}, function (result) {
+    $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn", {}, function (result) {
         if (result.Status == true) {
             userName = result.user;
             $("#LogInDetails").show();
@@ -987,7 +987,7 @@ function DetectLoggedInUserNew() {
     ShowModalWindow("توجه", 'در حال دریافت اطلاعات سرور ....');
     $.ajax({
         type: 'GET',
-        url: ServerURL + "Account/IsLoggedIn",
+        url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn",
         dataType: 'json',
         success: function (result) {
             if (result.Status == true) {
