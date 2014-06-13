@@ -69,3 +69,6 @@ C:\inetpub\wwwroot\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\Newtonsoft.Js
 C:\inetpub\wwwroot\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.dll
 C:\inetpub\wwwroot\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.pdb
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.dll
+C:\Users\majid\Desktop\Projects\LastTaavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.pdb
