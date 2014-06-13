@@ -20,13 +20,12 @@ function LoginToAccountUp() {
         //Call Ajax
         LoginData = {
             username: m_userName,
-            password: m_password,
-            rememberMe: true
+            pass: m_password
         };
 
         $.ajax({
             type: 'POST',
-            url: ServerURL + "Account/SignInToServer",
+            url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOn",
             dataType: 'json',
             success: function (result) {
 
@@ -98,13 +97,12 @@ function LoginToAccountCenter() {
         //Call Ajax
         LoginData = {
             username: m_userName,
-            password: m_password,
-            rememberMe: true
+            pass: m_password
         };
 
         $.ajax({
             type: 'POST',
-            url: ServerURL + "Account/SignInToServer",
+            url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOn",
             dataType: 'json',
             success: function (result) {
 
