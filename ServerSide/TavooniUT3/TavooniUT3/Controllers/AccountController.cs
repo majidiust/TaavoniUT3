@@ -232,6 +232,30 @@ namespace TavooniUT3.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetUserBriefInfo()
+        {
+            try
+            {
+                if (Request.IsAuthenticated == false)
+                {
+                    return Error(30);
+                }
+                else
+                {
+                    String userName = User.Identity.Name;
+                    var Result = Membership.GetUser(userName);
+                    var user = m_model.aspnet_Users.Single(P=>P.UserName.Equals(userName));
+                    var UserPoint = CalculateUserPoint(user.UserId);
+                    return Json(new { Status = true, Result , Point = UserPoint}, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
         public ActionResult IsLoggedIn()
         {
             try
