@@ -898,7 +898,7 @@ function LogOutNew() {
     ShowModalWindow("توجه", 'در حال اعمال تغییرات ....');
     $.ajax({
         type: 'GET',
-        url: ServerURL + "Account/LogOutOfServer",
+        url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOutOfServer",
         dataType: 'json',
         success: function () {
             ShowModalWindow("موفقیت آمیز", "شما با موفقیت از سیستم خارج شدید");
