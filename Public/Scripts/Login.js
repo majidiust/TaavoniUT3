@@ -40,6 +40,7 @@ function LoginToAccountUp() {
 					
 					try
 					{
+						
 											$("#UserDetails").show();
 					$("#loginbox2").hide();
 					}
@@ -409,7 +410,7 @@ function DetectLoggedInUser() {
             $("#login-box").hide();
             $("#RegisterBox").hide();
             $("#UserInfo").show();
-            $("#UserName").html(result.UserName);
+            $("#UserNameUp").html(result.UserName);
             $("#Login").hide();
 			
 			try
