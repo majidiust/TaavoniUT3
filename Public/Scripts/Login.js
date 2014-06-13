@@ -405,11 +405,11 @@ function DetectLoggedInUser() {
         if (result.Status == true) {
             userName = result.user;
             $("#LogInDetails").show();
-            $("#LogInDetailsUserName").html(result.user);
+            $("#LogInDetailsUserName").html(result.UserName);
             $("#login-box").hide();
             $("#RegisterBox").hide();
             $("#UserInfo").show();
-            $("#UserName").html(result.user);
+            $("#UserName").html(result.UserName);
             $("#Login").hide();
 			
 			try
@@ -924,34 +924,32 @@ function LogOutNew() {
 }
 
 function GetUserSummery() {
+	var x  = 1;
     ShowModalWindow("توجه", 'در حال دریافت اطلاعات کاربری ....');
     $.ajax({
         type: 'GET',
-        url: ServerURL + "Account/GetUserSummery",
+        url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/GetUserBriefInfo",
         dataType: 'json',
         success: function (result) {
             CloseModalWindow();
             if (result.Status == true) {
                 var userDetails = {};
-                userDetails.username = result.Result.userName;
-                userDetails.balance = result.Result.balance;
-                userDetails.email = result.Result.email;
-                userDetails.invited = result.Result.invited;
-                userDetails.accepted = result.Result.accepted;
-                userDetails.rejected = result.Result.rejected;
-                if (result.Result.HasProfile == true) {
-
-                } else {
-                    var errorMessage = "لطفا پروفایل خود را تکمیل کنید. برای این کار وارد پانل مدیریت شدهو از بالای صفحه نام کاربری و سپس پروفایل خود را انتخاب کرده و سپس فرم نمایش داده شده را تکمیل نمایید.";
-                    $("#loggedinuser_systemMessage").html(errorMessage);
-                }
+                userDetails.username = result.Result.UserName;
+                userDetails.email = result.Result.Email;
+				userDetails.Point = result.Point;
+              //  if (result.Result.HasProfile == true) {
+//
+  //              } else {
+    //                var errorMessage = "لطفا پروفایل خود را تکمیل کنید. برای این کار وارد پانل مدیریت شدهو از بالای صفحه نام کاربری و سپس پروفایل خود را انتخاب کرده و سپس فرم نمایش داده شده را تکمیل نمایید.";
+      //              $("#loggedinuser_systemMessage").html(errorMessage);
+        //        }
 
                 $("#loggedin_userName").html("نام کاربری : " + userDetails.username);
                 $("#loggedin_email").html("پست الکترونیکی : " + userDetails.email);
-                $("#loggedin_invited").html("سمینارهای دعوت شده  : " + userDetails.invited);
-                $("#loggedin_acceptedRequest").html("سمینارهای پذیرفته شده : " + userDetails.accepted);
-                $("#loggedin_rejectedRequest").html("سمینارهای رد شده : " + userDetails.rejected);
-                $("#loggedin_credit").html("اعتبار : " + userDetails.balance + ' ریال ');
+              //  $("#loggedin_invited").html("سمینارهای دعوت شده  : " + userDetails.invited);
+                //$("#loggedin_acceptedRequest").html("سمینارهای پذیرفته شده : " + userDetails.accepted);
+                //$("#loggedin_rejectedRequest").html("سمینارهای رد شده : " + userDetails.rejected);
+                $("#loggedin_credit").html("امتیاز شما : " + userDetails.Point);
                 ShowUserInfo(true);
             } else {
                 ShowModalWindow("خطا", "خطا در دریافت اطلاعات کاربری از سیستم");
