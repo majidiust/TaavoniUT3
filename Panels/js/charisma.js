@@ -28,8 +28,8 @@ var listOfChildrens = new Array();
 var listOfMates = new Array();
 var listOfEtc = new Array();
 var listOfPayments = new Array();
-var selectedTable ;
-var temporalPictureName = "default" ;
+var selectedTable;
+var temporalPictureName = "default";
 var fee;
 var WebinarPoster;
 $(document).load(function () {
@@ -37,8 +37,10 @@ $(document).load(function () {
 });
 
 $(document).ready(function () {
-	$.ajaxSetup({ cache: false });
-	LoadViews();
+    $.ajaxSetup({
+        cache: false
+    });
+    LoadViews();
     var current_theme = $.cookie('current_theme') == null ? 'cerulean' : $.cookie('current_theme');
     switch_theme(current_theme);
 
@@ -62,7 +64,7 @@ $(document).ready(function () {
 
     //establish history variables
     var
-    History = window.History, // Note: We are using a capital H instead of a lower h
+        History = window.History, // Note: We are using a capital H instead of a lower h
         State = History.getState(),
         $log = $('#log');
 
@@ -93,7 +95,7 @@ $(document).ready(function () {
             }, 300);
         });
 
-		
+
 
     PrepareNewMember();
     //other things to do on document ready, seperated for ajax calls
@@ -102,152 +104,142 @@ $(document).ready(function () {
     //  GetUserProfile();
     CloseAllForm();
     docReady();
-	InitLocalStorage();
+    InitLocalStorage();
+
 });
 
-function InitLocalStorage()
-{
-	 if (!store.enabled) {
-            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
-            return
+function InitLocalStorage() {
+    if (!store.enabled) {
+        alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
+        return
+    }
+}
+
+function DataTableify() {
+    $('.datatable').dataTable();
+}
+
+function LoadViews() {
+    Debug('Loading Views');
+    $("#NewMemberContent").load("newMemberView.html");
+    $("#SuggestionContent").load("suggestionView.html");
+    $("#ListOfRolesContent").load("listOfRolesView.html");
+    $("#ForgotPasswordContent").load("forgotPasswordView.html");
+    $("#NewChildContent").load("newChildView.html");
+    $("#NewPaymentContent").load("newPaymentView.html");
+    $("#NewHamsarContent").load("newHamsarView.html");
+    $("#NewCausinContent").load("newCausinView.html");
+    $("#ListOfMembersContent").load("listOfMembersView.html");
+    $("#NewProjectContent").load("newProjectView.html");
+    $("#MemberInfoContent").load("memberDetailsView.html", function () {
+        $("#tabs").tabs();
+    });
+}
+
+
+
+function PrepareMemberInfo() {
+    ClearRelationalTable();
+    $('#MemberInfoImageInput').fileupload({
+        dataType: 'json',
+        url: ServerURL + 'Account/UploadPicture',
+        progressall: function (e, data) {
+            var per = parseInt(data.loaded / data.total * 100, 10);
+        },
+        done: function (e, data) {
+            temporalPictureName = data.result.Name;
         }
-}
+    });
 
-function DataTableify()
-{
-	    $('.datatable').dataTable();
-}
+    $("#MemberInfoJob2").hide();
+    $("div[name=OtherJobs]").hide();
 
-function LoadViews()
-{
-	Debug('Loading Views');
-	$("#NewMemberContent").load("newMemberView.html"); 
-	$("#SuggestionContent").load("suggestionView.html"); 
-	$("#ListOfRolesContent").load("listOfRolesView.html");
-	$("#ForgotPasswordContent").load("forgotPasswordView.html");
-	$("#NewChildContent").load("newChildView.html");
-	$("#NewPaymentContent").load("newPaymentView.html"); 
-	$("#NewHamsarContent").load("newHamsarView.html");
-	$("#NewCausinContent").load("newCausinView.html");
-	$("#ListOfMembersContent").load("listOfMembersView.html");
-	$("#NewProjectContent").load("newProjectView.html");
-	$("#MemberInfoContent").load("memberDetailsView.html", function(){
-		$("#tabs").tabs();
-	});
-}
-
-
-
-function PrepareMemberInfo()
-{
-	ClearRelationalTable();
-	$('#MemberInfoImageInput').fileupload({
-			dataType: 'json',
-			url: ServerURL + 'Account/UploadPicture',
-			progressall: function (e, data) {
-				var per = parseInt(data.loaded / data.total * 100, 10);
-			},
-			done: function (e, data) {
-				temporalPictureName = data.result.Name;
-			}
-		});
-		
-	$("#MemberInfoJob2").hide();
-	$("div[name=OtherJobs]").hide();
-
-	$("#MemberInfoJob1Concept").change(function () {
+    $("#MemberInfoJob1Concept").change(function () {
         if ($("#MemberInfoJob1Concept").val() == 1) {
             $("#MemberInfoJob2").show();
-			$("div[name=OtherJobs]").hide();
-        } else if($("#MemberInfoJob1Concept").val() == 2){
+            $("div[name=OtherJobs]").hide();
+        } else if ($("#MemberInfoJob1Concept").val() == 2) {
             $("#MemberInfoJob2").hide();
-			$("div[name=OtherJobs]").hide();
-			$("#MemberInfoJob4").show();
+            $("div[name=OtherJobs]").hide();
+            $("#MemberInfoJob4").show();
         } else {
-		    $("#MemberInfoJob2").hide();
-			$("div[name=OtherJobs]").hide();
-		}
+            $("#MemberInfoJob2").hide();
+            $("div[name=OtherJobs]").hide();
+        }
     });
-	
-	$("#MemberInfoOtherType").change(function () {
-		if ($("#MemberInfoOtherType").val() == 1) {
-			$("#MemberInfoJob5").show();
-			$("#MemberInfoJob6").hide();
-		}
-		else if($("#MemberInfoOtherType").val() == 2){
-			$("#MemberInfoJob5").hide();
-			$("#MemberInfoJob6").show();
-		}
-		else{
-			$("#MemberInfoJob5").hide();
-			$("#emberInfoJob6").hide();
-		}
-	});
+
+    $("#MemberInfoOtherType").change(function () {
+        if ($("#MemberInfoOtherType").val() == 1) {
+            $("#MemberInfoJob5").show();
+            $("#MemberInfoJob6").hide();
+        } else if ($("#MemberInfoOtherType").val() == 2) {
+            $("#MemberInfoJob5").hide();
+            $("#MemberInfoJob6").show();
+        } else {
+            $("#MemberInfoJob5").hide();
+            $("#emberInfoJob6").hide();
+        }
+    });
 }
 
 function PrepareNewMember() {
-	ClearRelationalTable();
-		ClearForm();
-		$('#NewMemberImageInput').fileupload({
-			dataType: 'json',
-			url: ServerURL + 'Account/UploadPicture',
-			progressall: function (e, data) {
-				var per = parseInt(data.loaded / data.total * 100, 10);
-			},
-			done: function (e, data) {
-				temporalPictureName = data.result.Name;
-			}
-		});
-		
-    $("#NewMemberJob2").hide();
-	$("div[name=OtherJobs]").hide();
+    ClearRelationalTable();
+    ClearForm();
+    $('#NewMemberImageInput').fileupload({
+        dataType: 'json',
+        url: ServerURL + 'Account/UploadPicture',
+        progressall: function (e, data) {
+            var per = parseInt(data.loaded / data.total * 100, 10);
+        },
+        done: function (e, data) {
+            temporalPictureName = data.result.Name;
+        }
+    });
 
-	$("#NewMemberJob1Concept").change(function () {
+    $("#NewMemberJob2").hide();
+    $("div[name=OtherJobs]").hide();
+
+    $("#NewMemberJob1Concept").change(function () {
         if ($("#NewMemberJob1Concept").val() == 1) {
             $("#NewMemberJob2").show();
-						$("div[name=OtherJobs]").hide();
+            $("div[name=OtherJobs]").hide();
 
-			
-        } else if($("#NewMemberJob1Concept").val() == 2){
+
+        } else if ($("#NewMemberJob1Concept").val() == 2) {
             $("#NewMemberJob2").hide();
-			$("div[name=OtherJobs]").hide();
-			$("#NewMemberJob4").show();
+            $("div[name=OtherJobs]").hide();
+            $("#NewMemberJob4").show();
         } else {
-		    $("#NewMemberJob2").hide();
-			$("div[name=OtherJobs]").hide();
-		}
+            $("#NewMemberJob2").hide();
+            $("div[name=OtherJobs]").hide();
+        }
     });
-	
-	$("#NewMemberOtherType").change(function () {
-		if ($("#NewMemberOtherType").val() == 1) {
-			$("#NewMemberJob5").show();
-			$("#NewMemberJob6").hide();
-		}
-		else if($("#NewMemberOtherType").val() == 2){
-			$("#NewMemberJob5").hide();
-			$("#NewMemberJob6").show();
-		}
-		else{
-			$("#NewMemberJob5").hide();
-			$("#NewMemberJob6").hide();
-		}
-	});
-	
-	
-	$("div[name=NewMemberIsargari]").hide();
-	$("#NewMemberIsargariType").change(function () {
-		$("div[name=NewMemberIsargari]").hide();
+
+    $("#NewMemberOtherType").change(function () {
+        if ($("#NewMemberOtherType").val() == 1) {
+            $("#NewMemberJob5").show();
+            $("#NewMemberJob6").hide();
+        } else if ($("#NewMemberOtherType").val() == 2) {
+            $("#NewMemberJob5").hide();
+            $("#NewMemberJob6").show();
+        } else {
+            $("#NewMemberJob5").hide();
+            $("#NewMemberJob6").hide();
+        }
+    });
+
+
+    $("div[name=NewMemberIsargari]").hide();
+    $("#NewMemberIsargariType").change(function () {
+        $("div[name=NewMemberIsargari]").hide();
         if ($("#NewMemberIsargariType").val() == 1) {
             $("#NewMemberIsargariAzade").show();
-        } 
-		else if($("#NewMemberIsargariType").val() == 2){
+        } else if ($("#NewMemberIsargariType").val() == 2) {
             $("#NewMemberIsargariJanbaz").show();
-        }
-		else if($("#NewMemberIsargariType").val() == 3){
+        } else if ($("#NewMemberIsargariType").val() == 3) {
             $("#NewMemberIsargariRazmande").show();
 
-        }
-		else if($("#NewMemberIsargariType").val() == 4){
+        } else if ($("#NewMemberIsargariType").val() == 4) {
             $("#NewMemberIsargariIsargarFamily").show();
 
         }
@@ -255,171 +247,163 @@ function PrepareNewMember() {
     GotoWizard(1);
 }
 
-function IsUserExist(nationalityCode, trueCallback, falseCallback, errorCallback)
-{
+function IsUserExist(nationalityCode, trueCallback, falseCallback, errorCallback) {
     CustomBlockingPanel('توجه', 'در حال برسی کد ملی ...', -1, null);
-	 $.ajax({
-				type: 'GET',
-				url: ServerURL + "Account/IsExistUser",
-				dataType: 'json',
-				data : { nationalityCode : nationalityCode},
-				success: function (result) {
-					if(result.Status == true){
-						if(result.Message == 2){
-							CustomAlert('توجه',"کد ملی وجود دارد", null);
-							trueCallback();
-						}
-						else{
-							CustomAlert('توجه',"این کد ملی وجود ندارد و شما می توانید ادامه دهید.", null);
-							falseCallback();
-						}
-					}
-					else{
-						CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
-						errorCallback();
-					}
-				},
-				error: function(){
-				        CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
-						errorCallback();
-							
-				},
-				async:true
-		});
-}
-
-function AddNewMember()
-{
-	var newMember = { 
-		ProfileFirstName : $("#ProfileFirstName").val(),
-		ProfileLastName : $("#ProfileLastName").val(),
-		ProfileGender : $("#ProfileGender").val(),
-		ProfileDegree : $("#ProfileDegree").val(),
-		ProfileNationalityCode : $("#ProfileNationalityCode").val(),
-		ProfileShenasnameCode: $("#ProfileShenasnameCode").val(),
-        ProfileShenasnamePlace : $("#ProfileShenasnamePlace").val(),
-		ProfilePersonID: $("#ProfilePersonID").val(),
-		ProfileBirthdateDay : $("#ProfileBirthdateDay").val(),
-		ProfileBirthdateMonth : $("#ProfileBirthdateMonth").val(),
-		ProfileBirthdateYear : $("#ProfileBirthdateYear").val(),
-		ProfileMobile : $("#ProfileMobile").val(),
-		ProfileHomePhone : $("#ProfileHomePhone").val(),
-		ProfileWorkPhone : $("#ProfileWorkPhone").val(),
-		ProfileEmail : $("#ProfileEmail").val(),
-		ProfileCity : $("#ProfileCity").val(),
-		NewMemberEmployeeDateDay : $("#NewMemberEmployeeDateDay").val(),
-		NewMemberEmployeeDateYear : $("#NewMemberEmployeeDateYear").val(),
-		NewMemberEmployeeDateMonth : $("#NewMemberEmployeeDateMonth").val(),
-		NewMemberContractType : $("#NewMemberJob3ContractType").val(),
-		NewMemberJobType : $("#NewMemberJob3Types").val(),
-		NewMemberJobConcept : $("#NewMemberJob1Concept").val(),
-		NewMemberJobStatus : $("#NewMemberJobStatus").val(),
-		NewMemberJobName : $("#NewMemberJobName").val(),
-		NewMemberJobPlace : $("#NewMemberJobPlace").val(),
-		NewMemberOthertype: $("#NewMemberOtherType").val(),
-		NewMemberJob3University: $("#NewMemberJob3University").val(),
-		NewMemberIsAzadeh : $("#NewMemberIsAzadeh").is(":checked"),
-		NewMemberIsJanbaz : $("#NewMemberIsJanbaz").is(":checked"),
-		NewMemberIsRazmande: $("#NewMemberIsRazmande").is(":checked"),
-		NewMemberIsIsargar : $("#NewMemberIsIsargar").is(":checked"),
-		NewMemberIsFamilyOfShahid : $("#NewMemberIsFamilyOfShahid").is(":checked"),
-		NewMemberIsChildOfShahid : $("#NewMemberIsChildOfShahid").is(":checked"),
-		NewMemberEsratDuration : $("#NewMemberEsratDuration").val(),
-		NewMemberJanbaziPercent: $("#NewMemberJanbaziPercent").val(),
-		NewMemberJebheDuration: $("#NewMemberJebheDuration").val(),
-		NewMemberIsargariIsargarFamilyType: $("#NewMemberIsargariIsargarFamilyType").val(),
-		NewMemberPictureName : temporalPictureName
-		}
-	Debug(newMember);
-	
-	 $.ajax({
-        type: 'POST',
-        url: ServerURL + "Account/AddNewMember",
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/IsExistUser",
         dataType: 'json',
-		data : newMember,
-        success: function (result) 
-			{
-				if(result.Status == true)
-				{
-					var nationalityCode = newMember.ProfileNationalityCode;
-					for(var i = 0 ; i < listOfChildrens.length ; i++){
-						listOfChildrens[i].userName = nationalityCode;
-						$.ajax({
-							type: 'POST',
-							url: ServerURL + "Account/AddChild",
-							dataType: 'json',
-							data : listOfChildrens[i],
-							async:false
-						});
-					}
-					for(var i = 0 ; i < listOfMates.length ; i++){
-						listOfMates[i].userName = nationalityCode;
-						$.ajax({
-							type: 'POST',
-							url: ServerURL + "Account/AddHamsar",
-							dataType: 'json',
-							data : listOfMates[i],
-							async:false
-						});
-					}
-					for(var i = 0 ; i < listOfEtc.length ; i++){
-						listOfEtc[i].userName = nationalityCode;
-						$.ajax({
-							type: 'POST',
-							url: ServerURL + "Account/AddCausin",
-							dataType: 'json',
-							data : listOfEtc[i],
-							async:false
-						});
-					}
-					GotoWizard(8);
-				}
-				else
-				{
-					GotoWizard(9);
-				}
-				Debug(result.Message);
-			},
-		error : function()
-			{
-				GotoWizard(9);
-			},
+        data: {
+            nationalityCode: nationalityCode
+        },
+        success: function (result) {
+            if (result.Status == true) {
+                if (result.Message == 2) {
+                    CustomAlert('توجه', "کد ملی وجود دارد", null);
+                    trueCallback();
+                } else {
+                    CustomAlert('توجه', "این کد ملی وجود ندارد و شما می توانید ادامه دهید.", null);
+                    falseCallback();
+                }
+            } else {
+                CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
+                errorCallback();
+            }
+        },
+        error: function () {
+            CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
+            errorCallback();
+
+        },
         async: true
     });
 }
 
-function ClearForm()
-{
-	$("#NewMemberTakafolEtc tbody tr").each(function () {
-			this.parentNode.removeChild(this);
-		});
-	$("#NewMemberHamsars tbody tr").each(function () {
-			this.parentNode.removeChild(this);
-		});
-	$("#NewMemberChilds tbody tr").each(function () {
+function AddNewMember() {
+    var newMember = {
+        ProfileFirstName: $("#ProfileFirstName").val(),
+        ProfileLastName: $("#ProfileLastName").val(),
+        ProfileGender: $("#ProfileGender").val(),
+        ProfileDegree: $("#ProfileDegree").val(),
+        ProfileNationalityCode: $("#ProfileNationalityCode").val(),
+        ProfileShenasnameCode: $("#ProfileShenasnameCode").val(),
+        ProfileShenasnamePlace: $("#ProfileShenasnamePlace").val(),
+        ProfilePersonID: $("#ProfilePersonID").val(),
+        ProfileBirthdateDay: $("#ProfileBirthdateDay").val(),
+        ProfileBirthdateMonth: $("#ProfileBirthdateMonth").val(),
+        ProfileBirthdateYear: $("#ProfileBirthdateYear").val(),
+        ProfileMobile: $("#ProfileMobile").val(),
+        ProfileHomePhone: $("#ProfileHomePhone").val(),
+        ProfileWorkPhone: $("#ProfileWorkPhone").val(),
+        ProfileEmail: $("#ProfileEmail").val(),
+        ProfileCity: $("#ProfileCity").val(),
+        NewMemberEmployeeDateDay: $("#NewMemberEmployeeDateDay").val(),
+        NewMemberEmployeeDateYear: $("#NewMemberEmployeeDateYear").val(),
+        NewMemberEmployeeDateMonth: $("#NewMemberEmployeeDateMonth").val(),
+        NewMemberContractType: $("#NewMemberJob3ContractType").val(),
+        NewMemberJobType: $("#NewMemberJob3Types").val(),
+        NewMemberJobConcept: $("#NewMemberJob1Concept").val(),
+        NewMemberJobStatus: $("#NewMemberJobStatus").val(),
+        NewMemberJobName: $("#NewMemberJobName").val(),
+        NewMemberJobPlace: $("#NewMemberJobPlace").val(),
+        NewMemberOthertype: $("#NewMemberOtherType").val(),
+        NewMemberJob3University: $("#NewMemberJob3University").val(),
+        NewMemberIsAzadeh: $("#NewMemberIsAzadeh").is(":checked"),
+        NewMemberIsJanbaz: $("#NewMemberIsJanbaz").is(":checked"),
+        NewMemberIsRazmande: $("#NewMemberIsRazmande").is(":checked"),
+        NewMemberIsIsargar: $("#NewMemberIsIsargar").is(":checked"),
+        NewMemberIsFamilyOfShahid: $("#NewMemberIsFamilyOfShahid").is(":checked"),
+        NewMemberIsChildOfShahid: $("#NewMemberIsChildOfShahid").is(":checked"),
+        NewMemberEsratDuration: $("#NewMemberEsratDuration").val(),
+        NewMemberJanbaziPercent: $("#NewMemberJanbaziPercent").val(),
+        NewMemberJebheDuration: $("#NewMemberJebheDuration").val(),
+        NewMemberIsargariIsargarFamilyType: $("#NewMemberIsargariIsargarFamilyType").val(),
+        NewMemberPictureName: temporalPictureName
+    }
+    Debug(newMember);
+
+    $.ajax({
+        type: 'POST',
+        url: ServerURL + "Account/AddNewMember",
+        dataType: 'json',
+        data: newMember,
+        success: function (result) {
+            if (result.Status == true) {
+                var nationalityCode = newMember.ProfileNationalityCode;
+                for (var i = 0; i < listOfChildrens.length; i++) {
+                    listOfChildrens[i].userName = nationalityCode;
+                    $.ajax({
+                        type: 'POST',
+                        url: ServerURL + "Account/AddChild",
+                        dataType: 'json',
+                        data: listOfChildrens[i],
+                        async: false
+                    });
+                }
+                for (var i = 0; i < listOfMates.length; i++) {
+                    listOfMates[i].userName = nationalityCode;
+                    $.ajax({
+                        type: 'POST',
+                        url: ServerURL + "Account/AddHamsar",
+                        dataType: 'json',
+                        data: listOfMates[i],
+                        async: false
+                    });
+                }
+                for (var i = 0; i < listOfEtc.length; i++) {
+                    listOfEtc[i].userName = nationalityCode;
+                    $.ajax({
+                        type: 'POST',
+                        url: ServerURL + "Account/AddCausin",
+                        dataType: 'json',
+                        data: listOfEtc[i],
+                        async: false
+                    });
+                }
+                GotoWizard(8);
+            } else {
+                GotoWizard(9);
+            }
+            Debug(result.Message);
+        },
+        error: function () {
+            GotoWizard(9);
+        },
+        async: true
+    });
+}
+
+function ClearForm() {
+    $("#NewMemberTakafolEtc tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
- $("#ProfileFirstName").val("");
- $("#ProfileLastName").val("");
- $("#ProfileNationalityCode").val("");
- $("#ProfileShenasnameCode").val("");
- $("#ProfileShenasnamePlace").val("");
- $("#ProfilePersonID").val("");
- $("#ProfileMobile").val("");
- $("#ProfileHomePhone").val("");
- $("#ProfileWorkPhone").val("");
- $("#ProfileEmail").val("");
- $("#NewMemberJobName").val("");
- $("#NewMemberJobPlace").val("");
- $("#NewMemberIsAzadeh").prop("checked", false);
- $("#NewMemberIsJanbaz").prop("checked" , false);
- $("#NewMemberIsRazmande").prop("checked", false);
- $("#NewMemberIsIsargar").prop("checked", false);
- $("#NewMemberIsFamilyOfShahid").prop("checked", false);
- $("#NewMemberIsChildOfShahid").prop("checked", false);
- $("#NewMemberEsratDuration").val("");
- $("#NewMemberJanbaziPercent").val("");
- $("#NewMemberJebheDuration").val("");
+    $("#NewMemberHamsars tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+    $("#NewMemberChilds tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+    $("#ProfileFirstName").val("");
+    $("#ProfileLastName").val("");
+    $("#ProfileNationalityCode").val("");
+    $("#ProfileShenasnameCode").val("");
+    $("#ProfileShenasnamePlace").val("");
+    $("#ProfilePersonID").val("");
+    $("#ProfileMobile").val("");
+    $("#ProfileHomePhone").val("");
+    $("#ProfileWorkPhone").val("");
+    $("#ProfileEmail").val("");
+    $("#NewMemberJobName").val("");
+    $("#NewMemberJobPlace").val("");
+    $("#NewMemberIsAzadeh").prop("checked", false);
+    $("#NewMemberIsJanbaz").prop("checked", false);
+    $("#NewMemberIsRazmande").prop("checked", false);
+    $("#NewMemberIsIsargar").prop("checked", false);
+    $("#NewMemberIsFamilyOfShahid").prop("checked", false);
+    $("#NewMemberIsChildOfShahid").prop("checked", false);
+    $("#NewMemberEsratDuration").val("");
+    $("#NewMemberJanbaziPercent").val("");
+    $("#NewMemberJebheDuration").val("");
 }
 
 
@@ -576,108 +560,126 @@ function ViewUserRoles(userName) {
 
 }
 
-function GetListOfMembers(){
-
-	DataTableify();
-	
-    $("#ListOfMembersTable tbody tr").each(function () {
-        this.parentNode.removeChild(this);
-    });
-	
+function FetchListOfMembersFromServer() {
 	 CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
-
     $.ajax({
         type: 'GET',
         url: ServerURL + "Account/GetListOfMembers",
         dataType: 'json',
         success: function (result) {
-            CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
+			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-				var results = new Array();
+                var results = new Array();
                 for (var i = 0; i < result.Result.length; i++) {
-					var res = [
-							result.Result[i].NationalityCode,
-							result.Result[i].FirstName,
-							result.Result[i].LastName,
-							result.Result[i].Date,
-							result.Result[i].IsApproved,
-							result.Result[i].Point,
-							result.Result[i].NationalityCode
-						];
-					results.push(res);
+                    var res = {
+                        NationalityId: result.Result[i].NationalityCode,
+                        FirstName: result.Result[i].FirstName,
+                        LastName: result.Result[i].LastName,
+                        Date: result.Result[i].Date,
+                        IsApproved: result.Result[i].IsApproved,
+                        Point: result.Result[i].Point,
+                        NationalityCode: result.Result[i].NationalityCode
+                    };
+                    store.set(result.Result[i].NationalityCode, res);
                 }
-				Debug(results);
 				
-				 $('#ListOfMembersTable').dataTable({
-					 		"bDestroy" : true,
-	       					"bJQueryUI": true,
-							"bProcessing": true,
-							"bDeferRender": true,
-							 "oLanguage": {
-								    "sProcessing":   "درحال پردازش...",
-									"sLengthMenu":   "نمایش محتویات _MENU_",
-									"sZeroRecords":  "موردی یافت نشد",
-									"sInfo":         "نمایش _START_ تا _END_ از مجموع _TOTAL_ مورد",
-									"sInfoEmpty":    "تهی",
-									"sInfoFiltered": "(فیلتر شده از مجموع _MAX_ مورد)",
-									"sInfoPostFix":  "",
-									"sSearch":       "جستجو:",
-									"sUrl":          "",
-									"oPaginate": {
-										"sFirst":    "ابتدا",
-										"sPrevious": "قبلی",
-										"sNext":     "بعدی",
-										"sLast":     "انتها"
-									}
-							},
-					 		"aaData" : results,
-							"aoColumns": [
-								{ "sTitle": "کد ملی" },
-								{ "sTitle": "نام" },
-								{ "sTitle": "نام خانوادگی" },
-								{ "sTitle": "تاریخ عضویت" },
-								{ 
-									"sTitle": "وضعیت" ,
-									"fnRender": function(obj) {
-										var sReturn = obj.aData[ obj.iDataColumn ];
-										Debug(sReturn);
-										if ( sReturn == true ) {
-											sReturn = '<center><div class="label label-success">تایید شده</div></center>';
-										}
-										else
-											sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
-										return sReturn;
-									}
-								},
-								{ "sTitle": "امتیاز" },
-								{ 
-									"sTitle": "",
-									"fnRender": function(obj) {
-										var sReturn = obj.aData[ obj.iDataColumn ];
-										sReturn = '<center>' + '<div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails('+ "'" + sReturn + "'" + ');">جزئیات</div>' + '</center>';
-										return sReturn;
-									}
-								}
-							]
-				 });
-
-                ShowBox("#ListOfMembers");
+				GetListOfMembers();
             } else {
-			
-			}
+
+            }
         },
         error: function () {
             CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
         },
         async: true
     });
+}
+
+
+function GetListOfMembers() {
+
+    DataTableify();
+
+    $("#ListOfMembersTable tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+
+    store.forEach(function (key, val) {
+        console.log(key, '==', val);
+        var user = store.get(key);
+        var res = [
+            user.NationalityCode,
+            user.FirstName,
+            user.LastName,
+            user.Date,
+            user.IsApproved,
+            user.Point,
+            user.NationalityCode
+        ];
+        results.push(res);
+    })
+    Debug(results);
+
+    $('#ListOfMembersTable').dataTable({
+        "bDestroy": true,
+        "bJQueryUI": true,
+        "bProcessing": true,
+        "bDeferRender": true,
+        "oLanguage": {
+            "sProcessing": "درحال پردازش...",
+            "sLengthMenu": "نمایش محتویات _MENU_",
+            "sZeroRecords": "موردی یافت نشد",
+            "sInfo": "نمایش _START_ تا _END_ از مجموع _TOTAL_ مورد",
+            "sInfoEmpty": "تهی",
+            "sInfoFiltered": "(فیلتر شده از مجموع _MAX_ مورد)",
+            "sInfoPostFix": "",
+            "sSearch": "جستجو:",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "ابتدا",
+                "sPrevious": "قبلی",
+                "sNext": "بعدی",
+                "sLast": "انتها"
+            }
+        },
+        "aaData": results,
+        "aoColumns": [{
+            "sTitle": "کد ملی"
+        }, {
+            "sTitle": "نام"
+        }, {
+            "sTitle": "نام خانوادگی"
+        }, {
+            "sTitle": "تاریخ عضویت"
+        }, {
+            "sTitle": "وضعیت",
+            "fnRender": function (obj) {
+                var sReturn = obj.aData[obj.iDataColumn];
+                Debug(sReturn);
+                if (sReturn == true) {
+                    sReturn = '<center><div class="label label-success">تایید شده</div></center>';
+                } else
+                    sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
+                return sReturn;
+            }
+        }, {
+            "sTitle": "امتیاز"
+        }, {
+            "sTitle": "",
+            "fnRender": function (obj) {
+                var sReturn = obj.aData[obj.iDataColumn];
+                sReturn = '<center>' + '<div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div>' + '</center>';
+                return sReturn;
+            }
+        }]
+    });
 
 }
 
-function ShowDetails(nationalityCode){
-	PrepareMemberInfo();
-	LoadUserDetails(nationalityCode);
-	ShowBox("#MemberInfo");
+function ShowDetails(nationalityCode) {
+    PrepareMemberInfo();
+    LoadUserDetails(nationalityCode);
+    ShowBox("#MemberInfo");
 }
 
 function ViewUserInRoles(roleName) {
@@ -938,133 +940,123 @@ function ChangePassword() {
     }
 }
 
-function CheckStep1Values(){
-	var values = {
-		ProfileFirstName : $("#ProfileFirstName").val(),
-		ProfileLastName : $("#ProfileLastName").val(),
-		ProfileGender : $("#ProfileGender").val(),
-		ProfileDegree : $("#ProfileDegree").val(),
-		ProfileNationalityCode : $("#ProfileNationalityCode").val(),
-		ProfileShenasnameCode: $("#ProfileShenasnameCode").val(),
-        ProfileShenasnamePlace : $("#ProfileShenasnamePlace").val(),
-		ProfilePersonID: $("#ProfilePersonID").val()
-	};
-	
-	if(values.ProfileFirstName == ""){
-		CustomAlert('توجه', " نام عضو جدید را وارد نمایید.", null);
-		return false;
-	}
-	if(values.ProfileLastName == ""){
-		CustomAlert('توجه', " نام خانوادگی عضو جدید را وارد نمایید.", null);
-		return false;
-	}
-	if(values.ProfileGender == 0){
-		CustomAlert('توجه', "جنسیت عضو جدید را انتخاب نمایید.", null);
-		return false;
-	}
-	if(values.ProfileDegree == 0){
-		CustomAlert('توجه', "مدرک تحصیلی عضو جدید را انتخاب نمایید.", null);
-		return false;
-	}
-	if(values.ProfileNationalityCode == ""){
-		CustomAlert('توجه',"کد ملی عضو جدید را وارد نمایید.", null);
-		return false;
-	}
-	if(values.ProfileShenasnameCode == ""){
-		CustomAlert('توجه', "شماره شناسنامه عضو جدید را وارد نمایید.", null);
-		return false;
-	}
-	return true;
+function CheckStep1Values() {
+    var values = {
+        ProfileFirstName: $("#ProfileFirstName").val(),
+        ProfileLastName: $("#ProfileLastName").val(),
+        ProfileGender: $("#ProfileGender").val(),
+        ProfileDegree: $("#ProfileDegree").val(),
+        ProfileNationalityCode: $("#ProfileNationalityCode").val(),
+        ProfileShenasnameCode: $("#ProfileShenasnameCode").val(),
+        ProfileShenasnamePlace: $("#ProfileShenasnamePlace").val(),
+        ProfilePersonID: $("#ProfilePersonID").val()
+    };
+
+    if (values.ProfileFirstName == "") {
+        CustomAlert('توجه', " نام عضو جدید را وارد نمایید.", null);
+        return false;
+    }
+    if (values.ProfileLastName == "") {
+        CustomAlert('توجه', " نام خانوادگی عضو جدید را وارد نمایید.", null);
+        return false;
+    }
+    if (values.ProfileGender == 0) {
+        CustomAlert('توجه', "جنسیت عضو جدید را انتخاب نمایید.", null);
+        return false;
+    }
+    if (values.ProfileDegree == 0) {
+        CustomAlert('توجه', "مدرک تحصیلی عضو جدید را انتخاب نمایید.", null);
+        return false;
+    }
+    if (values.ProfileNationalityCode == "") {
+        CustomAlert('توجه', "کد ملی عضو جدید را وارد نمایید.", null);
+        return false;
+    }
+    if (values.ProfileShenasnameCode == "") {
+        CustomAlert('توجه', "شماره شناسنامه عضو جدید را وارد نمایید.", null);
+        return false;
+    }
+    return true;
 }
 
 
-function CheckStep2Values(){
-	var values = {
-		ProfileMobile : $("#ProfileMobile").val(),
-		ProfileHomePhone : $("#ProfileHomePhone").val(),
-		ProfileWorkPhone : $("#ProfileWorkPhone").val(),
-		ProfileEmail : $("#ProfileEmail").val()
-		};
-	if(values.ProfileMobile == ""){
-		CustomAlert('توجه',"تلفن همراه عضو را وارد نمایید", null);
-		return false;
-	}
-	if(values.ProfileHomePhone == ""){
-		CustomAlert('توجه', "شماره منزل عضو را وارد نمایید.", null);
-		return false;
-	}
-	if(values.ProfileWorkPhone == ""){
-		CustomAlert('توجه', "شماره تلفن محل کار عضو را وارد نمایید", null);
-		return false;
-	}
-	if(values.ProfileEmail == ""){
-		CustomAlert('توجه', "پست الکترونیکی عضو را وارد نمایید", null);
-		return false;
-	}
+function CheckStep2Values() {
+    var values = {
+        ProfileMobile: $("#ProfileMobile").val(),
+        ProfileHomePhone: $("#ProfileHomePhone").val(),
+        ProfileWorkPhone: $("#ProfileWorkPhone").val(),
+        ProfileEmail: $("#ProfileEmail").val()
+    };
+    if (values.ProfileMobile == "") {
+        CustomAlert('توجه', "تلفن همراه عضو را وارد نمایید", null);
+        return false;
+    }
+    if (values.ProfileHomePhone == "") {
+        CustomAlert('توجه', "شماره منزل عضو را وارد نمایید.", null);
+        return false;
+    }
+    if (values.ProfileWorkPhone == "") {
+        CustomAlert('توجه', "شماره تلفن محل کار عضو را وارد نمایید", null);
+        return false;
+    }
+    if (values.ProfileEmail == "") {
+        CustomAlert('توجه', "پست الکترونیکی عضو را وارد نمایید", null);
+        return false;
+    }
 }
 
 function GotoWizard(step) {
-	var _hasError = false;
-	var _doOrdinary = true;
-	
-	
-	if(currentStep < step){
-		if(step == 2){
-			_doOrdinary = false;
-			if(CheckStep1Values() == true)
-			{
-				var isExist = IsUserExist($("#ProfileNationalityCode").val() , 
-				function(){
-				}, 
-				function(){
-					$("div[name=memberWizard]").hide();
-					$("#NewTerminalWizard2").show();
-					currentStep = 2;
-				}, 
-				function(){
-				});
-			}
-			else {
-				Debug("Has Error");
-			}
-		}
-		else if(step == 3){
-			if(CheckStep2Values() == false){
-				_hasError = true;
-			}
-			else{
-				_hasError = false;
-				currentStep = 3;
-				_doOrdinary = true;
-			}
-		}
-	}
-	if(_doOrdinary == true && _hasError == false){
-		Debug("Ordinary Bihavour");
-		$("div[name=memberWizard]").hide();
-		$("#NewTerminalWizard" + step).show();
-	}
+    var _hasError = false;
+    var _doOrdinary = true;
+
+
+    if (currentStep < step) {
+        if (step == 2) {
+            _doOrdinary = false;
+            if (CheckStep1Values() == true) {
+                var isExist = IsUserExist($("#ProfileNationalityCode").val(),
+                    function () {},
+                    function () {
+                        $("div[name=memberWizard]").hide();
+                        $("#NewTerminalWizard2").show();
+                        currentStep = 2;
+                    },
+                    function () {});
+            } else {
+                Debug("Has Error");
+            }
+        } else if (step == 3) {
+            if (CheckStep2Values() == false) {
+                _hasError = true;
+            } else {
+                _hasError = false;
+                currentStep = 3;
+                _doOrdinary = true;
+            }
+        }
+    }
+    if (_doOrdinary == true && _hasError == false) {
+        Debug("Ordinary Bihavour");
+        $("div[name=memberWizard]").hide();
+        $("#NewTerminalWizard" + step).show();
+    }
 }
 
-function ShowNewChildForm()
-{
-	$('#NewChild').modal('show');
+function ShowNewChildForm() {
+    $('#NewChild').modal('show');
 }
 
-function ShowNewHamsarForm()
-{
-	$('#NewHamsar').modal('show');
+function ShowNewHamsarForm() {
+    $('#NewHamsar').modal('show');
 }
 
-function ShowNewCausinForm()
-{
-	$('#NewCausin').modal('show');
+function ShowNewCausinForm() {
+    $('#NewCausin').modal('show');
 }
 
-function ShowNewPaymentForm()
-{
-	console.log("Show new payment modal");
-	$('#NewPayment').modal('show');
+function ShowNewPaymentForm() {
+    console.log("Show new payment modal");
+    $('#NewPayment').modal('show');
 }
 
 function Eorrify(control, step) {
@@ -1263,8 +1255,8 @@ function docReady() {
     }
 
 
-	
-	
+
+
     $('.btn-close').click(function (e) {
         e.preventDefault();
         $(this).parent().parent().parent().fadeOut();
