@@ -674,6 +674,7 @@ function GetListOfMembers() {
         }]
     });
 
+	ShowBox("#ListOfMembers");
 }
 
 function ShowDetails(nationalityCode) {
