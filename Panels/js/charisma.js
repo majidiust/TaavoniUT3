@@ -111,7 +111,10 @@ $(document).ready(function () {
 });
 
 function InitLocalStorage() {
-  ResetDataBase('members');
+  if (!store.enabled) {
+            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
+            return
+        }
 }
 
 function ResetDataBase(dbname)
@@ -578,7 +581,6 @@ function ViewUserRoles(userName) {
 
 function FetchListOfMembersFromServer() {
 	 CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
-	 ResetDataBase('members');
     $.ajax({
         type: 'GET',
         url: ServerURL + "Account/GetListOfMembers",
@@ -589,7 +591,6 @@ function FetchListOfMembersFromServer() {
                 var results = new Array();
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
-						_id: result.Result[i].NationalityCode,
                         NationalityId: result.Result[i].NationalityCode,
                         FirstName: result.Result[i].FirstName,
                         LastName: result.Result[i].LastName,
@@ -598,7 +599,7 @@ function FetchListOfMembersFromServer() {
                         Point: result.Result[i].Point,
                         NationalityCode: result.Result[i].NationalityCode
                     };
-                    db.put(res);
+                    store.set(result.Result[i].NationalityCode, res);
                 }
 				
 				GetListOfMembers();
@@ -622,24 +623,20 @@ function GetListOfMembers() {
         this.parentNode.removeChild(this);
     });
 
-
-		db.allDocs({include_docs: true}, function(err, res){
-            if(!err){
-                res.rows.forEach(function(element){
-					 var res = [
-						element.doc.NationalityCode,
-						element.doc.FirstName,
-						element.doc.LastName,
-						element.doc.Date,
-						element.doc.IsApproved,
-						element.doc.Point,
-						element.doc.NationalityCode
-					];
-					console.log(res);
-					results.push(res);
-                });
-            }
-        });
+    store.forEach(function (key, val) {
+        console.log(key, '==', val);
+        var user = store.get(key);
+        var res = [
+            user.NationalityCode,
+            user.FirstName,
+            user.LastName,
+            user.Date,
+            user.IsApproved,
+            user.Point,
+            user.NationalityCode
+        ];
+        results.push(res);
+    })
     Debug(results);
 
     $('#ListOfMembersTable').dataTable({
