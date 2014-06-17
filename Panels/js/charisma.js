@@ -32,6 +32,8 @@ var selectedTable;
 var temporalPictureName = "default";
 var fee;
 var WebinarPoster;
+var db;
+
 $(document).load(function () {
     CustomBlockingPanel('توجه', 'لطفا اندکی صبر کنید.', -1, null);
 });
@@ -109,10 +111,24 @@ $(document).ready(function () {
 });
 
 function InitLocalStorage() {
-    if (!store.enabled) {
-        alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
-        return
-    }
+  ResetDataBase('members');
+}
+
+function ResetDataBase(dbname)
+{
+		Pouch.destroy(dbname, function(err1){
+			if(err1){
+				alert("Database destruction error")
+			} else {
+				Pouch(dbname, function(err2, pouchdb){
+					if(err2){
+						alert("Database creation error")
+					} else {
+						db= pouchdb;
+					}
+				})
+			}
+		});
 }
 
 function DataTableify() {
@@ -562,6 +578,7 @@ function ViewUserRoles(userName) {
 
 function FetchListOfMembersFromServer() {
 	 CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
+	 ResetDataBase('members');
     $.ajax({
         type: 'GET',
         url: ServerURL + "Account/GetListOfMembers",
@@ -572,6 +589,7 @@ function FetchListOfMembersFromServer() {
                 var results = new Array();
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
+						_id: result.Result[i].NationalityCode,
                         NationalityId: result.Result[i].NationalityCode,
                         FirstName: result.Result[i].FirstName,
                         LastName: result.Result[i].LastName,
@@ -580,7 +598,7 @@ function FetchListOfMembersFromServer() {
                         Point: result.Result[i].Point,
                         NationalityCode: result.Result[i].NationalityCode
                     };
-                    store.set(result.Result[i].NationalityCode, res);
+                    db.put(res);
                 }
 				
 				GetListOfMembers();
@@ -604,20 +622,24 @@ function GetListOfMembers() {
         this.parentNode.removeChild(this);
     });
 
-    store.forEach(function (key, val) {
-        console.log(key, '==', val);
-        var user = store.get(key);
-        var res = [
-            user.NationalityCode,
-            user.FirstName,
-            user.LastName,
-            user.Date,
-            user.IsApproved,
-            user.Point,
-            user.NationalityCode
-        ];
-        results.push(res);
-    })
+
+		db.allDocs({include_docs: true}, function(err, res){
+            if(!err){
+                res.rows.forEach(function(element){
+					 var res = [
+						element.doc.NationalityCode,
+						element.doc.FirstName,
+						element.doc.LastName,
+						element.doc.Date,
+						element.doc.IsApproved,
+						element.doc.Point,
+						element.doc.NationalityCode
+					];
+					console.log(res);
+					results.push(res);
+                });
+            }
+        });
     Debug(results);
 
     $('#ListOfMembersTable').dataTable({
