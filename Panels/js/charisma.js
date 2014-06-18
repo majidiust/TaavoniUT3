@@ -24,6 +24,7 @@ var SeminarPrimaryContent;
 var isMember = -1;
 var index = -1;
 var Membership;
+var members = new Array();
 var currentStep = 0;
 var listOfChildrens = new Array();
 var listOfMates = new Array();
@@ -591,7 +592,7 @@ function FetchListOfMembersFromServer() {
         success: function (result) {
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-                var results = new Array();
+				members.clear();
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
                         NationalityId: result.Result[i].NationalityCode,
@@ -603,7 +604,8 @@ function FetchListOfMembersFromServer() {
                         NationalityCode: result.Result[i].NationalityCode
                     };
 					console.log(res);
-					var newSample = new $org.types.Member();
+					members.push(res);
+					/*var newSample = new $org.types.Member();
 					newSample.FirstName = res.FirstName;
 					newSample.NationalityCode = res.NationalityId;
 					newSample.LastName = res.LastName;
@@ -612,7 +614,7 @@ function FetchListOfMembersFromServer() {
 					newSample.CreateDate = res.Date;	
 					$org.context.Members.add(newSample);
 					console.log(newSample);
-					console.log("Add to database successfully");
+					console.log("Add to database successfully");*/
                 }
 				$org.context.saveChanges().then(function() { console.log("done!"); });
 				GetListOfMembers();
@@ -636,7 +638,7 @@ function GetListOfMembers() {
     });
 	var results = new Array();
 
-    $org.context.Members.forEach(function (user) {
+   /* $org.context.Members.forEach(function (user) {
         console.log(user);
         var res = [
             user.NationalityCode,
@@ -650,6 +652,8 @@ function GetListOfMembers() {
 		console.log(res);
         results.push(res);
     })
+	**/
+	results = members;
     Debug(results);
 
     $('#ListOfMembersTable').dataTable({
