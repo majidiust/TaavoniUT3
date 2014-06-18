@@ -724,15 +724,20 @@ function GetListOfMembers() {
             }
         },
         "aaData": results,
-        "aoColumns": [{
+        "aoColumns": [
+		{
             "sTitle": "کد ملی"
-        }, {
+        }, 
+		{
             "sTitle": "نام"
-        }, {
+        }, 
+		{
             "sTitle": "نام خانوادگی"
-        }, {
+        }, 
+		{
             "sTitle": "تاریخ عضویت"
-        }, {
+        }, 
+		{
             "sTitle": "وضعیت",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
@@ -743,22 +748,29 @@ function GetListOfMembers() {
                     sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
                 return sReturn;
             }
-        }, {
+        }, 
+		{
             "sTitle": "امتیاز"
-        }, {
+        }, 
+		{
             "sTitle": "",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
                 sReturn = '<center>' + '<div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div>' + '</center>';
                 return sReturn;
             }
-        },{
+        },
+		, 
+		{
             "sTitle": "",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
                 sReturn = '<center>' + '<div title="بروزرسانی" data-rel="tooltip"  class="btn btn-info" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
                 return sReturn;
-			}}]
+            }
+        }
+		
+		]
     });
 
 	ShowBox("#ListOfMembers");
