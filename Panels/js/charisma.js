@@ -607,7 +607,7 @@ function FetchListOfMembersFromServer() {
                     };
 					console.log(res);
 					members.push(res);
-					/*var newSample = new $org.types.Member();
+					var newSample = new $org.types.Member();
 					newSample.FirstName = res.FirstName;
 					newSample.NationalityCode = res.NationalityId;
 					newSample.LastName = res.LastName;
@@ -615,9 +615,9 @@ function FetchListOfMembersFromServer() {
 					newSample.Point = res.Point;
 					newSample.CreateDate = res.Date;	
 					$org.context.Members.add(newSample);
-					$org.context.Members.removeAll();
-					console.log(newSample);
-					console.log("Add to database successfully");*/
+					//$org.context.Members.removeAll();
+					//console.log(newSample);
+					//console.log("Add to database successfully");
                 }
 				$org.context.saveChanges().then(function() { console.log("done!"); });
 				GetListOfMembers();
