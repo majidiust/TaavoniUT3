@@ -1269,6 +1269,40 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult GetMember(string userName)
+        {
+            try
+            {
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+                    String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
+                    var Result = from p in m_model.MembersProfiles
+                                 where p.MemberID.Equals(userId)
+                                 select new
+                                 {
+                                     NationalityCode = p.InternationalCode,
+                                     FirstName = p.FirstName,
+                                     LastName = p.LastName,
+                                     Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                     IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
+                                     Point = CalculateUserPoint((Guid)p.MemberID)
+                                 };
+                    return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
         #endregion
         #region Add Child
         [HttpPost]

@@ -583,8 +583,46 @@ function ViewUserRoles(userName) {
 
 }
 
+function RefreshMember(memberId)
+{
+	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/GetMember",
+        dataType: 'json',
+		data : {userName : memberId},
+        success: function (result) {
+			
+			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
+            if (result.Status == true) {
+				$org.context.Members.forEach(function (item) {
+            		if(item.NationalityId == memberId)
+					{
+						console.log(item);
+						coneole.log(result.Result);
+						item.FirstName = result.Result.FirstName;
+						item.NationalityCode = result.Result.NationalityId;
+						item.LastName = result.Result.LastName;
+						item.IsApproved = result.Result.IsApproved;
+						item.Point = result.Result.Point;
+						item.CreateDate = result.Result.Date;	
+						$org.context.saveChanges();
+					}
+        		});
+        		
+            } else {
+
+            }
+        },
+        error: function () {
+            CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
+        },
+        async: true
+    });
+}
+
 function FetchListOfMembersFromServer() {
-	 CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
+	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
     $.ajax({
         type: 'GET',
         url: ServerURL + "Account/GetListOfMembers",
@@ -654,7 +692,8 @@ function GetListOfMembers() {
             user.CreateDate,
             user.IsApproved,
             user.Point,
-            user.NationalityCode
+            user.NationalityCode,
+			user.NationalityCode
         ];
 		console.log("###########################################");
 		console.log("Element : " + user);
@@ -713,7 +752,13 @@ function GetListOfMembers() {
                 sReturn = '<center>' + '<div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div>' + '</center>';
                 return sReturn;
             }
-        }]
+        },{
+            "sTitle": "",
+            "fnRender": function (obj) {
+                var sReturn = obj.aData[obj.iDataColumn];
+                sReturn = '<center>' + '<div title="بروزرسانی" data-rel="tooltip"  class="btn btn-error" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
+                return sReturn;
+			}}]
     });
 
 	ShowBox("#ListOfMembers");
