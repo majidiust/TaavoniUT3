@@ -114,7 +114,7 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
-	$org.context = new $org.types.OrgContext({ name: "webSql", databaseName: "TaavoniDatabase" });
+	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase" });
 	$org.context.onReady(function() {
 		console.log("Data base is ready");
 	});
@@ -131,7 +131,7 @@ function DefineModels()
 		IsApproved: {type: String, required: true},
 		Point: {type: String, required: true}
 	});
-	$data.EntityContext.extend("TaavoniDatabase", {
+	$data.EntityContext.extend("$org.types.utdb", {
 		Members: { type: $data.EntitySet, elementType: $org.types.Member }
 	});
 }
