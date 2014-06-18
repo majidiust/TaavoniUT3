@@ -659,25 +659,7 @@ function GetListOfMembers() {
 		console.log("Element : " + user);
 		console.log("New Record : " + res);
         results.push(res);
-    });
-	
-	/*var index = 0 ;
-	console.log(members2.length);
-	for(index = 0 ;  index < members2.length ; index ++)
-	{
-		var user = members2[index];
-		 var res = [
-            user.NationalityCode,
-            user.FirstName,
-            user.LastName,
-            user.CreateDate,
-            user.IsApproved,
-            user.Point,
-            user.NationalityCode
-        ];
-		results.push(res);
-	};
-    Debug(results);*/
+    }).then(function(){
 	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
     $('#ListOfMembersTable').dataTable({
         "bDestroy": true,
@@ -734,6 +716,26 @@ function GetListOfMembers() {
     });
 
 	ShowBox("#ListOfMembers");
+	});
+	
+	/*var index = 0 ;
+	console.log(members2.length);
+	for(index = 0 ;  index < members2.length ; index ++)
+	{
+		var user = members2[index];
+		 var res = [
+            user.NationalityCode,
+            user.FirstName,
+            user.LastName,
+            user.CreateDate,
+            user.IsApproved,
+            user.Point,
+            user.NationalityCode
+        ];
+		results.push(res);
+	};
+    Debug(results);*/
+	
 }
 
 function ShowDetails(nationalityCode) {
