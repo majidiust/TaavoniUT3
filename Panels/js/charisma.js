@@ -622,7 +622,7 @@ function FetchListOfMembersFromServer() {
 					//console.log(newSample);
 					//console.log("Add to database successfully");
                 }
-				//$org.context.saveChanges().then(function() { console.log("done!"); });
+				$org.context.saveChanges().then(function() { console.log("done!"); });
 				GetListOfMembers();
             } else {
 
