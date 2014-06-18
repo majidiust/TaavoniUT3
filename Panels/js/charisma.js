@@ -114,8 +114,8 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
-	TaavoniDataBase = new TodoDatabase("TaavoniDatabase");
-	TaavoniDataBase.onReady(function() {
+	$org.context = new $org.types.OrgContext({ name: "webSql", databaseName: "TaavoniDatabase" });
+	$org.context.onReady(function() {
 		console.log("Data base is ready");
 	});
 }
@@ -585,15 +585,15 @@ function FetchListOfMembersFromServer() {
                         Point: result.Result[i].Point,
                         NationalityCode: result.Result[i].NationalityCode
                     };
-					var newSample = new Member();
+					var newSample = new $org.types.Membefr();
 					newSample.FirstName = res.FirstName;
 					newSample.NationalityCode = res.NationalityId;
 					newSample.LastName = res.LastName;
 					newSample.IsApproved = res.IsApproved;
 					newSample.Point = res.Point;
 					newSample.CreateDate = res.Date;	
-					TaavoniDataBase.add(newSample);
-					TaavoniDataBase.saveChanges().then(function() { console.log("done!"); });
+					$org.context.Members.add(newSample);
+					$org.context.saveChanges().then(function() { console.log("done!"); });
                 }
 				
 				GetListOfMembers();
