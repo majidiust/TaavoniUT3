@@ -592,7 +592,7 @@ function FetchListOfMembersFromServer() {
         success: function (result) {
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-				members.clear();
+				members=[];
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
                         NationalityId: result.Result[i].NationalityCode,
