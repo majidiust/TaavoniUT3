@@ -760,7 +760,6 @@ function GetListOfMembers() {
                 return sReturn;
             }
         },
-		, 
 		{
             "sTitle": "بروزرسانی",
             "fnRender": function (obj) {
