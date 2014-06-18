@@ -597,8 +597,8 @@ function RefreshMember(memberId)
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
 				$org.context.Members.forEach(function (item) {
-					console.log(item.NationalityId + ":" + memberId);
-            		if(item.NationalityId == memberId)
+					console.log(item.NationalityCode + ":" + memberId);
+            		if(item.NationalityCode == memberId)
 					{
 						console.log(item);
 						coneole.log(result.Result);
