@@ -124,7 +124,8 @@ function DefineModels()
 {
 	console.log("Define Models");
 	$data.Entity.extend("$org.types.Member", {
-		NationalityCode: { type: String, key: true, computed: true },
+		Id: {type: "int", key:true, computed: true},
+		NationalityCode: { type: String, required: true },
 		FirstName: {type: String, required: true},
 		LastName: {type: String, required: true},
 		CreateDate: {type: String, required: true},
