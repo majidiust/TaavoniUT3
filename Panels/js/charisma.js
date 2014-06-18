@@ -643,7 +643,7 @@ function GetListOfMembers() {
         this.parentNode.removeChild(this);
     });
 	var results = new Array();
-
+	console.log("###########################################");
     $org.context.Members.forEach(function (user) {
         console.log(user);
         var res = [
@@ -655,6 +655,8 @@ function GetListOfMembers() {
             user.Point,
             user.NationalityCode
         ];
+			console.log("###########################################");
+
 		console.log(res);
         results.push(res);
     })
