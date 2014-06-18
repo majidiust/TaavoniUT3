@@ -661,7 +661,7 @@ function GetListOfMembers() {
             user.NationalityCode,
             user.FirstName,
             user.LastName,
-            user.CreateDate,
+            user.Date,
             user.IsApproved,
             user.Point,
             user.NationalityCode
