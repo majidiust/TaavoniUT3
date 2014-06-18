@@ -656,7 +656,17 @@ function GetListOfMembers() {
 	var index = 0 ;
 	for(index = 0 ;  index < members.length ; index ++)
 	{
-		results.push(members[index]);
+		var user = members[index];
+		 var res = [
+            user.NationalityCode,
+            user.FirstName,
+            user.LastName,
+            user.CreateDate,
+            user.IsApproved,
+            user.Point,
+            user.NationalityCode
+        ];
+		results.push(res);
 	}
     Debug(results);
 
