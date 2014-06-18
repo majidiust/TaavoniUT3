@@ -595,8 +595,8 @@ function FetchListOfMembersFromServer() {
             if (result.Status == true) {
 				$org.context.Members.forEach(function (item) {
             		$org.context.Members.remove(item);
-        		});
-        		$org.context.saveChanges().then(function(){console.log("Members Data Clean successfully");});
+        		}).then(function(){
+					$org.context.saveChanges().then(function(){console.log("Members Data Clean successfully");});
 				members=[];
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
@@ -623,7 +623,8 @@ function FetchListOfMembersFromServer() {
 					//console.log("Add to database successfully");
                 }
 				$org.context.saveChanges().then(function() { console.log("done!"); });
-				GetListOfMembers();
+				GetListOfMembers();});
+        		
             } else {
 
             }
@@ -643,8 +644,25 @@ function GetListOfMembers() {
         this.parentNode.removeChild(this);
     });
 	var results = new Array();
-	
-	    $('#ListOfMembersTable').dataTable({
+	console.log("###########################################");
+    //var members2 = $org.context.Members.toArray();
+	$org.context.Members.forEach(function (user) {
+        var res = [
+            user.NationalityCode,
+            user.FirstName,
+            user.LastName,
+            user.CreateDate,
+            user.IsApproved,
+            user.Point,
+            user.NationalityCode
+        ];
+		console.log("###########################################");
+		console.log("Element : " + user);
+		console.log("New Record : " + res);
+        results.push(res);
+    }).then(function(){
+	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    $('#ListOfMembersTable').dataTable({
         "bDestroy": true,
         "bJQueryUI": true,
         "bProcessing": true,
@@ -699,10 +717,14 @@ function GetListOfMembers() {
     });
 
 	ShowBox("#ListOfMembers");
-	console.log("###########################################");
-    //var members2 = $org.context.Members.toArray();
-	$org.context.Members.forEach(function (user) {
-        var res = [
+	});
+	
+	/*var index = 0 ;
+	console.log(members2.length);
+	for(index = 0 ;  index < members2.length ; index ++)
+	{
+		var user = members2[index];
+		 var res = [
             user.NationalityCode,
             user.FirstName,
             user.LastName,
@@ -711,14 +733,10 @@ function GetListOfMembers() {
             user.Point,
             user.NationalityCode
         ];
-		console.log("###########################################");
-		console.log("Element : " + user);
-		console.log("New Record : " + res);
-        results.push(res);
-    }).then(function(){
-	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
-	});
+		results.push(res);
+	};
+    Debug(results);*/
+	
 }
 
 function ShowDetails(nationalityCode) {
