@@ -601,7 +601,7 @@ function RefreshMember(memberId)
             		if(item.NationalityCode == memberId)
 					{
 						console.log(item);
-						coneole.log(result.Result);
+						console.log(result.Result);
 						item.FirstName = result.Result.FirstName;
 						item.NationalityCode = result.Result.NationalityId;
 						item.LastName = result.Result.LastName;
