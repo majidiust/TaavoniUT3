@@ -663,6 +663,7 @@ function GetListOfMembers() {
     });*/
 	
 	var index = 0 ;
+	console.log(members2.length);
 	for(index = 0 ;  index < members2.length ; index ++)
 	{
 		var user = members2[index];
