@@ -644,7 +644,7 @@ function GetListOfMembers() {
     });
 	var results = new Array();
 	console.log("###########################################");
-    var members2 = $org.context.Members;
+    var members2 = $org.context.Members.toArray();
 	/*.forEach(function (user) {
         console.log(user);
         var res = [
