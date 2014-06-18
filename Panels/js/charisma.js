@@ -756,7 +756,7 @@ function GetListOfMembers() {
             "sTitle": "",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
-                sReturn = '<center>' + '<div title="بروزرسانی" data-rel="tooltip"  class="btn btn-error" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
+                sReturn = '<center>' + '<div title="بروزرسانی" data-rel="tooltip"  class="btn btn-info" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
                 return sReturn;
 			}}]
     });
