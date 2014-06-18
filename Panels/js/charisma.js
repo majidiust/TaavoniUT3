@@ -590,8 +590,10 @@ function FetchListOfMembersFromServer() {
         url: ServerURL + "Account/GetListOfMembers",
         dataType: 'json',
         success: function (result) {
+			
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
+				$org.context.Members.removeAll();
 				members=[];
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
@@ -613,6 +615,7 @@ function FetchListOfMembersFromServer() {
 					newSample.Point = res.Point;
 					newSample.CreateDate = res.Date;	
 					$org.context.Members.add(newSample);
+					$org.context.Members.removeAll();
 					console.log(newSample);
 					console.log("Add to database successfully");*/
                 }
