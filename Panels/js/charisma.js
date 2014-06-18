@@ -643,25 +643,8 @@ function GetListOfMembers() {
         this.parentNode.removeChild(this);
     });
 	var results = new Array();
-	console.log("###########################################");
-    //var members2 = $org.context.Members.toArray();
-	$org.context.Members.forEach(function (user) {
-        var res = [
-            user.NationalityCode,
-            user.FirstName,
-            user.LastName,
-            user.CreateDate,
-            user.IsApproved,
-            user.Point,
-            user.NationalityCode
-        ];
-		console.log("###########################################");
-		console.log("Element : " + user);
-		console.log("New Record : " + res);
-        results.push(res);
-    }).then(function(){
-	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
-    $('#ListOfMembersTable').dataTable({
+	
+	    $('#ListOfMembersTable').dataTable({
         "bDestroy": true,
         "bJQueryUI": true,
         "bProcessing": true,
@@ -716,14 +699,10 @@ function GetListOfMembers() {
     });
 
 	ShowBox("#ListOfMembers");
-	});
-	
-	/*var index = 0 ;
-	console.log(members2.length);
-	for(index = 0 ;  index < members2.length ; index ++)
-	{
-		var user = members2[index];
-		 var res = [
+	console.log("###########################################");
+    //var members2 = $org.context.Members.toArray();
+	$org.context.Members.forEach(function (user) {
+        var res = [
             user.NationalityCode,
             user.FirstName,
             user.LastName,
@@ -732,10 +711,14 @@ function GetListOfMembers() {
             user.Point,
             user.NationalityCode
         ];
-		results.push(res);
-	};
-    Debug(results);*/
-	
+		console.log("###########################################");
+		console.log("Element : " + user);
+		console.log("New Record : " + res);
+        results.push(res);
+    }).then(function(){
+	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+	});
 }
 
 function ShowDetails(nationalityCode) {
