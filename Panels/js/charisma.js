@@ -120,6 +120,22 @@ function InitLocalStorage() {
 	});
 }
 
+function DefineModels()
+{
+	console.log("Define Models");
+	$data.Entity.extend("$org.types.Member", {
+		NationalityCode: { type: String, key: true, computed: true },
+		FirstName: {type: String, required: true},
+		LastName: {type: String, required: true},
+		CreateDate: {type: String, required: true},
+		IsApproved: {type: String, required: true},
+		Point: {type: String, required: true}
+	});
+	$data.EntityContext.extend("TaavoniDatabase", {
+		Members: { type: $data.EntitySet, elementType: $org.types.Member }
+	});
+}
+
 function DataTableify() {
     $('.datatable').dataTable();
 }
@@ -607,23 +623,6 @@ function FetchListOfMembersFromServer() {
         async: true
     });
 }
-
-function DefineModels()
-{
-	console.log("Define Models");
-	$data.Entity.extend("Member", {
-		NationalityCode: { type: String, key: true, computed: true },
-		FirstName: {type: String, required: true},
-		LastName: {type: String, required: true},
-		CreateDate: {type: String, required: true},
-		IsApproved: {type: String, required: true},
-		Point: {type: String, required: true}
-	});
-	$data.EntityContext.extend("TaavoniDatabase", {
-		Members: { type: $data.EntitySet, elementType: Member }
-	});
-}
-
 
 function GetListOfMembers() {
 
