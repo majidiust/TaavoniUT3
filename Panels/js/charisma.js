@@ -632,6 +632,7 @@ function GetListOfMembers() {
     $("#ListOfMembersTable tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
+	var results = new Array();
 
     $org.context.Members.forEach(function (user) {
         console.log(user);
