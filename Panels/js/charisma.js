@@ -644,7 +644,8 @@ function GetListOfMembers() {
     });
 	var results = new Array();
 	console.log("###########################################");
-    $org.context.Members.forEach(function (user) {
+    var members2 = $org.context.Members;
+	/*.forEach(function (user) {
         console.log(user);
         var res = [
             user.NationalityCode,
@@ -659,23 +660,23 @@ function GetListOfMembers() {
 
 		console.log(res);
         results.push(res);
-    })
+    });*/
 	
-	/*var index = 0 ;
-	for(index = 0 ;  index < members.length ; index ++)
+	var index = 0 ;
+	for(index = 0 ;  index < members2.length ; index ++)
 	{
-		var user = members[index];
+		var user = members2[index];
 		 var res = [
             user.NationalityCode,
             user.FirstName,
             user.LastName,
-            user.Date,
+            user.CreateDate,
             user.IsApproved,
             user.Point,
             user.NationalityCode
         ];
 		results.push(res);
-	}*/
+	};
     Debug(results);
 
     $('#ListOfMembersTable').dataTable({
