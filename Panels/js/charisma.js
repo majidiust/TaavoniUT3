@@ -611,10 +611,10 @@ function FetchListOfMembersFromServer() {
 					newSample.Point = res.Point;
 					newSample.CreateDate = res.Date;	
 					$org.context.Members.add(newSample);
-					$org.context.saveChanges().then(function() { console.log("done!"); });
+					console.log(newSample);
 					console.log("Add to database successfully");
                 }
-				
+				$org.context.saveChanges().then(function() { console.log("done!"); });
 				GetListOfMembers();
             } else {
 
