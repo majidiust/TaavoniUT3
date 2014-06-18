@@ -644,7 +644,7 @@ function GetListOfMembers() {
     });
 	var results = new Array();
 
-   /* $org.context.Members.forEach(function (user) {
+    $org.context.Members.forEach(function (user) {
         console.log(user);
         var res = [
             user.NationalityCode,
@@ -658,8 +658,8 @@ function GetListOfMembers() {
 		console.log(res);
         results.push(res);
     })
-	**/
-	var index = 0 ;
+	
+	/*var index = 0 ;
 	for(index = 0 ;  index < members.length ; index ++)
 	{
 		var user = members[index];
@@ -673,7 +673,7 @@ function GetListOfMembers() {
             user.NationalityCode
         ];
 		results.push(res);
-	}
+	}*/
     Debug(results);
 
     $('#ListOfMembersTable').dataTable({
