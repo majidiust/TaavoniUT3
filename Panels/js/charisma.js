@@ -692,8 +692,7 @@ function GetListOfMembers() {
             user.CreateDate,
             user.IsApproved,
             user.Point,
-            user.NationalityCode,
-			user.NationalityCode
+            user.NationalityCode
         ];
 		console.log("###########################################");
 		console.log("Element : " + user);
@@ -756,20 +755,10 @@ function GetListOfMembers() {
             "sTitle": "",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
-                sReturn = '<center>' + '<div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div>' + '</center>';
+                sReturn = '<center>' + '<div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-info" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
                 return sReturn;
             }
-        },
-		{
-            "sTitle": "بروزرسانی",
-            "fnRender": function (obj) {
-                var sReturn = obj.aData[obj.iDataColumn];
-                sReturn = '<center>' + '<div title="بروزرسانی" data-rel="tooltip"  class="btn btn-info" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
-                return sReturn;
-            }
-        }
-		
-		]
+        }]
     });
 
 	ShowBox("#ListOfMembers");
