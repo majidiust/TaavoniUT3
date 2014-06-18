@@ -42,6 +42,7 @@ $(document).ready(function () {
     $.ajaxSetup({
         cache: false
     });
+	InitLocalStorage();
     LoadViews();
     var current_theme = $.cookie('current_theme') == null ? 'cerulean' : $.cookie('current_theme');
     switch_theme(current_theme);
@@ -106,15 +107,15 @@ $(document).ready(function () {
     //  GetUserProfile();
     CloseAllForm();
     docReady();
-    InitLocalStorage();
 
 });
 
 function InitLocalStorage() {
   if (!store.enabled) {
-            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
-            return
+            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
+            return;
         }
+		else console.log("Store has been enabled");
 }
 
 function ResetDataBase(dbname)
