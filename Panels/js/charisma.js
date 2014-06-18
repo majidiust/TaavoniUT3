@@ -762,7 +762,7 @@ function GetListOfMembers() {
         },
 		, 
 		{
-            "sTitle": "",
+            "sTitle": "بروزرسانی",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
                 sReturn = '<center>' + '<div title="بروزرسانی" data-rel="tooltip"  class="btn btn-info" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div>' + '</center>';
