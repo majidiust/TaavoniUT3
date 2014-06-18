@@ -115,7 +115,7 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
-	$org.context = new $org.types.utdb({ name: "localStorage", databaseName: "TaavoniDatabase" ,dbCreation: $data.storageProviders.DbCreationType.Default});
+	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase" ,dbCreation: $data.storageProviders.DbCreationType.Default});
 	$org.context.onReady(function() {
 		console.log("Data base is ready");
 	});
@@ -593,7 +593,7 @@ function FetchListOfMembersFromServer() {
 			
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-				$org.context.Members.removeAll();
+			//	$org.context.Members.removeAll();
 				members=[];
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
@@ -607,19 +607,19 @@ function FetchListOfMembersFromServer() {
                     };
 					console.log(res);
 					members.push(res);
-					var newSample = new $org.types.Member();
+					/*var newSample = new $org.types.Member();
 					newSample.FirstName = res.FirstName;
 					newSample.NationalityCode = res.NationalityId;
 					newSample.LastName = res.LastName;
 					newSample.IsApproved = res.IsApproved;
 					newSample.Point = res.Point;
 					newSample.CreateDate = res.Date;	
-					$org.context.Members.add(newSample);
+					$org.context.Members.add(newSample);*/
 					//$org.context.Members.removeAll();
 					//console.log(newSample);
 					//console.log("Add to database successfully");
                 }
-				$org.context.saveChanges().then(function() { console.log("done!"); });
+				//$org.context.saveChanges().then(function() { console.log("done!"); });
 				GetListOfMembers();
             } else {
 
