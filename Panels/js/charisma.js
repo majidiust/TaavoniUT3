@@ -111,28 +111,8 @@ $(document).ready(function () {
 });
 
 function InitLocalStorage() {
-  if (!store.enabled) {
-            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
-            return;
-        }
-		else console.log("Store has been enabled");
-}
-
-function ResetDataBase(dbname)
-{
-		Pouch.destroy(dbname, function(err1){
-			if(err1){
-				alert("Database destruction error")
-			} else {
-				Pouch(dbname, function(err2, pouchdb){
-					if(err2){
-						alert("Database creation error")
-					} else {
-						db= pouchdb;
-					}
-				})
-			}
-		});
+	console.log("Init Local Storage");
+	DefineModels();
 }
 
 function DataTableify() {
@@ -613,6 +593,22 @@ function FetchListOfMembersFromServer() {
         },
         async: true
     });
+}
+
+function DefineModels()
+{
+	console.log("Define Models");
+	$data.Entity.extend("Member", {
+		NationalityCode: { type: String, key: true, computed: true },
+		FirstName: {type: String, required: true},
+		LastName: {type: String, required: true},
+		CreateDate: {type: String, required: true},
+		IsApproved: {type: String, required: true},
+		Point: {type: String, required: true}
+	});
+	$data.EntityContext.extend("TaavoniDatabase", {
+		Members: { type: $data.EntitySet, elementType: Member }
+	});
 }
 
 
