@@ -585,6 +585,7 @@ function ViewUserRoles(userName) {
 
 function RefreshMember(memberId)
 {
+	console.log("RefreshMember : " + memberId);
 	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
     $.ajax({
         type: 'GET',
