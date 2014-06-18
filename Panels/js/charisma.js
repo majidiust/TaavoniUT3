@@ -602,6 +602,7 @@ function FetchListOfMembersFromServer() {
                         Point: result.Result[i].Point,
                         NationalityCode: result.Result[i].NationalityCode
                     };
+					console.log(res);
 					var newSample = new $org.types.Member();
 					newSample.FirstName = res.FirstName;
 					newSample.NationalityCode = res.NationalityId;
@@ -611,6 +612,7 @@ function FetchListOfMembersFromServer() {
 					newSample.CreateDate = res.Date;	
 					$org.context.Members.add(newSample);
 					$org.context.saveChanges().then(function() { console.log("done!"); });
+					console.log("Add to database successfully");
                 }
 				
 				GetListOfMembers();
