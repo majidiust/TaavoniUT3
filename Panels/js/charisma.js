@@ -114,7 +114,7 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
-	$org.context = new $org.types.utdb({ name: "sqLite", databaseName: "TaavoniDatabase" });
+	$org.context = new $org.types.utdb({ name: "LocalStore", databaseName: "TaavoniDatabase" });
 	$org.context.onReady(function() {
 		console.log("Data base is ready");
 	});
@@ -125,12 +125,12 @@ function DefineModels()
 	console.log("Define Models");
 	$data.Entity.extend("$org.types.Member", {
 		Id: {type: "int", key:true, computed: true},
-		NationalityCode: { type: String, required: true },
-		FirstName: {type: String, required: true},
-		LastName: {type: String, required: true},
-		CreateDate: {type: String, required: true},
-		IsApproved: {type: String, required: true},
-		Point: {type: String, required: true}
+		NationalityCode: { type: 'string', required: true },
+		FirstName: {type: 'string', required: true},
+		LastName: {type: 'string', required: true},
+		CreateDate: {type: 'string', required: true},
+		IsApproved: {type: 'string', required: true},
+		Point: {type: 'string', required: true}
 	});
 	$data.EntityContext.extend("$org.types.utdb", {
 		Members: { type: $data.EntitySet, elementType: $org.types.Member }
