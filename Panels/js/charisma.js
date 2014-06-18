@@ -602,7 +602,7 @@ function FetchListOfMembersFromServer() {
                         Point: result.Result[i].Point,
                         NationalityCode: result.Result[i].NationalityCode
                     };
-					var newSample = new $org.types.Membefr();
+					var newSample = new $org.types.Member();
 					newSample.FirstName = res.FirstName;
 					newSample.NationalityCode = res.NationalityId;
 					newSample.LastName = res.LastName;
@@ -633,18 +633,18 @@ function GetListOfMembers() {
         this.parentNode.removeChild(this);
     });
 
-    store.forEach(function (key, val) {
-        console.log(key, '==', val);
-        var user = store.get(key);
+    $org.context.Members.forEach(function (user) {
+        console.log(user);
         var res = [
             user.NationalityCode,
             user.FirstName,
             user.LastName,
-            user.Date,
+            user.CreateDate,
             user.IsApproved,
             user.Point,
             user.NationalityCode
         ];
+		console.log(res);
         results.push(res);
     })
     Debug(results);
