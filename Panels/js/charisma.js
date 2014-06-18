@@ -678,7 +678,7 @@ function GetListOfMembers() {
 		results.push(res);
 	};
     Debug(results);*/
-
+	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
     $('#ListOfMembersTable').dataTable({
         "bDestroy": true,
         "bJQueryUI": true,
