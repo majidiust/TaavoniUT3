@@ -9,6 +9,7 @@ var NewSminar;
 var EditInviteRowSeleted;
 var DeleteInviteRowSeleted;
 var MySeminars = [];
+var TaavoniDataBase;
 var chatBoardUpdaterID;
 var LastMessageId;
 var CurrentSeminarID;
@@ -113,6 +114,10 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
+	TaavoniDataBase = new TodoDatabase("TaavoniDatabase");
+	TaavoniDataBase.onReady(function() {
+		console.log("Data base is ready");
+	});
 }
 
 function DataTableify() {
