@@ -585,7 +585,15 @@ function FetchListOfMembersFromServer() {
                         Point: result.Result[i].Point,
                         NationalityCode: result.Result[i].NationalityCode
                     };
-                    store.set(result.Result[i].NationalityCode, res);
+					var newSample = new Member();
+					newSample.FirstName = res.FirstName;
+					newSample.NationalityCode = res.NationalityId;
+					newSample.LastName = res.LastName;
+					newSample.IsApproved = res.IsApproved;
+					newSample.Point = res.Point;
+					newSample.CreateDate = res.Date;	
+					TaavoniDataBase.add(newSample);
+					TaavoniDataBase.saveChanges().then(function() { console.log("done!"); });
                 }
 				
 				GetListOfMembers();
