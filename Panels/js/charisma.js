@@ -653,7 +653,11 @@ function GetListOfMembers() {
         results.push(res);
     })
 	**/
-	results = members;
+	var index = 0 ;
+	for(index = 0 ;  index < members.length ; index ++)
+	{
+		results.push(members[i]);
+	}
     Debug(results);
 
     $('#ListOfMembersTable').dataTable({
