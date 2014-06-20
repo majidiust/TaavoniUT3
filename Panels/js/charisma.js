@@ -597,23 +597,31 @@ function RefreshMember(memberId)
 			
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
+				RefreshMemberIns = new $org.types.Member();
+				RefreshMemberIns.FirstName = result.Result.FirstName;
+				RefreshMemberIns.NationalityCode = result.Result.NationalityId;
+				RefreshMemberIns.LastName = result.Result.LastName;
+				RefreshMemberIns.IsApproved = result.Result.IsApproved;
+				RefreshMemberIns.Point = result.Result.Point;
+				RefreshMemberIns.CreateDate = result.Result.Date;	
+						
 				var selected ;
-					$org.context.Members.forEach(function (item) {
+				$org.context.Members.forEach(function (item) {
             		if(item.NationalityCode == memberId)
- 					{
- 						console.log(item);
- 						coneole.log(result.Result);
-						$org.context.Members.attach(item);
- 						item.FirstName = result.Result.FirstName;
- 						item.NationalityCode = result.Result.NationalityId;
- 						item.LastName = result.Result.LastName;
- 						item.IsApproved = result.Result.IsApproved;
- 						item.Point = result.Result.Point;
- 						item.CreateDate = result.Result.Date;	
- 						$org.context.saveChanges();
-						console.log("Update Suucessfully");
- 					}
-         		});
+					{
+						selected = item;
+						console.log("Update : " + item.NationalityCode + ":" + memberId);
+						console.log("Update : " + item);
+						console.log("Update : " + result.Result);
+					}
+        		}).then(function(){
+						console.log("Update fields");
+						$org.context.Members.remove(selected);
+						$org.context.saveChanges();
+						console.log("Add Member");
+						console.log(RefreshMemberIns);						
+						$org.context.Members.add(RefreshMemberIns);
+						$org.context.saveChanges().then(function() { console.log("done!"); }); });
             } else {
 
             }
