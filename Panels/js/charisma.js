@@ -607,13 +607,16 @@ function RefreshMember(memberId)
 					}
         		}).then(function(){
 						console.log("Update fields");
-						$org.context.Members.attach(selected);
-						selected.FirstName = result.Result.FirstName;
-						selected.NationalityCode = result.Result.NationalityId;
-						selected.LastName = result.Result.LastName;
-						selected.IsApproved = result.Result.IsApproved;
-						selected.Point = result.Result.Point;
-						selected.CreateDate = result.Result.Date;	
+						$org.context.Members.remove(selected);
+						$org.context.saveChanges().then(function() { console.log("done!"); });
+						var newSample = new $org.types.Member();
+						newSample.FirstName = result.Result.FirstName;
+						newSample.NationalityCode = result.Result.NationalityId;
+						newSample.LastName = result.Result.LastName;
+						newSample.IsApproved = result.Result.IsApproved;
+						newSample.Point = result.Result.Point;
+						newSample.CreateDate = result.Result.Date;	
+						$org.context.Members.add(newSample);
 						$org.context.saveChanges().then(function() { console.log("done!"); });
 					});
         		
