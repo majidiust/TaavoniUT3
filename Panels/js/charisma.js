@@ -601,6 +601,7 @@ function RefreshMember(memberId)
             		if(item.NationalityCode == memberId)
 					{
 						selected = item;
+						var record = result.Result;
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
@@ -610,14 +611,14 @@ function RefreshMember(memberId)
 						$org.context.Members.remove(selected);
 						$org.context.saveChanges().then(function() { 
 						console.log("Add Member");
-						console.log(result.Result.NationalityId);
+						console.log(record.NationalityId);
 						var newSample = new $org.types.Member();
-						newSample.FirstName = result.Result.FirstName;
-						newSample.NationalityCode = result.Result.NationalityId;
-						newSample.LastName = result.Result.LastName;
-						newSample.IsApproved = result.Result.IsApproved;
-						newSample.Point = result.Result.Point;
-						newSample.CreateDate = result.Result.Date;	
+						newSample.FirstName = record.FirstName;
+						newSample.NationalityCode = record.NationalityId;
+						newSample.LastName = record.LastName;
+						newSample.IsApproved = record.IsApproved;
+						newSample.Point = record.Point;
+						newSample.CreateDate = record.Date;	
 						$org.context.Members.add(newSample);
 						$org.context.saveChanges().then(function() { console.log("done!"); }); });
 						
