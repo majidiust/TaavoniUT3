@@ -616,14 +616,11 @@ function RefreshMember(memberId)
         		}).then(function(){
 						console.log("Update fields");
 						$org.context.Members.remove(selected);
-						$org.context.saveChanges().then(function() { 
+						$org.context.saveChanges();
 						console.log("Add Member");
 						console.log(RefreshMemberIns.NationalityCode);						
 						$org.context.Members.add(RefreshMemberIns);
 						$org.context.saveChanges().then(function() { console.log("done!"); }); });
-						
-					});
-        		
             } else {
 
             }
