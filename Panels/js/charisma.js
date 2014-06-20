@@ -115,7 +115,7 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
-	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase"});
+	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase" });
 	$org.context.onReady(function() {
 		console.log("Data base is ready");
 	});
@@ -596,18 +596,26 @@ function RefreshMember(memberId)
 			
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-				var records = $org.context.Members.toArray();
-				var index= 0 ;
-				for( index = 0 ;  index < records.length ; index++)
-				{
-					console.log("Delete Records " + records[i]);
-					if(records[i].NationalityCode == memberId)
+				var selected ;
+				$org.context.Members.forEach(function (item) {
+            		if(item.NationalityCode == memberId)
 					{
-						$org.context.Members.remove(records[i]);
-						$org.context.saveChanges().then(function() { console.log("done!"); });
-						break;
+						selected = item;
+						console.log("Update : " + item.NationalityCode + ":" + memberId);
+						console.log("Update : " + item);
+						console.log("Update : " + result.Result);
 					}
-				}
+        		}).then(function(){
+						console.log("Update fields");
+						$org.context.Members.attach(selected);
+						selected.FirstName = result.Result.FirstName;
+						selected.NationalityCode = result.Result.NationalityId;
+						selected.LastName = result.Result.LastName;
+						selected.IsApproved = result.Result.IsApproved;
+						selected.Point = result.Result.Point;
+						selected.CreateDate = result.Result.Date;	
+						$org.context.saveChanges().then(function() { console.log("done!"); });
+					});
         		
             } else {
 
