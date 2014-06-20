@@ -610,6 +610,7 @@ function RefreshMember(memberId)
 						$org.context.Members.remove(selected);
 						$org.context.saveChanges().then(function() { 
 						console.log("Add Member");
+						console.log(result.Result.NationalityId);
 						var newSample = new $org.types.Member();
 						newSample.FirstName = result.Result.FirstName;
 						newSample.NationalityCode = result.Result.NationalityId;
