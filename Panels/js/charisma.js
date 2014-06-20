@@ -594,15 +594,7 @@ function RefreshMember(memberId)
         dataType: 'json',
 		data : {userName : memberId},
         success: function (result) {
-			
-			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
-            if (result.Status == true) {
-				var selected ;
-				$org.context.Members.forEach(function (item) {
-            		if(item.NationalityCode == memberId)
-					{
-						selected = item;
-						RefreshMemberIns = {
+			RefreshMemberIns = {
 						FirstName : result.Result.FirstName,
 						NationalityCode : result.Result.NationalityId,
 						LastName : result.Result.LastName,
@@ -610,6 +602,14 @@ function RefreshMember(memberId)
 						Point : result.Result.Point,
 						CreateDate : result.Result.Date
 						};
+			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
+            if (result.Status == true) {
+				var selected ;
+				$org.context.Members.forEach(function (item) {
+            		if(item.NationalityCode == memberId)
+					{
+						selected = item;
+						
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log(RefreshMemberIns);
