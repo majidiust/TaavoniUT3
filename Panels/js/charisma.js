@@ -597,12 +597,18 @@ function RefreshMember(memberId)
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
 				var selected ;
-				var record;
+				var newSample = new $org.types.Member();
 				$org.context.Members.forEach(function (item) {
             		if(item.NationalityCode == memberId)
 					{
 						selected = item;
 						record = result.Result;
+						newSample.FirstName = record.FirstName;
+						newSample.NationalityCode = record.NationalityId;
+						newSample.LastName = record.LastName;
+						newSample.IsApproved = record.IsApproved;
+						newSample.Point = record.Point;
+						newSample.CreateDate = record.Date;	
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
@@ -612,14 +618,7 @@ function RefreshMember(memberId)
 						$org.context.Members.remove(selected);
 						$org.context.saveChanges().then(function() { 
 						console.log("Add Member");
-						console.log(record.NationalityId);
-						var newSample = new $org.types.Member();
-						newSample.FirstName = record.FirstName;
-						newSample.NationalityCode = record.NationalityId;
-						newSample.LastName = record.LastName;
-						newSample.IsApproved = record.IsApproved;
-						newSample.Point = record.Point;
-						newSample.CreateDate = record.Date;	
+						console.log(newSample.NationalityCode);						
 						$org.context.Members.add(newSample);
 						$org.context.saveChanges().then(function() { console.log("done!"); }); });
 						
