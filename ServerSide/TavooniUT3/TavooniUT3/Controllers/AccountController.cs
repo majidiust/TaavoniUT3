@@ -1280,17 +1280,17 @@ namespace TavooniUT3.Controllers
                     Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
                     System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
                     String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
-                    var Result = from p in m_model.MembersProfiles
-                                 where p.MemberID.Equals(userId)
-                                 select new
-                                 {
-                                     NationalityCode = p.InternationalCode,
-                                     FirstName = p.FirstName,
-                                     LastName = p.LastName,
-                                     Date = p.CreateDate != null ? p.CreateDate : tempdate,
-                                     IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                     Point = CalculateUserPoint((Guid)p.MemberID)
-                                 };
+                    var Result = (from p in m_model.MembersProfiles
+                                  where p.MemberID.Equals(userId)
+                                  select new
+                                  {
+                                      NationalityCode = p.InternationalCode,
+                                      FirstName = p.FirstName,
+                                      LastName = p.LastName,
+                                      Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                      IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
+                                      Point = CalculateUserPoint((Guid)p.MemberID)
+                                  }).ToList()[0];
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
                 }
                 else
