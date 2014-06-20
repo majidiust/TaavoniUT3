@@ -602,7 +602,7 @@ function RefreshMember(memberId)
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
-						item = $org.context.Members.attachOrGet(item);
+						item = $org.context.Members.attach(item);
 						item.FirstName = result.Result.FirstName;
 						item.NationalityCode = result.Result.NationalityId;
 						item.LastName = result.Result.LastName;
