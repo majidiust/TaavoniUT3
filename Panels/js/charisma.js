@@ -594,35 +594,26 @@ function RefreshMember(memberId)
         dataType: 'json',
 		data : {userName : memberId},
         success: function (result) {
-			RefreshMemberIns = {
-						FirstName : result.Result.FirstName,
-						NationalityCode : result.Result.NationalityId,
-						LastName : result.Result.LastName,
-						IsApproved : result.Result.IsApproved,
-						Point : result.Result.Point,
-						CreateDate : result.Result.Date
-						};
+			
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
 				var selected ;
-				$org.context.Members.forEach(function (item) {
-            		if(item.NationalityCode == memberId)
-					{
-						selected = item;
-						
-						console.log("Update : " + item.NationalityCode + ":" + memberId);
-						console.log("Update : " + item);
-						console.log(RefreshMemberIns);
-					}
-        		}).then(function(){
-						console.log("Update fields");
-						$org.context.Members.remove(selected);
-						console.log("Add Member");
-						console.log(RefreshMemberIns);						
-												$org.context.saveChanges();
-
-						
-						});
+					$org.context.Members.forEach(function (item) {
+            		if(item.NationalityId == memberId)
+ 					{
+ 						console.log(item);
+ 						coneole.log(result.Result);
+						$org.context.Members.attach(item);
+ 						item.FirstName = result.Result.FirstName;
+ 						item.NationalityCode = result.Result.NationalityId;
+ 						item.LastName = result.Result.LastName;
+ 						item.IsApproved = result.Result.IsApproved;
+ 						item.Point = result.Result.Point;
+ 						item.CreateDate = result.Result.Date;	
+ 						$org.context.saveChanges();
+						console.log("Update Suucessfully");
+ 					}
+         		});
             } else {
 
             }
