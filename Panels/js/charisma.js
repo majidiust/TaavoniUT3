@@ -608,7 +608,9 @@ function RefreshMember(memberId)
         		}).then(function(){
 						console.log("Update fields");
 						$org.context.Members.remove(selected);
-						$org.context.saveChanges().then(function() { var newSample = new $org.types.Member();
+						$org.context.saveChanges().then(function() { 
+						console.log("Add Member");
+						var newSample = new $org.types.Member();
 						newSample.FirstName = result.Result.FirstName;
 						newSample.NationalityCode = result.Result.NationalityId;
 						newSample.LastName = result.Result.LastName;
