@@ -610,7 +610,6 @@ function RefreshMember(memberId)
 						item.Point = result.Result.Point;
 						item.CreateDate = result.Result.Date;	
 						item.save();
-						$org.context.saveChanges();
 					}
         		});
         		
