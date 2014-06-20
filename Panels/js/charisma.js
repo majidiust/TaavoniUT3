@@ -617,10 +617,10 @@ function RefreshMember(memberId)
         		}).then(function(){
 						console.log("Update fields");
 						$org.context.Members.remove(selected);
-						$org.context.saveChanges();
 						console.log("Add Member");
-						console.log(RefreshMemberIns.NationalityCode);						
-						
+						console.log(RefreshMemberIns);						
+												$org.context.saveChanges();
+
 						
 						});
             } else {
