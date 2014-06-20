@@ -583,6 +583,7 @@ function ViewUserRoles(userName) {
 
 }
 
+var RefreshMemberIns;
 function RefreshMember(memberId)
 {
 	console.log("RefreshMember : " + memberId);
@@ -597,18 +598,17 @@ function RefreshMember(memberId)
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
 				var selected ;
-				var newSample = new $org.types.Member();
 				$org.context.Members.forEach(function (item) {
             		if(item.NationalityCode == memberId)
 					{
 						selected = item;
-						record = result.Result;
-						newSample.FirstName = record.FirstName;
-						newSample.NationalityCode = record.NationalityId;
-						newSample.LastName = record.LastName;
-						newSample.IsApproved = record.IsApproved;
-						newSample.Point = record.Point;
-						newSample.CreateDate = record.Date;	
+						RefreshMemberIns = new $org.types.Member();
+						RefreshMemberIns.FirstName = record.FirstName;
+						RefreshMemberIns.NationalityCode = record.NationalityId;
+						RefreshMemberIns.LastName = record.LastName;
+						RefreshMemberIns.IsApproved = record.IsApproved;
+						RefreshMemberIns.Point = record.Point;
+						RefreshMemberIns.CreateDate = record.Date;	
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
@@ -618,8 +618,8 @@ function RefreshMember(memberId)
 						$org.context.Members.remove(selected);
 						$org.context.saveChanges().then(function() { 
 						console.log("Add Member");
-						console.log(newSample.NationalityCode);						
-						$org.context.Members.add(newSample);
+						console.log(RefreshMemberIns.NationalityCode);						
+						$org.context.Members.add(RefreshMemberIns);
 						$org.context.saveChanges().then(function() { console.log("done!"); }); });
 						
 					});
