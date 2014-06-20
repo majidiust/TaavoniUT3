@@ -600,6 +600,7 @@ function RefreshMember(memberId)
 				var index= 0 ;
 				for( index = 0 ;  index < records.length ; index++)
 				{
+					console.log("Delete Records " + records[i]);
 					if(records[i].NationalityCode == memberId)
 					{
 						$org.context.Members.remove(records[i]);
