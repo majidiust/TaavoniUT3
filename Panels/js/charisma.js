@@ -115,7 +115,7 @@ $(document).ready(function () {
 function InitLocalStorage() {
 	console.log("Init Local Storage");
 	DefineModels();
-	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase" ,dbCreation: $data.storageProviders.DbCreationType.Default});
+	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase"});
 	$org.context.onReady(function() {
 		console.log("Data base is ready");
 	});
