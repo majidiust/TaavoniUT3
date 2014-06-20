@@ -602,16 +602,17 @@ function RefreshMember(memberId)
             		if(item.NationalityCode == memberId)
 					{
 						selected = item;
-						RefreshMemberIns = new $org.types.Member();
-						RefreshMemberIns.FirstName = result.Result.FirstName;
-						RefreshMemberIns.NationalityCode = result.Result.NationalityId;
-						RefreshMemberIns.LastName = result.Result.LastName;
-						RefreshMemberIns.IsApproved = result.Result.IsApproved;
-						RefreshMemberIns.Point = result.Result.Point;
-						RefreshMemberIns.CreateDate = result.Result.Date;	
+						RefreshMemberIns = {
+						FirstName : result.Result.FirstName,
+						NationalityCode : result.Result.NationalityId,
+						LastName : result.Result.LastName,
+						IsApproved : result.Result.IsApproved,
+						Point : result.Result.Point,
+						CreateDate : result.Result.Date
+						};
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
-						console.log("Update : " + result.Result);
+						console.log("Update : " + RefreshMemberIns);
 					}
         		}).then(function(){
 						console.log("Update fields");
@@ -619,8 +620,9 @@ function RefreshMember(memberId)
 						$org.context.saveChanges();
 						console.log("Add Member");
 						console.log(RefreshMemberIns.NationalityCode);						
-						$org.context.Members.add(RefreshMemberIns);
-						$org.context.saveChanges().then(function() { console.log("done!"); }); });
+						
+						
+						});
             } else {
 
             }
