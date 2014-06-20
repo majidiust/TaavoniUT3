@@ -597,11 +597,12 @@ function RefreshMember(memberId)
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
 				var selected ;
+				var record;
 				$org.context.Members.forEach(function (item) {
             		if(item.NationalityCode == memberId)
 					{
 						selected = item;
-						var record = result.Result;
+						record = result.Result;
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
