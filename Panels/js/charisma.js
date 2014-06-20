@@ -599,7 +599,7 @@ function RefreshMember(memberId)
             if (result.Status == true) {
 				var selected ;
 					$org.context.Members.forEach(function (item) {
-            		if(item.NationalityId == memberId)
+            		if(item.NationalityCode == memberId)
  					{
  						console.log(item);
  						coneole.log(result.Result);
