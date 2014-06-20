@@ -603,12 +603,12 @@ function RefreshMember(memberId)
 					{
 						selected = item;
 						RefreshMemberIns = new $org.types.Member();
-						RefreshMemberIns.FirstName = record.FirstName;
-						RefreshMemberIns.NationalityCode = record.NationalityId;
-						RefreshMemberIns.LastName = record.LastName;
-						RefreshMemberIns.IsApproved = record.IsApproved;
-						RefreshMemberIns.Point = record.Point;
-						RefreshMemberIns.CreateDate = record.Date;	
+						RefreshMemberIns.FirstName = result.Result.FirstName;
+						RefreshMemberIns.NationalityCode = result.Result.NationalityId;
+						RefreshMemberIns.LastName = result.Result.LastName;
+						RefreshMemberIns.IsApproved = result.Result.IsApproved;
+						RefreshMemberIns.Point = result.Result.Point;
+						RefreshMemberIns.CreateDate = result.Result.Date;	
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
