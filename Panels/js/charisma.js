@@ -596,22 +596,17 @@ function RefreshMember(memberId)
 			
 			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-				$org.context.Members.forEach(function (item) {
-            		if(item.NationalityCode == memberId)
+				var records = $org.context.Members.toArray();
+				var index= 0 ;
+				for( index = 0 ;  index < records.length ; index++)
+				{
+					if(records[i].NationalityCode == memberId)
 					{
-						console.log("Update : " + item.NationalityCode + ":" + memberId);
-						console.log("Update : " + item);
-						console.log("Update : " + result.Result);
-						$org.context.Members.attach(item);
-						item.FirstName = result.Result.FirstName;
-						item.NationalityCode = result.Result.NationalityId;
-						item.LastName = result.Result.LastName;
-						item.IsApproved = result.Result.IsApproved;
-						item.Point = result.Result.Point;
-						item.CreateDate = result.Result.Date;	
+						$org.context.Members.remove(records[i]);
 						$org.context.saveChanges().then(function() { console.log("done!"); });
+						break;
 					}
-        		});
+				}
         		
             } else {
 
