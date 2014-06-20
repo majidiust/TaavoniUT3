@@ -612,7 +612,7 @@ function RefreshMember(memberId)
 						};
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
-						console.log("Update : " + RefreshMemberIns);
+						console.log(RefreshMemberIns);
 					}
         		}).then(function(){
 						console.log("Update fields");
