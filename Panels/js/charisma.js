@@ -602,13 +602,14 @@ function RefreshMember(memberId)
 					{
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
-						$org.context.Members.attach(item);
+						///$org.context.Members.attach(item);
 						item.FirstName = result.Result.FirstName;
 						item.NationalityCode = result.Result.NationalityId;
 						item.LastName = result.Result.LastName;
 						item.IsApproved = result.Result.IsApproved;
 						item.Point = result.Result.Point;
 						item.CreateDate = result.Result.Date;	
+						item.save();
 						$org.context.saveChanges();
 					}
         		});
