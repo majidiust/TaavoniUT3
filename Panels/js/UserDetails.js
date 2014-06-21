@@ -276,6 +276,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
 						row += "<td>" + newPayment.PaymentBank + "</td>";
 						row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DP(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button></td></tr>';
+						row += '<td><button  style="width:100%" class="btn btn-large btn-info" onclick="alert(' + " ویرایش" + ');"> ویرایش </button></td></tr>';
 						Debug(row);
 						$("#MemberInfoPaymentTable").append(row);
 				}
