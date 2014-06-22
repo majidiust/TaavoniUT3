@@ -303,10 +303,15 @@ function ShowUpdatePayment(PaymentId)
 		$("#paymentCode").val(paymentObject.PaymentCode);
 		$("#paymentFee").val(paymentObject.PaymentFee);
 		$("#paymentBank").val(paymentObject.PaymentBank);
-		$("#PaymentDateDay option[value="+paymentObject.PaymentDateDay+"]").attr("selected", true);
-		$("#PaymentDateMonth option[value="+paymentObject.PaymentDateMonth+"]").attr("selected", true);
-		$("#PaymentDateYear option[value="+paymentObject.PaymentDateYear+"]").attr("selected", true);
-		$("#paymentMethod option[value=paymentMethod"+paymentObject.PaymentMethod+"]").attr("selected", true);
+		$("#PaymentDateDay option:selected").attr("selected", false);
+		$("#PaymentDateMonth option:selected").attr("selected", false);
+		$("#PaymentDateYear option:selected").attr("selected", false);
+		$("#paymentMethod option:selected").attr("selected", false);
+		
+		$("#PaymentDateDay"+paymentObject.PaymentDateDay).attr("selected", true);
+		$("#PaymentDateMonth"+paymentObject.PaymentDateMonth).attr("selected", true);
+		$("#PaymentDateYear"+paymentObject.PaymentDateYear).attr("selected", true);
+		$("#paymentMethod"+paymentObject.PaymentMethod).attr("selected", true);
 		selectedPaymentId = paymentObject.PaymentID;
 		$('#NewPayment').modal('show');
 	}
