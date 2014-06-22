@@ -288,6 +288,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 function ShowUpdatePayment(PaymentId)
 {
 	var paymentObject;
+	console.log("Update : " + PaymentId);
 	for (var i = 0; i < listOfPayments.length; i++) {
         if (listOfPayments[i].PaymentID == PaymentId) {
 			console.log("Update : " + PaymentId);
@@ -295,17 +296,20 @@ function ShowUpdatePayment(PaymentId)
             break;
         }
 	}
-	console.log("Show Payment Update : " + paymentObject.PaymentID);
-	NewPaymentMethod = 2;
-    $("#paymentCode").val(paymentObject.PaymentCode);
-    $("#paymentFee").val(paymentObject.PaymentFee);
-    $("#paymentBank").val(paymentObject.PaymentBank);
-	$("#PaymentDateDay option[value="+paymentObject.PaymentDateDay+"]").attr("selected", true);
-	$("#PaymentDateMonth option[value="+paymentObject.PaymentDateMonth+"]").attr("selected", true);
-	$("#PaymentDateYear option[value="+paymentObject.PaymentDateYear+"]").attr("selected", true);
-	$("#paymentMethod option[value=paymentMethod"+paymentObject.PaymentMethod+"]").attr("selected", true);
-	selectedPaymentId = paymentObject.PaymentID;
-	$('#NewPayment').modal('show');
+	if(paymentObject != null)
+	{
+		console.log("Show Payment Update : " + paymentObject.PaymentID);
+		NewPaymentMethod = 2;
+		$("#paymentCode").val(paymentObject.PaymentCode);
+		$("#paymentFee").val(paymentObject.PaymentFee);
+		$("#paymentBank").val(paymentObject.PaymentBank);
+		$("#PaymentDateDay option[value="+paymentObject.PaymentDateDay+"]").attr("selected", true);
+		$("#PaymentDateMonth option[value="+paymentObject.PaymentDateMonth+"]").attr("selected", true);
+		$("#PaymentDateYear option[value="+paymentObject.PaymentDateYear+"]").attr("selected", true);
+		$("#paymentMethod option[value=paymentMethod"+paymentObject.PaymentMethod+"]").attr("selected", true);
+		selectedPaymentId = paymentObject.PaymentID;
+		$('#NewPayment').modal('show');
+	}
 }
 
 function DP(PaymentId) {
