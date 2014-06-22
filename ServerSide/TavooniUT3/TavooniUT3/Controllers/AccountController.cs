@@ -1566,6 +1566,7 @@ namespace TavooniUT3.Controllers
                         payment.ReceiptID = PaymentCode;
                         payment.Fee = PaymentFee;
                         payment.DestinationBank = PaymentBank;
+                        payment.SourceBank = PaymentBank;
                         payment.DateofEntry = DateTime.Now;
                         payment.DateOfPayment = PaymentDateYear + "/" + PaymentDateMonth + "/" + PaymentDateDay;
                         m_model.Payments.InsertOnSubmit(payment);
@@ -1596,6 +1597,7 @@ namespace TavooniUT3.Controllers
                     {
                         Payment payment = m_model.Payments.Single(P => P.ID == int.Parse(PaymentId));
                         payment.MemberID = userId;
+                        payment.SourceBank = PaymentBank;
                         payment.PaymentMethod = PaymentMethod;
                         payment.ReceiptID = PaymentCode;
                         payment.Fee = PaymentFee;
