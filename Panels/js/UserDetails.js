@@ -276,7 +276,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
 						row += "<td>" + newPayment.PaymentBank + "</td>";
 						row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DP(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button>';
-						row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment();"> ویرایش </button></td></tr>';
+						row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' + "' + newPayment.PaymentID +  '" + ');"> ویرایش </button></td></tr>';
 						Debug(row);
 						$("#MemberInfoPaymentTable").append(row);
 				}
@@ -285,8 +285,16 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 		});
 }
 
-function ShowUpdatePayment(paymentObject)
+function ShowUpdatePayment(PaymentID)
 {
+	var paymentObject;
+	for (var i = 0; i < listOfPayments.length; i++) {
+        if (listOfPayments[i].PaymentID == PaymentId) {
+			console.log("Update : " + PaymentId);
+            paymentObject = listOfPayments[i];
+            break;
+        }
+	}
 	console.log("Show Payment Update : " + paymentObject.PaymentID);
 	NewPaymentMethod = 2;
     $("#paymentCode").val(paymentObject.PaymentCode);
