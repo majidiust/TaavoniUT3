@@ -83,6 +83,7 @@ function AddNewPayment() {
 
 function UpdatePayment()
 {
+	console.log("Update Payment : " + selectedPaymentId);
 	 var newPayment = {
         PaymentCode: $("#paymentCode").val(),
         PaymentFee: $("#paymentFee").val(),
