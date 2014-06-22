@@ -63,6 +63,7 @@ function AddNewPayment() {
     if (hasError == false) {
 		AddPaymentToDatabase(newPayment,function(code){
 		$('#NewPayment').modal('hide');
+		ClearPaymentForm();
 		console.log("Code is : " + code);
 		newPayment.PaymentID = code;
 		listOfPayments.push(newPayment);
@@ -110,6 +111,7 @@ function UpdatePayment()
 		console.log("Update Payment : " + selectedPaymentId);
 		UpdatepaymentInDatabase(newPayment, function(){
 			$('#NewPayment').modal('hide');
+			ClearPaymentForm();
 			var tdId = selectedRow.children("td:nth-child(1)"); 
 			var tdCode = selectedRow.children("td:nth-child(2)"); 
 			var tdFee = selectedRow.children("td:nth-child(3)");
