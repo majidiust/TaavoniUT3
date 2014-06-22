@@ -866,7 +866,7 @@ Author: Majid Sadeghi Alavijeh
         <div class="modal-body" id="NewPaymentContent">
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" onclick="if(NewPaymentMethod == 1) AddNewPayment(); else UpdatePayment(); $('#NewPayment').modal('hide'); ClearPaymentForm();">
+          <button type="submit" class="btn btn-primary" onclick="if(NewPaymentMethod == 1){ AddNewPayment();} else {console.log('update record');UpdatePayment();}  $('#NewPayment').modal('hide'); ClearPaymentForm();">
             ذخیره سازی
           </button>
           <button type="reset" class="btn" onclick="ClearPaymentForm();$('#NewPayment').modal('hide');">
