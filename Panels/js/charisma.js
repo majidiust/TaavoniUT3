@@ -627,9 +627,8 @@ function RefreshMember(memberId)
 						$org.context.Members.add(RefreshMemberIns);
 						$org.context.saveChanges().then(function() { 
 								console.log("done!"); 
-								//var tdPoint = selectedRow.children("td:nth-child(6)"); 
-								//tdPoint.html(RefreshMemberIns.Point);
-								oTable.fnDraw();
+								GetListOfMembers();
+								
 								console.log("Point updated to : " + RefreshMemberIns.Point);
 							}); });
             } else {
