@@ -38,6 +38,7 @@ var db;
 var NewPaymentMethod = 1;
 var selectedRow;
 var selectedPaymentId;
+var oTable;
 
 $(document).load(function () {
     CustomBlockingPanel('توجه', 'لطفا اندکی صبر کنید.', -1, null);
@@ -626,8 +627,9 @@ function RefreshMember(memberId)
 						$org.context.Members.add(RefreshMemberIns);
 						$org.context.saveChanges().then(function() { 
 								console.log("done!"); 
-								var tdPoint = selectedRow.children("td:nth-child(6)"); 
-								tdPoint.html(RefreshMemberIns.Point);
+								//var tdPoint = selectedRow.children("td:nth-child(6)"); 
+								//tdPoint.html(RefreshMemberIns.Point);
+								oTable.fnDraw();
 								console.log("Point updated to : " + RefreshMemberIns.Point);
 							}); });
             } else {
@@ -720,7 +722,7 @@ function GetListOfMembers() {
         results.push(res);
     }).then(function(){
 	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
-    $('#ListOfMembersTable').dataTable({
+    oTable = $('#ListOfMembersTable').dataTable({
         "bDestroy": true,
         "bJQueryUI": true,
         "bProcessing": true,
