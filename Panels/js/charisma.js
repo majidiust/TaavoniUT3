@@ -603,6 +603,7 @@ function RefreshMember(memberId)
 				RefreshMemberIns = new $org.types.Member();
 				RefreshMemberIns.FirstName = result.Result.FirstName;
 				RefreshMemberIns.NationalityCode = result.Result.NationalityId;
+				console.log("Nationality id : " + result.Result.NationalityId);
 				RefreshMemberIns.LastName = result.Result.LastName;
 				RefreshMemberIns.IsApproved = result.Result.IsApproved;
 				RefreshMemberIns.Point = result.Result.Point;
