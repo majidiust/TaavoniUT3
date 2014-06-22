@@ -775,7 +775,7 @@ function GetListOfMembers() {
             "sTitle": "",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
-                sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedrow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
+                sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedRow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
                 return sReturn;
             }
         }]
