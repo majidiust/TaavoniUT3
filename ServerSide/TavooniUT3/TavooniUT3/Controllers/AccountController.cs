@@ -1584,6 +1584,42 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult UpdatePayment(string userName, string PaymentId, string PaymentCode, string PaymentFee, int PaymentDateDay, int PaymentDateMonth, int PaymentDateYear, string PaymentBank, int PaymentMethod)
+        {
+            try
+            {
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    if (m_model.Payments.Count(P => P.ID == int.Parse(PaymentId)) > 0)
+                    {
+                        Payment payment = m_model.Payments.Single(P => P.ID == int.Parse(PaymentId));
+                        payment.MemberID = userId;
+                        payment.PaymentMethod = PaymentMethod;
+                        payment.ReceiptID = PaymentCode;
+                        payment.Fee = PaymentFee;
+                        payment.DestinationBank = PaymentBank;
+                        payment.DateOfPayment = PaymentDateYear + "/" + PaymentDateMonth + "/" + PaymentDateDay;
+                        m_model.SubmitChanges();
+                        return Json(new { Result = payment.ID, Status = true, Message = 36 }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Error(40);
+                    }
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
         [HttpGet]
         public ActionResult DeletePayment(string userName, string paymentId)
         {
