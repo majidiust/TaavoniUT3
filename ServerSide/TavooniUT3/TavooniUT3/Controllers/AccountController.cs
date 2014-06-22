@@ -1669,7 +1669,7 @@ namespace TavooniUT3.Controllers
                                       PaymentID = p.ID,
                                       PaymentDate = p.DateOfPayment,
                                       PaymentFee = p.Fee,
-                                      PaymentBank = p.SourceBank,
+                                      PaymentBank = p.DestinationBank,
                                       PaymentMethod = p.PaymentMethod,
                                       PaymentCode = p.ReceiptID
                                   }).ToList();
