@@ -602,8 +602,8 @@ function RefreshMember(memberId)
             if (result.Status == true) {
 				RefreshMemberIns = new $org.types.Member();
 				RefreshMemberIns.FirstName = result.Result.FirstName;
-				RefreshMemberIns.NationalityCode = result.Result.NationalityId;
-				console.log("Nationality id : " + result.Result.NationalityId);
+				RefreshMemberIns.NationalityCode = result.Result.NationalityCode;
+				console.log("Nationality id : " + result.Result.NationalityCode);
 				RefreshMemberIns.LastName = result.Result.LastName;
 				RefreshMemberIns.IsApproved = result.Result.IsApproved;
 				RefreshMemberIns.Point = result.Result.Point;
