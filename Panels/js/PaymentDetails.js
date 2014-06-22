@@ -62,6 +62,7 @@ function AddNewPayment() {
     } 
     if (hasError == false) {
 		AddPaymentToDatabase(newPayment,function(code){
+		$('#NewPayment').modal('hide');
 		console.log("Code is : " + code);
 		newPayment.PaymentID = code;
 		listOfPayments.push(newPayment);
@@ -83,7 +84,6 @@ function AddNewPayment() {
 
 function UpdatePayment()
 {
-	console.log("Update Payment : " + selectedPaymentId);
 	 var newPayment = {
         PaymentCode: $("#paymentCode").val(),
         PaymentFee: $("#paymentFee").val(),
@@ -92,22 +92,71 @@ function UpdatePayment()
 		PaymentDateMonth: $("#PaymentDateMonth").val(),
 		PaymentDateYear: $("#PaymentDateYear").val(),
 		PaymentMethod : $("#paymentMethod").val(),
-		PaymentID : selectedPaymentId,
+		PaymentId : selectedPaymentId,
 		userName : $("#MemberInfoInternationalCode").val() 
     };
-	
-	var tdId = selectedRow.children("td:nth-child(1)"); 
-	var tdCode = selectedRow.children("td:nth-child(2)"); 
-	var tdFee = selectedRow.children("td:nth-child(3)");
-	var tdPaymentDate = selectedRow.children("td:nth-child(4)");
-	var tdSrcBank = selectedRow.children("td:nth-child(5)");
-	
-	tdCode.html(newPayment.PaymentCode);
-	tdFee.html(newPayment.PaymentFee);
-	tdPaymentDate.html(newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay);
-	tdSrcBank.html(newPayment.PaymentBank);
-	console.log(tdId.html() + " : " + tdCode.html() + " : " + tdFee.html() + " : " + tdPaymentDate.html() + " : " + tdSrcBank.html());
-	
+    var hasError = false;
+    if (newPayment.PaymentCode == "") {
+        haeError = true;
+        CustomModalAlert("خطا", "لطفا کد فیش را وارد نمایید", null);
+    } else if (newPayment.PaymentFee == "") {
+        hasError = true;
+        CustomModalAlert("خطا", "لطفا مبلغ را وارد نمایید", null);
+    } else if (newPayment.PaymentBank == "") {
+        hasError = true;
+        CustomModalAlert("خطا", "لطفا بانک مبدا را وارد نمایید", null);
+    } 
+    if (hasError == false) {
+		console.log("Update Payment : " + selectedPaymentId);
+		UpdatepaymentInDatabase(newPayment, function(){
+			$('#NewPayment').modal('hide');
+			var tdId = selectedRow.children("td:nth-child(1)"); 
+			var tdCode = selectedRow.children("td:nth-child(2)"); 
+			var tdFee = selectedRow.children("td:nth-child(3)");
+			var tdPaymentDate = selectedRow.children("td:nth-child(4)");
+			var tdSrcBank = selectedRow.children("td:nth-child(5)");
+			
+			tdCode.html(newPayment.PaymentCode);
+			tdFee.html(newPayment.PaymentFee);
+			tdPaymentDate.html(newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay);
+			tdSrcBank.html(newPayment.PaymentBank);
+			console.log(tdId.html() + " : " + tdCode.html() + " : " + tdFee.html() + " : " + tdPaymentDate.html() + " : " + tdSrcBank.html());
+			
+		});
+	}
+}
+
+function UpdatepaymentInDatabase(payment, successCallback, errorCallback)
+{
+	 CustomBlockingPanel('توجه', 'در حال ثبت تغییرات....', -1, null);
+	 $.ajax({
+        type: 'POST',
+        url: ServerURL + "Account/UpdatePayment",
+        dataType: 'json',
+		data : payment,
+        success: function (result) 
+			{					
+				if(result.Status == true)
+				{
+					 CustomAlert('توجه', 'تغییرات با موفقیت انجام گردید', null);
+					 //$("div[name=PanelWindow]").hide();
+					 if(successCallback != null)
+					 	successCallback(result.Result);
+				}
+				else
+				{
+					CustomAlert('توجه', 'ثیت تغییرات با خطاروبرو گردبد', null);
+					if(errorCallback != null)
+						errorCallback();
+				}
+				Debug(result.Message);
+			},
+		error : function()
+			{
+				CustomAlert('توجه', 'ثیت تغییرات با خطاروبرو گردبد', null);
+			},
+        async: true
+    });
 }
 
 function AddPaymentToDatabase(newPayment ,successCallback, errorCallback)
