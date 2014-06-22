@@ -258,9 +258,9 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 							 PaymentCode: result.Result[i].PaymentCode,
 								PaymentFee: result.Result[i].PaymentFee,
 								PaymentBank: result.Result[i].PaymentBank,
-								PaymentDateDay: date[0],
+								PaymentDateDay: date[2],
 								PaymentDateMonth: date[1],
-								PaymentDateYear: date[2],
+								PaymentDateYear: date[0],
 								PaymentMethod : result.Result[i].PaymentMethod,
 								PaymentID : result.Result[i].PaymentID,
 								userName : nationalityCode
