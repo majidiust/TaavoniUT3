@@ -72,7 +72,7 @@ function AddNewPayment() {
         row += "<td>" + newPayment.PaymentFee + "</td>";
 		row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
         row += "<td>" + newPayment.PaymentBank + "</td>";
-        row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeletePayment(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button></td>';
+        row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeletePayment(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button>';
 		row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' + newPayment.PaymentID  + ');"> ویرایش </button></td></tr>';
 		Debug("New Row is : " + row);
 		$("#MemberInfoPaymentTable").append(row);
