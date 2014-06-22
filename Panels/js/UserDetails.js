@@ -308,6 +308,7 @@ function ShowUpdatePayment(PaymentId)
 		$("#PaymentDateYear option:selected").attr("selected", false);
 		$("#paymentMethod option:selected").attr("selected", false);
 		
+		console.log(paymentObject);
 		$("#PaymentDateDay"+paymentObject.PaymentDateDay).attr("selected", true);
 		$("#PaymentDateMonth"+paymentObject.PaymentDateMonth).attr("selected", true);
 		$("#PaymentDateYear"+paymentObject.PaymentDateYear).attr("selected", true);
