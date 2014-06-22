@@ -276,13 +276,28 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
 						row += "<td>" + newPayment.PaymentBank + "</td>";
 						row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DP(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button>';
-						row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="alert(' + "' ویرایش'" + ');"> ویرایش </button></td></tr>';
+						row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' + newPayment + ');"> ویرایش </button></td></tr>';
 						Debug(row);
 						$("#MemberInfoPaymentTable").append(row);
 				}
 			},
 		async:true
 		});
+}
+
+function ShowUpdatePayment(paymentObject)
+{
+	console.log("Show Payment Update : " + paymentObject.PaymentID);
+	NewPaymentMethod = 2;
+    $("#paymentCode").val(paymentObject.PaymentCode);
+    $("#paymentFee").val(paymentObject.PaymentFee);
+    $("#paymentBank").val(paymentObject.PaymentBank);
+	$("#PaymentDateDay option[value="+paymentObject.PaymentDateDay+"]").attr("selected", true);
+	$("#PaymentDateMonth option[value="+paymentObject.PaymentDateMonth+"]").attr("selected", true);
+	$("#PaymentDateYear option[value="+paymentObject.PaymentDateYear+"]").attr("selected", true);
+	$("#paymentMethod option[value=paymentMethod"+paymentObject.PaymentMethod+"]").attr("selected", true);
+	selectedPaymentId = paymentObject.PaymentID;
+	$('#NewPayment').modal('show');
 }
 
 function DP(PaymentId) {

@@ -47,6 +47,7 @@ function AddNewPayment() {
 		PaymentMethod : $("#paymentMethod").val(),
 		PaymentID : -1,
 		userName : $("#MemberInfoInternationalCode").val() 
+		
     };
     var hasError = false;
     if (newPayment.PaymentCode == "") {
@@ -71,12 +72,41 @@ function AddNewPayment() {
         row += "<td>" + newPayment.PaymentFee + "</td>";
 		row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
         row += "<td>" + newPayment.PaymentBank + "</td>";
-        row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeletePayment(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button></td></tr>';
+        row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeletePayment(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button></td>';
+		row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' + newPayment.PaymentID  + ');"> ویرایش </button></td></tr>';
 		Debug("New Row is : " + row);
 		$("#MemberInfoPaymentTable").append(row);
 			
 			},null);
     } 
+}
+
+function UpdatePayment()
+{
+	 var newPayment = {
+        PaymentCode: $("#paymentCode").val(),
+        PaymentFee: $("#paymentFee").val(),
+        PaymentBank: $("#paymentBank").val(),
+        PaymentDateDay: $("#PaymentDateDay").val(),
+		PaymentDateMonth: $("#PaymentDateMonth").val(),
+		PaymentDateYear: $("#PaymentDateYear").val(),
+		PaymentMethod : $("#paymentMethod").val(),
+		PaymentID : selectedPaymentId,
+		userName : $("#MemberInfoInternationalCode").val() 
+    };
+	
+	var tdId = selectedRow.children("td:nth-child(1)"); 
+	var tdCode = selectedRow.children("td:nth-child(2)"); 
+	var tdFee = selectedRow.children("td:nth-child(3)");
+	var tdPaymentDate = selectedRow.children("td:nth-child(4)");
+	var tdSrcBank = selectedRow.children("td:nth-child(5)");
+	
+	tdCode.html(newPayment.PaymentCode);
+	tdFee.html(newPayment.PaymentFee);
+	tdPaymentDate.html(newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay);
+	tdSrcBank.html(newPayment.PaymentBank);
+	console.log(tdId.html() + " : " + tdCode.html() + " : " + tdFee.html() + " : " + tdPaymentDate.html() + " : " + tdSrcBank.html());
+	
 }
 
 function AddPaymentToDatabase(newPayment ,successCallback, errorCallback)

@@ -35,6 +35,9 @@ var temporalPictureName = "default";
 var fee;
 var WebinarPoster;
 var db;
+var NewPaymentMethod = 1;
+var selectedRow;
+var selectedPaymentId;
 
 $(document).load(function () {
     CustomBlockingPanel('توجه', 'لطفا اندکی صبر کنید.', -1, null);
@@ -1175,6 +1178,7 @@ function ShowNewCausinForm() {
 
 function ShowNewPaymentForm() {
     console.log("Show new payment modal");
+	NewPaymentMethod = 1;
     $('#NewPayment').modal('show');
 }
 
