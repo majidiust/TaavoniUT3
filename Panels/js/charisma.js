@@ -624,7 +624,12 @@ function RefreshMember(memberId)
 						console.log("Add Member");
 						console.log(RefreshMemberIns);						
 						$org.context.Members.add(RefreshMemberIns);
-						$org.context.saveChanges().then(function() { console.log("done!"); }); });
+						$org.context.saveChanges().then(function() { 
+								console.log("done!"); 
+								var tdPoint = selectedRow.children("td:nth-child(6)"); 
+								tdPoint.html(RefreshMemberIns.Point);
+								console.log("Point updated to : " + RefreshMemberIns.Point);
+							}); });
             } else {
 
             }
@@ -770,7 +775,7 @@ function GetListOfMembers() {
             "sTitle": "",
             "fnRender": function (obj) {
                 var sReturn = obj.aData[obj.iDataColumn];
-                sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
+                sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedrow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
                 return sReturn;
             }
         }]
