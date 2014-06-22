@@ -285,7 +285,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 		});
 }
 
-function ShowUpdatePayment(PaymentID)
+function ShowUpdatePayment(PaymentId)
 {
 	var paymentObject;
 	for (var i = 0; i < listOfPayments.length; i++) {
