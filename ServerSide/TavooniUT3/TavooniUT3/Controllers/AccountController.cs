@@ -1210,7 +1210,7 @@ namespace TavooniUT3.Controllers
         {
             System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
             String tempdate = jc.GetYear(now) + ":" + jc.GetMonth(now) + ":" + jc.GetDayOfMonth(now);
-            return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now));
+            return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now), jc);
         }
 
         private double CalculateUserPoint(Guid userId)
@@ -1226,11 +1226,11 @@ namespace TavooniUT3.Controllers
                 else
                 {
                     var payments = m_model.Payments.Where(P => P.MemberID.Equals(userId));
-
+                    System.Globalization.PersianCalendar persian = new System.Globalization.PersianCalendar();
                     foreach (var x in payments)
                     {
                         String[] dates = x.DateOfPayment.Split(new char[] { '/' });
-                        DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]));
+                        DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]), persian);
                         DateTime tempNowDate = GetPersianDateInstance(DateTime.Now);
                         double days = (tempNowDate - tempDateTime).TotalDays;
                         double moneyWeight = double.Parse(x.Fee) / 100000.0;
