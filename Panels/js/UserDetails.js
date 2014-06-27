@@ -51,7 +51,7 @@ function LoadGeneralInfo(nationalityCode)
 				$("#MemberInfoBirthdateMonth option[value="+birthDate[1]+"]").attr("selected", true);
 				$("#MemberInfoBirthdateDay option[value="+birthDate[2]+"]").attr("selected", true);
 				Debug(ServerURL+"Pics/Users/Originals/" + result.Result.GuId + ".png");
-				$("#EditProfileImageImage").prop("src",ServerURL+"Pics/Users/Thumbnails/" + nationalityCode + ".png?" + new Date().getTime());
+				$("#EditProfileImageImage").prop("src",ServerURL+"Pics/Users/Thumbnails/" + result.Result.GuId + ".png?" + new Date().getTime());
 				if(result.Result.activity == true)
 					$("#MemberInfoActivity").html("فعال است");
 				else
