@@ -1274,6 +1274,34 @@ namespace TavooniUT3.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetRankForUser(string userName)
+        {
+            try
+            {
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    var Result = (from p in m_model.MembersProfiles
+                                    select new
+                                    {
+                                        userId = userId,
+                                        NationalityCode = p.InternationalCode,
+                                        Point = CalculateUserPoint((Guid)p.MemberID)
+                                    }).OrderByDescending(P => P.Point);
+                    return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
         public ActionResult GetMember(string userName)
         {
             try
