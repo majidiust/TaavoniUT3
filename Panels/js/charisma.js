@@ -594,15 +594,11 @@ function ReCalculateRanking()
 	console.log("ReCalculateRanking");
 	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; }).toArray(function(result){
 		 for (var i = 0; i < result.length; i++) {
-			 	//$org.context.Members.forEach(function (item) {
-            	//	if(item.NationalityCode == result[i].NationalityCode)
-				//	{
-				//		$org.context.Members.attach(item);
-				//		item.Rank = i;
-				//		console.log("New rank for : " + item.Rank + " : " + item.NationalityCode);
-				//		$org.context.saveChanges();
-				//	}});
-				console.log(result[i].NationalityCode);
+			 			var it = result[i];
+						$org.context.Members.attach(it);
+						it.Rank = i;
+						console.log("New rank for : " + it.Rank + " : " + it.NationalityCode);
+						$org.context.saveChanges();
 			 }
 		});
 }
