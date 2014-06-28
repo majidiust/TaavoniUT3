@@ -1289,9 +1289,9 @@ namespace TavooniUT3.Controllers
                                       userId = p.MemberID,
                                       NationalityCode = p.InternationalCode,
                                       Point = CalculateUserPoint((Guid)p.MemberID)
-                                  }).OrderBy(P => P.Point).ToList();
+                                  }).OrderBy(P => P.Point);
                     List<RankModel> Result = new List<RankModel>();
-                    for (int i = 0 ; i < rankList.Count ; i++)
+                    for (int i = 0 ; i < rankList.Count() ; i++)
                     {
                         var x = rankList.ElementAt(i);
                         Result.Add(new RankModel 
