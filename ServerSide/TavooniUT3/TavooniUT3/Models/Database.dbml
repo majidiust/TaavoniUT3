@@ -323,4 +323,16 @@
       <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
     </Type>
   </Table>
+  <Function Name="hiva.GetRankList" Method="GetRankList">
+    <ElementType Name="GetRankListResult">
+      <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="TotalFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="rank" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="hiva.GetRankForUser" Method="GetRankForUser">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="Rank" Parameter="rank" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
