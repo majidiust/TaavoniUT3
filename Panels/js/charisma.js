@@ -591,6 +591,7 @@ function ViewUserRoles(userName) {
 
 function ReCalculateRanking()
 {
+	console.log("ReCalculateRanking");
 	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; })
 	for(var i = 0 ; i < reordered.length ; i++)
 	{
