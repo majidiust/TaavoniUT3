@@ -595,9 +595,8 @@ function ReCalculateRanking()
 	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; }).toArray(function(result){
 		 for (var i = 0; i < result.length; i++) {
 			 			var it = result[i];
-						$org.context.Members.remove(it);	
-						it.Rank = i;				
-						$org.context.Members.add(it);
+						$org.context.Members.attach(it);
+						it.Rank = result.length - i;				
 						console.log("New rank for : " + it.Rank + " : " + it.NationalityCode);
 						$org.context.saveChanges();
 			 }
