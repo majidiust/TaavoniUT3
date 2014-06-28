@@ -135,7 +135,8 @@ function DefineModels()
 		LastName: {type: 'string', required: true},
 		CreateDate: {type: 'string', required: true},
 		IsApproved: {type: 'string', required: true},
-		Point: {type: 'string', required: true}
+		Point: {type: 'string', required: true},
+		Rank: {type: 'string', required: true}
 	});
 	$data.EntityContext.extend("$org.types.utdb", {
 		Members: { type: $data.EntitySet, elementType: $org.types.Member }
@@ -659,13 +660,14 @@ function FetchListOfMembersFromServer() {
 				members=[];
                 for (var i = 0; i < result.Result.length; i++) {
                     var res = {
-                        NationalityId: result.Result[i].NationalityCode,
+                        NationalityId: result.Result[i].UserName,
                         FirstName: result.Result[i].FirstName,
                         LastName: result.Result[i].LastName,
                         Date: result.Result[i].Date,
                         IsApproved: result.Result[i].IsApproved,
                         Point: result.Result[i].Point,
-                        NationalityCode: result.Result[i].NationalityCode
+                        NationalityCode: result.Result[i].NationalityCode,
+						Rank : result.Result[i].Rank
                     };
 					console.log(res);
 					members.push(res);
@@ -676,6 +678,7 @@ function FetchListOfMembersFromServer() {
 					newSample.IsApproved = res.IsApproved;
 					newSample.Point = res.Point;
 					newSample.CreateDate = res.Date;	
+					newSample.Rank = res.Rank;
 					$org.context.Members.add(newSample);
 					//$org.context.Members.removeAll();
 					//console.log(newSample);
@@ -713,8 +716,9 @@ function GetListOfMembers() {
             user.CreateDate,
             user.IsApproved,
             user.Point,
+			user.Rank,
             user.NationalityCode
-        ];
+	        ];
 		console.log("###########################################");
 		console.log("Element : " + user);
 		console.log("New Record : " + res);
@@ -772,6 +776,9 @@ function GetListOfMembers() {
 		{
             "sTitle": "امتیاز"
         }, 
+		{
+            "sTitle": "رتبه"
+        },
 		{
             "sTitle": "",
             "fnRender": function (obj) {
