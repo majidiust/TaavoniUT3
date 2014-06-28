@@ -644,7 +644,7 @@ function RefreshMember(memberId)
 						$org.context.Members.add(RefreshMemberIns);
 						$org.context.saveChanges().then(function() { 
 								console.log("done!"); 
-								ReCalculateRanking();
+								//ReCalculateRanking();
 								GetListOfMembers();
 								
 								console.log("Point updated to : " + RefreshMemberIns.Point);
