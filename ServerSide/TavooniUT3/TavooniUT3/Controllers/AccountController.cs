@@ -1287,7 +1287,7 @@ namespace TavooniUT3.Controllers
                                         userId = p.MemberID,
                                         NationalityCode = p.InternationalCode,
                                         Point = CalculateUserPoint((Guid)p.MemberID)
-                                    }).OrderBy(P => P.Point);
+                                    }).OrderBy(P => P.Point).ToList();
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
                 }
                 //else
