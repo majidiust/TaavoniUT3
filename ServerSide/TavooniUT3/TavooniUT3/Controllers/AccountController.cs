@@ -1280,14 +1280,15 @@ namespace TavooniUT3.Controllers
             {
              //   if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
                 {
-              //      Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    //      Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
                     var Result = (from p in m_model.MembersProfiles
-                                    select new
-                                    {
-                                        userId = p.MemberID,
-                                        NationalityCode = p.InternationalCode,
-                                        Point = CalculateUserPoint((Guid)p.MemberID)
-                                    }).OrderBy(P => P.Point).ToList();
+                                  select new
+                                  {
+                                      userId = p.MemberID,
+                                      NationalityCode = p.InternationalCode,
+                                      Point = CalculateUserPoint((Guid)p.MemberID)
+                                  }).OrderBy(P => P.Point).ToList()[0];
+  
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
                 }
                 //else
