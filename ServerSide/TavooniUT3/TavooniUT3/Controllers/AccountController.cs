@@ -1280,31 +1280,30 @@ namespace TavooniUT3.Controllers
             {
              //   if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
                 {
-                    //      Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
-                    var rankList = (from p in m_model.MembersProfiles
-                                  select new
-                                  {
-                                      FirstName = p.FirstName,
-                                      LastName = p .LastName,
-                                      userId = p.MemberID,
-                                      NationalityCode = p.InternationalCode,
-                                      Point = CalculateUserPoint((Guid)p.MemberID)
-                                  }).OrderBy(P => P.Point);
+                    var unsortRankList = (from p in m_model.MembersProfiles
+                                          select new
+                                          {
+                                              FirstName = p.FirstName,
+                                              LastName = p.LastName,
+                                              userId = p.MemberID,
+                                              NationalityCode = p.InternationalCode,
+                                              Point = CalculateUserPoint((Guid)p.MemberID)
+                                          }).ToList();
+                    var rankList = unsortRankList.OrderByDescending(P => P.Point);
                     List<RankModel> Result = new List<RankModel>();
-                    for (int i = 0 ; i < rankList.Count() ; i++)
+                    for (int i = 0; i < rankList.Count(); i++)
                     {
                         var x = rankList.ElementAt(i);
-                        Result.Add(new RankModel 
-                        { 
+                        Result.Add(new RankModel
+                        {
                             FirstName = x.FirstName,
-                            LastName = x.LastName , 
+                            LastName = x.LastName,
                             UserId = (Guid)x.userId,
                             UserName = x.NationalityCode,
                             Point = x.Point,
-                            Rank = i
+                            Rank = i + 1
                         });
                     }
-  
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
                 }
                 //else
