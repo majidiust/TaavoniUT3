@@ -136,7 +136,7 @@ function DefineModels()
 		CreateDate: {type: 'string', required: true},
 		IsApproved: {type: 'string', required: true},
 		Point: {type: 'string', required: true},
-		Rank: {type: 'string', required: true}
+		Rank: {type: 'string', required: false}
 	});
 	$data.EntityContext.extend("$org.types.utdb", {
 		Members: { type: $data.EntitySet, elementType: $org.types.Member }
@@ -666,7 +666,7 @@ function FetchListOfMembersFromServer() {
                         Date: result.Result[i].Date,
                         IsApproved: result.Result[i].IsApproved,
                         Point: result.Result[i].Point,
-                        NationalityCode: result.Result[i].NationalityCode,
+                        NationalityCode: result.Result[i].UserName,
 						Rank : result.Result[i].Rank
                     };
 					console.log(res);
