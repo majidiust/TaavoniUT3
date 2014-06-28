@@ -1341,6 +1341,43 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        private int GetRankForUser(Guid userId)
+        {
+            System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+            String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
+            var unsortRankList = (from p in m_model.MembersProfiles
+                                  select new
+                                  {
+                                      FirstName = p.FirstName,
+                                      LastName = p.LastName,
+                                      userId = p.MemberID,
+                                      NationalityCode = p.InternationalCode,
+                                      Point = CalculateUserPoint((Guid)p.MemberID),
+                                      Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                      IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
+                                  }).ToList();
+            var rankList = unsortRankList.OrderByDescending(P => P.Point);
+            List<RankModel> Result = new List<RankModel>();
+            for (int i = 0; i < rankList.Count(); i++)
+            {
+                var x = rankList.ElementAt(i);
+                Result.Add(new RankModel
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    UserId = (Guid)x.userId,
+                    UserName = x.NationalityCode,
+                    Point = x.Point,
+                    Rank = i + 1,
+                    IsApproved = x.IsApproved,
+                    Date = x.Date
+                });
+            }
+
+            return Result.Single(P => P.UserId.Equals(userId)).Rank;
+
+        }
+
         [HttpGet]
         public ActionResult GetMember(string userName)
         {
@@ -1351,8 +1388,7 @@ namespace TavooniUT3.Controllers
                     Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
                     System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
                     String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
-                    int? rank = 0;
-                    m_model.GetRankForUser(userId, ref rank);
+                    int rank = GetRankForUser(userId);
                     var Result = (from p in m_model.MembersProfiles
                                   where p.MemberID.Equals(userId)
                                   select new
