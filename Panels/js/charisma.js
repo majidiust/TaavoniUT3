@@ -610,6 +610,7 @@ function RefreshMember(memberId)
 				RefreshMemberIns.IsApproved = result.Result.IsApproved;
 				RefreshMemberIns.Point = result.Result.Point;
 				RefreshMemberIns.CreateDate = result.Result.Date;	
+				RefreshMemberIns.Rank = result.Result.Rank;	
 						
 				var selected ;
 				$org.context.Members.forEach(function (item) {
@@ -619,6 +620,7 @@ function RefreshMember(memberId)
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
+						console.log("Update : " + item.Rank);
 					}
         		}).then(function(){
 						console.log("Update fields");
