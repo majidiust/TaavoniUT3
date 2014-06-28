@@ -588,9 +588,21 @@ function ViewUserRoles(userName) {
 
 }
 
+
+function ReCalculateRanking()
+{
+	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; })
+	for(var i = 0 ; i < reordered.length ; i++)
+	{
+		console.log("***********" + reordered[i].Point);
+	}
+	
+}
+
 var RefreshMemberIns;
 function RefreshMember(memberId)
 {
+	ReCalculateRanking();
 	console.log("RefreshMember : " + memberId);
 	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
     $.ajax({
@@ -610,17 +622,16 @@ function RefreshMember(memberId)
 				RefreshMemberIns.IsApproved = result.Result.IsApproved;
 				RefreshMemberIns.Point = result.Result.Point;
 				RefreshMemberIns.CreateDate = result.Result.Date;	
-				RefreshMemberIns.Rank = result.Result.Rank;	
 						
 				var selected ;
 				$org.context.Members.forEach(function (item) {
             		if(item.NationalityCode == memberId)
 					{
 						selected = item;
+						RefreshMemberIns.Rank = selected.Rank;
 						console.log("Update : " + item.NationalityCode + ":" + memberId);
 						console.log("Update : " + item);
 						console.log("Update : " + result.Result);
-						console.log("Update : " + item.Rank);
 					}
         		}).then(function(){
 						console.log("Update fields");
