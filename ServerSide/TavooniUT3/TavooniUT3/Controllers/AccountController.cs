@@ -244,12 +244,12 @@ namespace TavooniUT3.Controllers
                 {
                     String userName = User.Identity.Name;
                     var Result = Membership.GetUser(userName);
-                    var user = m_model.aspnet_Users.Single(P=>P.UserName.Equals(userName));
+                    var user = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName));
                     var UserPoint = CalculateUserPoint(user.UserId);
-                    return Json(new { Status = true, Result , Point = UserPoint}, JsonRequestBehavior.AllowGet);
+                    return Json(new { Status = true, Result, Point = UserPoint }, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Error(ex.Message);
             }
@@ -1250,20 +1250,38 @@ namespace TavooniUT3.Controllers
         [HttpGet]
         public ActionResult GetListOfMembers()
         {
-            System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
-            String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
             try
             {
-                var Result = from p in m_model.MembersProfiles
-                             select new
-                             {
-                                 NationalityCode = p.InternationalCode,
-                                 FirstName = p.FirstName,
-                                 LastName = p.LastName,
-                                 Date = p.CreateDate != null ? p.CreateDate : tempdate,
-                                 IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                 Point = CalculateUserPoint((Guid)p.MemberID)
-                             };
+                System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+                String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
+                var unsortRankList = (from p in m_model.MembersProfiles
+                                      select new
+                                      {
+                                          FirstName = p.FirstName,
+                                          LastName = p.LastName,
+                                          userId = p.MemberID,
+                                          NationalityCode = p.InternationalCode,
+                                          Point = CalculateUserPoint((Guid)p.MemberID),
+                                          Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                          IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
+                                      }).ToList();
+                var rankList = unsortRankList.OrderByDescending(P => P.Point);
+                List<RankModel> Result = new List<RankModel>();
+                for (int i = 0; i < rankList.Count(); i++)
+                {
+                    var x = rankList.ElementAt(i);
+                    Result.Add(new RankModel
+                    {
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        UserId = (Guid)x.userId,
+                        UserName = x.NationalityCode,
+                        Point = x.Point,
+                        Rank = i + 1,
+                        IsApproved = x.IsApproved,
+                        Date = x.Date
+                    });
+                }
 
                 return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
             }
@@ -1278,8 +1296,10 @@ namespace TavooniUT3.Controllers
         {
             try
             {
-             //   if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                //   if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
                 {
+                    System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+                    String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
                     var unsortRankList = (from p in m_model.MembersProfiles
                                           select new
                                           {
@@ -1287,7 +1307,9 @@ namespace TavooniUT3.Controllers
                                               LastName = p.LastName,
                                               userId = p.MemberID,
                                               NationalityCode = p.InternationalCode,
-                                              Point = CalculateUserPoint((Guid)p.MemberID)
+                                              Point = CalculateUserPoint((Guid)p.MemberID),
+                                              Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                              IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
                                           }).ToList();
                     var rankList = unsortRankList.OrderByDescending(P => P.Point);
                     List<RankModel> Result = new List<RankModel>();
@@ -1301,7 +1323,9 @@ namespace TavooniUT3.Controllers
                             UserId = (Guid)x.userId,
                             UserName = x.NationalityCode,
                             Point = x.Point,
-                            Rank = i + 1
+                            Rank = i + 1,
+                            IsApproved = x.IsApproved,
+                            Date = x.Date
                         });
                     }
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
@@ -1677,7 +1701,7 @@ namespace TavooniUT3.Controllers
                 if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
                 {
                     Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
-                    if (m_model.Payments.Count(P=>P.MemberID.Equals(userId) && P.ID == int.Parse(paymentId)) > 0)
+                    if (m_model.Payments.Count(P => P.MemberID.Equals(userId) && P.ID == int.Parse(paymentId)) > 0)
                     {
                         var payment = m_model.Payments.Single(P => P.MemberID.Equals(userId) && P.ID == int.Parse(paymentId));
                         m_model.Payments.DeleteOnSubmit(payment);
