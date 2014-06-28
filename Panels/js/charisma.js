@@ -591,11 +591,18 @@ function ViewUserRoles(userName) {
 
 function ReCalculateRanking()
 {
-	var size = $org.context.Members.toArray().length;
-	console.log("Size is : " + size);
 	console.log("ReCalculateRanking");
-	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; }).forEach(function(item){
-			console.log("***********" + item.Point);
+	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; }).toArray(function(result){
+		 for (var i = 0; i < result.length; i++) {
+			 	$org.context.Members.forEach(function (item) {
+            		if(item.NationalityCode == result[i].NationalityCode)
+					{
+						$org.context.Members.attach(item);
+						item.Rank = i;
+						console.log("New rank for : " + item.Rank + " : " + item.NationalityCode);
+						$org.context.saveChanges();
+					}});
+			 }
 		});
 }
 
