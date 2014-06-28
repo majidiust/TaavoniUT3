@@ -606,7 +606,6 @@ function ReCalculateRanking()
 var RefreshMemberIns;
 function RefreshMember(memberId)
 {
-	ReCalculateRanking();
 	console.log("RefreshMember : " + memberId);
 	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
     $.ajax({
@@ -645,6 +644,7 @@ function RefreshMember(memberId)
 						$org.context.Members.add(RefreshMemberIns);
 						$org.context.saveChanges().then(function() { 
 								console.log("done!"); 
+								ReCalculateRanking();
 								GetListOfMembers();
 								
 								console.log("Point updated to : " + RefreshMemberIns.Point);
