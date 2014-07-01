@@ -79,7 +79,7 @@ function  LoadTotalPayment(nationalityCode)
         success: function (result) {
 			if(result.Status == true){
 			    $("#EditMemberInfoTotalPayment").html(result.Result.TotalFee);
-                console.log(result.Result.TotalFee);
+                console.log("جمع پرداختی : " + result.Result.TotalFee + " ریال ");
 			}
             else{
                 console.log(result.Message);
