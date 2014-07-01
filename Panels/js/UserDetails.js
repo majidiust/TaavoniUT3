@@ -78,8 +78,8 @@ function  LoadTotalPayment(nationalityCode)
 		data : { userName : nationalityCode },
         success: function (result) {
 			if(result.Status == true){
-			    $("#EditMemberInfoTotalPayment").html("جمع پرداختی : " + remaskPayment(result.Result.TotalFee) + " ریال ");
-                console.log("جمع پرداختی : " + remaskPayment(result.Result.TotalFee) + " ریال ");
+			    $("#EditMemberInfoTotalPayment").html("جمع پرداختی : " + remaskPayment(result.Result.TotalFee.toString()) + " ریال ");
+                console.log("جمع پرداختی : " + remaskPayment(result.Result.TotalFee.toString()) + " ریال ");
 			}
             else{
                 console.log(result.Message);
@@ -94,9 +94,9 @@ function remaskPayment(payment)
     var result = "";;
     for(var i = 0 ; i < payment.length ; i++)
     {
-        if(i%3 == 0 )
+        if(i!=0 && i%3 == 0 )
             result += ',';
-        else result += payment.charAt(i);
+        result += payment.charAt(i);
     }
     return result;
 }
