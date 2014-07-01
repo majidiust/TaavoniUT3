@@ -78,7 +78,7 @@ function  LoadTotalPayment(nationalityCode)
 		data : { userName : nationalityCode },
         success: function (result) {
 			if(result.Status == true){
-			    $("#EditMemberInfoTotalPayment").html(result.Result.TotalFee);
+			    $("#EditMemberInfoTotalPayment").html("جمع پرداختی : " + result.Result.TotalFee + " ریال ");
                 console.log("جمع پرداختی : " + result.Result.TotalFee + " ریال ");
 			}
             else{
