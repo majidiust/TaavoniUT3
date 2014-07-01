@@ -1246,6 +1246,33 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult GetTotalPaymentByUser(string userName)
+        {
+            try
+            {
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    var payments = m_model.Payments.Where(P => P.MemberID.Equals(userId));
+                    long result = 0;
+                    foreach (var x in payments)
+                    {
+                        result += long.Parse(x.Fee);
+                    }
+                    return Json(new { Status = true, Message = 37, Result = new { TotalFee = result } }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
 
         [HttpGet]
         public ActionResult GetListOfMembers()
@@ -1340,6 +1367,8 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
+
+        
 
         private int GetRankForUser(Guid userId)
         {
