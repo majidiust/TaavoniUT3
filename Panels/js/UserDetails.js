@@ -78,8 +78,8 @@ function  LoadTotalPayment(nationalityCode)
 		data : { userName : nationalityCode },
         success: function (result) {
 			if(result.Status == true){
-			    $("#EditMemberInfoTotalPayment").html("جمع پرداختی : " + result.Result.TotalFee + " ریال ");
-                console.log("جمع پرداختی : " + result.Result.TotalFee + " ریال ");
+			    $("#EditMemberInfoTotalPayment").html("جمع پرداختی : " + remaskPayment(result.Result.TotalFee0) + " ریال ");
+                console.log("جمع پرداختی : " + remaskPayment(result.Result.TotalFee0) + " ریال ");
 			}
             else{
                 console.log(result.Message);
@@ -87,6 +87,18 @@ function  LoadTotalPayment(nationalityCode)
             },
             async:true   
             });
+}
+
+function remaskPayment(payment)
+{
+    var result = "";;
+    for(var i = 0 ; i < payment.length ; i++)
+    {
+        if(i%3 == 0 )
+            result += ',';
+        else result += payment.charAt(i);
+    }
+    return result;
 }
 
 function LoadContactInfo(nationalityCode)
