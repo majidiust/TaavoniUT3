@@ -17,6 +17,7 @@ function LoadUserDetails(nationalityCode)
 	LoadJobInfo(nationalityCode);
 	LoadFamilyInfo(nationalityCode);
 	LoadPayments(nationalityCode);
+    LoadTotalPayment(nationalityCode);
 }
 
 function LoadGeneralInfo(nationalityCode)
@@ -66,6 +67,26 @@ function LoadGeneralInfo(nationalityCode)
 		},
 		async:true
 		});
+}
+
+function  LoadTotalPayment(nationalityCode)
+{
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/GetTotalPaymentByUser",
+        dataType: 'json',
+		data : { userName : nationalityCode },
+        success: function (result) {
+			if(result.Status == true){
+			    $("#EditMemberInfoTotalPayment").html(result.Result.TotalFee);
+                console.log(result.Result.TotalFee);
+			}
+            else{
+                console.log(result.Message);
+            }
+            },
+            async:true   
+            });
 }
 
 function LoadContactInfo(nationalityCode)
