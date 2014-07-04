@@ -136,6 +136,33 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult IsMember(String userName)
+        {
+            try
+            {
+                if (Membership.GetUser(userName) != null)
+                {
+                    var Result = Roles.GetRolesForUser(userName);
+                    if (Roles.IsUserInRole("Member") == true)
+                    {
+                        return Json(new { Status = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { Status = false}, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Error(1);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
 
         [Authorize(Roles = "Admin,ViewRoles")]
         public ActionResult GetRolesForUser(String userName)
@@ -218,7 +245,14 @@ namespace TavooniUT3.Controllers
                 if (MembershipService.ValidateUser(username, pass))
                 {
                     FormsService.SignIn(username, false);
-                    return Success(7);
+                    if (Roles.IsUserInRole(username, "Member") == true)
+                    {
+                            return Json(new { Status = true, Message = "17", IsMember = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { Status = true, Message = "17", IsMember = false }, JsonRequestBehavior.AllowGet);
+                    }
                 }
                 else
                 {
@@ -336,6 +370,7 @@ namespace TavooniUT3.Controllers
                 return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
 
         #region Active/Inactive Members
         [HttpGet]

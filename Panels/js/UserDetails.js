@@ -103,6 +103,8 @@ function remaskPayment(payment)
     return result.reverse();
 }
 
+
+
 function LoadContactInfo(nationalityCode)
 {
 	$.ajax({

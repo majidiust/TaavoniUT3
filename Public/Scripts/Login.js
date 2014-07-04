@@ -3,6 +3,7 @@ var index = -1;
 var pageSize = 50;
 var selectId = -1;
 var news = [];
+var IsMember = false;
 
 function LoginToAccountUp() {
     var m_userName = $("#usernameUp").val();
@@ -32,6 +33,7 @@ function LoginToAccountUp() {
                 if (result.Status == true) {
                     $("#LoginMessageUp").html("در حال ورود به سامانه");
                     $("#LoginMessageUp").show('slow');
+					IsMember = result.IsMember;
                     //Login To System
                     setTimeout(function () {
                         DetectLoggedInUser();
@@ -447,7 +449,10 @@ function DetectLoggedInUser() {
 
 function GoToPanel() {
     if (userName != "") {
-        window.location = "http:///taavoniut3.ir/Panels/blank.html";
+		if(IsMember == true)
+        	window.location = "http:///taavoniut3.ir/Panels/user.html";
+		else
+			window.location = "http:///taavoniut3.ir/Panels/blank.html";
     } else {
         DetectLoggedInUser();
     }
