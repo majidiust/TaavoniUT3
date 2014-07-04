@@ -208,7 +208,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += "<td>" + newPayment.PaymentFee + "</td>";
 						row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
 						row += "<td>" + newPayment.PaymentBank + "</td>";
-						row += '<td></td></tr>';
+						row += '</tr>';
 						Debug(row);
 						$("#MemberInfoPaymentTable").append(row);
                         
