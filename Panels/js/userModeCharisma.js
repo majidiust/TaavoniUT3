@@ -112,7 +112,6 @@ $(document).ready(function () {
 });
 function LoadViews() {
     Debug('Loading Views');
-    $("#MemberPaymentContent").load("memberPaymentList.html");
     $("#SuggestionContent").load("suggestionView.html");
     $("#ForgotPasswordContent").load("forgotPasswordView.html");
     $("#MemberInfoContent").load("memberDetailsView.html", function () {
