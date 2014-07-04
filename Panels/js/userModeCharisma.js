@@ -112,6 +112,7 @@ $(document).ready(function () {
 });
 function LoadViews() {
     Debug('Loading Views');
+    $("#MemberPaymentContent").load("memberPaymentList.html");
     $("#SuggestionContent").load("suggestionView.html");
     $("#ForgotPasswordContent").load("forgotPasswordView.html");
     $("#MemberInfoContent").load("memberDetailsView.html", function () {
@@ -161,6 +162,60 @@ function LoadTotalPayment(nationalityCode){
             },
             async:true   
             });
+}
+function ClearPaymentTable() {
+    listOfPayments.splice(0, listOfPayments.length);
+	    $("#MemberInfoPaymentTable tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+}
+function LoadPayments(){
+    console.log("user namefor load payment is : " + userName);
+ var nationalityCode = userName;
+//GetListOfPayment
+ClearPaymentTable();
+CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرداخت حسابها ... ', -1, null);
+	Debug("Load Payments : " + nationalityCode);
+	$.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/GetListOfPayment",
+        dataType: 'json',
+		data : { userName : nationalityCode },
+		success: function(result){
+				CustomBlockingPanel('توجه', 'داده ها با موفقیت بازیابی شدند.', 500, null);
+				for(var i = 0 ; i < result.Result.length ; i++)
+				{
+				var date = result.Result[i].PaymentDate.split("/");
+				console.log("Date is : "  + date);
+						var newPayment = {
+							 PaymentCode: result.Result[i].PaymentCode,
+								PaymentFee: result.Result[i].PaymentFee,
+								PaymentBank: result.Result[i].PaymentBank,
+								PaymentDateDay: date[2],
+								PaymentDateMonth: date[1],
+								PaymentDateYear: date[0],
+								PaymentMethod : result.Result[i].PaymentMethod,
+								PaymentID : result.Result[i].PaymentID,
+								userName : nationalityCode
+						};
+						console.log(newPayment);
+						
+						listOfPayments.push(newPayment);
+						var index = listOfPayments.length - 1;
+						var row = "<tr>";
+						row += "<td>" + newPayment.PaymentID + "</td>";
+						row += "<td>" + newPayment.PaymentCode + "</td>";
+						row += "<td>" + newPayment.PaymentFee + "</td>";
+						row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
+						row += "<td>" + newPayment.PaymentBank + "</td>";
+						row += '<td></td></tr>';
+						Debug(row);
+						$("#MemberInfoPaymentTable").append(row);
+                        ShowBox('#MemberPaymentList');
+				}
+			},
+		async:true
+		});
 }
 function remaskPayment(payment){
     var result = "";;
