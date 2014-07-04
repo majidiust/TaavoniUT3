@@ -169,6 +169,7 @@ function ClearPaymentTable() {
     });
 }
 function LoadPayments(){
+    ShowBox('#MemberPaymentList');
     console.log("user namefor load payment is : " + Membership.UserName);
  var nationalityCode = Membership.UserName;
 //GetListOfPayment
@@ -210,7 +211,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += '<td></td></tr>';
 						Debug(row);
 						$("#MemberInfoPaymentTable").append(row);
-                        ShowBox('#MemberPaymentList');
+                        
 				}
 			},
 		async:true
