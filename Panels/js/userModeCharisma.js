@@ -210,7 +210,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += "<td>" + newPayment.PaymentBank + "</td>";
 						row += '</tr>';
 						Debug(row);
-						$("#MemberInfoPaymentTable").append(row);
+						$("#MemberPaymentListTable").append(row);
                         
 				}
 			},
