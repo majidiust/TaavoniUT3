@@ -96,7 +96,7 @@ function remaskPayment(payment)
     {
         if(i!=0 && i%3 == 0 )
             result += ',';
-        result += payment.charAt(payment.length - 1 - i);
+        result = payment.charAt(payment.length - 1 - i) + result;
     }
     return result;
 }
