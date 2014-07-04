@@ -99,7 +99,8 @@ function remaskPayment(payment)
             result += ',';
         result += payment.charAt(i);
     }
-    return result;
+
+    return (result === '') ? '' : reverse(result.substr(1)) + result.charAt(0);
 }
 
 function LoadContactInfo(nationalityCode)
