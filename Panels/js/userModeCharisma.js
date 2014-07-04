@@ -152,7 +152,7 @@ function LoadTotalPayment(nationalityCode){
 		data : { userName : nationalityCode },
         success: function (result) {
 			if(result.Status == true){
-			    $("#userTotalPayment").html("جمع پرداختی : " + remaskPayment(result.Result.TotalFee.toString()) + " ریال ");
+			    $("#userTotalPayment").html(remaskPayment(result.Result.TotalFee.toString()) + " ریال ");
                 console.log("جمع پرداختی : " + remaskPayment(result.Result.TotalFee.toString()) + " ریال ");
 			}
             else{
