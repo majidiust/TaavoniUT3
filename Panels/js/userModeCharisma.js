@@ -170,8 +170,8 @@ function ClearPaymentTable() {
     });
 }
 function LoadPayments(){
-    console.log("user namefor load payment is : " + userName);
- var nationalityCode = userName;
+    console.log("user namefor load payment is : " + Membership.UserName);
+ var nationalityCode = Membership.UserName;
 //GetListOfPayment
 ClearPaymentTable();
 CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرداخت حسابها ... ', -1, null);
