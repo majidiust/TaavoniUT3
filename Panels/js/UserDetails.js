@@ -92,11 +92,12 @@ function  LoadTotalPayment(nationalityCode)
 function remaskPayment(payment)
 {
     var result = "";;
-    for(var i = 0 ; i < payment.length ; i++)
+    var index = 0 ;
+    for(var i = payment.length - 1 ; i >= 0  ; i-- , index++)
     {
-        if(i!=0 && i%3 == 0 )
+        if(index!=0 && index%3 == 0 )
             result += ',';
-        result = payment.charAt(payment.length - 1 - i) + result;
+        result += payment.charAt(i);
     }
     return result;
 }
