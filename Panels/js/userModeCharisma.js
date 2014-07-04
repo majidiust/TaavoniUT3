@@ -164,7 +164,7 @@ function LoadTotalPayment(nationalityCode){
 }
 function ClearPaymentTable() {
     listOfPayments.splice(0, listOfPayments.length);
-	    $("#MemberInfoPaymentTable tbody tr").each(function () {
+	    $("#MemberPaymentListTable tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
 }
