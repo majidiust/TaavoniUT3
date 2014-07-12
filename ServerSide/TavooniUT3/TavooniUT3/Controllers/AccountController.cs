@@ -1719,6 +1719,7 @@ namespace TavooniUT3.Controllers
         }
         #endregion
         #region User Payment
+        [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
         [HttpPost]
         public ActionResult AddPaymentForUser(string userName, string PaymentCode, string PaymentFee, int PaymentDateDay, int PaymentDateMonth, int PaymentDateYear, string PaymentBank, int PaymentMethod)
         {
@@ -1757,7 +1758,7 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
-
+         [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
         [HttpPost]
         public ActionResult UpdatePayment(string userName, string PaymentId, string PaymentCode, string PaymentFee, int PaymentDateDay, int PaymentDateMonth, int PaymentDateYear, string PaymentBank, int PaymentMethod)
         {
@@ -1794,7 +1795,7 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
-
+         [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
         [HttpGet]
         public ActionResult DeletePayment(string userName, string paymentId)
         {
@@ -1826,7 +1827,7 @@ namespace TavooniUT3.Controllers
             }
         }
 
-
+         [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
         [HttpGet]
         public ActionResult GetListOfPayment(string userName)
         {
