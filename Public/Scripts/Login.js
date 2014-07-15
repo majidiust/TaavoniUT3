@@ -407,7 +407,7 @@ function DetectLoggedInUser() {
     $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn", {}, function (result) {
         if (result.Status == true) {
 			
-			alert("user name is : " + userName);
+			//alert("user name is : " + userName);
             userName = result.user;
             $("#LogInDetails").show();
             $("#LogInDetailsUserName").html(result.UserName);
@@ -451,7 +451,7 @@ function DetectLoggedInUser() {
 
 function GoToPanel() {
     if (userName != "" && userName != undefined) {
-		alert("user name is : "  + userName + " : " + IsMember);
+		//alert("user name is : "  + userName + " : " + IsMember);
 		if(IsMember == true)
         	window.location = "http:///taavoniut3.ir/Panels/user.html";
 		else
@@ -948,7 +948,7 @@ function GetUserSummery() {
 				userDetails.Point = result.Point;
 				userName = result.Result.UserName;
 				IsMember = result.IsMember;
-				alert("User name is : " + userName + " : " + IsMember);
+				//alert("User name is : " + userName + " : " + IsMember);
               //  if (result.Result.HasProfile == true) {
 //
   //              } else {
@@ -1302,7 +1302,7 @@ function LoadSeminars(topEventsCount) {
 					walk(document.body, replaceNumbers);
             }
             else {
-                alert(result.Message);
+                //alert(result.Message);
             }
         });
 }
@@ -1371,7 +1371,7 @@ function LoadPastSeminars(topEventsCount) {
 					walk(document.body, replaceNumbers);
             }
             else {
-                alert(result.Message);
+                //alert(result.Message);
             }
         });
 }
@@ -1640,7 +1640,7 @@ function LoadPastSeminarsB(topEventsCount) {
 					walk(document.body, replaceNumbers);
             }
             else {
-                alert(result.Message);
+               // alert(result.Message);
             }
         });
 }
