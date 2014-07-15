@@ -449,6 +449,7 @@ function DetectLoggedInUser() {
 
 function GoToPanel() {
     if (userName != "") {
+		console.log("user name is : "  + userName + " : " + IsMember);
 		if(IsMember == true)
         	window.location = "http:///taavoniut3.ir/Panels/user.html";
 		else
