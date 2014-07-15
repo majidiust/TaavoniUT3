@@ -448,7 +448,7 @@ function DetectLoggedInUser() {
 }
 
 function GoToPanel() {
-    if (userName != "") {
+    if (userName != "" && userName != undefined) {
 		alert("user name is : "  + userName + " : " + IsMember);
 		if(IsMember == true)
         	window.location = "http:///taavoniut3.ir/Panels/user.html";
