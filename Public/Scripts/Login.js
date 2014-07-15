@@ -406,6 +406,7 @@ function DetectLoggedInUser() {
 
     $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn", {}, function (result) {
         if (result.Status == true) {
+			alert("user name is : " + userName);
             userName = result.user;
             $("#LogInDetails").show();
             $("#LogInDetailsUserName").html(result.UserName);
