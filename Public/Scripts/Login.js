@@ -406,6 +406,7 @@ function DetectLoggedInUser() {
 
     $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn", {}, function (result) {
         if (result.Status == true) {
+			
 			alert("user name is : " + userName);
             userName = result.user;
             $("#LogInDetails").show();
@@ -945,6 +946,8 @@ function GetUserSummery() {
                 userDetails.username = result.Result.UserName;
                 userDetails.email = result.Result.Email;
 				userDetails.Point = result.Point;
+				userName = result.Result.UserName;
+				alert("User name is : " + userName);
               //  if (result.Result.HasProfile == true) {
 //
   //              } else {
@@ -969,7 +972,7 @@ function GetUserSummery() {
             ShowModalWindow("خطا", message);
             ShowModalCloseButton();
         },
-        async: true
+        async: false
     });
 }
 
