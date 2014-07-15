@@ -280,7 +280,10 @@ namespace TavooniUT3.Controllers
                     var Result = Membership.GetUser(userName);
                     var user = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName));
                     var UserPoint = CalculateUserPoint(user.UserId);
-                    return Json(new { Status = true, Result, Point = UserPoint }, JsonRequestBehavior.AllowGet);
+                    if(Roles.IsUserInRole("Member"))
+                        return Json(new { Status = true, Result, Point = UserPoint, IsMember = true }, JsonRequestBehavior.AllowGet);
+                    else
+                        return Json(new { Status = true, Result, Point = UserPoint, IsMember = false }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
