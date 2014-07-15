@@ -947,7 +947,8 @@ function GetUserSummery() {
                 userDetails.email = result.Result.Email;
 				userDetails.Point = result.Point;
 				userName = result.Result.UserName;
-				alert("User name is : " + userName);
+				IsMember = result.IsMember;
+				alert("User name is : " + userName + " : " + IsMember);
               //  if (result.Result.HasProfile == true) {
 //
   //              } else {
