@@ -48,7 +48,7 @@ $(document).ready(function () {
     $.ajaxSetup({
         cache: false
     });
-	InitLocalStorage();
+    InitLocalStorage();
     LoadViews();
     var current_theme = $.cookie('current_theme') == null ? 'cerulean' : $.cookie('current_theme');
     switch_theme(current_theme);
@@ -72,7 +72,7 @@ $(document).ready(function () {
     }
 
     //establish history variables
-    var
+    var 
         History = window.History, // Note: We are using a capital H instead of a lower h
         State = History.getState(),
         $log = $('#log');
@@ -93,10 +93,10 @@ $(document).ready(function () {
 
     //animating menus on hover
     $('ul.main-menu li:not(.nav-header)').hover(function () {
-            $(this).animate({
-                'margin-left': '+=5'
-            }, 300);
-        },
+        $(this).animate({
+            'margin-left': '+=5'
+        }, 300);
+    },
 
         function () {
             $(this).animate({
@@ -114,6 +114,7 @@ $(document).ready(function () {
     CloseAllForm();
     docReady();
 
+    GetUserRoles();
 });
 
 function InitLocalStorage() {
