@@ -602,6 +602,7 @@ function ApplyUserRoles()
         else if(userRoles[i] == 'Viewer')
         {
             $('[name="editProfile"').hide();
+             $('[name="activeProfile"').hide();
             $('[name="AddNewMember"').hide();
             break;
         }
