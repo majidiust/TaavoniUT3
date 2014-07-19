@@ -70,7 +70,6 @@ function LoadGeneralInfo(nationalityCode)
 				else
 					$("#MemberInfoActivity").html("غیر فعال است");
 				$("#MemberInfoPoint").html("امتیاز کاربر : "  + result.Result.Point);
-			
 			}
 			else{
 			}
