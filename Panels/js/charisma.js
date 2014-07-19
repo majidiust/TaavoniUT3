@@ -1047,6 +1047,7 @@ function CloseAllForm() {
 
 
 function ShowBox(box) {
+    ApplyUserRoles();
     CloseAllForm();
     $(box).fadeIn(500);
 }
