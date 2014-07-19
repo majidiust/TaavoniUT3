@@ -121,7 +121,7 @@ function LoadViews() {
     });
 }
 
-function LoadGeneralInfo(nationalityCode){
+function LoadGeneralInfoB(nationalityCode){
 	$.ajax({
         type: 'GET',
         url: ServerURL + "Account/GetUserGeneralInfo",
@@ -363,7 +363,7 @@ function DetectLoggedInUser() {
             } else {
                 Membership = result.Result;
                 $("#UserName").html(Membership.UserName);
-                LoadGeneralInfo(Membership.UserName);
+                LoadGeneralInfoB(Membership.UserName);
                 LoadTotalPayment(Membership.UserName);
             }
         },
