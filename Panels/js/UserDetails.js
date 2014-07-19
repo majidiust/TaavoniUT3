@@ -327,6 +327,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 						row += '<button name="editPayment"  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' +  "'" +  newPayment.PaymentID+ "'"  + ');"> ویرایش </button></td></tr>';
 						Debug(row);
 						$("#MemberInfoPaymentTable").append(row);
+                        ApplyUserRoles();
 				}
 			},
 		async:true
