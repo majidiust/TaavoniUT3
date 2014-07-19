@@ -1830,6 +1830,29 @@ namespace TavooniUT3.Controllers
             }
         }
 
+         [HttpGet]
+         public ActionResult GetUserRole()
+         {
+             try
+             {
+                 if (Request.IsAuthenticated == false)
+                 {
+                     return Error(30);
+                 }
+                 else
+                 {
+                     String userName = User.Identity.Name;
+                     var Resuserult = Membership.GetUser(userName);
+                     var Result = Roles.GetRolesForUser();
+                     return Json(new { Result, Status = true, Message = 36 }, JsonRequestBehavior.AllowGet); 
+                 }
+             }
+             catch (Exception ex)
+             {
+                 return Error(ex.Message);
+             }
+         }
+
         [Authorize(Roles = "Admin, Member, User, Viewer")]
         [HttpGet]
         public ActionResult GetListOfPayment(string userName)

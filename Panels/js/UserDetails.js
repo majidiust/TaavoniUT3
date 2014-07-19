@@ -1,6 +1,6 @@
 //Region : Global Variables
 var selectedMember ; 
-
+var userRoles;
 //Region : Functions
 function Debug(message)
 {
@@ -591,6 +591,50 @@ function SaveProfile()
         async: true
     });
 }
+
+function ApplyUserRoles()
+{
+
+  
+
+    for(var i = 0 ; i < userRoles.length ; i++)
+    {
+        console.log("USer role is : " + userRoles);
+        if(userRoles[i] == 'Admin')
+            break;
+        else if(userRoles[i] == 'Viewer')
+        {
+            $('[name="editProfile"').hide();
+            $('[name="AddNewMember"').hide();
+            break;
+        }
+    }
+}
+
+function GetUserRoles()
+{
+    CustomBlockingPanel('توجه', 'در حال دریافت نقش های کاربر ... ', -1, null);
+	var ProfileNationalityCode = $("#MemberInfoInternationalCode").val();
+	 $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/GetUserRole",
+        dataType: 'json',
+        success: function (result) {
+				if(result.Status == true){
+					CustomAlert('توجه', 'نقش های کاربر دریافت شد', null);
+                    userRoles = result.Result;
+				}
+				else{
+					CustomAlert('توجه', 'دریافت نقش های کاربر یا خطا روبرو گردید', null);
+				}
+			},
+		error: function(){
+				CustomAlert('توجه', 'دریافت نقش های کاربر با خطا روبرو گردید', null);
+			},
+		async : true
+	 });   
+}
+
 
 function ActivateMember()
 {
