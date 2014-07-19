@@ -51,7 +51,7 @@
                         <table style="width:100%">
                         	<tr>
                             	<td colspan="2" style="width:100%;">
-                                 <button style="width:100%" class="btn btn-small btn-success" onclick="SaveProfile();" style="font-size:14px;">
+                                 <button name="editProfile" style="width:100%" class="btn btn-small btn-success" onclick="SaveProfile();" style="font-size:14px;">
 ثیت           </button>
                                 </td>
 								</tr>
@@ -63,25 +63,25 @@
                             </tr>
                             <tr>
                             		<td colspan="2" style="width:100%;">
-                                 <button style="width:100%" class="btn btn-small btn-info" onclick="ActivateMember();" style="font-size:14px;">
+                                 <button name="activeProfile" style="width:100%" class="btn btn-small btn-info" onclick="ActivateMember();" style="font-size:14px;">
 فعال            </button>
                                 </td>
 								</tr>
 								<tr>
                               	<td colspan="2" style="width:100%;">
-                                 <button onclick="DeActivateMember();"  style="width:100%" class="btn btn-small btn-error" data-rel="popover" data-content="از این دکمه برای غیر فعال سازی کاربر استفاده میشود." title="غیر فعال کردن" style="font-size:14px;">
+                                 <button name="activeProfile" onclick="DeActivateMember();"  style="width:100%" class="btn btn-small btn-error" data-rel="popover" data-content="از این دکمه برای غیر فعال سازی کاربر استفاده میشود." title="غیر فعال کردن" style="font-size:14px;">
 غیر فعال            </button>
                                 </td>
                             </tr>
 							                            <tr>
                             		<td colspan="2" style="width:100%;">
-                                 <button style="width:100%" class="btn btn-small btn" onclick="MakeUserActive();" style="font-size:12px;">
+                                 <button name="activeProfile" style="width:100%" class="btn btn-small btn" onclick="MakeUserActive();" style="font-size:12px;">
 ارسال پیامک            </button>
                                 </td>
 								</tr>
 								<tr>
                                	<td colspan="2" style="width:100%;">
-                                 <button  style="width:100%" class="btn btn-small btn-inverse" onclick="MakeUserDeActive();" style="font-size:12px;">
+                                 <button name="activeProfile" style="width:100%" class="btn btn-small btn-inverse" onclick="MakeUserDeActive();" style="font-size:12px;">
 ارسال ایمیل            </button>
                                 </td>
                             </tr>
@@ -1492,12 +1492,12 @@
             </tbody>
           </table>
 		  </div>
-          <button class="btn btn-large btn-primary" onclick="selectedTable = $('#MemberInfoChilds');ShowNewChildForm();">
+          <button name="editProfile"  class="btn btn-large btn-primary" onclick="selectedTable = $('#MemberInfoChilds');ShowNewChildForm();">
             افزودن فرزند
           </button>
       <hr/>
    
-        <label class="control-label" for="MemberInfoHamsars" style="float:right;">
+        <label  name="editProfile" class="control-label" for="MemberInfoHamsars" style="float:right;">
           اطلاعات همسر
         </label>
    <div class="datagrid">
@@ -1533,7 +1533,7 @@
             </tbody>
           </table>
 		  </div>
-          <button class="btn btn-large btn-warning" onclick="selectedTable = $('#MemberInfoHamsars');ShowNewHamsarForm();">
+          <button  name="editProfile"  class="btn btn-large btn-warning" onclick="selectedTable = $('#MemberInfoHamsars');ShowNewHamsarForm();">
             افزودن همسر
           </button>
         
@@ -1571,7 +1571,7 @@
             </tbody>
           </table>
 		  </div>
-          <button class="btn btn-large btn-info" onclick="selectedTable = $('#MemberInfoTakafolEtc');ShowNewCausinForm();">
+          <button  name="editProfile"  class="btn btn-large btn-info" onclick="selectedTable = $('#MemberInfoTakafolEtc');ShowNewCausinForm();">
             افزودن فرد تحت تکفل
           </button>
       
@@ -1611,7 +1611,7 @@
             </tbody>
           </table>
 		  </div>
-          <button class="btn btn-large btn-info" onclick="selectedTable = $('#MemberInfoPaymentTable');ShowNewPaymentForm();">
+          <button  name="editProfile"  class="btn btn-large btn-info" onclick="selectedTable = $('#MemberInfoPaymentTable');ShowNewPaymentForm();">
            افزودن پرداختی
           </button>
           </fieldset>
