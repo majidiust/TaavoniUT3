@@ -43,6 +43,7 @@ var oTable;
 $(document).load(function () {
     CustomBlockingPanel('توجه', 'لطفا اندکی صبر کنید.', -1, null);
 });
+
 $(document).ready(function () {
     $.ajaxSetup({
         cache: false
@@ -110,6 +111,7 @@ $(document).ready(function () {
     CloseAllForm();
     docReady();
 });
+
 function LoadViews() {
     Debug('Loading Views');
     $("#SuggestionContent").load("suggestionView.html");
@@ -118,6 +120,7 @@ function LoadViews() {
         $("#tabs").tabs();
     });
 }
+
 function LoadGeneralInfo(nationalityCode){
 	$.ajax({
         type: 'GET',
@@ -144,6 +147,8 @@ function LoadGeneralInfo(nationalityCode){
 		async:true
 		});
 }
+
+
 function LoadTotalPayment(nationalityCode){
     $.ajax({
         type: 'GET',
@@ -162,12 +167,21 @@ function LoadTotalPayment(nationalityCode){
             async:true   
             });
 }
+
 function ClearPaymentTable() {
     listOfPayments.splice(0, listOfPayments.length);
 	    $("#MemberPaymentListTable tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
 }
+
+function ShowUserInfo()
+{
+    ShowBox('#MemberInfo');
+    var nationalityCode = Membership.UserName;
+    LoadUserDetails(nationalityCode);
+}
+
 function LoadPayments(){
     ShowBox('#MemberPaymentList');
     console.log("user namefor load payment is : " + Membership.UserName);
