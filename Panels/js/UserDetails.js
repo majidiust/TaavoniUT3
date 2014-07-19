@@ -596,7 +596,7 @@ function ApplyUserRoles()
 {
     for(var i = 0 ; i < userRoles.length ; i++)
     {
-        console.log("USer role is : " + userRoles);
+        console.log("***************************User role is : " + userRoles[i]);
         if(userRoles[i] == 'Admin')
             break;
         else if(userRoles[i] == 'Viewer')
