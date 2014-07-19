@@ -1830,7 +1830,7 @@ namespace TavooniUT3.Controllers
             }
         }
 
-         [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
+         [Authorize(Roles = "Admin, Member, User")]
         [HttpGet]
         public ActionResult GetListOfPayment(string userName)
         {
