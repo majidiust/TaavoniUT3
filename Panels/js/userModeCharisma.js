@@ -181,7 +181,7 @@ function ShowUserInfo()
     $('[name="activeProfile"]').hide();
     ShowBox('#MemberInfo');
     var nationalityCode = Membership.UserName;
-    LoadUserDetails(nationalityCode);
+    LoadUserDetailsWithoutPayment(nationalityCode);
 }
 
 function LoadPayments(){
