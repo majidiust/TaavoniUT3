@@ -20,6 +20,18 @@ function LoadUserDetails(nationalityCode)
     LoadTotalPayment(nationalityCode);
 }
 
+function LoadUserDetailsWithoutPayment(nationalityCode)
+{
+	selectedMember = nationalityCode;
+	ClearRelationalTable();
+	LoadGeneralInfo(nationalityCode);
+	LoadContactInfo(nationalityCode);
+	LoadIsargariInfo(nationalityCode);
+	LoadJobInfo(nationalityCode);
+	LoadFamilyInfo(nationalityCode);
+    LoadTotalPayment(nationalityCode);
+}
+
 function LoadGeneralInfo(nationalityCode)
 {
 	$.ajax({
