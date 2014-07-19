@@ -594,9 +594,6 @@ function SaveProfile()
 
 function ApplyUserRoles()
 {
-
-  
-
     for(var i = 0 ; i < userRoles.length ; i++)
     {
         console.log("USer role is : " + userRoles);
@@ -623,6 +620,7 @@ function GetUserRoles()
 				if(result.Status == true){
 					CustomAlert('توجه', 'نقش های کاربر دریافت شد', null);
                     userRoles = result.Result;
+                    ApplyUserRoles();
 				}
 				else{
 					CustomAlert('توجه', 'دریافت نقش های کاربر یا خطا روبرو گردید', null);
