@@ -177,8 +177,7 @@ function ClearPaymentTable() {
 
 function ShowUserInfo()
 {
-    $('[name="editProfile"]').hide();
-    $('[name="activeProfile"]').hide();
+    $('[name="editProfileCollumn"]').hide();
     ShowBox('#MemberInfo');
     var nationalityCode = Membership.UserName;
     LoadUserDetailsWithoutPayment(nationalityCode);
