@@ -39,7 +39,7 @@ function ClearPaymentForm()
 function AddNewPayment() {
     var newPayment = {
         PaymentCode: $("#paymentCode").val(),
-        PaymentFee: $("#paymentFee").val(),
+        PaymentFee: remaskPayment($("#paymentFee").val()),
         PaymentBank: $("#paymentBank").val(),
         PaymentDateDay: $("#PaymentDateDay").val(),
 		PaymentDateMonth: $("#PaymentDateMonth").val(),

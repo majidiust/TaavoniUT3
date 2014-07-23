@@ -102,6 +102,8 @@ function  LoadTotalPayment(nationalityCode)
 
 function remaskPayment(payment)
 {
+    payment = (parseInt(payment) / 1000).toString();
+    console.log("Payent is : " + payment);
     var result = "";;
     var index = 0 ;
     for(var i = payment.length - 1 ; i >= 0  ; i-- , index++)
@@ -304,7 +306,7 @@ CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات پرد�
 				console.log("Date is : "  + date);
 						var newPayment = {
 							 PaymentCode: result.Result[i].PaymentCode,
-								PaymentFee: result.Result[i].PaymentFee,
+								PaymentFee: remaskPayment(result.Result[i].PaymentFee),
 								PaymentBank: result.Result[i].PaymentBank,
 								PaymentDateDay: date[2],
 								PaymentDateMonth: date[1],
