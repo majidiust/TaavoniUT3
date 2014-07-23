@@ -15,5 +15,6 @@ namespace TavooniUT3.Models
         public int Rank { get; set; }
         public String Date { get; set; }
         public bool IsApproved { get; set; }
+        public long TotalPayment { get; set; }
     }
 }

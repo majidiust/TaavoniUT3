@@ -1374,7 +1374,8 @@ namespace TavooniUT3.Controllers
                         Point = x.Point,
                         Rank = i + 1,
                         IsApproved = x.IsApproved,
-                        Date = x.Date
+                        Date = x.Date,
+                        TotalPayment = x.TotalPayment
                     });
                 }
 
