@@ -1284,6 +1284,35 @@ namespace TavooniUT3.Controllers
             }
         }
 
+
+        private long GetPaymentByUser(string userName)
+        {
+            try
+            {
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    var payments = m_model.Payments.Where(P => P.MemberID.Equals(userId));
+                    long result = 0;
+                    foreach (var x in payments)
+                    {
+                        result += long.Parse(x.Fee);
+                    }
+                    return result;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+
+
         [HttpGet]
         public ActionResult GetTotalPaymentByUser(string userName)
         {
@@ -1328,7 +1357,8 @@ namespace TavooniUT3.Controllers
                                           NationalityCode = p.InternationalCode,
                                           Point = CalculateUserPoint((Guid)p.MemberID),
                                           Date = p.CreateDate != null ? p.CreateDate : tempdate,
-                                          IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
+                                          IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
+                                          TotalPayment = GetPaymentByUser(p.InternationalCode)
                                       }).ToList();
                 var rankList = unsortRankList.OrderByDescending(P => P.Point);
                 List<RankModel> Result = new List<RankModel>();
@@ -1355,6 +1385,7 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
+
 
         [HttpGet]
         public ActionResult GetRankList()

@@ -130,14 +130,15 @@ function DefineModels()
 {
 	console.log("Define Models");
 	$data.Entity.extend("$org.types.Member", {
-		Id: {type: "int", key:true, computed: true},
-		NationalityCode: { type: 'string', required: true },
-		FirstName: {type: 'string', required: true},
-		LastName: {type: 'string', required: true},
-		CreateDate: {type: 'string', required: true},
-		IsApproved: {type: 'string', required: true},
-		Point: {type: 'string', required: true},
-		Rank: {type: 'string', required: false}
+	    Id: { type: "int", key: true, computed: true },
+	    NationalityCode: { type: 'string', required: true },
+	    FirstName: { type: 'string', required: true },
+	    LastName: { type: 'string', required: true },
+	    CreateDate: { type: 'string', required: true },
+	    IsApproved: { type: 'string', required: true },
+	    Point: { type: 'string', required: true },
+	    Rank: { type: 'string', required: false },
+	    Payment: { type: 'string', required: false}
 	});
 	$data.EntityContext.extend("$org.types.utdb", {
 		Members: { type: $data.EntitySet, elementType: $org.types.Member }
@@ -626,7 +627,7 @@ function RefreshMember(memberId)
 				RefreshMemberIns.IsApproved = result.Result.IsApproved;
 				RefreshMemberIns.Point = result.Result.Point;
 				RefreshMemberIns.CreateDate = result.Result.Date;	
-						
+				RefreshMemberIns.Payment = result.Result.TotalPayment;		
 				var selected ;
 				$org.context.Members.forEach(function (item) {
             		if(item.NationalityCode == memberId)
@@ -663,57 +664,60 @@ function RefreshMember(memberId)
 
 function FetchListOfMembersFromServer() {
 	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
-    $.ajax({
-        type: 'GET',
-        url: ServerURL + "Account/GetListOfMembers",
-        dataType: 'json',
-        success: function (result) {
-			
-			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
-            if (result.Status == true) {
-				$org.context.Members.forEach(function (item) {
-            		$org.context.Members.remove(item);
-        		}).then(function(){
-					$org.context.saveChanges().then(function(){console.log("Members Data Clean successfully");});
-				members=[];
-                for (var i = 0; i < result.Result.length; i++) {
-                    var res = {
-                        NationalityId: result.Result[i].UserName,
-                        FirstName: result.Result[i].FirstName,
-                        LastName: result.Result[i].LastName,
-                        Date: result.Result[i].Date,
-                        IsApproved: result.Result[i].IsApproved,
-                        Point: result.Result[i].Point,
-                        NationalityCode: result.Result[i].UserName,
-						Rank : result.Result[i].Rank
-                    };
-					console.log(res);
-					members.push(res);
-					var newSample = new $org.types.Member();
-					newSample.FirstName = res.FirstName;
-					newSample.NationalityCode = res.NationalityId;
-					newSample.LastName = res.LastName;
-					newSample.IsApproved = res.IsApproved;
-					newSample.Point = res.Point;
-					newSample.CreateDate = res.Date;	
-					newSample.Rank = res.Rank;
-					$org.context.Members.add(newSample);
-					//$org.context.Members.removeAll();
-					//console.log(newSample);
-					//console.log("Add to database successfully");
-                }
-				$org.context.saveChanges().then(function() { console.log("done!"); });
-				GetListOfMembers();});
-        		
-            } else {
+	$.ajax({
+	    type: 'GET',
+	    url: ServerURL + "Account/GetListOfMembers",
+	    dataType: 'json',
+	    success: function (result) {
 
-            }
-        },
-        error: function () {
-            CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
-        },
-        async: true
-    });
+	        CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
+	        if (result.Status == true) {
+	            $org.context.Members.forEach(function (item) {
+	                $org.context.Members.remove(item);
+	            }).then(function () {
+	                $org.context.saveChanges().then(function () { console.log("Members Data Clean successfully"); });
+	                members = [];
+	                for (var i = 0; i < result.Result.length; i++) {
+	                    var res = {
+	                        NationalityId: result.Result[i].UserName,
+	                        FirstName: result.Result[i].FirstName,
+	                        LastName: result.Result[i].LastName,
+	                        Date: result.Result[i].Date,
+	                        IsApproved: result.Result[i].IsApproved,
+	                        Point: result.Result[i].Point,
+	                        NationalityCode: result.Result[i].UserName,
+	                        Rank: result.Result[i].Rank,
+	                        Payment: result.Result[i].TotalPayment
+	                    };
+	                    console.log(res);
+	                    members.push(res);
+	                    var newSample = new $org.types.Member();
+	                    newSample.FirstName = res.FirstName;
+	                    newSample.NationalityCode = res.NationalityId;
+	                    newSample.LastName = res.LastName;
+	                    newSample.IsApproved = res.IsApproved;
+	                    newSample.Point = res.Point;
+	                    newSample.CreateDate = res.Date;
+	                    newSample.Rank = res.Rank;
+	                    newSample.Payment = res.Payment;
+	                    $org.context.Members.add(newSample);
+	                    //$org.context.Members.removeAll();
+	                    //console.log(newSample);
+	                    //console.log("Add to database successfully");
+	                }
+	                $org.context.saveChanges().then(function () { console.log("done!"); });
+	                GetListOfMembers();
+	            });
+
+	        } else {
+
+	        }
+	    },
+	    error: function () {
+	        CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
+	    },
+	    async: true
+	});
 }
 
 function GetListOfMembers() {
@@ -735,6 +739,7 @@ function GetListOfMembers() {
             user.IsApproved,
             user.Point,
 			user.Rank,
+            user.Payment,
             user.NationalityCode
 	        ];
 		console.log("###########################################");
@@ -796,6 +801,9 @@ function GetListOfMembers() {
         }, 
 		{
             "sTitle": "رتبه"
+        },
+        {
+            "sTitle": "مبلغ پرداختی (10 هزار ریال)"
         },
 		{
             "sTitle": "",
