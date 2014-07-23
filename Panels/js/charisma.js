@@ -739,7 +739,7 @@ function GetListOfMembers() {
             user.IsApproved,
             user.Point,
 			user.Rank,
-            user.Payment,
+            remaskPayment(user.Payment),
             user.NationalityCode
 	        ];
 		console.log("###########################################");
@@ -803,7 +803,7 @@ function GetListOfMembers() {
             "sTitle": "رتبه"
         },
         {
-            "sTitle": "مبلغ پرداختی (10 هزار ریال)"
+            "sTitle": "مبلغ پرداختی"
         },
 		{
             "sTitle": "",
