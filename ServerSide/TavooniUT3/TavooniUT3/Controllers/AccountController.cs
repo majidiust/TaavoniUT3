@@ -709,26 +709,29 @@ namespace TavooniUT3.Controllers
                 m_model.SubmitChanges();
 
                 #region Apply Picture
-                String lastName = Path.Combine(Server.MapPath("~/Pics/Users/Originals"), NewMemberPictureName);
-                String newName = Path.Combine(Server.MapPath("~/Pics/Users/Originals"), userName + ".png");
-                FileInfo f = new FileInfo(lastName);
-                if (new FileInfo(newName).Exists)
-                    System.IO.File.Delete(newName);
-                if (f.Exists)
+                if (!NewMemberPictureName.ToLower().Trim().Equals("default"))
                 {
-                    System.IO.File.Copy(lastName, newName);
-                    System.IO.File.Delete(lastName);
-                }
+                    String lastName = Path.Combine(Server.MapPath("~/Pics/Users/Originals"), NewMemberPictureName);
+                    String newName = Path.Combine(Server.MapPath("~/Pics/Users/Originals"), userName + ".png");
+                    FileInfo f = new FileInfo(lastName);
+                    if (new FileInfo(newName).Exists)
+                        System.IO.File.Delete(newName);
+                    if (f.Exists)
+                    {
+                        System.IO.File.Copy(lastName, newName);
+                        System.IO.File.Delete(lastName);
+                    }
 
-                lastName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), NewMemberPictureName);
-                newName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), userName + ".png");
-                f = new FileInfo(lastName);
-                if (new FileInfo(newName).Exists)
-                    System.IO.File.Delete(newName);
-                if (f.Exists)
-                {
-                    System.IO.File.Copy(lastName, newName);
-                    System.IO.File.Delete(lastName);
+                    lastName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), NewMemberPictureName);
+                    newName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), userName + ".png");
+                    f = new FileInfo(lastName);
+                    if (new FileInfo(newName).Exists)
+                        System.IO.File.Delete(newName);
+                    if (f.Exists)
+                    {
+                        System.IO.File.Copy(lastName, newName);
+                        System.IO.File.Delete(lastName);
+                    }
                 }
                 #endregion
                 return Success(33);
