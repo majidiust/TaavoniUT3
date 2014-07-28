@@ -105,7 +105,7 @@ function remaskPayment(payment)
    // payment = (parseInt(payment) / 1000).toString();
    // console.log("Payent is : " + payment);
    console.log(payment);
-   if(payment.indexOf(',') == -1)
+   if(payment.indexOf(',') != -1)
    {
 	   console.log("Remasked before");
    	return "" + payment;
