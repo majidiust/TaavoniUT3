@@ -119,7 +119,7 @@ function UpdatePayment()
 			var tdSrcBank = selectedRow.children("td:nth-child(5)");
 			
 			tdCode.html(newPayment.PaymentCode);
-			tdFee.html(newPayment.PaymentFee);
+			tdFee.html(remaskPayment(newPayment.PaymentFee));
 			tdPaymentDate.html(newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay);
 			tdSrcBank.html(newPayment.PaymentBank);
 			console.log(tdId.html() + " : " + tdCode.html() + " : " + tdFee.html() + " : " + tdPaymentDate.html() + " : " + tdSrcBank.html());
