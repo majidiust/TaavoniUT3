@@ -579,7 +579,7 @@ function SaveProfile()
 				if(result.Status == true)
 				{
 					 CustomAlert('توجه', 'تغییرات با موفقیت انجام گردید', null);
-					 $("div[name=PanelWindow]").hide();
+					// $("div[name=PanelWindow]").hide();
 				}
 				else
 				{
