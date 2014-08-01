@@ -1761,6 +1761,12 @@ namespace TavooniUT3.Controllers
         [HttpPost]
         public ActionResult AddPaymentForUser(string userName, string PaymentCode, string PaymentFee, int PaymentDateDay, int PaymentDateMonth, int PaymentDateYear, string PaymentBank, int PaymentMethod)
         {
+            String tmpPayment = PaymentFee;
+            PaymentFee = "";
+            foreach (var ch in tmpPayment)
+                if(ch!= ',')
+                PaymentFee += ch;
+            
             try
             {
                 if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
