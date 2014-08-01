@@ -748,6 +748,19 @@ function GetListOfMembers() {
         results.push(res);
     }).then(function(){
 	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+        jQuery.fn.dataTableExt.oSort["payment-desc"] = function (x, y) {
+        function removeComma(str){
+            var replaced = str.replace(',', '');
+            return parseInt(replaced);
+        };
+        return removeComma(x) - removeComma(y);
+    };
+    
+    jQuery.fn.dataTableExt.oSort["payment-asc"] = function (x, y) {
+        return jQuery.fn.dataTableExt.oSort["payment-desc"](y, x);
+    }
+
     oTable = $('#ListOfMembersTable').dataTable({
         "bDestroy": true,
         "bJQueryUI": true,
@@ -803,7 +816,9 @@ function GetListOfMembers() {
             "sTitle": "رتبه"
         },
         {
-            "sTitle": "مبلغ پرداختی"
+            "sTitle": "مبلغ پرداختی",
+            "bSortable": true,
+            "sType": "payment"
         },
 		{
             "sTitle": "",
