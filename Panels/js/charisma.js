@@ -731,7 +731,7 @@ function GetListOfMembers() {
 	console.log("###########################################");
     //var members2 = $org.context.Members.toArray();
 	$org.context.Members.forEach(function (user) {
-        var res = [
+	    var res = [
             user.NationalityCode,
             user.FirstName,
             user.LastName,
@@ -742,95 +742,97 @@ function GetListOfMembers() {
             remaskPayment(user.Payment),
             user.NationalityCode
 	        ];
-		console.log("###########################################");
-		console.log("Element : " + user);
-		console.log("New Record : " + res);
-        results.push(res);
-    }).then(function(){
-	Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+	    console.log("###########################################");
+	    console.log("Element : " + user);
+	    console.log("New Record : " + res);
+	    results.push(res);
+	}).then(function () {
+	    Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
-        jQuery.fn.dataTableExt.oSort["payment-desc"] = function (x, y) {
-        function removeComma(str){
-            var replaced = str.replace(',', '');
-            return parseInt(replaced);
-        };
-        return removeComma(x) - removeComma(y);
-    };
-    
-    jQuery.fn.dataTableExt.oSort["payment-asc"] = function (x, y) {
-        return jQuery.fn.dataTableExt.oSort["payment-desc"](y, x);
-    }
+	    jQuery.fn.dataTableExt.oSort["payment-desc"] = function (x, y) {
+	    
+	        function removeComma(str) {
+	            var replaced = str.replace(',', '');
+	            return parseInt(replaced);
+	        };
+            console.log("Sort : " + x + " : " + y + " : " + (removeComma(x) - removeComma(y)));
+	        return removeComma(x) - removeComma(y);
+	    };
 
-    oTable = $('#ListOfMembersTable').dataTable({
-        "bDestroy": true,
-        "bJQueryUI": true,
-        "bProcessing": true,
-        "bDeferRender": true,
-        "oLanguage": {
-            "sProcessing": "درحال پردازش...",
-            "sLengthMenu": "نمایش محتویات _MENU_",
-            "sZeroRecords": "موردی یافت نشد",
-            "sInfo": "نمایش _START_ تا _END_ از مجموع _TOTAL_ مورد",
-            "sInfoEmpty": "تهی",
-            "sInfoFiltered": "(فیلتر شده از مجموع _MAX_ مورد)",
-            "sInfoPostFix": "",
-            "sSearch": "جستجو:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "ابتدا",
-                "sPrevious": "قبلی",
-                "sNext": "بعدی",
-                "sLast": "انتها"
-            }
-        },
-        "aaData": results,
-        "aoColumns": [
+	    jQuery.fn.dataTableExt.oSort["payment-asc"] = function (x, y) {
+	        return jQuery.fn.dataTableExt.oSort["payment-desc"](y, x);
+	    }
+
+	    oTable = $('#ListOfMembersTable').dataTable({
+	        "bDestroy": true,
+	        "bJQueryUI": true,
+	        "bProcessing": true,
+	        "bDeferRender": true,
+	        "oLanguage": {
+	            "sProcessing": "درحال پردازش...",
+	            "sLengthMenu": "نمایش محتویات _MENU_",
+	            "sZeroRecords": "موردی یافت نشد",
+	            "sInfo": "نمایش _START_ تا _END_ از مجموع _TOTAL_ مورد",
+	            "sInfoEmpty": "تهی",
+	            "sInfoFiltered": "(فیلتر شده از مجموع _MAX_ مورد)",
+	            "sInfoPostFix": "",
+	            "sSearch": "جستجو:",
+	            "sUrl": "",
+	            "oPaginate": {
+	                "sFirst": "ابتدا",
+	                "sPrevious": "قبلی",
+	                "sNext": "بعدی",
+	                "sLast": "انتها"
+	            }
+	        },
+	        "aaData": results,
+	        "aoColumns": [
 		{
-            "sTitle": "کد ملی"
-        }, 
+		    "sTitle": "کد ملی"
+		},
 		{
-            "sTitle": "نام"
-        }, 
+		    "sTitle": "نام"
+		},
 		{
-            "sTitle": "نام خانوادگی"
-        }, 
+		    "sTitle": "نام خانوادگی"
+		},
 		{
-            "sTitle": "تاریخ عضویت"
-        }, 
+		    "sTitle": "تاریخ عضویت"
+		},
 		{
-            "sTitle": "وضعیت",
-            "fnRender": function (obj) {
-                var sReturn = obj.aData[obj.iDataColumn];
-                Debug(sReturn);
-                if (sReturn == true) {
-                    sReturn = '<center><div class="label label-success">تایید شده</div></center>';
-                } else
-                    sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
-                return sReturn;
-            }
-        }, 
+		    "sTitle": "وضعیت",
+		    "fnRender": function (obj) {
+		        var sReturn = obj.aData[obj.iDataColumn];
+		        Debug(sReturn);
+		        if (sReturn == true) {
+		            sReturn = '<center><div class="label label-success">تایید شده</div></center>';
+		        } else
+		            sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
+		        return sReturn;
+		    }
+		},
 		{
-            "sTitle": "امتیاز"
-        }, 
+		    "sTitle": "امتیاز"
+		},
 		{
-            "sTitle": "رتبه"
-        },
+		    "sTitle": "رتبه"
+		},
         {
             "sTitle": "مبلغ پرداختی",
             "bSortable": true,
             "sType": "payment"
         },
 		{
-            "sTitle": "",
-            "fnRender": function (obj) {
-                var sReturn = obj.aData[obj.iDataColumn];
-                sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedRow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
-                return sReturn;
-            }
-        }]
-    });
+		    "sTitle": "",
+		    "fnRender": function (obj) {
+		        var sReturn = obj.aData[obj.iDataColumn];
+		        sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedRow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
+		        return sReturn;
+		    }
+		}]
+	    });
 
-	ShowBox("#ListOfMembers");
+	    ShowBox("#ListOfMembers");
 	});
 	
 	/*var index = 0 ;
