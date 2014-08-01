@@ -25,6 +25,7 @@ function DeletePayment(PaymentId) {
             break;
         }
     }
+    LoadTotalPayment(newPayment.userName);
 }
 
 
@@ -61,25 +62,25 @@ function AddNewPayment() {
         CustomModalAlert("خطا", "لطفا بانک مبدا را وارد نمایید", null);
     } 
     if (hasError == false) {
-		AddPaymentToDatabase(newPayment,function(code){
-		$('#NewPayment').modal('hide');
-		ClearPaymentForm();
-		console.log("Code is : " + code);
-		newPayment.PaymentID = code;
-		listOfPayments.push(newPayment);
-        var index = listOfPayments.length - 1;
-        var row = "<tr>";
-		row += "<td>" + newPayment.PaymentID + "</td>";
-        row += "<td>" + newPayment.PaymentCode + "</td>";
-        row += "<td>" + newPayment.PaymentFee + "</td>";
-		row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
-        row += "<td>" + newPayment.PaymentBank + "</td>";
-        row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeletePayment(' + "'" + newPayment.PaymentID + "'" +');"> حذف </button>';
-		row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' + newPayment.PaymentID  + ');"> ویرایش </button></td></tr>';
-		Debug("New Row is : " + row);
-		$("#MemberInfoPaymentTable").append(row);
-			
-			},null);
+        AddPaymentToDatabase(newPayment, function (code) {
+            $('#NewPayment').modal('hide');
+            ClearPaymentForm();
+            console.log("Code is : " + code);
+            newPayment.PaymentID = code;
+            listOfPayments.push(newPayment);
+            var index = listOfPayments.length - 1;
+            var row = "<tr>";
+            row += "<td>" + newPayment.PaymentID + "</td>";
+            row += "<td>" + newPayment.PaymentCode + "</td>";
+            row += "<td>" + newPayment.PaymentFee + "</td>";
+            row += "<td>" + newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay + "</td>";
+            row += "<td>" + newPayment.PaymentBank + "</td>";
+            row += '<td><button  style="width:50%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeletePayment(' + "'" + newPayment.PaymentID + "'" + ');"> حذف </button>';
+            row += '<button  style="width:50%" class="btn btn-large btn-info" onclick="selectedRow = $(this).parent().parent();ShowUpdatePayment(' + newPayment.PaymentID + ');"> ویرایش </button></td></tr>';
+            Debug("New Row is : " + row);
+            $("#MemberInfoPaymentTable").append(row);
+            LoadTotalPayment(newPayment.userName);
+        }, null);
     } 
 }
 
@@ -123,7 +124,7 @@ function UpdatePayment()
 			tdPaymentDate.html(newPayment.PaymentDateYear + "/" + newPayment.PaymentDateMonth + "/" + newPayment.PaymentDateDay);
 			tdSrcBank.html(newPayment.PaymentBank);
 			console.log(tdId.html() + " : " + tdCode.html() + " : " + tdFee.html() + " : " + tdPaymentDate.html() + " : " + tdSrcBank.html());
-			
+			LoadTotalPayment(newPayment.userName);
 		});
 	}
 }
