@@ -750,12 +750,15 @@ function GetListOfMembers() {
 	    Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
 	    jQuery.fn.dataTableExt.oSort["payment-desc"] = function (x, y) {
-	    
+
 	        function removeComma(str) {
-	            var replaced = str.replace(',', '');
+	            var replaced = "";
+	            for (var i = 0; i < str.length; i++)
+	                if (str[i] != ',')
+	                    replaced += str[i];
+	            console.log(str + ":" + replaced);
 	            return parseInt(replaced);
 	        };
-            console.log("Sort : " + x + "," + removeComma(x) + " : " + y + "," + removeComma(y) + " : " + (removeComma(x) - removeComma(y)));
 	        return removeComma(x) - removeComma(y);
 	    };
 
