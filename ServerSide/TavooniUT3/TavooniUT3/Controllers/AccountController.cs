@@ -1501,8 +1501,7 @@ namespace TavooniUT3.Controllers
                                       Date = p.CreateDate != null ? p.CreateDate : tempdate,
                                       IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
                                       Point = CalculateUserPoint((Guid)p.MemberID),
-                                      TotalPayment = GetPaymentByUser(p.InternationalCode),
-                                      Rank = GetRankForUser((Guid)p.MemberID)
+                                      TotalPayment = GetPaymentByUser(p.InternationalCode)
                                   }).ToList()[0];
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
                 }
