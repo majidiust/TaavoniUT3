@@ -25,7 +25,7 @@ function DeletePayment(PaymentId) {
             break;
         }
     }
-    LoadTotalPayment(newPayment.userName);
+ 
 }
 
 
@@ -205,7 +205,9 @@ function DeletePaymentّFromDatabase(paymentID)
         dataType: 'json',
 		data : {userName : ProfileNationalityCode, paymentId : paymentID},
         success: function (result) {
+
 				if(result.Status == true){
+                       LoadTotalPayment(ProfileNationalityCode);
 					CustomAlert('توجه', 'با موفقبت حذف صورت پذیرفت', null);
 				}
 				else{
