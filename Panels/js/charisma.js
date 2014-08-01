@@ -755,7 +755,7 @@ function GetListOfMembers() {
 	            var replaced = str.replace(',', '');
 	            return parseInt(replaced);
 	        };
-            console.log("Sort : " + removeComma(x) + " : " + removeComma(y) + " : " + (removeComma(x) - removeComma(y)));
+            console.log("Sort : " + x + "," + removeComma(x) + " : " + y + "," + removeComma(y) + " : " + (removeComma(x) - removeComma(y)));
 	        return removeComma(x) - removeComma(y);
 	    };
 
