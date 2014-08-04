@@ -1950,7 +1950,7 @@ namespace TavooniUT3.Controllers
                     var payments = m_model.Payments;
                     long result = 0;
                     System.Threading.Tasks.Parallel.ForEach(payments, payment => { result += long.Parse(payment.Fee); });
-                    return Json(new { Status = true, Message = 63, result }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Status = true, Message = 63, result, count = m_model.Payments.Count() }, JsonRequestBehavior.AllowGet);
 
                 }
                 else
