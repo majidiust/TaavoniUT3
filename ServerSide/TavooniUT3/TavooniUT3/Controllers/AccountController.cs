@@ -1947,8 +1947,13 @@ namespace TavooniUT3.Controllers
                 String userName = User.Identity.Name;
                 if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
                 {
-                    var totalPayment = m_model.Payments.Sum(P=>double.Parse(P.Fee));
-                    return Json(new { Status = true, Message = 63, totalPayment }, JsonRequestBehavior.AllowGet);
+                    var payments = m_model.Payments;
+                    long result = 0;
+                    foreach (var payment in payments)
+                    {
+                        result += long.Parse(payment.Fee);
+                    }
+                    return Json(new { Status = true, Message = 63, result }, JsonRequestBehavior.AllowGet);
 
                 }
                 else
