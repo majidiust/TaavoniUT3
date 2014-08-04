@@ -159,7 +159,7 @@ function GetTotalPayment(){
              if (result.Status == true) {
                  if (result.Message == 63) {
                      CustomAlert('توجه', "اطلاعات مالی دریافت شد", null);
-                     var maskedresult = "";;
+                     var maskedresult = "";
                     var index = 0 ;
                     for(var i = result.result.length - 1 ; i >= 0  ; i-- , index++)
                     {
@@ -167,7 +167,7 @@ function GetTotalPayment(){
                             maskedresult += ',';
                         maskedresult += result.result.charAt(i);
                     }
-                     $("#totalPaymentWindowFee").html(remaskPayment(result.result) + '  ریال  ');
+                     $("#totalPaymentWindowFee").html(maskedresult + '  ریال  ');
                      $("#totalPaymentWindowFeeCount").html(result.count);
                      ShowBox("#TotalPaymentWindow");
                  } else {
