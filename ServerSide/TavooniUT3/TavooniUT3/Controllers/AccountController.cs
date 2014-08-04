@@ -714,23 +714,26 @@ namespace TavooniUT3.Controllers
                     String lastName = Path.Combine(Server.MapPath("~/Pics/Users/Originals"), NewMemberPictureName);
                     String newName = Path.Combine(Server.MapPath("~/Pics/Users/Originals"), userName + ".png");
                     FileInfo f = new FileInfo(lastName);
-                    if (new FileInfo(newName).Exists)
-                        System.IO.File.Delete(newName);
                     if (f.Exists)
                     {
-                        System.IO.File.Copy(lastName, newName);
-                        System.IO.File.Delete(lastName);
-                    }
+                        if (new FileInfo(newName).Exists)
+                            System.IO.File.Delete(newName);
+                        if (f.Exists)
+                        {
+                            System.IO.File.Copy(lastName, newName);
+                            System.IO.File.Delete(lastName);
+                        }
 
-                    lastName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), NewMemberPictureName);
-                    newName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), userName + ".png");
-                    f = new FileInfo(lastName);
-                    if (new FileInfo(newName).Exists)
-                        System.IO.File.Delete(newName);
-                    if (f.Exists)
-                    {
-                        System.IO.File.Copy(lastName, newName);
-                        System.IO.File.Delete(lastName);
+                        lastName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), NewMemberPictureName);
+                        newName = Path.Combine(Server.MapPath("~/Pics/Users/Thumbnails"), userName + ".png");
+                        f = new FileInfo(lastName);
+                        if (new FileInfo(newName).Exists)
+                            System.IO.File.Delete(newName);
+                        if (f.Exists)
+                        {
+                            System.IO.File.Copy(lastName, newName);
+                            System.IO.File.Delete(lastName);
+                        }
                     }
                 }
                 #endregion
@@ -1934,6 +1937,30 @@ namespace TavooniUT3.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Admin, Viewer")]
+        [HttpGet]
+        public ActionResult GetTotalPayment()
+        {
+            try
+            {
+                String userName = User.Identity.Name;
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    var totalPayment = m_model.Payments.Sum(P=>double.Parse(P.Fee));
+                    return Json(new { Status = true, Message = 63, totalPayment }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
         #endregion
     }
 }
