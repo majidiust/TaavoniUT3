@@ -81,3 +81,4 @@ D:\Projects\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\TavooniUT3.d
 D:\Projects\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\bin\TavooniUT3.pdb
 D:\Projects\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.dll
 D:\Projects\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.pdb
+D:\Projects\Taavoni\TaavoniUT3\ServerSide\TavooniUT3\TavooniUT3\obj\Debug\TavooniUT3.csprojResolveAssemblyReference.cache
