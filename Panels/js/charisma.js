@@ -159,7 +159,7 @@ function GetTotalPayment(){
              if (result.Status == true) {
                  if (result.Message == 63) {
                      CustomAlert('توجه', "اطلاعات مالی دریافت شد", null);
-                     $("#totalPaymentWindowFee").html(result.result + '  ریال  ');
+                     $("#totalPaymentWindowFee").html(remaskPayment(result.result) + '  ریال  ');
                      $("#totalPaymentWindowFeeCount").html(result.count);
                      ShowBox("#TotalPaymentWindow");
                  } else {
