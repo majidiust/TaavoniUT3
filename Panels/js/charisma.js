@@ -149,6 +149,36 @@ function DataTableify() {
     $('.datatable').dataTable();
 }
 
+function GetTotalPayment(){
+     CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات مالی ....', -1, null);
+     $.ajax({
+         type: 'GET',
+         url: ServerURL + "Account/GetTotalPayment",
+         dataType: 'json',
+         success: function (result) {
+             if (result.Status == true) {
+                 if (result.Message == 63) {
+                     CustomAlert('توجه', "اطلاعات مالی دریافت شد", null);
+                     $("#totalPaymentWindowFee").html(result.result + '  ریال  ');
+                     $("#totalPaymentWindowFeeCount").html(result.count);
+                     ShowBox("#TotalPaymentWindow");
+                 } else {
+                     CustomAlert('توجه', "امکان دریافت اطلاعات مالی در این لحظه وجود ندارد", null);
+                 }
+             } else {
+                 CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
+             }
+         },
+         error: function () {
+             CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
+             errorCallback();
+
+         },
+         async: true
+     });
+}
+
+
 function LoadViews() {
     Debug('Loading Views');
     $("#NewMemberContent").load("newMemberView.html");
