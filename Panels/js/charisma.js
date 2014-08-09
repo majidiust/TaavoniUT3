@@ -118,64 +118,63 @@ $(document).ready(function () {
 });
 
 function InitLocalStorage() {
-	console.log("Init Local Storage");
-	DefineModels();
-	$org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase", dbCreation: $data.storageProviders.DbCreationType.Default}); 
-	$org.context.onReady(function() {
-		console.log("Data base is ready");
-	});
+    console.log("Init Local Storage");
+    DefineModels();
+    $org.context = new $org.types.utdb({ name: "webSql", databaseName: "TaavoniDatabase", dbCreation: $data.storageProviders.DbCreationType.Default });
+    $org.context.onReady(function () {
+        console.log("Data base is ready");
+    });
 }
 
-function DefineModels()
-{
-	console.log("Define Models");
-	$data.Entity.extend("$org.types.Member", {
-	    Id: { type: "int", key: true, computed: true },
-	    NationalityCode: { type: 'string', required: true },
-	    FirstName: { type: 'string', required: true },
-	    LastName: { type: 'string', required: true },
-	    CreateDate: { type: 'string', required: true },
-	    IsApproved: { type: 'string', required: true },
-	    Point: { type: 'string', required: true },
-	    Rank: { type: 'string', required: false },
-	    Payment: { type: 'string', required: false}
-	});
-	$data.EntityContext.extend("$org.types.utdb", {
-		Members: { type: $data.EntitySet, elementType: $org.types.Member }
-	});
+function DefineModels() {
+    console.log("Define Models");
+    $data.Entity.extend("$org.types.Member", {
+        Id: { type: "int", key: true, computed: true },
+        NationalityCode: { type: 'string', required: true },
+        FirstName: { type: 'string', required: true },
+        LastName: { type: 'string', required: true },
+        CreateDate: { type: 'string', required: true },
+        IsApproved: { type: 'string', required: true },
+        Point: { type: 'string', required: true },
+        Rank: { type: 'string', required: false },
+        Payment: { type: 'string', required: false }
+    });
+    $data.EntityContext.extend("$org.types.utdb", {
+        Members: { type: $data.EntitySet, elementType: $org.types.Member }
+    });
 }
 
 function DataTableify() {
     $('.datatable').dataTable();
 }
 
-function GetTotalPayment(){
-     CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات مالی ....', -1, null);
-     $.ajax({
-         type: 'GET',
-         url: ServerURL + "Account/GetTotalPayment",
-         dataType: 'json',
-         success: function (result) {
-             if (result.Status == true) {
-                 if (result.Message == 63) {
-                     CustomAlert('توجه', "اطلاعات مالی دریافت شد", null);
-                     $("#totalPaymentWindowFee").html(result.result + '  ریال  ');
-                     $("#totalPaymentWindowFeeCount").html(result.count);
-                     ShowBox("#TotalPaymentWindow");
-                 } else {
-                     CustomAlert('توجه', "امکان دریافت اطلاعات مالی در این لحظه وجود ندارد", null);
-                 }
-             } else {
-                 CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
-             }
-         },
-         error: function () {
-             CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
-             errorCallback();
+function GetTotalPayment() {
+    CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات مالی ....', -1, null);
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/GetTotalPayment",
+        dataType: 'json',
+        success: function (result) {
+            if (result.Status == true) {
+                if (result.Message == 63) {
+                    CustomAlert('توجه', "اطلاعات مالی دریافت شد", null);
+                    $("#totalPaymentWindowFee").html(result.result + '  ریال  ');
+                    $("#totalPaymentWindowFeeCount").html(result.count);
+                    ShowBox("#TotalPaymentWindow");
+                } else {
+                    CustomAlert('توجه', "امکان دریافت اطلاعات مالی در این لحظه وجود ندارد", null);
+                }
+            } else {
+                CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
+            }
+        },
+        error: function () {
+            CustomAlert('توجه', 'دریافت داده با خطا روبرو گردید', null);
+            errorCallback();
 
-         },
-         async: true
-     });
+        },
+        async: true
+    });
 }
 
 
@@ -488,42 +487,42 @@ function GetPrsianDate(currentDate) {
     var _splitedDate = currentDate.split(":");
     var _month = _splitedDate[1];
     switch (_month) {
-    case "1":
-        _month = "فروردین";
-        break;
-    case "2":
-        _month = "اردیبهشت";
-        break;
-    case "3":
-        _month = "خرداد";
-        break;
-    case "4":
-        _month = "تیر";
-        break;
-    case "5":
-        _month = "مرداد";
-        break;
-    case "6":
-        _month = "شهریور";
-        break;
-    case "7":
-        _month = "مهر";
-        break;
-    case "8":
-        _month = "آبان";
-        break;
-    case "9":
-        _month = "آذر";
-        break;
-    case "10":
-        _month = "دی";
-        break;
-    case "11":
-        _month = "بهمن";
-        break;
-    case "12":
-        _month = "اسفند";
-        break;
+        case "1":
+            _month = "فروردین";
+            break;
+        case "2":
+            _month = "اردیبهشت";
+            break;
+        case "3":
+            _month = "خرداد";
+            break;
+        case "4":
+            _month = "تیر";
+            break;
+        case "5":
+            _month = "مرداد";
+            break;
+        case "6":
+            _month = "شهریور";
+            break;
+        case "7":
+            _month = "مهر";
+            break;
+        case "8":
+            _month = "آبان";
+            break;
+        case "9":
+            _month = "آذر";
+            break;
+        case "10":
+            _month = "دی";
+            break;
+        case "11":
+            _month = "بهمن";
+            break;
+        case "12":
+            _month = "اسفند";
+            break;
     }
     var _msg;
     if (_splitedDate[3] != "") {
@@ -610,7 +609,7 @@ function ViewUserRoles(userName) {
                 }
 
                 ShowBox("#ListOfUserRoles");
-            } else {}
+            } else { }
         },
         error: function () {
             CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
@@ -621,66 +620,64 @@ function ViewUserRoles(userName) {
 }
 
 
-function ReCalculateRanking()
-{
-	console.log("ReCalculateRanking");
-	var reordered = $org.context.Members.orderBy(function(item){ return item.Point; }).toArray(function(result){
-		 for (var i = 0; i < result.length; i++) {
-			 			var it = result[i];
-						$org.context.Members.attach(it);
-						it.Rank = result.length - i;				
-						console.log("New rank for : " + it.Rank + " : " + it.NationalityCode);
-						$org.context.saveChanges();
-			 }
-		});
+function ReCalculateRanking() {
+    console.log("ReCalculateRanking");
+    var reordered = $org.context.Members.orderBy(function (item) { return item.Point; }).toArray(function (result) {
+        for (var i = 0; i < result.length; i++) {
+            var it = result[i];
+            $org.context.Members.attach(it);
+            it.Rank = result.length - i;
+            console.log("New rank for : " + it.Rank + " : " + it.NationalityCode);
+            $org.context.saveChanges();
+        }
+    });
 }
 
 var RefreshMemberIns;
-function RefreshMember(memberId)
-{
-	console.log("RefreshMember : " + memberId);
-	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
+function RefreshMember(memberId) {
+    console.log("RefreshMember : " + memberId);
+    CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
     $.ajax({
         type: 'GET',
         url: ServerURL + "Account/GetMember",
         dataType: 'json',
-		data : {userName : memberId},
+        data: { userName: memberId },
         success: function (result) {
-			
-			 CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
+
+            CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
             if (result.Status == true) {
-				RefreshMemberIns = new $org.types.Member();
-				RefreshMemberIns.FirstName = result.Result.FirstName;
-				RefreshMemberIns.NationalityCode = result.Result.NationalityCode;
-				console.log("Nationality id : " + result.Result.NationalityCode);
-				RefreshMemberIns.LastName = result.Result.LastName;
-				RefreshMemberIns.IsApproved = result.Result.IsApproved;
-				RefreshMemberIns.Point = result.Result.Point;
-				RefreshMemberIns.CreateDate = result.Result.Date;	
-				RefreshMemberIns.Payment = result.Result.TotalPayment;		
-				var selected ;
-				$org.context.Members.forEach(function (item) {
-            		if(item.NationalityCode == memberId)
-					{
-						selected = item;
-						RefreshMemberIns.Rank = selected.Rank;
-						console.log("Update : " + item.NationalityCode + ":" + memberId);
-						console.log("Update : " + item);
-						console.log("Update : " + result.Result);
-					}
-        		}).then(function(){
-						console.log("Update fields");
-						$org.context.Members.remove(selected);
-						console.log("Add Member");
-						console.log(RefreshMemberIns);						
-						$org.context.Members.add(RefreshMemberIns);
-						$org.context.saveChanges().then(function() { 
-								console.log("done!"); 
-								//ReCalculateRanking();
-								GetListOfMembers();
-								
-								console.log("Point updated to : " + RefreshMemberIns.Point);
-							}); });
+                RefreshMemberIns = new $org.types.Member();
+                RefreshMemberIns.FirstName = result.Result.FirstName;
+                RefreshMemberIns.NationalityCode = result.Result.NationalityCode;
+                console.log("Nationality id : " + result.Result.NationalityCode);
+                RefreshMemberIns.LastName = result.Result.LastName;
+                RefreshMemberIns.IsApproved = result.Result.IsApproved;
+                RefreshMemberIns.Point = result.Result.Point;
+                RefreshMemberIns.CreateDate = result.Result.Date;
+                RefreshMemberIns.Payment = result.Result.TotalPayment;
+                var selected;
+                $org.context.Members.forEach(function (item) {
+                    if (item.NationalityCode == memberId) {
+                        selected = item;
+                        RefreshMemberIns.Rank = selected.Rank;
+                        console.log("Update : " + item.NationalityCode + ":" + memberId);
+                        console.log("Update : " + item);
+                        console.log("Update : " + result.Result);
+                    }
+                }).then(function () {
+                    console.log("Update fields");
+                    $org.context.Members.remove(selected);
+                    console.log("Add Member");
+                    console.log(RefreshMemberIns);
+                    $org.context.Members.add(RefreshMemberIns);
+                    $org.context.saveChanges().then(function () {
+                        console.log("done!");
+                        //ReCalculateRanking();
+                        GetListOfMembers();
+
+                        console.log("Point updated to : " + RefreshMemberIns.Point);
+                    });
+                });
             } else {
 
             }
@@ -693,61 +690,61 @@ function RefreshMember(memberId)
 }
 
 function FetchListOfMembersFromServer() {
-	CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
-	$.ajax({
-	    type: 'GET',
-	    url: ServerURL + "Account/GetListOfMembers",
-	    dataType: 'json',
-	    success: function (result) {
+    CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور ...', -1, null);
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/GetListOfMembers",
+        dataType: 'json',
+        success: function (result) {
 
-	        CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
-	        if (result.Status == true) {
-	            $org.context.Members.forEach(function (item) {
-	                $org.context.Members.remove(item);
-	            }).then(function () {
-	                $org.context.saveChanges().then(function () { console.log("Members Data Clean successfully"); });
-	                members = [];
-	                for (var i = 0; i < result.Result.length; i++) {
-	                    var res = {
-	                        NationalityId: result.Result[i].UserName,
-	                        FirstName: result.Result[i].FirstName,
-	                        LastName: result.Result[i].LastName,
-	                        Date: result.Result[i].Date,
-	                        IsApproved: result.Result[i].IsApproved,
-	                        Point: result.Result[i].Point,
-	                        NationalityCode: result.Result[i].UserName,
-	                        Rank: result.Result[i].Rank,
-	                        Payment: result.Result[i].TotalPayment
-	                    };
-	                    console.log(res);
-	                    members.push(res);
-	                    var newSample = new $org.types.Member();
-	                    newSample.FirstName = res.FirstName;
-	                    newSample.NationalityCode = res.NationalityId;
-	                    newSample.LastName = res.LastName;
-	                    newSample.IsApproved = res.IsApproved;
-	                    newSample.Point = res.Point;
-	                    newSample.CreateDate = res.Date;
-	                    newSample.Rank = res.Rank;
-	                    newSample.Payment = res.Payment;
-	                    $org.context.Members.add(newSample);
-	                    //$org.context.Members.removeAll();
-	                    //console.log(newSample);
-	                    //console.log("Add to database successfully");
-	                }
-	                $org.context.saveChanges().then(function () { console.log("done!"); });
-	                GetListOfMembers();
-	            });
+            CustomBlockingPanel('توجه', 'اطلاعات دریافت شد', 500, null);
+            if (result.Status == true) {
+                $org.context.Members.forEach(function (item) {
+                    $org.context.Members.remove(item);
+                }).then(function () {
+                    $org.context.saveChanges().then(function () { console.log("Members Data Clean successfully"); });
+                    members = [];
+                    for (var i = 0; i < result.Result.length; i++) {
+                        var res = {
+                            NationalityId: result.Result[i].UserName,
+                            FirstName: result.Result[i].FirstName,
+                            LastName: result.Result[i].LastName,
+                            Date: result.Result[i].Date,
+                            IsApproved: result.Result[i].IsApproved,
+                            Point: result.Result[i].Point,
+                            NationalityCode: result.Result[i].UserName,
+                            Rank: result.Result[i].Rank,
+                            Payment: result.Result[i].TotalPayment
+                        };
+                        console.log(res);
+                        members.push(res);
+                        var newSample = new $org.types.Member();
+                        newSample.FirstName = res.FirstName;
+                        newSample.NationalityCode = res.NationalityId;
+                        newSample.LastName = res.LastName;
+                        newSample.IsApproved = res.IsApproved;
+                        newSample.Point = res.Point;
+                        newSample.CreateDate = res.Date;
+                        newSample.Rank = res.Rank;
+                        newSample.Payment = res.Payment;
+                        $org.context.Members.add(newSample);
+                        //$org.context.Members.removeAll();
+                        //console.log(newSample);
+                        //console.log("Add to database successfully");
+                    }
+                    $org.context.saveChanges().then(function () { console.log("done!"); });
+                    GetListOfMembers();
+                });
 
-	        } else {
+            } else {
 
-	        }
-	    },
-	    error: function () {
-	        CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
-	    },
-	    async: true
-	});
+            }
+        },
+        error: function () {
+            CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
+        },
+        async: true
+    });
 }
 
 function GetListOfMembers() {
@@ -757,11 +754,11 @@ function GetListOfMembers() {
     $("#ListOfMembersTable tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
-	var results = new Array();
-	console.log("###########################################");
+    var results = new Array();
+    console.log("###########################################");
     //var members2 = $org.context.Members.toArray();
-	$org.context.Members.forEach(function (user) {
-	    var res = [
+    $org.context.Members.forEach(function (user) {
+        var res = [
             user.NationalityCode,
             user.FirstName,
             user.LastName,
@@ -772,54 +769,54 @@ function GetListOfMembers() {
             remaskPayment(user.Payment),
             user.NationalityCode
 	        ];
-	    console.log("###########################################");
-	    console.log("Element : " + user);
-	    console.log("New Record : " + res);
-	    results.push(res);
-	}).then(function () {
-	    Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        console.log("###########################################");
+        console.log("Element : " + user);
+        console.log("New Record : " + res);
+        results.push(res);
+    }).then(function () {
+        Debug("%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
-	    jQuery.fn.dataTableExt.oSort["payment-desc"] = function (x, y) {
+        jQuery.fn.dataTableExt.oSort["payment-desc"] = function (x, y) {
 
-	        function removeComma(str) {
-	            var replaced = "";
-	            for (var i = 0; i < str.length; i++)
-	                if (str[i] != ',')
-	                    replaced += str[i];
-	            console.log(str + ":" + replaced);
-	            return parseInt(replaced);
-	        };
-	        return removeComma(x) - removeComma(y);
-	    };
+            function removeComma(str) {
+                var replaced = "";
+                for (var i = 0; i < str.length; i++)
+                    if (str[i] != ',')
+                        replaced += str[i];
+                console.log(str + ":" + replaced);
+                return parseInt(replaced);
+            };
+            return removeComma(x) - removeComma(y);
+        };
 
-	    jQuery.fn.dataTableExt.oSort["payment-asc"] = function (x, y) {
-	        return jQuery.fn.dataTableExt.oSort["payment-desc"](y, x);
-	    }
+        jQuery.fn.dataTableExt.oSort["payment-asc"] = function (x, y) {
+            return jQuery.fn.dataTableExt.oSort["payment-desc"](y, x);
+        }
 
-	    oTable = $('#ListOfMembersTable').dataTable({
-	        "bDestroy": true,
-	        "bJQueryUI": true,
-	        "bProcessing": true,
-	        "bDeferRender": true,
-	        "oLanguage": {
-	            "sProcessing": "درحال پردازش...",
-	            "sLengthMenu": "نمایش محتویات _MENU_",
-	            "sZeroRecords": "موردی یافت نشد",
-	            "sInfo": "نمایش _START_ تا _END_ از مجموع _TOTAL_ مورد",
-	            "sInfoEmpty": "تهی",
-	            "sInfoFiltered": "(فیلتر شده از مجموع _MAX_ مورد)",
-	            "sInfoPostFix": "",
-	            "sSearch": "جستجو:",
-	            "sUrl": "",
-	            "oPaginate": {
-	                "sFirst": "ابتدا",
-	                "sPrevious": "قبلی",
-	                "sNext": "بعدی",
-	                "sLast": "انتها"
-	            }
-	        },
-	        "aaData": results,
-	        "aoColumns": [
+        oTable = $('#ListOfMembersTable').dataTable({
+            "bDestroy": true,
+            "bJQueryUI": true,
+            "bProcessing": true,
+            "bDeferRender": true,
+            "oLanguage": {
+                "sProcessing": "درحال پردازش...",
+                "sLengthMenu": "نمایش محتویات _MENU_",
+                "sZeroRecords": "موردی یافت نشد",
+                "sInfo": "نمایش _START_ تا _END_ از مجموع _TOTAL_ مورد",
+                "sInfoEmpty": "تهی",
+                "sInfoFiltered": "(فیلتر شده از مجموع _MAX_ مورد)",
+                "sInfoPostFix": "",
+                "sSearch": "جستجو:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "ابتدا",
+                    "sPrevious": "قبلی",
+                    "sNext": "بعدی",
+                    "sLast": "انتها"
+                }
+            },
+            "aaData": results,
+            "aoColumns": [
 		{
 		    "sTitle": "کد ملی"
 		},
@@ -863,29 +860,29 @@ function GetListOfMembers() {
 		        return sReturn;
 		    }
 		}]
-	    });
+        });
 
-	    ShowBox("#ListOfMembers");
-	});
-	
-	/*var index = 0 ;
-	console.log(members2.length);
-	for(index = 0 ;  index < members2.length ; index ++)
-	{
-		var user = members2[index];
-		 var res = [
-            user.NationalityCode,
-            user.FirstName,
-            user.LastName,
-            user.CreateDate,
-            user.IsApproved,
-            user.Point,
-            user.NationalityCode
-        ];
-		results.push(res);
-	};
+        ShowBox("#ListOfMembers");
+    });
+
+    /*var index = 0 ;
+    console.log(members2.length);
+    for(index = 0 ;  index < members2.length ; index ++)
+    {
+    var user = members2[index];
+    var res = [
+    user.NationalityCode,
+    user.FirstName,
+    user.LastName,
+    user.CreateDate,
+    user.IsApproved,
+    user.Point,
+    user.NationalityCode
+    ];
+    results.push(res);
+    };
     Debug(results);*/
-	
+
 }
 
 function ShowDetails(nationalityCode) {
@@ -1103,19 +1100,59 @@ function CloseAllForm() {
     $("div[name=PanelWindow]").hide();
 }
 
-function ShowNewAlbumForm(){
-    $("#NewAlbum").show();
+function ShowNewAlbumForm() {
+    $('#NewAlbum').modal('show');
 }
 
-function ClearAlbumForm(){
-    
+function ClearAlbumForm() {
+    $("#AlbumName").val("");
+    $("#AlbumDesc").val("");
 }
 
-function AddNewAlbum(){
-    return null;
+function AddNewAlbum() {
+    var albumName = $("#AlbumName");
+    var albumDesc = $("#AlbumDesc");
+    if (albumName == "") {
+        alert("لطفا نام آلبوم را وارد کنید.");
+    }
+    else if (albumDesc == "") {
+        alert("توصیف آلبوم را وارد کنید.");
+    }
+    else {
+        var pds = {
+            albumName: albumName,
+            albumDesc: albumDesc
+        };
+        CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
+        $.ajax({
+            type: 'POST',
+            url: ServerURL + "Account/CreateNewAlbum",
+            data: pds,
+            dataType: 'json',
+            success: function (result) {
+                var row = "<tr>";
+                row += "<td>" + result.Name + "</td>";
+                row += "<td>" + newChild.Explanation + "</td>";
+                row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Id + "'" + ');"> حذف </button>';
+                row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Id + "'" + ');"> تصاویر </button></td></tr>';
+                Debug(row);
+                return row;
+            },
+            error: function () { },
+            async: false
+        });
+    }
 }
 
-function EditAlbums(){
+function DeleteAlbum(){
+    alert("DeleteAlbum");
+}
+
+function ImagesForAlbum(){
+    alert("ImagesForAlbum");
+}
+
+function EditAlbums() {
     ShowBox("#AlbumList");
 }
 
@@ -1245,13 +1282,13 @@ function GotoWizard(step) {
             _doOrdinary = false;
             if (CheckStep1Values() == true) {
                 var isExist = IsUserExist($("#ProfileNationalityCode").val(),
-                    function () {},
+                    function () { },
                     function () {
                         $("div[name=memberWizard]").hide();
                         $("#NewTerminalWizard2").show();
                         currentStep = 2;
                     },
-                    function () {});
+                    function () { });
             } else {
                 Debug("Has Error");
             }
@@ -1286,7 +1323,7 @@ function ShowNewCausinForm() {
 
 function ShowNewPaymentForm() {
     console.log("Show new payment modal");
-	NewPaymentMethod = 1;
+    NewPaymentMethod = 1;
     $('#NewPayment').modal('show');
 }
 
