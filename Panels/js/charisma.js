@@ -1103,6 +1103,23 @@ function CloseAllForm() {
     $("div[name=PanelWindow]").hide();
 }
 
+function ShowNewAlbumForm(){
+    $("#NewAlbum").show();
+}
+
+function ClearAlbumForm(){
+    
+}
+
+function AddNewAlbum(){
+    return null;
+}
+
+function EditAlbums(){
+    ShowBox("#AlbumList");
+}
+
+
 
 function ShowBox(box) {
     ApplyUserRoles();

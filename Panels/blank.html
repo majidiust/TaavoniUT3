@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
                     <!--
-            RayanHiva v1.0.0
-            Copyright 2013 RayanHiva
-            Licensed under the Apache License v2.0
-            http://www.apache.org/licenses/LICENSE-2.0
-            http://www.Rayanhiva.com
-            Sadeghi@rayanhiva.com
-            Author: Majid Sadeghi Alavijeh
-            -->
+                                    RayanHiva v1.0.0
+                                    Copyright 2013 RayanHiva
+                                    Licensed under the Apache License v2.0
+                                    http://www.apache.org/licenses/LICENSE-2.0
+                                    http://www.Rayanhiva.com
+                                    Sadeghi@rayanhiva.com
+                                    Author: Majid Sadeghi Alavijeh
+                                    -->
         <meta charset="utf-8">
         <title>
       پانل کاربری
@@ -20,10 +20,10 @@
         <meta name="author" content="RayanHiva.Ltd">
 
                     <!-- 
-            <meta http-equiv='cache-control' content='no-cache'>
-            <meta http-equiv='expires' content='0'>
-            <meta http-equiv='pragma' content='no-cache'>
-            -->
+                                    <meta http-equiv='cache-control' content='no-cache'>
+                                    <meta http-equiv='expires' content='0'>
+                                    <meta http-equiv='pragma' content='no-cache'>
+                                    -->
         <!-- The styles -->
         <link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
         <style type="text/css">
@@ -219,16 +219,16 @@
 
 
                     <!-- 
-            <link type='text/css' href="~/Content/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
-            -->
+                                    <link type='text/css' href="~/Content/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
+                                    -->
         <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
                     <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+                                    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
             
             
             
-            </script>
-            <![endif]-->
+                                    </script>
+                                    <![endif]-->
         <!-- The fav icon -->
         <link rel="shortcut icon" href="img/favicon.ico">
     </head>
@@ -444,6 +444,20 @@
                                         </span>
                                     </a>
                                 </li>
+
+                                <li class="nav-header hidden-tablet">
+                  مدیریت محتوا
+                                </li>
+                                <li>
+                                    <a class="ajax-link" onclick="EditAlbums();" style="cursor:pointer;">
+                                        <i class="icon-align-justify">
+                                        </i>
+                                        <span class="hidden-tablet">
+                     ویرایش آلبوم ها
+                                        </span>
+                                    </a>
+                                </li>
+
 
                                 <li class="nav-header hidden-tablet">
                   اطلاعات شخصی
@@ -799,7 +813,61 @@
                                 </div>
                             </div>
 
-
+                            <!-- Begin of content of album edition-->
+                            <!-- End Of List Of User Roles -->
+                            <div class="box span6" id="AlbumList" name="PanelWindow" style="display:none;float:right;">
+                                <div class="box-header well" data-original-title>
+                                    <h2 style="float:right;">
+                                        <i class="icon-info-sign">
+                                        </i>
+                    مدیریت آلبوم ها
+                                    </h2>
+                                    <div class="box-icon" style="float:left;">
+                                        <a href="#" class="btn btn-setting btn-round">
+                                            <i class="icon-cog">
+                                            </i>
+                                        </a>
+                                        <a href="#" class="btn btn-minimize btn-round">
+                                            <i class="icon-chevron-up">
+                                            </i>
+                                        </a>
+                                        <a href="#" class="btn btn-close btn-round">
+                                            <i class="icon-remove">
+                                            </i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="box-content" id="AlbumListContent">
+                                    <div class="datagrid">
+                                        <table class="table table-bordered table-striped table-condensed" id="AlbumListTable">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                  شماره آلبوم
+                                                </th>
+                                                <th>
+                  نام آلبوم
+                                                </th>
+                                                <th>
+                  وضعیت
+                                                </th>
+                                                <th>
+                  تاریخ ایجاد
+                                                </th>
+                                                <th>
+                                                </th>
+                                            </tr>
+            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button name="albumEdit" class="btn btn-large btn-info" onclick="selectedTable = $('#AlbumListTable');ShowNewAlbumForm();">
+           آلبوم تصاویر جدید
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- End of album -->
                             <div class="box span6" id="TotalPaymentWindow" name="PanelWindow" style="display:none;float:right;">
                                 <div class="box-header well" data-original-title>
                                     <h2 style="float:right;">
@@ -1079,21 +1147,65 @@
                 </div>
             </div>
 
+            <!-- Modal for new album -->
+             <div class="modal hide fade" id="NewAlbum">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+			&nbsp; × &nbsp;
+                    </button>
+                    <h3>
+            آلبوم جدید
+                    </h3>
+                </div>
+                <div class="modal-body" id="NewAlbumBody">
+                     <div class="form-horizontal">
+            <fieldset>
+              <div class="control-group">
+                <label class="control-label" for="AlbumName" style="float:right;">
+                  نام آلبوم
+                </label>
+                <div class="controls">
+                  <input type="text" class="span2 typeahead" id="AlbumName" data-provide="typeahead">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="AlbumDesc" style="float:right;">
+                 توصیف آلبوم
+                </label>
+                <div class="controls">
+                 
+                       <textarea  id="AlbumDesc" rows="5" >
+                    </textarea>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" onclick="var newAlbum = AddNewAlbum(); if(newAlbum != null) {selectedTable.append(newAlbum);$('#NewAlbum').modal('hide');ClearAlbumForm();}">
+            ذخیره سازی
+                    </button>
+                    <button type="reset" class="btn" onclick="ClearAlbumForm();$('#NewAlbum').modal('hide');">
+            انصراف
+                    </button>
+                </div>
+            </div>
+
 
                             <!-- 
-                <footer>
-                <center>
-                <p>
-                تمامی حقوق مادی و معنوی متعلق به شرکت فنی و مهندسی رایان هیوا کیش می باشد.
-                </p>
-                <p>
-                <a href="http://www.rayanhiva.ir">
-                Http://www.RayanHiva.ir
-                </a>
-                </p>
-                </center>
-                </footer>
-                -->
+                                                <footer>
+                                                <center>
+                                                <p>
+                                                تمامی حقوق مادی و معنوی متعلق به شرکت فنی و مهندسی رایان هیوا کیش می باشد.
+                                                </p>
+                                                <p>
+                                                <a href="http://www.rayanhiva.ir">
+                                                Http://www.RayanHiva.ir
+                                                </a>
+                                                </p>
+                                                </center>
+                                                </footer>
+                                                -->
         </div>
         <div id="CustomMessageBox" style="display:none;">
             <div class="Smodal">
@@ -1156,7 +1268,7 @@ text-align:right;" id="CustomMessageTitle">
 
         <!--/.fluid-container-->
                     <!-- external javascript
-            ================================================== -->
+                                    ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- Server Info -->
         <script src="../Scripts/Info.js">
