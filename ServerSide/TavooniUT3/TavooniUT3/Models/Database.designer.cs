@@ -108,6 +108,12 @@ namespace TavooniUT3.Models
     partial void InsertMembersRelation(MembersRelation instance);
     partial void UpdateMembersRelation(MembersRelation instance);
     partial void DeleteMembersRelation(MembersRelation instance);
+    partial void InsertAlbum(Album instance);
+    partial void UpdateAlbum(Album instance);
+    partial void DeleteAlbum(Album instance);
+    partial void InsertPicOfAlbum(PicOfAlbum instance);
+    partial void UpdatePicOfAlbum(PicOfAlbum instance);
+    partial void DeletePicOfAlbum(PicOfAlbum instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -345,6 +351,22 @@ namespace TavooniUT3.Models
 			get
 			{
 				return this.GetTable<MembersRelation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Album> Albums
+		{
+			get
+			{
+				return this.GetTable<Album>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PicOfAlbum> PicOfAlbums
+		{
+			get
+			{
+				return this.GetTable<PicOfAlbum>();
 			}
 		}
 		
@@ -7078,6 +7100,394 @@ namespace TavooniUT3.Models
 					this._MembershipID = value;
 					this.SendPropertyChanged("MembershipID");
 					this.OnMembershipIDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.Album")]
+	public partial class Album : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private System.Nullable<System.Guid> _CreatorId;
+		
+		private string _Explanation;
+		
+		private System.Nullable<bool> _State;
+		
+		private string _ImageTitlePoster;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreateDateChanged();
+    partial void OnCreatorIdChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatorIdChanged();
+    partial void OnExplanationChanging(string value);
+    partial void OnExplanationChanged();
+    partial void OnStateChanging(System.Nullable<bool> value);
+    partial void OnStateChanged();
+    partial void OnImageTitlePosterChanging(string value);
+    partial void OnImageTitlePosterChanged();
+    #endregion
+		
+		public Album()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this.OnCreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> CreatorId
+		{
+			get
+			{
+				return this._CreatorId;
+			}
+			set
+			{
+				if ((this._CreatorId != value))
+				{
+					this.OnCreatorIdChanging(value);
+					this.SendPropertyChanging();
+					this._CreatorId = value;
+					this.SendPropertyChanged("CreatorId");
+					this.OnCreatorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Explanation", DbType="NVarChar(MAX)")]
+		public string Explanation
+		{
+			get
+			{
+				return this._Explanation;
+			}
+			set
+			{
+				if ((this._Explanation != value))
+				{
+					this.OnExplanationChanging(value);
+					this.SendPropertyChanging();
+					this._Explanation = value;
+					this.SendPropertyChanged("Explanation");
+					this.OnExplanationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Bit")]
+		public System.Nullable<bool> State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImageTitlePoster", DbType="NVarChar(50)")]
+		public string ImageTitlePoster
+		{
+			get
+			{
+				return this._ImageTitlePoster;
+			}
+			set
+			{
+				if ((this._ImageTitlePoster != value))
+				{
+					this.OnImageTitlePosterChanging(value);
+					this.SendPropertyChanging();
+					this._ImageTitlePoster = value;
+					this.SendPropertyChanged("ImageTitlePoster");
+					this.OnImageTitlePosterChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.PicOfAlbums")]
+	public partial class PicOfAlbum : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _AlbumId;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private System.Nullable<System.Guid> _CreatorId;
+		
+		private string _Desc;
+		
+		private System.Nullable<bool> _State;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnAlbumIdChanging(System.Nullable<int> value);
+    partial void OnAlbumIdChanged();
+    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreateDateChanged();
+    partial void OnCreatorIdChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatorIdChanged();
+    partial void OnDescChanging(string value);
+    partial void OnDescChanged();
+    partial void OnStateChanging(System.Nullable<bool> value);
+    partial void OnStateChanged();
+    #endregion
+		
+		public PicOfAlbum()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AlbumId", DbType="Int")]
+		public System.Nullable<int> AlbumId
+		{
+			get
+			{
+				return this._AlbumId;
+			}
+			set
+			{
+				if ((this._AlbumId != value))
+				{
+					this.OnAlbumIdChanging(value);
+					this.SendPropertyChanging();
+					this._AlbumId = value;
+					this.SendPropertyChanged("AlbumId");
+					this.OnAlbumIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this.OnCreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> CreatorId
+		{
+			get
+			{
+				return this._CreatorId;
+			}
+			set
+			{
+				if ((this._CreatorId != value))
+				{
+					this.OnCreatorIdChanging(value);
+					this.SendPropertyChanging();
+					this._CreatorId = value;
+					this.SendPropertyChanged("CreatorId");
+					this.OnCreatorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(MAX)")]
+		public string Desc
+		{
+			get
+			{
+				return this._Desc;
+			}
+			set
+			{
+				if ((this._Desc != value))
+				{
+					this.OnDescChanging(value);
+					this.SendPropertyChanging();
+					this._Desc = value;
+					this.SendPropertyChanged("Desc");
+					this.OnDescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="Bit")]
+		public System.Nullable<bool> State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
 				}
 			}
 		}

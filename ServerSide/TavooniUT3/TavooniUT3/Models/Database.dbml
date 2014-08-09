@@ -323,6 +323,27 @@
       <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="hiva.Album" Member="Albums">
+    <Type Name="Album">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Explanation" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ImageTitlePoster" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="hiva.PicOfAlbums" Member="PicOfAlbums">
+    <Type Name="PicOfAlbum">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AlbumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="hiva.GetRankList" Method="GetRankList">
     <ElementType Name="GetRankListResult">
       <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />

@@ -150,7 +150,7 @@ namespace TavooniUT3.Controllers
                     }
                     else
                     {
-                        return Json(new { Status = false}, JsonRequestBehavior.AllowGet);
+                        return Json(new { Status = false }, JsonRequestBehavior.AllowGet);
                     }
                 }
                 else
@@ -247,7 +247,7 @@ namespace TavooniUT3.Controllers
                     FormsService.SignIn(username, false);
                     if (Roles.IsUserInRole(username, "Member") == true)
                     {
-                            return Json(new { Status = true, Message = "17", IsMember = true }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Status = true, Message = "17", IsMember = true }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
@@ -280,7 +280,7 @@ namespace TavooniUT3.Controllers
                     var Result = Membership.GetUser(userName);
                     var user = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName));
                     var UserPoint = CalculateUserPoint(user.UserId);
-                    if(Roles.IsUserInRole("Member"))
+                    if (Roles.IsUserInRole("Member"))
                         return Json(new { Status = true, Result, Point = UserPoint, IsMember = true }, JsonRequestBehavior.AllowGet);
                     else
                         return Json(new { Status = true, Result, Point = UserPoint, IsMember = false }, JsonRequestBehavior.AllowGet);
@@ -1444,7 +1444,7 @@ namespace TavooniUT3.Controllers
             }
         }
 
-        
+
 
         private int GetRankForUser(Guid userId)
         {
@@ -1497,7 +1497,7 @@ namespace TavooniUT3.Controllers
                                   where p.MemberID.Equals(userId)
                                   select new
                                   {
-                                      UserId= p.MemberID,
+                                      UserId = p.MemberID,
                                       NationalityCode = p.InternationalCode,
                                       FirstName = p.FirstName,
                                       LastName = p.LastName,
@@ -1768,9 +1768,9 @@ namespace TavooniUT3.Controllers
             String tmpPayment = PaymentFee;
             PaymentFee = "";
             foreach (var ch in tmpPayment)
-                if(ch!= ',')
-                PaymentFee += ch;
-            
+                if (ch != ',')
+                    PaymentFee += ch;
+
             try
             {
                 if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
@@ -1806,7 +1806,7 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
-         [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
+        [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
         [HttpPost]
         public ActionResult UpdatePayment(string userName, string PaymentId, string PaymentCode, string PaymentFee, int PaymentDateDay, int PaymentDateMonth, int PaymentDateYear, string PaymentBank, int PaymentMethod)
         {
@@ -1848,7 +1848,7 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
-         [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
+        [Authorize(Roles = "Admin, ViewRoles, ViewUsers")]
         [HttpGet]
         public ActionResult DeletePayment(string userName, string paymentId)
         {
@@ -1880,28 +1880,28 @@ namespace TavooniUT3.Controllers
             }
         }
 
-         [HttpGet]
-         public ActionResult GetUserRole()
-         {
-             try
-             {
-                 if (Request.IsAuthenticated == false)
-                 {
-                     return Error(30);
-                 }
-                 else
-                 {
-                     String userName = User.Identity.Name;
-                     var Resuserult = Membership.GetUser(userName);
-                     var Result = Roles.GetRolesForUser();
-                     return Json(new { Result, Status = true, Message = 36 }, JsonRequestBehavior.AllowGet); 
-                 }
-             }
-             catch (Exception ex)
-             {
-                 return Error(ex.Message);
-             }
-         }
+        [HttpGet]
+        public ActionResult GetUserRole()
+        {
+            try
+            {
+                if (Request.IsAuthenticated == false)
+                {
+                    return Error(30);
+                }
+                else
+                {
+                    String userName = User.Identity.Name;
+                    var Resuserult = Membership.GetUser(userName);
+                    var Result = Roles.GetRolesForUser();
+                    return Json(new { Result, Status = true, Message = 36 }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
 
         [Authorize(Roles = "Admin, Member, User, Viewer")]
         [HttpGet]
@@ -1963,6 +1963,188 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
+        #endregion
+        #region Public area api
+        #region album region
+        [Authorize(Roles = "Admin, Album")]
+        [HttpPost]
+        public ActionResult CreateNewAlbum(string albumName, string albumDesc)
+        {
+            try
+            {
+                String userName = User.Identity.Name;
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    Album newAlbum = new Album();
+                    newAlbum.CreateDate = DateTime.Now;
+                    newAlbum.CreatorId = userId;
+                    newAlbum.Explanation = albumDesc;
+                    newAlbum.Name = albumName;
+                    newAlbum.State = true;
+                    m_model.Albums.InsertOnSubmit(newAlbum);
+                    m_model.SubmitChanges();
+                    return Json(new { Status = true, Message = 63, Result = newAlbum }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin, Album")]
+        [HttpGet]
+        public ActionResult ChangeAlbumState(string albumId, string albumState)
+        {
+            try
+            {
+                String userName = User.Identity.Name;
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    var album = m_model.Albums.Single(P => P.Id.Equals(int.Parse(albumId)));
+                    album.State = bool.Parse(albumState);
+                    m_model.SubmitChanges();
+                    return Json(new { Status = true, Message = 63 }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult getListOfAlbums()
+        {
+            try
+            {
+                return Json(new { Status = true, Message = 63, Result = m_model.Albums.Where(P => P.State == true) }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin, Album")]
+        [HttpGet]
+        public ActionResult DeleteAlbum(string albumId)
+        {
+            try
+            {
+                String userName = User.Identity.Name;
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    var album = m_model.Albums.Single(P => P.Id.Equals(int.Parse(albumId)));
+                    album.State = false;
+                    m_model.SubmitChanges();
+                    return Json(new { Status = true, Message = 63 }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public ContentResult AddPictureToAlbum(string albumId, string desc)
+        {
+            try
+            {
+                String userName = User.Identity.Name;
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    var user = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName));
+                    if (m_model.Albums.Count(P => P.Id.Equals(int.Parse(albumId))) <= 0)
+                    {
+                        return Content("{\"Status\":\"" + "false" + "\",\"Message\":\"" + "Album not found" + "\"}", "application/json");
+                    }
+
+                    var album = m_model.Albums.Single(P => P.Id.Equals(int.Parse(albumId)));
+
+
+                    string tmpId = Guid.NewGuid().ToString();
+                    var r = new List<ViewDataUploadFilesResult>();
+                    foreach (string file in Request.Files)
+                    {
+                        PicOfAlbum newPicture = new PicOfAlbum();
+                        HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                        if (hpf.ContentLength == 0)
+                            continue;
+
+                        System.Drawing.Image bmp = System.Drawing.Bitmap.FromStream(hpf.InputStream);
+
+                        string savedFileName = Path.Combine(Server.MapPath("~/Pics/Albums/Originals"), tmpId);
+                        string savedThumbnailName = Path.Combine(Server.MapPath("~/Pics/Albums/Thumbnails"), tmpId);
+                        bmp.Save(savedFileName + ".png", System.Drawing.Imaging.ImageFormat.Png);
+
+
+                        double aspectRatio = 160.0 / (double)bmp.Width;
+
+                        int width = (int)(160);
+                        int height = (int)((double)bmp.Height * aspectRatio);
+                        System.Drawing.Bitmap newPic = new System.Drawing.Bitmap(width, height);
+
+                        System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(newPic);
+                        gr.DrawImage(bmp, 0, 0, width, height);
+
+                        newPic.Save(savedThumbnailName + ".png", System.Drawing.Imaging.ImageFormat.Png);
+
+                        gr.Dispose();
+                        newPic.Dispose();
+                        bmp.Dispose();
+
+                        r.Add(new ViewDataUploadFilesResult()
+                        {
+                            Name = tmpId + ".png",
+                            Length = hpf.ContentLength,
+                            Type = hpf.ContentType,
+                            Id = 0
+                        });
+
+                        newPicture.AlbumId = album.Id;
+                        newPicture.CreatorId = user.UserId;
+                        newPicture.CreateDate = DateTime.Now;
+                        newPicture.Desc = desc;
+                        newPicture.State = true;
+                        m_model.PicOfAlbums.InsertOnSubmit(newPicture);
+                        m_model.SubmitChanges();
+                    }
+                    // Returns json
+
+                    return Content("{\"Status\":\"" + "true" + "\",\"Message\":\"" + "Your File Sent Sucessfully" + "\",\"Id\":\"" + r[0].Id + "\",\"Name\":\"" + r[0].Name + "\",\"Size\":\"" + r[0].Length + "\",\"Type\":\"" + r[0].Type + "\"}", "application/json");
+                }
+                else
+                {
+                    return Content("{\"Status\":\"" + "false" + "\",\"Message\":\"" + "User not found" + "\"}", "application/json");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content("{\"Status\":\"" + "false" + "\",\"Message\":\"" + ex.Message + "\"}", "application/json");
+            }
+        }
+
+        #endregion
         #endregion
     }
 }
