@@ -1110,9 +1110,11 @@ function ClearAlbumForm() {
 }
 
 function AddNewAlbum() {
+    
     var albumName = $("#AlbumName");
     var albumDesc = $("#AlbumDesc");
     console.log(albumName + " : " + albumDesc);
+    return;
     if (albumName == "") {
         alert("لطفا نام آلبوم را وارد کنید.");
     }
