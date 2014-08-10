@@ -1263,6 +1263,7 @@ function PrepareImageUploadForAlbum(){
             var per = parseInt(data.loaded / data.total * 100, 10);
         },
         done: function (e, data) {
+            CustomBlockingPanel('توجه', 'اطلاعات با موفقیت ارسال گردید.', 500, null);
             temporalPictureName = data.result.Name;
             console.log("File Uploaded successfully");
             $("#NewAlbumImage").modal('hide');
@@ -1276,6 +1277,7 @@ function PrepareImageUploadForAlbum(){
             albumId: albumId,
             desc: $("#AlbumImageDesc").val()
         };
+         CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
     });
 }
 
