@@ -1243,8 +1243,24 @@ function LoadImageForAlbum(aId){
      });
 }
 
-function DeleteAlbumImage(){
-    alert("DeleteAlbumImage");    
+function DeleteAlbumImage(iId){
+    $.ajax({
+         type: 'GET',
+         url: ServerURL + "Account/DeleteImage",
+         data : {imageId: iId},
+         dataType: 'json',
+         success: function (result) {
+             if (result.Status == true) {
+                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+             }
+             else {
+                 CustomBlockingPanel('خطا', result.Message, 500, null);
+                 Debug(result.Message);
+             }
+         },
+         error: function () { },
+         async: true
+     });  
 }
 
 function EditAlbums() {

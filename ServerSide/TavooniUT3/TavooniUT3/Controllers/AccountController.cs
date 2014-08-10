@@ -2090,6 +2090,36 @@ namespace TavooniUT3.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Admin, Album")]
+        [HttpGet]
+        public ActionResult DeleteImage(int imageId)
+        {
+            try
+            {
+                String userName = User.Identity.Name;
+                if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
+                {
+                    Guid userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    var image = m_model.PicOfAlbums.Single(P => P.Id.Equals(imageId));
+                    image.State = false;
+                    m_model.SubmitChanges();
+                    return Json(new { Status = true, Message = 63 }, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    return Error(38);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+
+
         [HttpPost]
         public ContentResult AddPictureToAlbum(string albumId, string desc)
         {
