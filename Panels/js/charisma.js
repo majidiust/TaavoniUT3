@@ -1112,6 +1112,7 @@ function ClearAlbumForm() {
 function AddNewAlbum() {
     var albumName = $("#AlbumName");
     var albumDesc = $("#AlbumDesc");
+    console.log(albumName + " : " + albumDesc);
     if (albumName == "") {
         alert("لطفا نام آلبوم را وارد کنید.");
     }
@@ -1130,6 +1131,7 @@ function AddNewAlbum() {
             data: pds,
             dataType: 'json',
             success: function (result) {
+                console.log(result);
                 var row = "<tr>";
                 row += "<td>" + result.Name + "</td>";
                 row += "<td>" + newChild.Explanation + "</td>";
