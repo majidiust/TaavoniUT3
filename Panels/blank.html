@@ -1289,10 +1289,10 @@
                                                             <div id="NewAlbumImageImageFileInput">
                                                                 <input id="NewAlbumImageImageInput" type="file" name="files[]" multiple onchange="
 var file = this.files[0];
-oFReader = new FileReader();
+var oFReader = new FileReader();
 oFReader.readAsDataURL(document.getElementById('NewAlbumImageImageInput').files[0]);
 oFReader.onload = function (oFREvent) {
-document.getElementById('NewAlbumImageImageImage').src = oFREvent.target.result;
+document.getElementById('NewAlbumImageImage').src = oFREvent.target.result;
 };">
 
                                                             </div>
