@@ -1131,18 +1131,25 @@ function AddNewAlbum() {
             },
             dataType: 'json',
             success: function (result) {
-                console.log(result);
-                var row = "<tr>";
-                row += "<td>" + result.Result.Id + "</td>";
-                row += "<td>" + result.Result.Name + "</td>";
-                row += "<td>" + result.Result.State + "</td>";
-                row += "<td>" + result.Result.Explanation + "</td>";
-                row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Id + "'" + ');"> حذف </button>';
-                row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Id + "'" + ');"> تصاویر </button></td></tr>';
-                Debug(row);
-                selectedTable.append(row);
-                $('#NewAlbum').modal('hide');
-                ClearAlbumForm();
+                if (result.Status == true) {
+                    CustomBlockingPanel('توجه', 'آلبوم با موفقیت ایجاد گردید.', 500, null);
+                    console.log(result);
+                    var row = "<tr>";
+                    row += "<td>" + result.Result.Id + "</td>";
+                    row += "<td>" + result.Result.Name + "</td>";
+                    row += "<td>" + result.Result.State + "</td>";
+                    row += "<td>" + result.Result.Explanation + "</td>";
+                    row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Id + "'" + ');"> حذف </button>';
+                    row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Id + "'" + ');"> تصاویر </button></td></tr>';
+                    Debug(row);
+                    selectedTable.append(row);
+                    $('#NewAlbum').modal('hide');
+                    ClearAlbumForm();
+                }
+                else{
+                    CustomBlockingPanel('خطا', result.Message , 500, null);
+                    Debug(result.Message);
+                }
             },
             error: function () { },
             async: true
