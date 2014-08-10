@@ -1226,7 +1226,7 @@ function LoadImageForAlbum(aId){
                      row += "<td>" + result.Result[i].Id + "</td>";
                      row += "<td>" + result.Result[i].Desc + "</td>";
                      row += "<td>" + result.Result[i].State + "</td>";
-                     row += "<td>" + '<img style="width:100px; height:100px" src="../Pics/Albums/Thumbnails/' + result.Result[i].Path +'" />'+ "</td>";
+                     row += "<td>" + '<img style="width:100px; height:100px" src="http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path +'" />'+ "</td>";
                      row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbumImage(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
                      row += '</td></tr>';
                      Debug(row);
