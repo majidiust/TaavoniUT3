@@ -1113,7 +1113,6 @@ function AddNewAlbum() {
     var albumName = $("#AlbumName").val();
     var albumDesc = $("#AlbumDesc").val();
     console.log(albumName + " : " + albumDesc);
-    return;
     if (albumName == "") {
         alert("لطفا نام آلبوم را وارد کنید.");
     }
