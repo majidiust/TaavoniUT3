@@ -1109,6 +1109,43 @@ function ClearAlbumForm() {
     $("#AlbumDesc").val("");
 }
 
+function LoadAlbums(){
+	    $("#AlbumListTable tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+
+     CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور', -1, null);
+     $.ajax({
+         type: 'GET',
+         url: ServerURL + "Account/getListOfAlbums",
+         dataType: 'json',
+         success: function (result) {
+             if (result.Status == true) {
+                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+                 console.log(result);
+                 for (var i = 0; i < result.Result.length; i++) {
+                     var row = "<tr>";
+                     row += "<td>" + result.Result[i].Id + "</td>";
+                     row += "<td>" + result.Result[i].Name + "</td>";
+                     row += "<td>" + result.Result[i].State + "</td>";
+                     row += "<td>" + result.Result[i].Explanation + "</td>";
+                     row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
+                     row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button></td></tr>';
+                     Debug(row);
+                     $("#AlbumListTable").append(row);
+                 }
+             }
+             else {
+                 CustomBlockingPanel('خطا', result.Message, 500, null);
+                 Debug(result.Message);
+             }
+         },
+         error: function () { },
+         async: true
+     });
+
+}
+
 function AddNewAlbum() {
     var albumName = $("#AlbumName").val();
     var albumDesc = $("#AlbumDesc").val();
@@ -1167,6 +1204,7 @@ function ImagesForAlbum(){
 
 function EditAlbums() {
     ShowBox("#AlbumList");
+    LoadAlbums();
 }
 
 
