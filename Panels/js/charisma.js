@@ -1136,7 +1136,7 @@ function AddNewAlbum() {
                 row += "<td>" + result.Result.Id + "</td>";
                 row += "<td>" + result.Result.Name + "</td>";
                 row += "<td>" + result.Result.State + "</td>";
-                row += "<td>" + result.result.Explanation + "</td>";
+                row += "<td>" + result.Result.Explanation + "</td>";
                 row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Id + "'" + ');"> حذف </button>';
                 row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Id + "'" + ');"> تصاویر </button></td></tr>';
                 Debug(row);
