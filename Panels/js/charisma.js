@@ -1121,15 +1121,15 @@ function AddNewAlbum() {
         alert("توصیف آلبوم را وارد کنید.");
     }
     else {
-        var pds = {
-            albumName: albumName,
-            albumDesc: albumDesc
-        };
+        console.log("Send new album data to server");
         CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
         $.ajax({
             type: 'POST',
             url: ServerURL + "Account/CreateNewAlbum",
-            data: pds,
+            data: {
+                albumName: albumName,
+                albumDesc: albumDesc
+            },
             dataType: 'json',
             success: function (result) {
                 console.log(result);
