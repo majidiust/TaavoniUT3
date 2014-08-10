@@ -1982,6 +1982,7 @@ namespace TavooniUT3.Controllers
                     newAlbum.Explanation = albumDesc;
                     newAlbum.Name = albumName;
                     newAlbum.State = true;
+
                     m_model.Albums.InsertOnSubmit(newAlbum);
                     m_model.SubmitChanges();
                     return Json(new { Status = true, Message = 63, Result = newAlbum }, JsonRequestBehavior.AllowGet);
