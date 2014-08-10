@@ -1271,8 +1271,10 @@ function PrepareImageUploadForAlbum(){
     });
     $('#NewAlbumImageImageInput').bind('fileuploadsubmit', function (e, data) {
         console.log("Upload image for : " + albumId);
+        console.log($("#AlbumImageDesc").val());
         data.formData = {
-            albumId: albumId
+            albumId: albumId,
+            desc: $("#AlbumImageDesc").val()
         };
     });
 }
