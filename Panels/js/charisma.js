@@ -1200,6 +1200,7 @@ function DeleteAlbum(){
 
 function ImagesForAlbum(){
     alert("ImagesForAlbum");
+    ShowBox("#AlbumImageList");
 }
 
 function EditAlbums() {
@@ -1207,6 +1208,14 @@ function EditAlbums() {
     LoadAlbums();
 }
 
+function ShowNewImageAlbumForm(){
+    alert("ShowNewImageAlbumForm");
+    $("#NewAlbumImage").modal('show');
+}
+
+function ClearAlbumImageForm(){
+    alert("ClearAlbumImageForm");
+}
 
 
 function ShowBox(box) {
