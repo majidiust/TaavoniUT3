@@ -7349,6 +7349,8 @@ namespace TavooniUT3.Models
 		
 		private System.Nullable<bool> _State;
 		
+		private string _Path;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7365,6 +7367,8 @@ namespace TavooniUT3.Models
     partial void OnDescChanged();
     partial void OnStateChanging(System.Nullable<bool> value);
     partial void OnStateChanged();
+    partial void OnPathChanging(string value);
+    partial void OnPathChanged();
     #endregion
 		
 		public PicOfAlbum()
@@ -7488,6 +7492,26 @@ namespace TavooniUT3.Models
 					this._State = value;
 					this.SendPropertyChanged("State");
 					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Path", DbType="NVarChar(MAX)")]
+		public string Path
+		{
+			get
+			{
+				return this._Path;
+			}
+			set
+			{
+				if ((this._Path != value))
+				{
+					this.OnPathChanging(value);
+					this.SendPropertyChanging();
+					this._Path = value;
+					this.SendPropertyChanged("Path");
+					this.OnPathChanged();
 				}
 			}
 		}

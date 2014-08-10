@@ -2039,6 +2039,30 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult getListOfImages(int albumId)
+        {
+            try
+            {
+                if (m_model.Albums.Count(P => P.Id == albumId) > 0)
+                {
+                    return Json(
+                        new
+                        {
+                            Status = true,
+                            Message = 63,
+                            Result = m_model.PicOfAlbums.Where(P => P.State == true && P.AlbumId == (albumId))
+                        }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Error(68);
+                }
+            }
+            catch(Exception ex){
+                return Error(ex.Message);
+            }
+        }
         [Authorize(Roles = "Admin, Album")]
         [HttpGet]
         public ActionResult DeleteAlbum(string albumId)
@@ -2127,6 +2151,7 @@ namespace TavooniUT3.Controllers
                         newPicture.CreateDate = DateTime.Now;
                         newPicture.Desc = desc;
                         newPicture.State = true;
+                        newPicture.Path = tmpId + ".png";
                         m_model.PicOfAlbums.InsertOnSubmit(newPicture);
                         m_model.SubmitChanges();
                     }

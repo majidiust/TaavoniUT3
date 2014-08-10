@@ -115,6 +115,8 @@ $(document).ready(function () {
     docReady();
 
     GetUserRoles();
+
+    PrepareImageUploadForAlbum();
 });
 
 function InitLocalStorage() {
@@ -1198,14 +1200,73 @@ function DeleteAlbum(){
     alert("DeleteAlbum");
 }
 
-function ImagesForAlbum(){
-    alert("ImagesForAlbum");
+function ImagesForAlbum(aId){
+    albumId = aId;
     ShowBox("#AlbumImageList");
+    LoadImageForAlbum(aId);
+}
+
+function LoadImageForAlbum(aId){
+      $("#ImageListTable tbody tr").each(function () {
+        this.parentNode.removeChild(this);
+    });
+
+     CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور', -1, null);
+     $.ajax({
+         type: 'GET',
+         url: ServerURL + "Account/getListOfImages",
+         data : {albumId: aId},
+         dataType: 'json',
+         success: function (result) {
+             if (result.Status == true) {
+                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+                 console.log(result);
+                 for (var i = 0; i < result.Result.length; i++) {
+                     var row = "<tr>";
+                     row += "<td>" + result.Result[i].Id + "</td>";
+                     row += "<td>" + result.Result[i].Desc + "</td>";
+                     row += "<td>" + result.Result[i].State + "</td>";
+                     row += "<td>" + '<img style="width:100px; height:100px" src="../Pics/Albums/Thumbnails/' + result.Result[i].Path +'" />'+ "</td>";
+                     row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbumImage(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
+                     row += '</td></tr>';
+                     Debug(row);
+                     $("#ImageListTable").append(row);
+                 }
+             }
+             else {
+                 CustomBlockingPanel('خطا', result.Message, 500, null);
+                 Debug(result.Message);
+             }
+         },
+         error: function () { },
+         async: true
+     });
+}
+
+function DeleteAlbumImage(){
+    alert("DeleteAlbumImage");    
 }
 
 function EditAlbums() {
     ShowBox("#AlbumList");
     LoadAlbums();
+}
+
+
+var albumId;
+function PrepareImageUploadForAlbum(){
+    $('#NewAlbumImageImageInput').fileupload({
+        dataType: 'json',
+        url: ServerURL + 'Account/AddPictureToAlbum',
+        formData: { albumId: albumId, desc: $("#AlbumImageDesc").val() },
+        progressall: function (e, data) {
+            var per = parseInt(data.loaded / data.total * 100, 10);
+        },
+        done: function (e, data) {
+            temporalPictureName = data.result.Name;
+            console.log("File Uploaded successfully");
+        }
+    });
 }
 
 function ShowNewImageAlbumForm(){

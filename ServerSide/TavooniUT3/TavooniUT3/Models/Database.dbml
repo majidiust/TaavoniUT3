@@ -342,6 +342,7 @@
       <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="hiva.GetRankList" Method="GetRankList">
