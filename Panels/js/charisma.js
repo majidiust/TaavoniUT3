@@ -1267,6 +1267,12 @@ function PrepareImageUploadForAlbum(){
             console.log("File Uploaded successfully");
         }
     });
+    $('#NewAlbumImageImageInput').bind('fileuploadsubmit', function (e, data) {
+        console.log("Upload image for : " + albumId);
+        data.formData = {
+            albumId: albumId
+        };
+    });
 }
 
 function ShowNewImageAlbumForm(){
