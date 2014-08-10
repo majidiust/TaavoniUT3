@@ -1265,6 +1265,8 @@ function PrepareImageUploadForAlbum(){
         done: function (e, data) {
             temporalPictureName = data.result.Name;
             console.log("File Uploaded successfully");
+            $("#NewAlbumImage").modal('hide');
+            LoadImageForAlbum(albumId);
         }
     });
     $('#NewAlbumImageImageInput').bind('fileuploadsubmit', function (e, data) {
