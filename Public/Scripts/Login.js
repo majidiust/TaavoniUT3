@@ -1632,7 +1632,7 @@ function LoadAlbums() {
 						var element = GetMiddleTagCNew(
 						result.Result[i].Name, 
 						result.Result[i].Explanation, 
-						result.Result[i].Poster, 
+						result.Result[i].ImageTitlePoster, 
 						result.Result[i].Id, 
 						GetPrsianDate(result.Result[i].CreateDate),i
 						);
