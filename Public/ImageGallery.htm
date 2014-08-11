@@ -83,8 +83,9 @@
                                 var b = '<li>';
                                 if ((i + 1) % 5 == 0)
                                     b = '<li  class="last">';
+                                    var org = 'http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Originals/' + result.Result[i].Path;
                                     var img = 'http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path;
-                                var li = b + '<a href="' + img + '" rel="prettyPhoto[gallery1]" title="' + result.Result[i].Desc + '"><img src="' + img + '" alt="" /></a></li>';
+                                var li = b + '<a href="' + img + '" rel="prettyPhoto[gallery1]" title="' + result.Result[i].Desc + '"><img src="' + org + '" alt="" /></a></li>';
                                 console.log(li);
                                 content += li;
             
