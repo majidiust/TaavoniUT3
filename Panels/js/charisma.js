@@ -1183,10 +1183,11 @@ function AddNewAlbum() {
                     Debug(row);
                     selectedTable.append(row);
                     $('#NewAlbum').modal('hide');
+                    LoadAlbums();
                     ClearAlbumForm();
                 }
-                else{
-                    CustomBlockingPanel('خطا', result.Message , 500, null);
+                else {
+                    CustomBlockingPanel('خطا', result.Message, 500, null);
                     Debug(result.Message);
                 }
             },
@@ -1216,6 +1217,8 @@ function DeleteAlbum(aId){
          async: true
      });
 }
+
+
 
 function ImagesForAlbum(aId){
     albumId = aId;
