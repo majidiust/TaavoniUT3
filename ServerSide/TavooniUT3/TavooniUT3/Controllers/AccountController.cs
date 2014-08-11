@@ -2031,7 +2031,17 @@ namespace TavooniUT3.Controllers
         {
             try
             {
-                return Json(new { Status = true, Message = 63, Result = m_model.Albums.Where(P => P.State == true) }, JsonRequestBehavior.AllowGet);
+                var Result = from p in m_model.Albums
+                             where p.State == true
+                             select new
+                             {
+                                 Name = p.Name,
+                                 Id = p.Id,
+                                 Explanation = p.Explanation,
+                                 CreateDate = GetPersianDate((DateTime)p.CreateDate),
+                                 ImageTitlePoster = p.ImageTitlePoster
+                             };
+                return Json(new { Status = true, Message = 63,  Result}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -2059,7 +2069,8 @@ namespace TavooniUT3.Controllers
                     return Error(68);
                 }
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 return Error(ex.Message);
             }
         }
