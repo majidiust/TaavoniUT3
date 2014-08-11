@@ -1,3 +1,5 @@
+var BaseURL = "http://taavoniut3.ir";
+var ServerURL = BaseURL + "/ServerSide/TavooniUT3/TavooniUT3/";
 var isShowRegisterationForm = false;
 var index = -1;
 var pageSize = 50;
@@ -1263,9 +1265,9 @@ function ShowMoreInfo(webinarID)
 	window.location = "eventInfo.html?WebinarID=" + webinarID;
 }
 
-function ShowMoreInfoB(webinarID)
+function ShowMoreInfoB(albumId)
 {
-	window.location = "eventInfo.htm?WebinarID=" + webinarID;
+	window.location = "ImageGallery.htm?albumId=" + albumId;
 }
 
  
@@ -1578,7 +1580,7 @@ function GetMiddleTagC(name, presentor, describtion, pic, webinarID, time, i)
 			  return msg;
 }
 
-function GetMiddleTagCNew(name, presentor, describtion, pic, webinarID, time, i)
+function GetMiddleTagCNew(name, describtion, pic, albumId, time, i)
 {
   var msg = '<center><table style="-webkit-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.75);-moz-box-shadow:    3px 3px 13px 0px rgba(50, 50, 50, 0.75);box-shadow:         3px 3px 13px 0px rgba(50, 50, 50, 0.75);width:80%;">';
 	msg += '<tr>';
@@ -1598,11 +1600,11 @@ function GetMiddleTagCNew(name, presentor, describtion, pic, webinarID, time, i)
 	msg +=                    '</td>';
 	msg +=                '</tr>';
 	msg +=                '<tr  style="border:0;">';
-	msg +=                	'<td style="border:0;">' + '<p>' +  GenerateMinSummery(describtion) + '</p>';
+	msg +=                	'<td style="border:0;">' + '<p>' +  describtion + '</p>';
 	msg +=                    '</td>';
 	msg +=                 '</tr>';
 	msg +=                '<tr  style="border:0;">';
-	msg +=                	'<td style="border:0;">' + '<p class="readmore"><a style="cursor:pointer;" onClick="ShowMoreInfoB(' + webinarID + ' );">جزئیات بیشتر</a></p>';
+	msg +=                	'<td style="border:0;">' + '<p class="readmore"><a style="cursor:pointer;" onClick="ShowMoreInfoB(' + albumId + ' );">جزئیات بیشتر</a></p>';
 	msg +=                    '</td>';
 	msg +=                 '</tr>';
 	msg +=            '</table>';
@@ -1613,29 +1615,24 @@ function GetMiddleTagCNew(name, presentor, describtion, pic, webinarID, time, i)
 
 }
 
-function LoadPastSeminarsB(topEventsCount) {
+function LoadAlbums() {
   //$('.PleaseWait').show();
-  	$("#seminars").html("");
-    $.getJSON(ServerURL + "Session/AllLastSearchSession",
-        {
-            index:-1,
-            pageSize:topEventsCount
-        },
+  	$("#albums").html("");
+    $.getJSON(ServerURL + "Session/getListOfAlbums",
         function (result) {
 		// $('.PleaseWait').hide();
 			var elements = new Array();
             if (result.Status == true) {
-                for (var i =0; i < result.Result.CurrentCount ;i++) {
+                for (var i =0; i < result.Result.length ;i++) {
 						//alert(result.Result.SearchResult[i].poster);
 						var element = GetMiddleTagCNew(
-						result.Result.SearchResult[i].name, 
-						result.Result.SearchResult[i].presentorUserName, 
-						result.Result.SearchResult[i].desc, 
-						result.Result.SearchResult[i].poster, 
-						result.Result.SearchResult[i].id, 
-						GetPrsianDate(result.Result.SearchResult[i].beginTime),i
+						result.Result[i].Name, 
+						result.Result.SearchResult[i].Explanation, 
+						result.Result.SearchResult[i].Poster, 
+						result.Result.SearchResult[i].Id, 
+						GetPrsianDate(result.Result[i].CreateDate),i
 						);
-						$("#seminars").append(element);
+						$("#albums").append(element);
                     }
 					walk(document.body, replaceNumbers);
             }
