@@ -1196,8 +1196,25 @@ function AddNewAlbum() {
     }
 }
 
-function DeleteAlbum(){
-    alert("DeleteAlbum");
+function DeleteAlbum(aId){
+     CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
+    $.ajax({
+         type: 'GET',
+         url: ServerURL + "Account/DeleteAlbum",
+         data : {albumId: aId},
+         dataType: 'json',
+         success: function (result) {
+             if (result.Status == true) {
+                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+             }
+             else {
+                 CustomBlockingPanel('خطا', result.Message, 500, null);
+                 Debug(result.Message);
+             }
+         },
+         error: function () { },
+         async: true
+     });
 }
 
 function ImagesForAlbum(aId){
