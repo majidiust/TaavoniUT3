@@ -1618,7 +1618,7 @@ function GetMiddleTagCNew(name, describtion, pic, albumId, time, i)
 function LoadAlbums() {
   //$('.PleaseWait').show();
   	$("#albums").html("");
-    $.getJSON(ServerURL + "Session/getListOfAlbums",
+    $.getJSON(ServerURL + "Account/getListOfAlbums",
         function (result) {
 		// $('.PleaseWait').hide();
 			var elements = new Array();
