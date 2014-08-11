@@ -37,15 +37,12 @@
         <!-- End Homepage Specific Elements -->
         <script type="text/javascript">
             $(document).ready(function () {
-
-                $("a[rel^='prettyPhoto']").prettyPhoto({
-                    theme: 'dark_rounded',
-                    overlay_gallery: false
-                });
-
-
+            
+            
+            
+            
                 $.modal.close();
-
+            
                 LoadPageComponents();
                 DetectLoggedInUser();
                 var _date = GetCurrentPersianDayString() + ", " + GetCurrentPersianDayOfMonth() + "  " + GetCurrentPersianMonthString() + " ماه  " + "1392";
@@ -53,7 +50,7 @@
                 if (BrowserDetect.browser.indexOf("Explorer") != -1) {
                     alert("مرورگر شما Internet Explorer است. لطفا برای استفاده از امکانات سایت از یکی از مرورگر های Firefox، Chrome و یا Opera استفاده نمایید.");
                 }
-
+            
                 var qs = getQueryStrings();
                 var albumId = qs["albumId"];
                 console.log("Get images for album : " + albumId);
@@ -63,15 +60,15 @@
                 else {
                     GetImagesForAlbum(albumId);
                 }
-
+            
                 walk(document.body, replaceNumbers);
-
-
-
-
+            
+            
+            
+            
             }
                               );
-
+            
             function GetImagesForAlbum(aId) {
                 $.ajax({
                     type: 'GET',
@@ -86,13 +83,18 @@
                                 var b = '<li>';
                                 if ((i + 1) % 5 == 0)
                                     b = '<li  class="last">';
-                                    var img = 'ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path;
+                                    var img = 'http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path;
                                 var li = b + '<a href="' + img + '" rel="prettyPhoto[gallery1]" title="' + result.Result[i].Desc + '"><img src="' + img + '" alt="" /></a></li>';
                                 console.log(li);
                                 content += li;
-
+            
                             }
                             $("#imageContainer").append(content);
+            
+                             $("a[rel^='prettyPhoto']").prettyPhoto({
+                    theme: 'dark_rounded',
+                    overlay_gallery: false
+                });
                         }
                         else {
                             CustomBlockingPanel('خطا', result.Message, 500, null);
@@ -203,25 +205,25 @@
                     <div id="gallery" class="clear">
                         <h2 class="title">تصاویر پروژه دانشگاه تهران</h2>
                         <ul id="imageContainer">
-                                                  </ul>
+                        </ul>
                     </div>
                     <!-- ####################################################################################################### -->
                                             <!--  <div class="pagination">
-                                <ul>
-                                  <li class="prev"><a href="#">&laquo; Previous</a></li>
-                                  <li><a href="#">1</a></li>
-                                  <li><a href="#">2</a></li>
-                                  <li class="splitter">&hellip;</li>
-                                  <li><a href="#">6</a></li>
-                                  <li class="current">7</li>
-                                  <li><a href="#">8</a></li>
-                                  <li><a href="#">9</a></li>
-                                  <li class="splitter">&hellip;</li>
-                                  <li><a href="#">14</a></li>
-                                  <li><a href="#">15</a></li>
-                                  <li class="next"><a href="#">Next &raquo;</a></li>
-                                </ul>
-                              </div> -->
+                                                                                <ul>
+                                                                                  <li class="prev"><a href="#">&laquo; Previous</a></li>
+                                                                                  <li><a href="#">1</a></li>
+                                                                                  <li><a href="#">2</a></li>
+                                                                                  <li class="splitter">&hellip;</li>
+                                                                                  <li><a href="#">6</a></li>
+                                                                                  <li class="current">7</li>
+                                                                                  <li><a href="#">8</a></li>
+                                                                                  <li><a href="#">9</a></li>
+                                                                                  <li class="splitter">&hellip;</li>
+                                                                                  <li><a href="#">14</a></li>
+                                                                                  <li><a href="#">15</a></li>
+                                                                                  <li class="next"><a href="#">Next &raquo;</a></li>
+                                                                                </ul>
+                                                                              </div> -->
                     <!-- ####################################################################################################### -->
                 </div>
             </div>
