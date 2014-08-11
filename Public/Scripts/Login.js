@@ -1627,9 +1627,9 @@ function LoadAlbums() {
 						//alert(result.Result.SearchResult[i].poster);
 						var element = GetMiddleTagCNew(
 						result.Result[i].Name, 
-						result.Result.SearchResult[i].Explanation, 
-						result.Result.SearchResult[i].Poster, 
-						result.Result.SearchResult[i].Id, 
+						result.Result[i].Explanation, 
+						result.Result[i].Poster, 
+						result.Result[i].Id, 
 						GetPrsianDate(result.Result[i].CreateDate),i
 						);
 						$("#albums").append(element);
