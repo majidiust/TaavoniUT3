@@ -2048,7 +2048,8 @@ namespace TavooniUT3.Controllers
                                  Id = p.Id,
                                  Explanation = p.Explanation,
                                  CreateDate = GetPersianDate((DateTime)p.CreateDate),
-                                 ImageTitlePoster = GetAlbumPoster(p.Id)
+                                 ImageTitlePoster = GetAlbumPoster(p.Id),
+                                 State = p.State
                              };
                 return Json(new { Status = true, Message = 63,  Result}, JsonRequestBehavior.AllowGet);
             }
