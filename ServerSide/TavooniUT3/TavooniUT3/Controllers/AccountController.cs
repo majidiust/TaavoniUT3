@@ -2026,6 +2026,15 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        private String GetAlbumPoster(int albumId)
+        {
+            if (m_model.PicOfAlbums.Count(P => P.AlbumId == albumId) > 0)
+            {
+                return m_model.PicOfAlbums.First(P => P.AlbumId == albumId).Path;
+            }
+            else return "default";
+        }
+
         [HttpGet]
         public ActionResult getListOfAlbums()
         {
@@ -2039,7 +2048,7 @@ namespace TavooniUT3.Controllers
                                  Id = p.Id,
                                  Explanation = p.Explanation,
                                  CreateDate = GetPersianDate((DateTime)p.CreateDate),
-                                 ImageTitlePoster = p.ImageTitlePoster
+                                 ImageTitlePoster = GetAlbumPoster(p.Id)
                              };
                 return Json(new { Status = true, Message = 63,  Result}, JsonRequestBehavior.AllowGet);
             }

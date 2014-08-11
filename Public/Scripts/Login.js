@@ -1153,7 +1153,7 @@ function GetPrsianDate(currentDate)
 			_month =  "اسفند";
 			break;
 	}
-	var _msg = _splitedDate[2] + "  " + _month + "  ماه سال" + _splitedDate[0] + " ، " + "ساعت " + _splitedDate[3];
+	var _msg = _splitedDate[2] + "  " + _month + "  ماه سال" + _splitedDate[0] ;
 	return _msg;
 }
 
@@ -1584,7 +1584,11 @@ function GetMiddleTagCNew(name, describtion, pic, albumId, time, i)
 {
   var msg = '<center><table style="-webkit-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.75);-moz-box-shadow:    3px 3px 13px 0px rgba(50, 50, 50, 0.75);box-shadow:         3px 3px 13px 0px rgba(50, 50, 50, 0.75);width:80%;">';
 	msg += '<tr>';
-    msg += '<td style="border:0;vertical-align:middle;alignment-adjust:central;width:200px;text-align:center;">' +  '<img src="ServerSide/' + pic +'" alt="" style="width:80%; padding: 20px;background: #eeeeee;border: 1px solid #bbbbbb;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;"/>';
+    if(pic == 'default')
+        pic = "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Users/album-icon.png";
+    else
+        pic = "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/" + pic ;
+    msg += '<td style="border:0;vertical-align:middle;alignment-adjust:central;width:200px;text-align:center;">' +  '<img src="' + pic +'" alt="" style="width:80%; padding: 20px;background: #eeeeee;border: 1px solid #bbbbbb;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;"/>';
     msg += '</td>';
 	msg +=         '<td style="border:0;">';
 	msg +=        	'<table style="border:0;">';
