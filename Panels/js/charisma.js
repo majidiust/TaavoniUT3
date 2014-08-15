@@ -39,7 +39,7 @@ var NewPaymentMethod = 1;
 var selectedRow;
 var selectedPaymentId;
 var oTable;
-
+var albumDialogType = 0;
 $(document).load(function () {
     CustomBlockingPanel('توجه', 'لطفا اندکی صبر کنید.', -1, null);
 });
@@ -1132,7 +1132,9 @@ function LoadAlbums(){
                      row += "<td>" + result.Result[i].State + "</td>";
                      row += "<td>" + result.Result[i].Explanation + "</td>";
                      row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
-                     row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button></td></tr>';
+                     row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button>' +
+                         '' + '<button  style="width:100%" class="btn btn-large btn-info" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'"  + ');"> ویرایش </button>'+
+                         '</td></tr>';
                      Debug(row);
                      $("#AlbumListTable").append(row);
                  }
@@ -1146,6 +1148,55 @@ function LoadAlbums(){
          async: true
      });
 
+}
+
+
+var editableAlbumId ;
+function EditAlbum(albumId, albumName, albumDesc){
+    editableAlbumId = albumId;
+    $("#AlbumName").val(albumName);
+    $("#AlbumDesc").val(albumDesc);
+    $('#NewAlbum').modal('show');
+}
+
+function doEditAllbum(){
+    var albumName = $("#AlbumName").val();
+    var albumDesc = $("#AlbumDesc").val();
+    console.log(albumName + " : " + albumDesc);
+    if (albumName == "") {
+        alert("لطفا نام آلبوم را وارد کنید.");
+    }
+    else if (albumDesc == "") {
+        alert("توصیف آلبوم را وارد کنید.");
+    }
+    else {
+        console.log("Send edit album data to server");
+        CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
+        $.ajax({
+            type: 'POST',
+            url: ServerURL + "Account/EditAlbum",
+            data: {
+                albumName: albumName,
+                albumDesc: albumDesc,
+                albumId : editableAlbumId
+            },
+            dataType: 'json',
+            success: function (result) {
+                if (result.Status == true) {
+                    CustomBlockingPanel('توجه', 'آلبوم با موفقیت ایجاد گردید.', 500, null);
+                    console.log(result);
+                    LoadAlbums();
+                    ClearAlbumForm();
+                }
+                else {
+                    CustomBlockingPanel('خطا', result.Message, 500, null);
+                    Debug(result.Message);
+                }
+            },
+            error: function () { },
+            async: true
+        });
+    }
 }
 
 function AddNewAlbum() {

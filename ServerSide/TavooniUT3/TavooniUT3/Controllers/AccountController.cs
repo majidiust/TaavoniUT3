@@ -2084,6 +2084,32 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
+
+        [Authorize(Roles = "Admin, Album")]
+        [HttpPost]
+        public ActionResult EditAlbum(int albumId, string albumDesc, string albumName)
+        {
+            try
+            {
+                if (m_model.Albums.Count(P => P.Id == albumId) > 0)
+                {
+                    var album = m_model.Albums.Single(P => P.Id == albumId);
+                    album.Name = albumName;
+                    album.Explanation = albumName;
+                    m_model.SubmitChanges();
+                    return Success(70);
+                }
+                else
+                {
+                    return Error("Album does not exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
         [Authorize(Roles = "Admin, Album")]
         [HttpGet]
         public ActionResult DeleteAlbum(string albumId)
