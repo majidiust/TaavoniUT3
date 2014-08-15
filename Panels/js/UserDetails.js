@@ -621,6 +621,7 @@ function ApplyUserRoles()
     }
 }
 
+
 function GetUserRoles()
 {
     CustomBlockingPanel('توجه', 'در حال دریافت نقش های کاربر ... ', -1, null);

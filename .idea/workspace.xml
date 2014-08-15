@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6ac3a91e-5031-48f9-b59d-db64f419ea5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/js/UserDetails.js" afterPath="$PROJECT_DIR$/Panels/js/UserDetails.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/blank.html" afterPath="$PROJECT_DIR$/Panels/blank.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/js/charisma.js" afterPath="$PROJECT_DIR$/Panels/js/charisma.js" />
     </list>
     <ignored path="TaavoniUT3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,13 +59,13 @@
       <file leaf-file-name="UserDetails.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Panels/js/UserDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71978986" vertical-offset="10061" max-vertical-offset="11968">
-              <caret line="616" column="44" selection-start-line="616" selection-start-column="44" selection-end-line="616" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.92819613" vertical-offset="10061" max-vertical-offset="11985">
+              <caret line="623" column="0" selection-start-line="623" selection-start-column="0" selection-end-line="623" selection-end-column="0" />
               <folding>
-                <marker date="1408135649975" expanded="false" signature="8528:8538" placeholder="..." />
-                <marker date="1408135649975" expanded="false" signature="10244:10254" placeholder="..." />
-                <marker date="1408135649975" expanded="false" signature="12144:12153" placeholder="..." />
-                <marker date="1408135649975" expanded="false" signature="15462:15472" placeholder="..." />
+                <marker date="1408135905960" expanded="false" signature="8528:8538" placeholder="..." />
+                <marker date="1408135905960" expanded="false" signature="10244:10254" placeholder="..." />
+                <marker date="1408135905960" expanded="false" signature="12144:12153" placeholder="..." />
+                <marker date="1408135905960" expanded="false" signature="15462:15472" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -338,13 +336,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Panels/js/UserDetails.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71978986" vertical-offset="10061" max-vertical-offset="11968">
-          <caret line="616" column="44" selection-start-line="616" selection-start-column="44" selection-end-line="616" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.92819613" vertical-offset="10061" max-vertical-offset="11985">
+          <caret line="623" column="0" selection-start-line="623" selection-start-column="0" selection-end-line="623" selection-end-column="0" />
           <folding>
-            <marker date="1408135649975" expanded="false" signature="8528:8538" placeholder="..." />
-            <marker date="1408135649975" expanded="false" signature="10244:10254" placeholder="..." />
-            <marker date="1408135649975" expanded="false" signature="12144:12153" placeholder="..." />
-            <marker date="1408135649975" expanded="false" signature="15462:15472" placeholder="..." />
+            <marker date="1408135905960" expanded="false" signature="8528:8538" placeholder="..." />
+            <marker date="1408135905960" expanded="false" signature="10244:10254" placeholder="..." />
+            <marker date="1408135905960" expanded="false" signature="12144:12153" placeholder="..." />
+            <marker date="1408135905960" expanded="false" signature="15462:15472" placeholder="..." />
           </folding>
         </state>
       </provider>
