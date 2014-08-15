@@ -1133,7 +1133,7 @@ function LoadAlbums(){
                      row += "<td>" + result.Result[i].Explanation + "</td>";
                      row += '<td><button name="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
                      row += '<button name="Album"  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button>' +
-                         '' + '<button name="Album" style="width:100%" class="btn btn-large btn-info" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'"  + ');"> ویرایش </button>'+
+                         '' + '<button name="Album" style="width:100%" class="btn btn-large btns" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'"  + ');"> ویرایش </button>'+
                          '</td></tr>';
                      Debug(row);
                      $("#AlbumListTable").append(row);

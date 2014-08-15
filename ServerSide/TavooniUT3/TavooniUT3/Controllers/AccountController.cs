@@ -2095,7 +2095,7 @@ namespace TavooniUT3.Controllers
                 {
                     var album = m_model.Albums.Single(P => P.Id == albumId);
                     album.Name = albumName;
-                    album.Explanation = albumName;
+                    album.Explanation = albumDesc;
                     m_model.SubmitChanges();
                     return Success(70);
                 }
