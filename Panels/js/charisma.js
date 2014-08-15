@@ -1182,6 +1182,7 @@ function doEditAllbum(){
             },
             dataType: 'json',
             success: function (result) {
+                $('#NewAlbum').modal('hide');
                 if (result.Status == true) {
                     CustomBlockingPanel('توجه', 'آلبوم با موفقیت ایجاد گردید.', 500, null);
                     console.log(result);
