@@ -1131,9 +1131,9 @@ function LoadAlbums(){
                      row += "<td>" + result.Result[i].Name + "</td>";
                      row += "<td>" + result.Result[i].State + "</td>";
                      row += "<td>" + result.Result[i].Explanation + "</td>";
-                     row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
-                     row += '<button  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button>' +
-                         '' + '<button  style="width:100%" class="btn btn-large btn-info" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'"  + ');"> ویرایش </button>'+
+                     row += '<td><button name="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
+                     row += '<button name="Album"  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button>' +
+                         '' + '<button name="Album" style="width:100%" class="btn btn-large btn-info" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'"  + ');"> ویرایش </button>'+
                          '</td></tr>';
                      Debug(row);
                      $("#AlbumListTable").append(row);
@@ -1298,7 +1298,7 @@ function LoadImageForAlbum(aId){
                      row += "<td>" + result.Result[i].Desc + "</td>";
                      row += "<td>" + result.Result[i].State + "</td>";
                      row += "<td>" + '<img style="width:100px; height:100px" src="http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path +'" />'+ "</td>";
-                     row += '<td><button  style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbumImage(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
+                     row += '<td><button nme="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbumImage(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
                      row += '</td></tr>';
                      Debug(row);
                      $("#ImageListTable").append(row);

@@ -608,13 +608,14 @@ function ApplyUserRoles()
         console.log("***************************User role is : " + userRoles[i]);
         if(userRoles[i] == 'Admin')
             break;
-        else if(userRoles[i] == 'Viewer')
+        else if(userRoles[i] != 'Viewer')
         {
             $('[name="editProfile"').hide();
             $('[name="activeProfile"').hide();
             $('[name="AddNewMember"').hide();
             $('[name="deletePayment"').hide();
             $('[name="editPayment"').hide();
+            $('[name="Album"').hide();
             break;
         }
     }
