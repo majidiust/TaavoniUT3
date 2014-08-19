@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6ac3a91e-5031-48f9-b59d-db64f419ea5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/blank.html" afterPath="$PROJECT_DIR$/Panels/blank.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/js/charisma.js" afterPath="$PROJECT_DIR$/Panels/js/charisma.js" />
     </list>
     <ignored path="TaavoniUT3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,23 +25,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="blank.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="blank.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Panels/blank.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.5" vertical-offset="20731" max-vertical-offset="26707">
-              <caret line="1234" column="34" selection-start-line="1234" selection-start-column="34" selection-end-line="1234" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.7614035" vertical-offset="20646" max-vertical-offset="26707">
+              <caret line="1240" column="75" selection-start-line="1240" selection-start-column="75" selection-end-line="1240" selection-end-column="75" />
               <folding>
-                <marker date="1408451917447" expanded="true" signature="10287:10408" placeholder="..." />
+                <marker date="1408452350846" expanded="true" signature="10287:10408" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="charisma.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="charisma.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Panels/js/charisma.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39229423" vertical-offset="23117" max-vertical-offset="32572">
-              <caret line="1373" column="54" selection-start-line="1373" selection-start-column="54" selection-end-line="1373" selection-end-column="54" />
+            <state vertical-scroll-proportion="-8.28" vertical-offset="23117" max-vertical-offset="32572">
+              <caret line="1372" column="24" selection-start-line="1372" selection-start-column="24" selection-end-line="1372" selection-end-column="24" />
               <folding>
                 <marker date="1408452024458" expanded="false" signature="20125:20137" placeholder="..." />
                 <marker date="1408452024458" expanded="false" signature="20381:20393" placeholder="..." />
@@ -86,8 +85,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/Panels/js/UserDetails.js" />
-        <option value="$PROJECT_DIR$/Panels/blank.html" />
         <option value="$PROJECT_DIR$/Panels/js/charisma.js" />
+        <option value="$PROJECT_DIR$/Panels/blank.html" />
       </list>
     </option>
   </component>
@@ -308,7 +307,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="26775">
           <caret line="920" column="55" selection-start-line="920" selection-start-column="55" selection-end-line="920" selection-end-column="55" />
           <folding>
-            <marker date="1408451917447" expanded="true" signature="10287:10408" placeholder="..." />
+            <marker date="1408452350846" expanded="true" signature="10287:10408" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -348,7 +347,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="26775">
           <caret line="1569" column="7" selection-start-line="1569" selection-start-column="7" selection-end-line="1569" selection-end-column="7" />
           <folding>
-            <marker date="1408451917447" expanded="true" signature="10287:10408" placeholder="..." />
+            <marker date="1408452350846" expanded="true" signature="10287:10408" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -383,20 +382,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/blank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.5" vertical-offset="20731" max-vertical-offset="26707">
-          <caret line="1234" column="34" selection-start-line="1234" selection-start-column="34" selection-end-line="1234" selection-end-column="34" />
-          <folding>
-            <marker date="1408451917447" expanded="true" signature="10287:10408" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Panels/js/charisma.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39229423" vertical-offset="23117" max-vertical-offset="32572">
-          <caret line="1373" column="54" selection-start-line="1373" selection-start-column="54" selection-end-line="1373" selection-end-column="54" />
+        <state vertical-scroll-proportion="-8.28" vertical-offset="23117" max-vertical-offset="32572">
+          <caret line="1372" column="24" selection-start-line="1372" selection-start-column="24" selection-end-line="1372" selection-end-column="24" />
           <folding>
             <marker date="1408452024458" expanded="false" signature="20125:20137" placeholder="..." />
             <marker date="1408452024458" expanded="false" signature="20381:20393" placeholder="..." />
@@ -406,6 +395,16 @@
             <marker date="1408452024458" expanded="false" signature="39811:39821" placeholder="..." />
             <marker date="1408452024458" expanded="false" signature="43675:43685" placeholder="..." />
             <marker date="1408452024458" expanded="false" signature="46398:46408" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/blank.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7614035" vertical-offset="20646" max-vertical-offset="26707">
+          <caret line="1240" column="75" selection-start-line="1240" selection-start-column="75" selection-end-line="1240" selection-end-column="75" />
+          <folding>
+            <marker date="1408452350846" expanded="true" signature="10287:10408" placeholder="..." />
           </folding>
         </state>
       </provider>
