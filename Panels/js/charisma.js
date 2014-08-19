@@ -1370,6 +1370,7 @@ function PrepareImageUploadForAlbum(){
 }
 
 function ShowNewImageAlbumForm(){
+    albumDialogType = 1;
     alert("ShowNewImageAlbumForm");
     $("#NewAlbumImage").modal('show');
 }

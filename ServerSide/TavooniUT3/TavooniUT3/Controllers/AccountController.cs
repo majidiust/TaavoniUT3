@@ -2166,7 +2166,7 @@ namespace TavooniUT3.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin, Album")]
         [HttpPost]
         public ContentResult AddPictureToAlbum(string albumId, string desc)
         {
