@@ -1371,7 +1371,7 @@ function PrepareImageUploadForAlbum(){
 
 function ShowNewImageAlbumForm(){
     albumDialogType = 1;
-    alert("ShowNewImageAlbumForm");
+    alert("ShowNewImageAlbumForm : " + albumDialogType);
     $("#NewAlbumImage").modal('show');
 }
 
