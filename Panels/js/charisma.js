@@ -796,10 +796,6 @@ function GetListOfMembers() {
         }
 
         oTable = $('#ListOfMembersTable').dataTable({
-            "bDestroy": true,
-            "bJQueryUI": true,
-            "bProcessing": true,
-            "bDeferRender": true,
             "oLanguage": {
                 "sProcessing": "درحال پردازش...",
                 "sLengthMenu": "نمایش محتویات _MENU_",

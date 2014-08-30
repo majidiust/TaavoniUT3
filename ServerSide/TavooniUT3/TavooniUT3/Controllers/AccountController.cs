@@ -596,7 +596,7 @@ namespace TavooniUT3.Controllers
             string NewMemberContractType, string NewMemberJobType, string NewMemberJobConcept, string NewMemberJobStatus,
             string NewMemberJob3University, string NewMemberIsargariType, string NewMemberEsratDuration,
             string NewMemberJanbaziPercent, string NewMemberJebheDuration, string NewMemberIsargariIsargarFamilyType,
-            string NewMemberPictureName, string NewMemberjobName, string NewMemberJobPlace, bool NewMemberIsAzadeh, string NewMemberOthertype,
+            string NewMemberPictureName, string NewMemberJobName, string NewMemberJobPlace, bool NewMemberIsAzadeh, string NewMemberOthertype,
             bool NewMemberIsJanbaz, bool NewMemberIsRazmande, bool NewMemberIsIsargar, bool NewMemberIsFamilyOfShahid, bool NewMemberIsChildOfShahid)
         {
             try
@@ -641,7 +641,7 @@ namespace TavooniUT3.Controllers
                 employee.Organization = int.Parse(NewMemberJobConcept);
                 employee.University = int.Parse(NewMemberJob3University);
                 employee.JobOtherType = int.Parse(NewMemberOthertype);
-                employee.JobName = NewMemberjobName;
+                employee.JobName = NewMemberJobName;
                 employee.JobPlace = NewMemberJobPlace;
 
                 // m_model.MembersEmployees.InsertOnSubmit(employee);
