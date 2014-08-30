@@ -814,6 +814,7 @@ function GetListOfMembers() {
                 }
             },
             "aaData": results,
+            "bDestroy":true,
             "aoColumns": [
 		{
 		    "sTitle": "کد ملی"
