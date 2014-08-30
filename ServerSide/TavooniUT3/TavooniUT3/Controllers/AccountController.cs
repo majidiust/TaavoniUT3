@@ -1355,6 +1355,7 @@ namespace TavooniUT3.Controllers
                 System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
                 String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
                 var unsortRankList = (from p in m_model.MembersProfiles
+                                      where p.IsDisabled == null || p.IsDisabled == false
                                       select new
                                       {
                                           FirstName = p.FirstName,
@@ -1403,7 +1404,7 @@ namespace TavooniUT3.Controllers
                 {
                     System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
                     String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
-                    var unsortRankList = (from p in m_model.MembersProfiles
+                    var unsortRankList = (from p in m_model.MembersProfiles where p.IsDisabled == null || p.IsDisabled == false
                                           select new
                                           {
                                               FirstName = p.FirstName,
@@ -1451,6 +1452,7 @@ namespace TavooniUT3.Controllers
             System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
             String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
             var unsortRankList = (from p in m_model.MembersProfiles
+                                  where p.IsDisabled == null || p.IsDisabled == false
                                   select new
                                   {
                                       FirstName = p.FirstName,
