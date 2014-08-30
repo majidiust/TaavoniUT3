@@ -70,7 +70,7 @@ function LoadGeneralInfo(nationalityCode)
 					$("#MemberInfoActivity").html("فعال است");
 				else
 					$("#MemberInfoActivity").html("غیر فعال است");
-				$("#MemberInfoPoint").html("امتیاز کاربر : "  + result.Result.Point);
+				$("#EditMemberInfoPoint").html("امتیاز کاربر : "  + result.Result.Point);
 			}
 			else{
 			}
@@ -700,5 +700,5 @@ function DeActivateMember()
 }
 
 function LoadUserRank(user){
-    $("#MemberInfoRank").html('<center>' + user.Rank + '</center>');
+    $("#EditMemberInfoRank").html('<center> رتیه کاربر : ' + user.Rank + '</center>');
 }
