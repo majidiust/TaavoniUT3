@@ -884,9 +884,28 @@ function GetListOfMembers() {
 }
 
 function ShowDetails(nationalityCode) {
-    PrepareMemberInfo();
-    LoadUserDetails(nationalityCode);
-    ShowBox("#MemberInfo");
+    var selectedUser = null;
+    $org.context.Members.forEach(function (user) {
+        var res = [
+            user.NationalityCode,
+            user.FirstName,
+            user.LastName,
+            user.CreateDate,
+            user.IsApproved,
+            user.Point,
+            user.Rank,
+            remaskPayment(user.Payment),
+            user.NationalityCode
+        ];
+        if(user.NationalityCode == nationalityCode)
+            selectedUser = user;
+    }).then(function(){
+        PrepareMemberInfo();
+        LoadUserDetails(nationalityCode, selectedUser);
+        ShowBox("#MemberInfo");
+    });
+
+
 }
 
 function ViewUserInRoles(roleName) {

@@ -1,1628 +1,1697 @@
 <div class="control-group" style="font-family:Tahoma, Geneva, sans-serif;">
-  <table class="table table-striped table-bordered bootstrap-datatable">
-  	<tbody>
-    	<tr>
-        	<td name="editProfileCollumn" width="20%" valign="middle" align="center">
-            	<table>
-                	<tr>
-                    	<td valign="center" align="center" >
-                        	<img id="EditProfileImageImage" src="../Pics/Users/default.png" width="200" height="200"/>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td>
-                        <input  id="MemberInfoImageInput" type="file" name="files[]" multiple onchange="
+<table class="table table-striped table-bordered bootstrap-datatable">
+<tbody>
+<tr>
+<td name="editProfileCollumn" width="20%" valign="middle" align="center">
+    <table>
+        <tr>
+            <td valign="center" align="center">
+                <img id="EditProfileImageImage" src="../Pics/Users/default.png" width="200" height="200"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="MemberInfoImageInput" type="file" name="files[]" multiple onchange="
                             var file = this.files[0];
                             oFReader = new FileReader();
                             oFReader.readAsDataURL(document.getElementById('MemberInfoImageInput').files[0]);
                             oFReader.onload = function (oFREvent) {
                             document.getElementById('EditProfileImageImage').src = oFREvent.target.result;
                             };">
-                        </td>
-                    </tr>
-                    <tr>
-                    
-                    	<td id="EditMemberInfoName" style="text-align:center;">
-                        	Majid Sadeghi Alavijeh
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td id="EditMemberInfoNationalID" style="text-align:center;">
-                        	0082900620
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td id="EditMemberInfoTotalPayment" style="text-align:center;">
-                        	------------
-                        </td>
-                    </tr>
-					<tr>
-						<td id="MemberInfoActivity" style="text-align:center;">
-							
-						</td>
-					</tr>
-					<tr>
-						<td id="MemberInfoPoint" style="text-align:center;font-style:bold;">
-							
-						</td>
-					</tr>
-                    <tr>
-                    	<td>
-                        <table style="width:100%">
-                        	<tr>
-                            	<td colspan="2" style="width:100%;">
-                                 <button name="editProfile" style="width:100%" class="btn btn-small btn-success" onclick="SaveProfile();" style="font-size:14px;">
-ثیت           </button>
-                                </td>
-								</tr>
-								<tr>
-                               	<td colspan="2" style="width:100%;">
-                                 <button  style="width:100%" class="btn btn-small btn-warning" onclick="LoadUserDetails($('#MemberInfoNationalityCode').val());" style="font-size:14px;">
-بازیابی           </button>
-                                </td>
-                            </tr>
-                            <tr>
-                            		<td colspan="2" style="width:100%;">
-                                 <button name="activeProfile" style="width:100%" class="btn btn-small btn-info" onclick="ActivateMember();" style="font-size:14px;">
-فعال            </button>
-                                </td>
-								</tr>
-								<tr>
-                              	<td colspan="2" style="width:100%;">
-                                 <button name="activeProfile" onclick="DeActivateMember();"  style="width:100%" class="btn btn-small btn-error" data-rel="popover" data-content="از این دکمه برای غیر فعال سازی کاربر استفاده میشود." title="غیر فعال کردن" style="font-size:14px;">
-غیر فعال            </button>
-                                </td>
-                            </tr>
-							                            <tr>
-                            		<td colspan="2" style="width:100%;">
-                                 <button name="activeProfile" style="width:100%" class="btn btn-small btn" onclick="MakeUserActive();" style="font-size:12px;">
-ارسال پیامک            </button>
-                                </td>
-								</tr>
-								<tr>
-                               	<td colspan="2" style="width:100%;">
-                                 <button name="activeProfile" style="width:100%" class="btn btn-small btn-inverse" onclick="MakeUserDeActive();" style="font-size:12px;">
-ارسال ایمیل            </button>
-                                </td>
-                            </tr>
-                        </table>
-                        
-                        </td>
-                    </tr>
-                </table>
-        
-            </td>
-            <td width="80%">
-            	<table style="width:100%">
-                	<tr>
-                    	<td style="width:100%">
-                        	<div id="tabs" style="width:100%;font-family:Tahoma, Geneva, sans-serif;">
-                              <ul>
-                                <li><a href="#fragment-1"><span>مشخصات فردی</span></a></li>
-                                <li><a href="#fragment-2"><span>اطلاعات شغلی</span></a></li>
-                                <li><a href="#fragment-3"><span>اطلاعات ایثارگری</span></a></li>
-                                 <li><a href="#fragment-4"><span>اطلاعات تماس</span></a></li>
-                                  <li><a href="#fragment-5"><span>افراد تحت تکفل</span></a></li>
-                                  <li><a href="#fragment-6"><span>پرداخت</span></a></li>
-                              </ul>
-                              <div id="fragment-1" style="width:80%;">
-                               <div class="form-horizontal">
-              <fieldset>
-                <div class="control-group" id="EditMemberInfoFirstName">
-                  <label class="control-label" for="typeahead" style="float:right;">
-                    * نام
-                  </label>
-                  <div class="controls">
-                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoFirstName" data-provide="typeahead">
-                  </div>
-                </div>
-                <div class="control-group" id="EditMemberInfoLastName">
-                  <label class="control-label" for="typeahead" style="float:right;">
-                    * نام خانوادگی
-                  </label>
-                  <div class="controls">
-                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoLastName" data-provide="typeahead">
-                  </div>
-                </div>
-                
-                <div class="control-group" id="EditMemberInfoGenderContol">
-                  <label class="control-label InputClass" for="EditMemberInfoGender" style="float:right;">
-                    * جنسیت
-                  </label>
-                  <div class="controls">
-                    <select id="EditMemberInfoGender">
-                      <option id="EditMemberInfoGender0" value="0">
-                        انتخاب نشده
-                      </option>
-                      <option id="EditMemberInfoGender1" value="1">
-                        مرد
-                      </option>
-                      <option id="EditMemberInfoGender2" value="2">
-                        زن
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="control-group" id="EditMemberSelectCityGroup">
-                  <label class="control-label InputClass" for="EditMemberInfoCity" style="float:right;">
-                    * شهر
-                  </label>
-                  <div class="controls">
-                    <select id="EditMemberInfoCity" >
-                      <option id="EditMemberInfoCity0" value="35">
-                        انتخاب نشده
-                      </option>
-                      <option id="EditMemberInfoCity1" value="1">
-                        تهران
-                      </option>
-                      <option id="EditMemberInfoCity2" value="2">
-                        اصفهان
-                      </option>
-                      <option id="EditMemberInfoCity3" value="3">
-                        مشهد
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div class="control-group" id="MemberInfoDegreeGroup">
-                  <label class="control-label InputClass" for="MemberInfoDegree" style="float:right;">
-                    * سطح تحصیلات
-                  </label>
-                  <div class="controls">
-                    <select id="MemberInfoDegree" >
-                      <option  id="MemberInfoDegree0" value="7">
-                        انتخاب نشده
-                      </option>
-                      <option  id="MemberInfoDegree1" value="1">
-                        دیپلم
-                      </option>
-                      <option  id="MemberInfoDegree2" value="2">
-                        فوق دیپلم
-                      </option>
-                      <option  id="MemberInfoDegree3"  value="3">
-                        کارشناسی
-                      </option>
-                      <option  id="MemberInfoDegree4"  value="4">
-                        کارشناسی ارشد
-                      </option>
-                      <option  id="MemberInfoDegree5" value="5">
-                        دکترا
-                      </option>
-                      <option  id="MemberInfoDegree6" value="6">
-                        فوق دکترا
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                
-                
-                <div class="control-group" id="MemberInfoNationalityCodeGroup">
-                  <label class="control-label" for="MemberInfoInternationalCode" style="float:right;">
-                    * کدملی
-                  </label>
-                  <div class="controls">
-                    <input disabled type="text" class="span6 typeahead InputClass" id="MemberInfoInternationalCode" data-provide="MemberInfoInternationalCode">
-                  </div>
-                </div>
-                
-                <div class="control-group" id="MemberInfoShenasnameGroup">
-                  <label class="control-label" for="MemberInfoShenasname" style="float:right;">
-                    * شماره شناسنامه
-                  </label>
-                  <div class="controls">
-                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoShenasname" data-provide="MemberInfoShenasname">
-                  </div>
-                </div>
-                
-                <div class="control-group" id="MemberInfoShenasnamePlaceGroup">
-                  <label class="control-label" for="MemberInfoShenasnamePlace" style="float:right;">
-                    * محل صدور شناسنامه
-                  </label>
-                  <div class="controls">
-                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoShenasnamePlace" data-provide="MemberInfoShenasnamePlace">
-                  </div>
-                </div>
-                
-                
-                <div class="control-group" id="MemberInfoPersonIDGroup">
-                  <label class="control-label" for="MemberInfoPersonID" style="float:right;">
-                    * شماره پرسنلی
-                  </label>
-                  <div class="controls">
-                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoPersonID" data-provide="MemberInfoPersonID">
-                  </div>
-                </div>
-                
-                
-                <div class="control-group">
-                  <label class="control-label" for="MemberInfoBirthdate" style="float:right;">
-                    * تولد 
-                  </label>
-                  <div class="controls">
-                    <select id="MemberInfoBirthdateDay" style="width:60px;">
-                      <option>
-                        1
-                      </option>
-                      <option>
-                        2
-                      </option>
-                      <option>
-                        3
-                      </option>
-                      <option>
-                        4
-                      </option>
-                      <option>
-                        5
-                      </option>
-                      <option>
-                        6
-                      </option>
-                      <option>
-                        7
-                      </option>
-                      <option>
-                        8
-                      </option>
-                      <option>
-                        9
-                      </option>
-                      <option>
-                        10
-                      </option>
-                      <option>
-                        11
-                      </option>
-                      <option>
-                        12
-                      </option>
-                      <option>
-                        13
-                      </option>
-                      <option>
-                        14
-                      </option>
-                      <option>
-                        15
-                      </option>
-                      <option>
-                        16
-                      </option>
-                      <option>
-                        17
-                      </option>
-                      <option>
-                        18
-                      </option>
-                      <option>
-                        19
-                      </option>
-                      <option>
-                        20
-                      </option>
-                      <option>
-                        21
-                      </option>
-                      <option>
-                        22
-                      </option>
-                      <option>
-                        23
-                      </option>
-                      <option>
-                        24
-                      </option>
-                      <option>
-                        25
-                      </option>
-                      <option>
-                        26
-                      </option>
-                      <option>
-                        27
-                      </option>
-                      <option>
-                        28
-                      </option>
-                      <option>
-                        29
-                      </option>
-                      <option>
-                        30
-                      </option>
-                      <option>
-                        31
-                      </option>
-                    </select>
-                    <select id="MemberInfoBirthdateMonth" style="width:90px;">
-                      <option value="1">
-                        فروردین
-                      </option>
-                      <option value="2">
-                        اردیبهشت
-                      </option>
-                      <option value="3">
-                        خرداد
-                      </option>
-                      <option value="4">
-                        تیر
-                      </option>
-                      <option value="5">
-                        مرداد
-                      </option>
-                      <option value="6">
-                        شهریور
-                      </option>
-                      <option value="7">
-                        مهر
-                      </option>
-                      <option value="8">
-                        آبان
-                      </option>
-                      <option value="9">
-                        آذر
-                      </option>
-                      <option value="10">
-                        دی
-                      </option>
-                      <option value="11">
-                        بهمن
-                      </option>
-                      <option value="12">
-                        اسفند
-                      </option>
-                    </select>
-                    <select id="MemberInfoBirthdateYear" style="width:60px;">
-                      <option value="1327">
-                        1304
-                      </option>
-                      <option value="1328">
-                        1305
-                      </option>
-                      <option value="1329">
-                        1306
-                      </option>
-                      <option value="1330">
-                        1307
-                      </option>
-                      <option value="1331">
-                        1308
-                      </option>
-                      <option value="1332">
-                        1309
-                      </option>
-                      <option value="1333">
-                        1310
-                      </option>
-                      <option value="1334">
-                        1311
-                      </option>
-                      <option value="1335">
-                        1312
-                      </option>
-                      <option value="1336">
-                        1313
-                      </option>
-                      <option value="1337">
-                        1314
-                      </option>
-                      <option value="1327">
-                        1315
-                      </option>
-                      <option value="1328">
-                        1316
-                      </option>
-                      <option value="1329">
-                        1317
-                      </option>
-                      <option value="1330">
-                        1318
-                      </option>
-                      <option value="1331">
-                        1319
-                      </option>
-                      <option value="1332">
-                        1320
-                      </option>
-                      <option value="1333">
-                        1321
-                      </option>
-                      <option value="1334">
-                        1322
-                      </option>
-                      <option value="1335">
-                        1323
-                      </option>
-                      <option value="1336">
-                        1324
-                      </option>
-                      <option value="1337">
-                        1325
-                      </option>
-                      <option value="1338">
-                        1326
-                      </option>
-                      <option value="1327">
-                        1327
-                      </option>
-                      <option value="1328">
-                        1328
-                      </option>
-                      <option value="1329">
-                        1329
-                      </option>
-                      <option value="1330">
-                        1330
-                      </option>
-                      <option value="1331">
-                        1331
-                      </option>
-                      <option value="1332">
-                        1332
-                      </option>
-                      <option value="1333">
-                        1333
-                      </option>
-                      <option value="1334">
-                        1334
-                      </option>
-                      <option value="1335">
-                        1335
-                      </option>
-                      <option value="1336">
-                        1336
-                      </option>
-                      <option value="1337">
-                        1337
-                      </option>
-                      <option value="1338">
-                        1338
-                      </option>
-                      <option value="1339">
-                        1339
-                      </option>
-                      <option value="1340">
-                        1340
-                      </option>
-                      <option value="1341">
-                        1341
-                      </option>
-                      <option value="1342">
-                        1342
-                      </option>
-                      <option value="1343">
-                        1343
-                      </option>
-                      <option value="1344">
-                        1344
-                      </option>
-                      <option value="1345">
-                        1345
-                      </option>
-                      <option value="1346">
-                        1346
-                      </option>
-                      <option value="1347">
-                        1347
-                      </option>
-                      <option value="1348">
-                        1348
-                      </option>
-                      <option value="1349">
-                        1349
-                      </option>
-                      <option value="1350">
-                        1350
-                      </option>
-                      <option value="1351">
-                        1351
-                      </option>
-                      <option value="1352">
-                        1352
-                      </option>
-                      <option value="1353">
-                        1353
-                      </option>
-                      <option value="1354">
-                        1354
-                      </option>
-                      <option value="1355">
-                        1355
-                      </option>
-                      <option value="1356">
-                        1356
-                      </option>
-                      <option value="1357">
-                        1357
-                      </option>
-                      <option value="1358">
-                        1358
-                      </option>
-                      <option value="1359">
-                        1359
-                      </option>
-                      <option value="1360">
-                        1360
-                      </option>
-                      <option value="1361">
-                        1361
-                      </option>
-                      <option value="1362">
-                        1362
-                      </option>
-                      <option value="1363">
-                        1363
-                      </option>
-                      <option value="1364">
-                        1364
-                      </option>
-                      <option value="1365">
-                        1365
-                      </option>
-                      <option value="1366">
-                        1366
-                      </option>
-                      <option value="1367">
-                        1367
-                      </option>
-                      <option value="1368">
-                        1368
-                      </option>
-                      <option value="1369">
-                        1369
-                      </option>
-                      <option value="1370">
-                        1370
-                      </option>
-                      <option value="1371">
-                        1371
-                      </option>
-                      <option value="1372">
-                        1372
-                      </option>
-                      <option value="1373">
-                        1373
-                      </option>
-                      <option value="1374">
-                        1374
-                      </option>
-                      <option value="1375">
-                        1375
-                      </option>
-                      <option value="1376">
-                        1376
-                      </option>
-                      <option value="1377">
-                        1377
-                      </option>
-                      <option value="1378">
-                        1378
-                      </option>
-                      <option value="1379">
-                        1379
-                      </option>
-                      <option value="1380">
-                        1380
-                      </option>
-                      <option value="1381">
-                        1381
-                      </option>
-                      <option value="1382">
-                        1382
-                      </option>
-                      <option value="1383">
-                        1383
-                      </option>
-                      <option value="1384">
-                        1384
-                      </option>
-                      <option value="1385">
-                        1385
-                      </option>
-                      <option value="1386">
-                        1386
-                      </option>
-                      <option value="1387">
-                        1387
-                      </option>
-                      <option value="1388">
-                        1388
-                      </option>
-                      <option value="1389">
-                        1389
-                      </option>
-                      <option value="1390">
-                        1390
-                      </option>
-                      <option value="1391">
-                        1391
-                      </option>
-                      
-                    </select>
-                    
-                    
-                  </div>
-                </div>
-
-              </fieldset>
-              
-            </div>
-                              </div>
-                              <div id="fragment-2"  style="width:80%;">
-								<div class="form-horizontal">
-    <fieldset>
-      
-      <div class="control-group" id="MemberInfoJob1">
-        
-        <label class="control-label InputClass" for="MemberInfoJob1Concept" style="float:right;">
-          نوع وابستگی
-        </label>
-        <div class="controls">
-          <select id="MemberInfoJob1Concept">
-            <option id="MemberInfoJob1Concept0" value="0">
-              انتخاب نشده
-            </option>
-            <option id="MemberInfoJob1Concept1" value="1">
-              دانشگاهی
-            </option>
-            <option id="MemberInfoJob1Concept2" value="2">
-              غیر دانشگاهی
-            </option>
-          </select>
-        </div>
-      </div>
-      
-      
-      <div class="control-group" id="MemberInfoJob3">
-        
-        <label class="control-label InputClass" for="MemberInfoJobStatus" style="float:right;">
-          وضعیت کاری
-        </label>
-        <div class="controls">
-          <select id="MemberInfoJobStatus">
-            <option id="MemberInfoJobStatus0" value="0">
-              انتخاب نشده
-            </option>
-            <option id="MemberInfoJobStatus1" value="1">
-              بازنشسته
-            </option>
-            <option id="MemberInfoJobStatus2" value="2">
-              شاغل
-            </option>
-          </select>
-        </div>
-      </div>
-      
-	  
-	<div class="control-group" id="MemberInfoJob4" name="OtherJobs">
-        <label class="control-label InputClass" for="MemberInfoOtherType" style="float:right;">
-          نوع شغل
-        </label>
-        <div class="controls">
-          <select id="MemberInfoOtherType">
-            <option id="MemberInfoOtherType0" value="0">
-              انتخاب نشده
-            </option>
-            <option id="MemberInfoOtherType1" value="1">
-              آزاد
-            </option>
-            <option id="MemberInfoOtherType2" value="2">
-              کارمند
-            </option>
-          </select>
-        </div>
-        <br/>
-	</div>
-	
-	<div class="control-group" id="MemberInfoJob5" name="OtherJobs">
-	 <div class="control-group">
-        <label class="control-label" for="typeahead" style="float:right;">
-			نام شغل
-		</label>
-        <div class="controls">
-          <input type="text" class="span6 typeahead InputClass" id="MemberInfoJobName" data-provide="typeahead">
-        </div>
-      </div>
-	</div>
-	
-	<div class="control-group" id="MemberInfoJob6"  name="OtherJobs">
-		<div class="control-group">
-			<label class="control-label" for="typeahead" style="float:right;">
-				محل خدمت    
-			</label>
-			<div class="controls">
-			  <input type="text" class="span6 typeahead InputClass" id="MemberInfoJobPlace" data-provide="typeahead">
-			</div>
-		</div>
-	</div>
-	
-	  
-      <div class="control-group" id="MemberInfoJob2">
-        
-        <label class="control-label InputClass" for="MemberInfoJob3University" style="float:right;">
-          * دانشگاه
-        </label>
-        <div class="controls">
-          <select id="MemberInfoJob3University">
-            <option id="MemberInfoJob3University0" value="0">
-              انتخاب نشده
-            </option>
-            <option id="MemberInfoJob3University1" value="1">
-              تهران
-            </option>
-            <option id="MemberInfoJob3University2" value="2">
-              سایر دانشگاه ها
-            </option>
-          </select>
-        </div>
-        <br/>
-        
-        <label class="control-label InputClass" for="MemberInfoJob3Types" style="float:right;">
-          * نوع شغل
-        </label>
-        <div class="controls">
-          <select id="MemberInfoJob3Types">
-            <option id="MemberInfoJob3Types0" value="0">
-              انتخاب نشده
-            </option>
-            <option id="MemberInfoJob3Types1" value="1">
-              کارمند
-            </option>
-            <option id="MemberInfoJob3Types2" value="2">
-              هیئت علمی
-            </option>
-          </select>
-        </div>
-        <br/>
-        <label class="control-label InputClass" for="MemberInfoJob3ContractType" style="float:right;">
-          * نوع قرارداد
-        </label>
-        <div class="controls">
-          <select id="MemberInfoJob3ContractType">
-            <option id="MemberInfoJob3ContractType0" value="0">
-              انتخاب نشده
-            </option>
-            <option id="MemberInfoJob3ContractType1" value="1">
-              قراردادی
-            </option>
-            <option id="MemberInfoJob3ContractType2" value="2">
-              رسمی
-            </option>
-          </select>
-        </div>
-        
-        <br/>
-        <div class="control-group" id="MemberInfoEmployeeDate">
-          
-          <label class="control-label" for="ProfileBirthdate" style="float:right;">
-            * تاریخ استخدام 
-          </label>
-          <div class="controls">
-            <select id="MemberInfoEmployeeDateDay" style="width:60px;">
-              <option>
-                1
-              </option>
-              <option>
-                2
-              </option>
-              <option>
-                3
-              </option>
-              <option>
-                4
-              </option>
-              <option>
-                5
-              </option>
-              <option>
-                6
-              </option>
-              <option>
-                7
-              </option>
-              <option>
-                8
-              </option>
-              <option>
-                9
-              </option>
-              <option>
-                10
-              </option>
-              <option>
-                11
-              </option>
-              <option>
-                12
-              </option>
-              <option>
-                13
-              </option>
-              <option>
-                14
-              </option>
-              <option>
-                15
-              </option>
-              <option>
-                16
-              </option>
-              <option>
-                17
-              </option>
-              <option>
-                18
-              </option>
-              <option>
-                19
-              </option>
-              <option>
-                20
-              </option>
-              <option>
-                21
-              </option>
-              <option>
-                22
-              </option>
-              <option>
-                23
-              </option>
-              <option>
-                24
-              </option>
-              <option>
-                25
-              </option>
-              <option>
-                26
-              </option>
-              <option>
-                27
-              </option>
-              <option>
-                28
-              </option>
-              <option>
-                29
-              </option>
-              <option>
-                30
-              </option>
-              <option>
-                31
-              </option>
-            </select>
-            <select id="MemberInfoEmployeeDateMonth" style="width:90px;">
-              <option value="1">
-                فروردین
-              </option>
-              <option value="2">
-                اردیبهشت
-              </option>
-              <option value="3">
-                خرداد
-              </option>
-              <option value="4">
-                تیر
-              </option>
-              <option value="5">
-                مرداد
-              </option>
-              <option value="6">
-                شهریور
-              </option>
-              <option value="7">
-                مهر
-              </option>
-              <option value="8">
-                آبان
-              </option>
-              <option value="9">
-                آذر
-              </option>
-              <option value="10">
-                دی
-              </option>
-              <option value="11">
-                بهمن
-              </option>
-              <option value="12">
-                اسفند
-              </option>
-            </select>
-            <select id="MemberInfoEmployeeDateYear" style="width:90px;">
-              <option value="1327">
-                1304
-              </option>
-              <option value="1328">
-                1305
-              </option>
-              <option value="1329">
-                1306
-              </option>
-              <option value="1330">
-                1307
-              </option>
-              <option value="1331">
-                1308
-              </option>
-              <option value="1332">
-                1309
-              </option>
-              <option value="1333">
-                1310
-              </option>
-              <option value="1334">
-                1311
-              </option>
-              <option value="1335">
-                1312
-              </option>
-              <option value="1336">
-                1313
-              </option>
-              <option value="1337">
-                1314
-              </option>
-              <option value="1327">
-                1315
-              </option>
-              <option value="1328">
-                1316
-              </option>
-              <option value="1329">
-                1317
-              </option>
-              <option value="1330">
-                1318
-              </option>
-              <option value="1331">
-                1319
-              </option>
-              <option value="1332">
-                1320
-              </option>
-              <option value="1333">
-                1321
-              </option>
-              <option value="1334">
-                1322
-              </option>
-              <option value="1335">
-                1323
-              </option>
-              <option value="1336">
-                1324
-              </option>
-              <option value="1337">
-                1325
-              </option>
-              <option value="1338">
-                1326
-              </option>
-              <option value="1327">
-                1327
-              </option>
-              <option value="1328">
-                1328
-              </option>
-              <option value="1329">
-                1329
-              </option>
-              <option value="1330">
-                1330
-              </option>
-              <option value="1331">
-                1331
-              </option>
-              <option value="1332">
-                1332
-              </option>
-              <option value="1333">
-                1333
-              </option>
-              <option value="1334">
-                1334
-              </option>
-              <option value="1335">
-                1335
-              </option>
-              <option value="1336">
-                1336
-              </option>
-              <option value="1337">
-                1337
-              </option>
-              <option value="1338">
-                1338
-              </option>
-              <option value="1339">
-                1339
-              </option>
-              <option value="1340">
-                1340
-              </option>
-              <option value="1341">
-                1341
-              </option>
-              <option value="1342">
-                1342
-              </option>
-              <option value="1343">
-                1343
-              </option>
-              <option value="1344">
-                1344
-              </option>
-              <option value="1345">
-                1345
-              </option>
-              <option value="1346">
-                1346
-              </option>
-              <option value="1347">
-                1347
-              </option>
-              <option value="1348">
-                1348
-              </option>
-              <option value="1349">
-                1349
-              </option>
-              <option value="1350">
-                1350
-              </option>
-              <option value="1351">
-                1351
-              </option>
-              <option value="1352">
-                1352
-              </option>
-              <option value="1353">
-                1353
-              </option>
-              <option value="1354">
-                1354
-              </option>
-              <option value="1355">
-                1355
-              </option>
-              <option value="1356">
-                1356
-              </option>
-              <option value="1357">
-                1357
-              </option>
-              <option value="1358">
-                1358
-              </option>
-              <option value="1359">
-                1359
-              </option>
-              <option value="1360">
-                1360
-              </option>
-              <option value="1361">
-                1361
-              </option>
-              <option value="1362">
-                1362
-              </option>
-              <option value="1363">
-                1363
-              </option>
-              <option value="1364">
-                1364
-              </option>
-              <option value="1365">
-                1365
-              </option>
-              <option value="1366">
-                1366
-              </option>
-              <option value="1367">
-                1367
-              </option>
-              <option value="1368">
-                1368
-              </option>
-              <option value="1369">
-                1369
-              </option>
-              <option value="1370">
-                1370
-              </option>
-              <option value="1371">
-                1371
-              </option>
-              <option value="1372">
-                1372
-              </option>
-              <option value="1373">
-                1373
-              </option>
-              <option value="1374">
-                1374
-              </option>
-              <option value="1375">
-                1375
-              </option>
-              <option value="1376">
-                1376
-              </option>
-              <option value="1377">
-                1377
-              </option>
-              <option value="1378">
-                1378
-              </option>
-              <option value="1379">
-                1379
-              </option>
-              <option value="1380">
-                1380
-              </option>
-              <option value="1381">
-                1381
-              </option>
-              <option value="1382">
-                1382
-              </option>
-              <option value="1383">
-                1383
-              </option>
-              <option value="1384">
-                1384
-              </option>
-              <option value="1385">
-                1385
-              </option>
-              <option value="1386">
-                1386
-              </option>
-              <option value="1387">
-                1387
-              </option>
-              <option value="1388">
-                1388
-              </option>
-              <option value="1389">
-                1389
-              </option>
-              <option value="1390">
-                1390
-              </option>
-              <option value="1391">
-                1391
-              </option>
-              <option value="1392">
-                1392
-              </option>
-              <option value="1393">
-                1393
-              </option>
-              <option value="1394">
-                1394
-              </option>
-              <option value="1395">
-                1395
-              </option>
-              <option value="1396">
-                1396
-              </option>
-              <option value="1397">
-                1397
-              </option>
-              <option value="1398">
-                1398
-              </option>
-              <option value="1399">
-                1399
-              </option>
-              <option value="1400">
-                1400
-              </option>
-              <option value="1401">
-                1401
-              </option>
-              <option value="1402">
-                1402
-              </option>
-              <option value="1403">
-                1403
-              </option>
-              <option value="1404">
-                1404
-              </option>
-              <option value="1405">
-                1405
-              </option>
-              <option value="1406">
-                1406
-              </option>
-              <option value="1407">
-                1407
-              </option>
-              <option value="1408">
-                1408
-              </option>
-              <option value="1409">
-                1409
-              </option>
-              <option value="1410">
-                1410
-              </option>
-              <option value="1411">
-                1411
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-  </div>
-                              </div>
-                              <div id="fragment-3"  style="width:80%;">
-							  
-							   <div class="form-horizontal">
-    <fieldset>
-	  <table style="width:100%;direction:rtl;">
-		<tr>
-			<td style="width:10%">
-				<div class="control-group">
-					<label class="control-label" >
-					 آزاده
-					</label>
-					<div class="controls" >
-					   <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle" id="MemberInfoIsAzadeh">
-					</div>
-				</div>
-			</td>
-			<td align="right" style="width:10%">
-			    <div class="control-group" id="MemberInfoIsargariAzade">
-					<label class="control-label" for="MemberInfoEsratDuration" style="float:right;">
-					  مدت اسارت 
-					</label>
-				</div>
-			</td>
-			<td>
-				<div  class="controls">
-					  <input type="text" class="span8 typeahead InputClass" id="MemberInfoEsratDuration" data-provide="MemberInfoEsratDuration">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:10%">
-				<div class="control-group">
-					<label class="control-label">
-					 جانباز
-					</label>
-					<div class="controls" >
-					   <input  name="isargari"  data-no-uniform="true" type="checkbox" class="iphone-toggle" id="MemberInfoIsJanbaz">
-					</div>
-				</div>
-			</td>
-			<td  align="right" style="width:10%";>
-			      <div class="control-group" id="MemberInfoIsargariJanbaz">
-					<label class="control-label" for="MemberInfoJanbaziPercent" style="float:right;">
-					  درصد جانبازی 
-					</label>
-				  </div>
-			</td>
-			<td>
-				<div class="controls">
-					  <input type="text" class="span8 typeahead InputClass" id="MemberInfoJanbaziPercent" data-provide="MemberInfoJanbaziPercent">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:10%">
-				<div class="control-group">
-					<label class="control-label">
-					 رزمنده
-					</label>
-					<div class="controls" >
-					   <input  name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle" id="MemberInfoIsRazmande">
-					</div>
-				</div>
-			</td>
-			<td  align="right" style="width:10%">
-				<div class="control-group" id="MemberInfoIsargariRazmande">
-					<label class="control-label" for="MemberInfoJebheDuration" style="float:right;">
-					  مدت حضور در جبهه 
-					</label>
-				</div>
-			</td>
-			<td>
-				<div class="controls">
-					  <input type="text" class="span8 typeahead InputClass" id="MemberInfoJebheDuration" data-provide="MemberInfoJebheDuration">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:10%">
-				<div class="control-group">
-					<label class="control-label" >
-					 خانواده ایثارگر
-					</label>
-					<div class="controls" >
-					   <input  name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle" id="MemberInfoIsIsargar">
-					</div>
-				</div>
-			</td>
-			<td style="width:10%">
-				<div class="control-group" id="MemberInfoIsargariIsargarFamily">
-					<label class="control-label InputClass" for="MemberInfoIsargariIsargarFamilyType" style="float:right;">
-					  نسبت با ایثارگر
-					</label>
-				</div>
-			</td>
-			<td>
-				<div>
-					  <select style="width:100%;" id="MemberInfoIsargariIsargarFamilyType">
-						<option id="MemberInfoIsargariIsargarFamilyType0" value="0">
-						  انتخاب نشده
-						</option>
-						<option id="MemberInfoIsargariIsargarFamilyType1" value="1">
-						  فرزند/همسر جانباز
-						</option>
-						<option id="MemberInfoIsargariIsargarFamilyType2" value="2">
-						  فرزند/همسر ازاده
-						</option>
-					  </select>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			
-				<td style="width:10%;text-align:right;">
-				<div class="control-group">
-					<label class="control-label" >
-					خانواده شهید
-					</label>
-					<div class="controls" >
-					   <input  name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle" id="MemberInfoIsFamilyOfShahid">
-					</div>
-				</div>
-			</td>
-			<td>
-			</td>
-			<td>
-			</td>
-		</tr>
-		<tr>
-				<td style="width:10%;text-align:right;">
-				<div class="control-group">
-					<label class="control-label" >
-فرزند شهید					</label>
-					<div class="controls" >
-					   <input  name="isargari"  data-no-uniform="true" type="checkbox" class="iphone-toggle" id="MemberInfoIsChildOfShahid">
-					</div>
-				</div>
-			</td>
-			<td>
-			</td>
-			<td>
-			</td>
-		</tr>
-	  </table>
-	  </fieldset>
-  </div>
-
-        </div>
-                              
-                                <div id="fragment-4"  style="width:80%;">
-                                  <div class="form-horizontal">
-    <fieldset>
-      <div class="control-group" id="MemberInfoEmailGroup">
-        <label class="control-label" for="MemberInfoEmail" style="float:right;">
-          * پست الکترونیکی
-        </label>
-        <div class="controls">
-          <input type="text" class="span6 typeahead InputClass" id="MemberInfoEmail" data-provide="MemberInfoEmail">
-        </div>
-      </div>
-      <div class="control-group" id="MemberInfoMobileGroup">
-        <label class="control-label" for="typeahead" style="float:right;">
-          * تلفن همراه 
-        </label>
-        <div class="controls">
-          <input type="text" class="span6 typeahead InputClass" id="MemberInfoMobile" data-provide="typeahead">
-        </div>
-      </div>
-      <div class="control-group" id="MemberInfoHomePhoneGroup">
-        <label class="control-label" for="MemberInfoHomePhone" style="float:right;">
-          * تلفن منزل 
-        </label>
-        <div class="controls">
-          <input type="text" class="span6 typeahead InputClass" id="MemberInfoHomePhone" data-provide="MemberInfoHomePhone">
-        </div>
-      </div>
-      <div class="control-group" id="MemberInfoWorkPhoneGroup">
-        <label class="control-label" for="MemberInfoWorkPhone" style="float:right;">
-          * تلفن محل کار 
-        </label>
-        <div class="controls">
-          <input type="text" class="span6 typeahead InputClass" id="MemberInfoWorkPhone" data-provide="MemberInfoWorkPhone">
-        </div>
-      </div>
-      
-       <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" onclick="Debug('Save Contact Details'); ">
-                          ذخیره سازی
-                        </button>
-                      </div>
-                      
-    </fieldset>
-  </div>
-                                  </div>
-                                <div id="fragment-5"  style="width:80%;">
-                              <div class="form-horizontal">
-    <fieldset>
-        <label class="control-label" for="MemberInfoChilds" style="float:right;">
-          فرزندان اعضا
-        </label>
-		
-		<div class="datagrid">
-          <table style="width:100%" id="MemberInfoChilds">
-            <thead>
-              <tr>
-                <th>
-                  نام
-                </th>
-                <th>
-                  نام خانوادگی
-                </th>
-                <th>
-                  کد ملی
-                </th>
-                <th>
-                  جنسیت
-                </th>
-                <th>
-                  شماره تماس
-                </th>
-                <th>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-		  </div>
-          <button name="editProfile"  class="btn btn-large btn-primary" onclick="selectedTable = $('#MemberInfoChilds');ShowNewChildForm();">
-            افزودن فرزند
-          </button>
-      <hr/>
-   
-        <label  name="editProfile" class="control-label" for="MemberInfoHamsars" style="float:right;">
-          اطلاعات همسر
-        </label>
-   <div class="datagrid">
-          <table class="table table-bordered table-striped table-condensed" id="MemberInfoHamsars">
-            <thead>
-              <tr>
-                <th>
-                  نام
-                </th>
-                <th>
-                  نام خانوادگی
-                </th>
-                <th>
-                  کد ملی
-                </th>
-                <th>
-                  جنسیت
-                </th>
-                <th>
-                  شماره تماس
-                </th>
-                <th>
-                  شغل                                  
-                </th>
-                <th>
-                  محل خدمت                                  
-                </th>
-                <th>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-		  </div>
-          <button  name="editProfile"  class="btn btn-large btn-warning" onclick="selectedTable = $('#MemberInfoHamsars');ShowNewHamsarForm();">
-            افزودن همسر
-          </button>
-        
-      <hr/>
-      
-     
-        <label class="control-label" for="MemberInfoTakafolEtc" style="float:right;">
-          سایر افراد تحت تکفل                          
-        </label>
-       <div class="datagrid">
-          <table class="table table-bordered table-striped table-condensed" id="MemberInfoTakafolEtc">
-            <thead>
-              <tr>
-                <th>
-                  نام
-                </th>
-                <th>
-                  نام خانوادگی
-                </th>
-                <th>
-                  کد ملی
-                </th>
-                <th>
-                  سن
-                </th>
-                <th>
-                  نسبت                              
-                </th>
-                
-                <th>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-		  </div>
-          <button  name="editProfile"  class="btn btn-large btn-info" onclick="selectedTable = $('#MemberInfoTakafolEtc');ShowNewCausinForm();">
-            افزودن فرد تحت تکفل
-          </button>
-      
-  </div>
-  </fieldset>
-                                
-                            </div>
-                              <div id="fragment-6"  style="width:80%;">
-                              <div class="form-horizontal">
-                              <fieldset>
-                                <label class="control-label" for="MemberInfoPaymentTable" style="float:right;">
-لیست پرداختی ها        </label>
-       <div class="datagrid">
-          <table class="table table-bordered table-striped table-condensed" id="MemberInfoPaymentTable" style="width:100%;">
-            <thead>
-              <tr>
-               <th>
-                  شماره رکورد
-                </th>
-                <th>
-                  شماره فیش
-                </th>
-                <th>
-                 مبلغ پرداختی
-                </th>
-                <th>
-                 تاریخ پرداخت
-                </th>
-                <th>
-                  بانک مبدا
-                </th>
-                <th>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-		  </div>
-          <button  name="editProfile"  class="btn btn-large btn-info" onclick="selectedTable = $('#MemberInfoPaymentTable');ShowNewPaymentForm();">
-           افزودن پرداختی
-          </button>
-          </fieldset>
-  </div>
-  </div>
-
-                        </td>
-                    </tr>
-                </table>
             </td>
         </tr>
-    </tbody>
-  </table>
+        <tr>
+
+            <td id="EditMemberInfoName" style="text-align:center;">
+                --------
+            </td>
+        </tr>
+        <tr>
+            <td id="EditMemberInfoNationalID" style="text-align:center;">
+                ---------
+            </td>
+        </tr>
+        <tr>
+            <td id="EditMemberInfoPoint" style="text-align:center;">
+                --------
+            </td>
+        </tr>
+        <tr>
+            <td id="EditMemberInfoTotalPayment" style="text-align:center;">
+                ------------
+            </td>
+        </tr>
+        <tr>
+            <td id="MemberInfoActivity" style="text-align:center;">
+
+            </td>
+        </tr>
+        <tr>
+            <td id="MemberInfoRank" style="text-align:center;font-style:bold;">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <button name="editProfile" style="width:100%" class="btn btn-small btn-success"
+                                    onclick="SaveProfile();" style="font-size:14px;">
+                                ثیت
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <button style="width:100%" class="btn btn-small btn-warning"
+                                    onclick="LoadUserDetails($('#MemberInfoNationalityCode').val());"
+                                    style="font-size:14px;">
+                                بازیابی
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <button name="activeProfile" style="width:100%" class="btn btn-small btn-info"
+                                    onclick="ActivateMember();" style="font-size:14px;">
+                                فعال
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <button name="activeProfile" onclick="DeActivateMember();" style="width:100%"
+                                    class="btn btn-small btn-error" data-rel="popover"
+                                    data-content="از این دکمه برای غیر فعال سازی کاربر استفاده میشود."
+                                    title="غیر فعال کردن" style="font-size:14px;">
+                                غیر فعال
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <button name="activeProfile" style="width:100%" class="btn btn-small btn"
+                                    onclick="MakeUserActive();" style="font-size:12px;">
+                                ارسال پیامک
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</td>
+<td width="80%">
+<table style="width:100%">
+<tr>
+<td style="width:100%">
+<div id="tabs" style="width:100%;font-family:Tahoma, Geneva, sans-serif;">
+<ul>
+    <li><a href="#fragment-1"><span>مشخصات فردی</span></a></li>
+    <li><a href="#fragment-2"><span>اطلاعات شغلی</span></a></li>
+    <li><a href="#fragment-3"><span>اطلاعات ایثارگری</span></a></li>
+    <li><a href="#fragment-4"><span>اطلاعات تماس</span></a></li>
+    <li><a href="#fragment-5"><span>افراد تحت تکفل</span></a></li>
+    <li><a href="#fragment-6"><span>پرداخت</span></a></li>
+</ul>
+<div id="fragment-1" style="width:80%;">
+<div class="form-horizontal">
+<fieldset>
+<div class="control-group" id="EditMemberInfoFirstName">
+    <label class="control-label" for="typeahead" style="float:right;">
+        * نام
+    </label>
+
+    <div class="controls">
+        <input type="text" class="span6 typeahead InputClass" id="MemberInfoFirstName" data-provide="typeahead">
+    </div>
+</div>
+<div class="control-group" id="EditMemberInfoLastName">
+    <label class="control-label" for="typeahead" style="float:right;">
+        * نام خانوادگی
+    </label>
+
+    <div class="controls">
+        <input type="text" class="span6 typeahead InputClass" id="MemberInfoLastName" data-provide="typeahead">
+    </div>
+</div>
+
+<div class="control-group" id="EditMemberInfoGenderContol">
+    <label class="control-label InputClass" for="EditMemberInfoGender" style="float:right;">
+        * جنسیت
+    </label>
+
+    <div class="controls">
+        <select id="EditMemberInfoGender">
+            <option id="EditMemberInfoGender0" value="0">
+                انتخاب نشده
+            </option>
+            <option id="EditMemberInfoGender1" value="1">
+                مرد
+            </option>
+            <option id="EditMemberInfoGender2" value="2">
+                زن
+            </option>
+        </select>
+    </div>
+</div>
+<div class="control-group" id="EditMemberSelectCityGroup">
+    <label class="control-label InputClass" for="EditMemberInfoCity" style="float:right;">
+        * شهر
+    </label>
+
+    <div class="controls">
+        <select id="EditMemberInfoCity">
+            <option id="EditMemberInfoCity0" value="35">
+                انتخاب نشده
+            </option>
+            <option id="EditMemberInfoCity1" value="1">
+                تهران
+            </option>
+            <option id="EditMemberInfoCity2" value="2">
+                اصفهان
+            </option>
+            <option id="EditMemberInfoCity3" value="3">
+                مشهد
+            </option>
+        </select>
+    </div>
+</div>
+
+<div class="control-group" id="MemberInfoDegreeGroup">
+    <label class="control-label InputClass" for="MemberInfoDegree" style="float:right;">
+        * سطح تحصیلات
+    </label>
+
+    <div class="controls">
+        <select id="MemberInfoDegree">
+            <option id="MemberInfoDegree0" value="7">
+                انتخاب نشده
+            </option>
+            <option id="MemberInfoDegree1" value="1">
+                دیپلم
+            </option>
+            <option id="MemberInfoDegree2" value="2">
+                فوق دیپلم
+            </option>
+            <option id="MemberInfoDegree3" value="3">
+                کارشناسی
+            </option>
+            <option id="MemberInfoDegree4" value="4">
+                کارشناسی ارشد
+            </option>
+            <option id="MemberInfoDegree5" value="5">
+                دکترا
+            </option>
+            <option id="MemberInfoDegree6" value="6">
+                فوق دکترا
+            </option>
+        </select>
+    </div>
+</div>
+
+
+<div class="control-group" id="MemberInfoNationalityCodeGroup">
+    <label class="control-label" for="MemberInfoInternationalCode" style="float:right;">
+        * کدملی
+    </label>
+
+    <div class="controls">
+        <input disabled type="text" class="span6 typeahead InputClass" id="MemberInfoInternationalCode"
+               data-provide="MemberInfoInternationalCode">
+    </div>
+</div>
+
+<div class="control-group" id="MemberInfoShenasnameGroup">
+    <label class="control-label" for="MemberInfoShenasname" style="float:right;">
+        * شماره شناسنامه
+    </label>
+
+    <div class="controls">
+        <input type="text" class="span6 typeahead InputClass" id="MemberInfoShenasname"
+               data-provide="MemberInfoShenasname">
+    </div>
+</div>
+
+<div class="control-group" id="MemberInfoShenasnamePlaceGroup">
+    <label class="control-label" for="MemberInfoShenasnamePlace" style="float:right;">
+        * محل صدور شناسنامه
+    </label>
+
+    <div class="controls">
+        <input type="text" class="span6 typeahead InputClass" id="MemberInfoShenasnamePlace"
+               data-provide="MemberInfoShenasnamePlace">
+    </div>
+</div>
+
+
+<div class="control-group" id="MemberInfoPersonIDGroup">
+    <label class="control-label" for="MemberInfoPersonID" style="float:right;">
+        * شماره پرسنلی
+    </label>
+
+    <div class="controls">
+        <input type="text" class="span6 typeahead InputClass" id="MemberInfoPersonID" data-provide="MemberInfoPersonID">
+    </div>
+</div>
+
+
+<div class="control-group">
+<label class="control-label" for="MemberInfoBirthdate" style="float:right;">
+    * تولد
+</label>
+
+<div class="controls">
+<select id="MemberInfoBirthdateDay" style="width:60px;">
+    <option>
+        1
+    </option>
+    <option>
+        2
+    </option>
+    <option>
+        3
+    </option>
+    <option>
+        4
+    </option>
+    <option>
+        5
+    </option>
+    <option>
+        6
+    </option>
+    <option>
+        7
+    </option>
+    <option>
+        8
+    </option>
+    <option>
+        9
+    </option>
+    <option>
+        10
+    </option>
+    <option>
+        11
+    </option>
+    <option>
+        12
+    </option>
+    <option>
+        13
+    </option>
+    <option>
+        14
+    </option>
+    <option>
+        15
+    </option>
+    <option>
+        16
+    </option>
+    <option>
+        17
+    </option>
+    <option>
+        18
+    </option>
+    <option>
+        19
+    </option>
+    <option>
+        20
+    </option>
+    <option>
+        21
+    </option>
+    <option>
+        22
+    </option>
+    <option>
+        23
+    </option>
+    <option>
+        24
+    </option>
+    <option>
+        25
+    </option>
+    <option>
+        26
+    </option>
+    <option>
+        27
+    </option>
+    <option>
+        28
+    </option>
+    <option>
+        29
+    </option>
+    <option>
+        30
+    </option>
+    <option>
+        31
+    </option>
+</select>
+<select id="MemberInfoBirthdateMonth" style="width:90px;">
+    <option value="1">
+        فروردین
+    </option>
+    <option value="2">
+        اردیبهشت
+    </option>
+    <option value="3">
+        خرداد
+    </option>
+    <option value="4">
+        تیر
+    </option>
+    <option value="5">
+        مرداد
+    </option>
+    <option value="6">
+        شهریور
+    </option>
+    <option value="7">
+        مهر
+    </option>
+    <option value="8">
+        آبان
+    </option>
+    <option value="9">
+        آذر
+    </option>
+    <option value="10">
+        دی
+    </option>
+    <option value="11">
+        بهمن
+    </option>
+    <option value="12">
+        اسفند
+    </option>
+</select>
+<select id="MemberInfoBirthdateYear" style="width:60px;">
+<option value="1327">
+    1304
+</option>
+<option value="1328">
+    1305
+</option>
+<option value="1329">
+    1306
+</option>
+<option value="1330">
+    1307
+</option>
+<option value="1331">
+    1308
+</option>
+<option value="1332">
+    1309
+</option>
+<option value="1333">
+    1310
+</option>
+<option value="1334">
+    1311
+</option>
+<option value="1335">
+    1312
+</option>
+<option value="1336">
+    1313
+</option>
+<option value="1337">
+    1314
+</option>
+<option value="1327">
+    1315
+</option>
+<option value="1328">
+    1316
+</option>
+<option value="1329">
+    1317
+</option>
+<option value="1330">
+    1318
+</option>
+<option value="1331">
+    1319
+</option>
+<option value="1332">
+    1320
+</option>
+<option value="1333">
+    1321
+</option>
+<option value="1334">
+    1322
+</option>
+<option value="1335">
+    1323
+</option>
+<option value="1336">
+    1324
+</option>
+<option value="1337">
+    1325
+</option>
+<option value="1338">
+    1326
+</option>
+<option value="1327">
+    1327
+</option>
+<option value="1328">
+    1328
+</option>
+<option value="1329">
+    1329
+</option>
+<option value="1330">
+    1330
+</option>
+<option value="1331">
+    1331
+</option>
+<option value="1332">
+    1332
+</option>
+<option value="1333">
+    1333
+</option>
+<option value="1334">
+    1334
+</option>
+<option value="1335">
+    1335
+</option>
+<option value="1336">
+    1336
+</option>
+<option value="1337">
+    1337
+</option>
+<option value="1338">
+    1338
+</option>
+<option value="1339">
+    1339
+</option>
+<option value="1340">
+    1340
+</option>
+<option value="1341">
+    1341
+</option>
+<option value="1342">
+    1342
+</option>
+<option value="1343">
+    1343
+</option>
+<option value="1344">
+    1344
+</option>
+<option value="1345">
+    1345
+</option>
+<option value="1346">
+    1346
+</option>
+<option value="1347">
+    1347
+</option>
+<option value="1348">
+    1348
+</option>
+<option value="1349">
+    1349
+</option>
+<option value="1350">
+    1350
+</option>
+<option value="1351">
+    1351
+</option>
+<option value="1352">
+    1352
+</option>
+<option value="1353">
+    1353
+</option>
+<option value="1354">
+    1354
+</option>
+<option value="1355">
+    1355
+</option>
+<option value="1356">
+    1356
+</option>
+<option value="1357">
+    1357
+</option>
+<option value="1358">
+    1358
+</option>
+<option value="1359">
+    1359
+</option>
+<option value="1360">
+    1360
+</option>
+<option value="1361">
+    1361
+</option>
+<option value="1362">
+    1362
+</option>
+<option value="1363">
+    1363
+</option>
+<option value="1364">
+    1364
+</option>
+<option value="1365">
+    1365
+</option>
+<option value="1366">
+    1366
+</option>
+<option value="1367">
+    1367
+</option>
+<option value="1368">
+    1368
+</option>
+<option value="1369">
+    1369
+</option>
+<option value="1370">
+    1370
+</option>
+<option value="1371">
+    1371
+</option>
+<option value="1372">
+    1372
+</option>
+<option value="1373">
+    1373
+</option>
+<option value="1374">
+    1374
+</option>
+<option value="1375">
+    1375
+</option>
+<option value="1376">
+    1376
+</option>
+<option value="1377">
+    1377
+</option>
+<option value="1378">
+    1378
+</option>
+<option value="1379">
+    1379
+</option>
+<option value="1380">
+    1380
+</option>
+<option value="1381">
+    1381
+</option>
+<option value="1382">
+    1382
+</option>
+<option value="1383">
+    1383
+</option>
+<option value="1384">
+    1384
+</option>
+<option value="1385">
+    1385
+</option>
+<option value="1386">
+    1386
+</option>
+<option value="1387">
+    1387
+</option>
+<option value="1388">
+    1388
+</option>
+<option value="1389">
+    1389
+</option>
+<option value="1390">
+    1390
+</option>
+<option value="1391">
+    1391
+</option>
+
+</select>
+
+
+</div>
+</div>
+
+</fieldset>
+
+</div>
+</div>
+<div id="fragment-2" style="width:80%;">
+<div class="form-horizontal">
+<fieldset>
+
+<div class="control-group" id="MemberInfoJob1">
+
+    <label class="control-label InputClass" for="MemberInfoJob1Concept" style="float:right;">
+        نوع وابستگی
+    </label>
+
+    <div class="controls">
+        <select id="MemberInfoJob1Concept">
+            <option id="MemberInfoJob1Concept0" value="0">
+                انتخاب نشده
+            </option>
+            <option id="MemberInfoJob1Concept1" value="1">
+                دانشگاهی
+            </option>
+            <option id="MemberInfoJob1Concept2" value="2">
+                غیر دانشگاهی
+            </option>
+        </select>
+    </div>
+</div>
+
+
+<div class="control-group" id="MemberInfoJob3">
+
+    <label class="control-label InputClass" for="MemberInfoJobStatus" style="float:right;">
+        وضعیت کاری
+    </label>
+
+    <div class="controls">
+        <select id="MemberInfoJobStatus">
+            <option id="MemberInfoJobStatus0" value="0">
+                انتخاب نشده
+            </option>
+            <option id="MemberInfoJobStatus1" value="1">
+                بازنشسته
+            </option>
+            <option id="MemberInfoJobStatus2" value="2">
+                شاغل
+            </option>
+        </select>
+    </div>
+</div>
+
+
+<div class="control-group" id="MemberInfoJob4" name="OtherJobs">
+    <label class="control-label InputClass" for="MemberInfoOtherType" style="float:right;">
+        نوع شغل
+    </label>
+
+    <div class="controls">
+        <select id="MemberInfoOtherType">
+            <option id="MemberInfoOtherType0" value="0">
+                انتخاب نشده
+            </option>
+            <option id="MemberInfoOtherType1" value="1">
+                آزاد
+            </option>
+            <option id="MemberInfoOtherType2" value="2">
+                کارمند
+            </option>
+        </select>
+    </div>
+    <br/>
+</div>
+
+<div class="control-group" id="MemberInfoJob5" name="OtherJobs">
+    <div class="control-group">
+        <label class="control-label" for="typeahead" style="float:right;">
+            نام شغل
+        </label>
+
+        <div class="controls">
+            <input type="text" class="span6 typeahead InputClass" id="MemberInfoJobName" data-provide="typeahead">
+        </div>
+    </div>
+</div>
+
+<div class="control-group" id="MemberInfoJob6" name="OtherJobs">
+    <div class="control-group">
+        <label class="control-label" for="typeahead" style="float:right;">
+            محل خدمت
+        </label>
+
+        <div class="controls">
+            <input type="text" class="span6 typeahead InputClass" id="MemberInfoJobPlace" data-provide="typeahead">
+        </div>
+    </div>
+</div>
+
+
+<div class="control-group" id="MemberInfoJob2">
+
+<label class="control-label InputClass" for="MemberInfoJob3University" style="float:right;">
+    * دانشگاه
+</label>
+
+<div class="controls">
+    <select id="MemberInfoJob3University">
+        <option id="MemberInfoJob3University0" value="0">
+            انتخاب نشده
+        </option>
+        <option id="MemberInfoJob3University1" value="1">
+            تهران
+        </option>
+        <option id="MemberInfoJob3University2" value="2">
+            سایر دانشگاه ها
+        </option>
+    </select>
+</div>
+<br/>
+
+<label class="control-label InputClass" for="MemberInfoJob3Types" style="float:right;">
+    * نوع شغل
+</label>
+
+<div class="controls">
+    <select id="MemberInfoJob3Types">
+        <option id="MemberInfoJob3Types0" value="0">
+            انتخاب نشده
+        </option>
+        <option id="MemberInfoJob3Types1" value="1">
+            کارمند
+        </option>
+        <option id="MemberInfoJob3Types2" value="2">
+            هیئت علمی
+        </option>
+    </select>
+</div>
+<br/>
+<label class="control-label InputClass" for="MemberInfoJob3ContractType" style="float:right;">
+    * نوع قرارداد
+</label>
+
+<div class="controls">
+    <select id="MemberInfoJob3ContractType">
+        <option id="MemberInfoJob3ContractType0" value="0">
+            انتخاب نشده
+        </option>
+        <option id="MemberInfoJob3ContractType1" value="1">
+            قراردادی
+        </option>
+        <option id="MemberInfoJob3ContractType2" value="2">
+            رسمی
+        </option>
+    </select>
+</div>
+
+<br/>
+
+<div class="control-group" id="MemberInfoEmployeeDate">
+
+<label class="control-label" for="ProfileBirthdate" style="float:right;">
+    * تاریخ استخدام
+</label>
+
+<div class="controls">
+<select id="MemberInfoEmployeeDateDay" style="width:60px;">
+    <option>
+        1
+    </option>
+    <option>
+        2
+    </option>
+    <option>
+        3
+    </option>
+    <option>
+        4
+    </option>
+    <option>
+        5
+    </option>
+    <option>
+        6
+    </option>
+    <option>
+        7
+    </option>
+    <option>
+        8
+    </option>
+    <option>
+        9
+    </option>
+    <option>
+        10
+    </option>
+    <option>
+        11
+    </option>
+    <option>
+        12
+    </option>
+    <option>
+        13
+    </option>
+    <option>
+        14
+    </option>
+    <option>
+        15
+    </option>
+    <option>
+        16
+    </option>
+    <option>
+        17
+    </option>
+    <option>
+        18
+    </option>
+    <option>
+        19
+    </option>
+    <option>
+        20
+    </option>
+    <option>
+        21
+    </option>
+    <option>
+        22
+    </option>
+    <option>
+        23
+    </option>
+    <option>
+        24
+    </option>
+    <option>
+        25
+    </option>
+    <option>
+        26
+    </option>
+    <option>
+        27
+    </option>
+    <option>
+        28
+    </option>
+    <option>
+        29
+    </option>
+    <option>
+        30
+    </option>
+    <option>
+        31
+    </option>
+</select>
+<select id="MemberInfoEmployeeDateMonth" style="width:90px;">
+    <option value="1">
+        فروردین
+    </option>
+    <option value="2">
+        اردیبهشت
+    </option>
+    <option value="3">
+        خرداد
+    </option>
+    <option value="4">
+        تیر
+    </option>
+    <option value="5">
+        مرداد
+    </option>
+    <option value="6">
+        شهریور
+    </option>
+    <option value="7">
+        مهر
+    </option>
+    <option value="8">
+        آبان
+    </option>
+    <option value="9">
+        آذر
+    </option>
+    <option value="10">
+        دی
+    </option>
+    <option value="11">
+        بهمن
+    </option>
+    <option value="12">
+        اسفند
+    </option>
+</select>
+<select id="MemberInfoEmployeeDateYear" style="width:90px;">
+<option value="1327">
+    1304
+</option>
+<option value="1328">
+    1305
+</option>
+<option value="1329">
+    1306
+</option>
+<option value="1330">
+    1307
+</option>
+<option value="1331">
+    1308
+</option>
+<option value="1332">
+    1309
+</option>
+<option value="1333">
+    1310
+</option>
+<option value="1334">
+    1311
+</option>
+<option value="1335">
+    1312
+</option>
+<option value="1336">
+    1313
+</option>
+<option value="1337">
+    1314
+</option>
+<option value="1327">
+    1315
+</option>
+<option value="1328">
+    1316
+</option>
+<option value="1329">
+    1317
+</option>
+<option value="1330">
+    1318
+</option>
+<option value="1331">
+    1319
+</option>
+<option value="1332">
+    1320
+</option>
+<option value="1333">
+    1321
+</option>
+<option value="1334">
+    1322
+</option>
+<option value="1335">
+    1323
+</option>
+<option value="1336">
+    1324
+</option>
+<option value="1337">
+    1325
+</option>
+<option value="1338">
+    1326
+</option>
+<option value="1327">
+    1327
+</option>
+<option value="1328">
+    1328
+</option>
+<option value="1329">
+    1329
+</option>
+<option value="1330">
+    1330
+</option>
+<option value="1331">
+    1331
+</option>
+<option value="1332">
+    1332
+</option>
+<option value="1333">
+    1333
+</option>
+<option value="1334">
+    1334
+</option>
+<option value="1335">
+    1335
+</option>
+<option value="1336">
+    1336
+</option>
+<option value="1337">
+    1337
+</option>
+<option value="1338">
+    1338
+</option>
+<option value="1339">
+    1339
+</option>
+<option value="1340">
+    1340
+</option>
+<option value="1341">
+    1341
+</option>
+<option value="1342">
+    1342
+</option>
+<option value="1343">
+    1343
+</option>
+<option value="1344">
+    1344
+</option>
+<option value="1345">
+    1345
+</option>
+<option value="1346">
+    1346
+</option>
+<option value="1347">
+    1347
+</option>
+<option value="1348">
+    1348
+</option>
+<option value="1349">
+    1349
+</option>
+<option value="1350">
+    1350
+</option>
+<option value="1351">
+    1351
+</option>
+<option value="1352">
+    1352
+</option>
+<option value="1353">
+    1353
+</option>
+<option value="1354">
+    1354
+</option>
+<option value="1355">
+    1355
+</option>
+<option value="1356">
+    1356
+</option>
+<option value="1357">
+    1357
+</option>
+<option value="1358">
+    1358
+</option>
+<option value="1359">
+    1359
+</option>
+<option value="1360">
+    1360
+</option>
+<option value="1361">
+    1361
+</option>
+<option value="1362">
+    1362
+</option>
+<option value="1363">
+    1363
+</option>
+<option value="1364">
+    1364
+</option>
+<option value="1365">
+    1365
+</option>
+<option value="1366">
+    1366
+</option>
+<option value="1367">
+    1367
+</option>
+<option value="1368">
+    1368
+</option>
+<option value="1369">
+    1369
+</option>
+<option value="1370">
+    1370
+</option>
+<option value="1371">
+    1371
+</option>
+<option value="1372">
+    1372
+</option>
+<option value="1373">
+    1373
+</option>
+<option value="1374">
+    1374
+</option>
+<option value="1375">
+    1375
+</option>
+<option value="1376">
+    1376
+</option>
+<option value="1377">
+    1377
+</option>
+<option value="1378">
+    1378
+</option>
+<option value="1379">
+    1379
+</option>
+<option value="1380">
+    1380
+</option>
+<option value="1381">
+    1381
+</option>
+<option value="1382">
+    1382
+</option>
+<option value="1383">
+    1383
+</option>
+<option value="1384">
+    1384
+</option>
+<option value="1385">
+    1385
+</option>
+<option value="1386">
+    1386
+</option>
+<option value="1387">
+    1387
+</option>
+<option value="1388">
+    1388
+</option>
+<option value="1389">
+    1389
+</option>
+<option value="1390">
+    1390
+</option>
+<option value="1391">
+    1391
+</option>
+<option value="1392">
+    1392
+</option>
+<option value="1393">
+    1393
+</option>
+<option value="1394">
+    1394
+</option>
+<option value="1395">
+    1395
+</option>
+<option value="1396">
+    1396
+</option>
+<option value="1397">
+    1397
+</option>
+<option value="1398">
+    1398
+</option>
+<option value="1399">
+    1399
+</option>
+<option value="1400">
+    1400
+</option>
+<option value="1401">
+    1401
+</option>
+<option value="1402">
+    1402
+</option>
+<option value="1403">
+    1403
+</option>
+<option value="1404">
+    1404
+</option>
+<option value="1405">
+    1405
+</option>
+<option value="1406">
+    1406
+</option>
+<option value="1407">
+    1407
+</option>
+<option value="1408">
+    1408
+</option>
+<option value="1409">
+    1409
+</option>
+<option value="1410">
+    1410
+</option>
+<option value="1411">
+    1411
+</option>
+</select>
+</div>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+<div id="fragment-3" style="width:80%;">
+
+    <div class="form-horizontal">
+        <fieldset>
+            <table style="width:100%;direction:rtl;">
+                <tr>
+                    <td style="width:10%">
+                        <div class="control-group">
+                            <label class="control-label">
+                                آزاده
+                            </label>
+
+                            <div class="controls">
+                                <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle"
+                                       id="MemberInfoIsAzadeh">
+                            </div>
+                        </div>
+                    </td>
+                    <td align="right" style="width:10%">
+                        <div class="control-group" id="MemberInfoIsargariAzade">
+                            <label class="control-label" for="MemberInfoEsratDuration" style="float:right;">
+                                مدت اسارت
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="controls">
+                            <input type="text" class="span8 typeahead InputClass" id="MemberInfoEsratDuration"
+                                   data-provide="MemberInfoEsratDuration">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:10%">
+                        <div class="control-group">
+                            <label class="control-label">
+                                جانباز
+                            </label>
+
+                            <div class="controls">
+                                <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle"
+                                       id="MemberInfoIsJanbaz">
+                            </div>
+                        </div>
+                    </td>
+                    <td align="right" style="width:10%"
+                    ;>
+                    <div class="control-group" id="MemberInfoIsargariJanbaz">
+                        <label class="control-label" for="MemberInfoJanbaziPercent" style="float:right;">
+                            درصد جانبازی
+                        </label>
+                    </div>
+                    </td>
+                    <td>
+                        <div class="controls">
+                            <input type="text" class="span8 typeahead InputClass" id="MemberInfoJanbaziPercent"
+                                   data-provide="MemberInfoJanbaziPercent">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:10%">
+                        <div class="control-group">
+                            <label class="control-label">
+                                رزمنده
+                            </label>
+
+                            <div class="controls">
+                                <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle"
+                                       id="MemberInfoIsRazmande">
+                            </div>
+                        </div>
+                    </td>
+                    <td align="right" style="width:10%">
+                        <div class="control-group" id="MemberInfoIsargariRazmande">
+                            <label class="control-label" for="MemberInfoJebheDuration" style="float:right;">
+                                مدت حضور در جبهه
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="controls">
+                            <input type="text" class="span8 typeahead InputClass" id="MemberInfoJebheDuration"
+                                   data-provide="MemberInfoJebheDuration">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:10%">
+                        <div class="control-group">
+                            <label class="control-label">
+                                خانواده ایثارگر
+                            </label>
+
+                            <div class="controls">
+                                <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle"
+                                       id="MemberInfoIsIsargar">
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width:10%">
+                        <div class="control-group" id="MemberInfoIsargariIsargarFamily">
+                            <label class="control-label InputClass" for="MemberInfoIsargariIsargarFamilyType"
+                                   style="float:right;">
+                                نسبت با ایثارگر
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <select style="width:100%;" id="MemberInfoIsargariIsargarFamilyType">
+                                <option id="MemberInfoIsargariIsargarFamilyType0" value="0">
+                                    انتخاب نشده
+                                </option>
+                                <option id="MemberInfoIsargariIsargarFamilyType1" value="1">
+                                    فرزند/همسر جانباز
+                                </option>
+                                <option id="MemberInfoIsargariIsargarFamilyType2" value="2">
+                                    فرزند/همسر ازاده
+                                </option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td style="width:10%;text-align:right;">
+                        <div class="control-group">
+                            <label class="control-label">
+                                خانواده شهید
+                            </label>
+
+                            <div class="controls">
+                                <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle"
+                                       id="MemberInfoIsFamilyOfShahid">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:10%;text-align:right;">
+                        <div class="control-group">
+                            <label class="control-label">
+                                فرزند شهید </label>
+
+                            <div class="controls">
+                                <input name="isargari" data-no-uniform="true" type="checkbox" class="iphone-toggle"
+                                       id="MemberInfoIsChildOfShahid">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+</div>
+
+<div id="fragment-4" style="width:80%;">
+    <div class="form-horizontal">
+        <fieldset>
+            <div class="control-group" id="MemberInfoEmailGroup">
+                <label class="control-label" for="MemberInfoEmail" style="float:right;">
+                    * پست الکترونیکی
+                </label>
+
+                <div class="controls">
+                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoEmail"
+                           data-provide="MemberInfoEmail">
+                </div>
+            </div>
+            <div class="control-group" id="MemberInfoMobileGroup">
+                <label class="control-label" for="typeahead" style="float:right;">
+                    * تلفن همراه
+                </label>
+
+                <div class="controls">
+                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoMobile"
+                           data-provide="typeahead">
+                </div>
+            </div>
+            <div class="control-group" id="MemberInfoHomePhoneGroup">
+                <label class="control-label" for="MemberInfoHomePhone" style="float:right;">
+                    * تلفن منزل
+                </label>
+
+                <div class="controls">
+                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoHomePhone"
+                           data-provide="MemberInfoHomePhone">
+                </div>
+            </div>
+            <div class="control-group" id="MemberInfoWorkPhoneGroup">
+                <label class="control-label" for="MemberInfoWorkPhone" style="float:right;">
+                    * تلفن محل کار
+                </label>
+
+                <div class="controls">
+                    <input type="text" class="span6 typeahead InputClass" id="MemberInfoWorkPhone"
+                           data-provide="MemberInfoWorkPhone">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" onclick="Debug('Save Contact Details'); ">
+                    ذخیره سازی
+                </button>
+            </div>
+
+        </fieldset>
+    </div>
+</div>
+<div id="fragment-5" style="width:80%;">
+    <div class="form-horizontal">
+        <fieldset>
+            <label class="control-label" for="MemberInfoChilds" style="float:right;">
+                فرزندان اعضا
+            </label>
+
+            <div class="datagrid">
+                <table style="width:100%" id="MemberInfoChilds">
+                    <thead>
+                    <tr>
+                        <th>
+                            نام
+                        </th>
+                        <th>
+                            نام خانوادگی
+                        </th>
+                        <th>
+                            کد ملی
+                        </th>
+                        <th>
+                            جنسیت
+                        </th>
+                        <th>
+                            شماره تماس
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <button name="editProfile" class="btn btn-large btn-primary"
+                    onclick="selectedTable = $('#MemberInfoChilds');ShowNewChildForm();">
+                افزودن فرزند
+            </button>
+            <hr/>
+
+            <label name="editProfile" class="control-label" for="MemberInfoHamsars" style="float:right;">
+                اطلاعات همسر
+            </label>
+
+            <div class="datagrid">
+                <table class="table table-bordered table-striped table-condensed" id="MemberInfoHamsars">
+                    <thead>
+                    <tr>
+                        <th>
+                            نام
+                        </th>
+                        <th>
+                            نام خانوادگی
+                        </th>
+                        <th>
+                            کد ملی
+                        </th>
+                        <th>
+                            جنسیت
+                        </th>
+                        <th>
+                            شماره تماس
+                        </th>
+                        <th>
+                            شغل
+                        </th>
+                        <th>
+                            محل خدمت
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <button name="editProfile" class="btn btn-large btn-warning"
+                    onclick="selectedTable = $('#MemberInfoHamsars');ShowNewHamsarForm();">
+                افزودن همسر
+            </button>
+
+            <hr/>
+
+
+            <label class="control-label" for="MemberInfoTakafolEtc" style="float:right;">
+                سایر افراد تحت تکفل
+            </label>
+
+            <div class="datagrid">
+                <table class="table table-bordered table-striped table-condensed" id="MemberInfoTakafolEtc">
+                    <thead>
+                    <tr>
+                        <th>
+                            نام
+                        </th>
+                        <th>
+                            نام خانوادگی
+                        </th>
+                        <th>
+                            کد ملی
+                        </th>
+                        <th>
+                            سن
+                        </th>
+                        <th>
+                            نسبت
+                        </th>
+
+                        <th>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <button name="editProfile" class="btn btn-large btn-info"
+                    onclick="selectedTable = $('#MemberInfoTakafolEtc');ShowNewCausinForm();">
+                افزودن فرد تحت تکفل
+            </button>
+
+    </div>
+    </fieldset>
+
+</div>
+<div id="fragment-6" style="width:80%;">
+    <div class="form-horizontal">
+        <fieldset>
+            <label class="control-label" for="MemberInfoPaymentTable" style="float:right;">
+                لیست پرداختی ها </label>
+
+            <div class="datagrid">
+                <table class="table table-bordered table-striped table-condensed" id="MemberInfoPaymentTable"
+                       style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th>
+                            شماره رکورد
+                        </th>
+                        <th>
+                            شماره فیش
+                        </th>
+                        <th>
+                            مبلغ پرداختی
+                        </th>
+                        <th>
+                            تاریخ پرداخت
+                        </th>
+                        <th>
+                            بانک مبدا
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <button name="editProfile" class="btn btn-large btn-info"
+                    onclick="selectedTable = $('#MemberInfoPaymentTable');ShowNewPaymentForm();">
+                افزودن پرداختی
+            </button>
+        </fieldset>
+    </div>
+</div>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 </div>

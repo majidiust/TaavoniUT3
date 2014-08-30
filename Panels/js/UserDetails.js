@@ -7,7 +7,7 @@ function Debug(message)
 	console.log(message);
 }
 
-function LoadUserDetails(nationalityCode)
+function LoadUserDetails(nationalityCode, user)
 {
 	selectedMember = nationalityCode;
 	ClearRelationalTable();
@@ -18,6 +18,7 @@ function LoadUserDetails(nationalityCode)
 	LoadFamilyInfo(nationalityCode);
 	LoadPayments(nationalityCode);
     LoadTotalPayment(nationalityCode);
+    LoadUserRank(user);
 }
 
 function LoadUserDetailsWithoutPayment(nationalityCode)
@@ -696,4 +697,8 @@ function DeActivateMember()
 			},
 		async : true
 	 });
+}
+
+function LoadUserRank(user){
+    $("#MemberInfoRank").html('<center>' + user.Rank + '</center>');
 }
