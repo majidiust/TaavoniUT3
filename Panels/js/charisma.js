@@ -832,7 +832,7 @@ function GetListOfMembers() {
 		    "sTitle": "وضعیت",
 		    "fnRender": function (obj) {
 		        var sReturn = obj.aData[obj.iDataColumn];
-		        Debug(sReturn);
+		        Debug("isApproved : " + sReturn);
 		        if (sReturn == true) {
 		            sReturn = '<center><div class="label label-success">تایید شده</div></center>';
 		        } else
