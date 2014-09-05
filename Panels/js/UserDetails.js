@@ -49,7 +49,7 @@ function LoadGeneralInfo(nationalityCode)
 				console.log(result.Result.Gender);
 				console.log(result.Result.FirstName + " " + result.Result.LastName);
 				$("#EditMemberInfoGender option:selected").attr("selected", false);
-				var gender = result.Result.Gender == true ? 1 : 2;
+				var gender = result.Result.Gender == true ? 2 : 1;
 				$("#EditMemberInfoGender" + gender).attr("selected", true);
 				$("#EditMemberInfoCity option:selected").attr("selected", false);
 				$("#EditMemberInfoCity"+result.Result.City).attr("selected", true);
