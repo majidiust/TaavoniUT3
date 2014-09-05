@@ -1033,7 +1033,7 @@ namespace TavooniUT3.Controllers
                                       BirthDate = p.BirthDate,
                                       Degree = p.DegreeID,
                                       Activity = activity,
-                                      Point = CalculateUserPoint(p.aspnet_User.UserId),
+                                      Point = p.Point,
                                       GuId = p.MemberID
                                   }).ToList()[0];
                     return Json(new { Status = true, Message = 39, Result }, JsonRequestBehavior.AllowGet);
