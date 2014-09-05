@@ -408,7 +408,8 @@ function LoadCausin(nationalityCode)
 							NewCausinLastName: result.Result[i].LastName,
 							NewCausinGenderType: result.Result[i].Gender,
 							NewCausinInternationalCode: result.Result[i].InternationalCode,
-							NewCausinAge: result.Result[i].Age
+							NewCausinAge: result.Result[i].Age,
+                            NewCausinRelation : result.Result[i].Relation
 						}
 						listOfEtc.push(newEtc);
 						var row = "<tr>";

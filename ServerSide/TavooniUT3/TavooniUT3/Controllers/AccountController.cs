@@ -1230,7 +1230,8 @@ namespace TavooniUT3.Controllers
                                      LastName = p.LastName,
                                      Gender = p.Gender,
                                      InternationalCode = p.InternationalCode,
-                                     Age = p.Age
+                                     Age = p.Age,
+                                     Relation = p.Relation
                                  };
                     return Json(new { Status = true, Message = 46, Result }, JsonRequestBehavior.AllowGet);
                 }
@@ -1510,6 +1511,7 @@ namespace TavooniUT3.Controllers
                     relation.RelationType = 2;
                     relation.Relation = NewCausinRelation;
                     relation.MembershipID = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
+                    relation.Age = NewCausinAge;
                     m_model.MembersRelations.InsertOnSubmit(relation);
                     m_model.SubmitChanges();
                     return Json(new { Status = true, Message = 36 }, JsonRequestBehavior.AllowGet);
