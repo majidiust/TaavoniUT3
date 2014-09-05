@@ -411,8 +411,8 @@ function SearchForExistCausin() {
                         NewCausinLastName: result.Result.LastName,
                         NewCausinGenderType: result.Result.Gender
                     };
-                    $("#NewCausinFirstName").val(newChild.ChildFirstName);
-                    $("#NewCausinLastName").val(newChild.ChildLastName);
+                    $("#NewCausinFirstName").val(newEtc.NewCausinFirstName);
+                    $("#NewCausinLastName").val(newEtc.NewCausinLastName);
                     $("#NewCausinGenderType option:selected").attr("selected", false);
                     if (newEtc.NewCausinGenderType == true)
                         $("#NewCausinGenderType1").attr("selected", true);
