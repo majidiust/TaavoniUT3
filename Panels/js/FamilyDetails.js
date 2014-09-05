@@ -250,6 +250,7 @@ function AddNewEtc() {
         CustomModalAlert("خطا", "لطفا سن را مشخص نمایید.", null);
     } else {
         for (var i = 0; i < listOfEtc.length; i++) {
+            alert(listOfEtc[i].NewCausinInternationalCode + " : " + newEtc.NewCausinInternationalCode);
             if (listOfEtc[i].NewCausinInternationalCode == newEtc.NewCausinInternationalCode) {
                 CustomModalAlert("خطا", "این کد ملی قبلا به عنوان تحت تکفل استفاده شده است.", null);
                 hasError = true;
