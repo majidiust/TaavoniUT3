@@ -1034,6 +1034,7 @@ namespace TavooniUT3.Controllers
                                       Degree = p.DegreeID,
                                       Activity = activity,
                                       Point = p.Point,
+                                      Rank = p.Rank,
                                       GuId = p.MemberID
                                   }).ToList()[0];
                     return Json(new { Status = true, Message = 39, Result }, JsonRequestBehavior.AllowGet);

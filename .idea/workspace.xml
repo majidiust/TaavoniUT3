@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ac3a91e-5031-48f9-b59d-db64f419ea5e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/blank.html" afterPath="$PROJECT_DIR$/Panels/blank.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/bin/TavooniUT3.dll" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/bin/TavooniUT3.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.dll" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/bin/TavooniUT3.pdb" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/bin/TavooniUT3.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.pdb" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Controllers/AccountController.cs" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Controllers/AccountController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/user.html" afterPath="$PROJECT_DIR$/Panels/user.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/js/userModeCharisma.js" afterPath="$PROJECT_DIR$/Panels/js/userModeCharisma.js" />
     </list>
     <ignored path="TaavoniUT3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,13 +50,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="blank.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="blank.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Panels/blank.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5800416" vertical-offset="11655" max-vertical-offset="26775">
+            <state vertical-scroll-proportion="-3.6710527" vertical-offset="11655" max-vertical-offset="26775">
               <caret line="702" column="63" selection-start-line="702" selection-start-column="63" selection-end-line="702" selection-end-column="63" />
               <folding>
                 <marker date="1409919487604" expanded="true" signature="10287:10408" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userModeCharisma.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Panels/js/userModeCharisma.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.70197487" vertical-offset="2006" max-vertical-offset="16167">
+              <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/user.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.627451" vertical-offset="7856" max-vertical-offset="18785">
+              <caret line="482" column="90" selection-start-line="482" selection-start-column="82" selection-end-line="482" selection-end-column="90" />
+              <folding>
+                <element signature="n#style#0;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#5;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1409919864057" expanded="true" signature="8040:8053" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -83,6 +115,8 @@
         <option value="$PROJECT_DIR$/Panels/js/UserDetails.js" />
         <option value="$PROJECT_DIR$/Panels/js/charisma.js" />
         <option value="$PROJECT_DIR$/Panels/blank.html" />
+        <option value="$PROJECT_DIR$/Panels/user.html" />
+        <option value="$PROJECT_DIR$/Panels/js/userModeCharisma.js" />
       </list>
     </option>
   </component>
@@ -610,11 +644,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Panels/blank.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5800416" vertical-offset="11655" max-vertical-offset="26775">
+        <state vertical-scroll-proportion="-3.6710527" vertical-offset="11655" max-vertical-offset="26775">
           <caret line="702" column="63" selection-start-line="702" selection-start-column="63" selection-end-line="702" selection-end-column="63" />
           <folding>
             <marker date="1409919487604" expanded="true" signature="10287:10408" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.627451" vertical-offset="7856" max-vertical-offset="18785">
+          <caret line="482" column="90" selection-start-line="482" selection-start-column="82" selection-end-line="482" selection-end-column="90" />
+          <folding>
+            <element signature="n#style#0;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#5;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1409919864057" expanded="true" signature="8040:8053" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/js/userModeCharisma.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70197487" vertical-offset="2006" max-vertical-offset="16167">
+          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
