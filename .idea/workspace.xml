@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ac3a91e-5031-48f9-b59d-db64f419ea5e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Public/js/Old_English_Text_MT_400.font.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Public/js/jquery.zrssfeed.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Public/index.htm" afterPath="$PROJECT_DIR$/Public/index.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TaavoniUT3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,8 +79,8 @@
       <file leaf-file-name="index.htm" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Public/index.htm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7" vertical-offset="510" max-vertical-offset="9486">
-              <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.56666666" vertical-offset="561" max-vertical-offset="9469">
+              <caret line="50" column="77" selection-start-line="50" selection-start-column="77" selection-end-line="50" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -130,16 +133,6 @@
                 <element signature="n#style#0;n#td#1;n#tr#5;n#table#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <marker date="1409919864057" expanded="true" signature="8040:8053" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listOfMembersView.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Panels/listOfMembersView.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.65384614" vertical-offset="0" max-vertical-offset="629">
-              <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="69" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -244,6 +237,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaavoniUT3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TaavoniUT3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -255,6 +266,11 @@
     <property name="options.searchVisible" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Taavoni\TaavoniUT3\Public\js" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -747,10 +763,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Public/js/jquery.zrssfeed.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="536">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Public/index.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7" vertical-offset="510" max-vertical-offset="9486">
-          <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.56666666" vertical-offset="561" max-vertical-offset="9469">
+          <caret line="50" column="77" selection-start-line="50" selection-start-column="77" selection-end-line="50" selection-end-column="77" />
           <folding />
         </state>
       </provider>
