@@ -1256,35 +1256,39 @@ namespace TavooniUT3.Controllers
             String tempdate = jc.GetYear(now) + ":" + jc.GetMonth(now) + ":" + jc.GetDayOfMonth(now);
             return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now), jc);
         }
-        private double CalculateUserPoint(Guid userId)
+        private KeyValuePair<double, double> CalculateUserPoint(Guid userId)
         {
             try
             {
+                KeyValuePair<double, double> Result = new KeyValuePair<double, double>(0.0,0.0);
                 double result = 0;
                 if (m_model.Payments.Count(P => P.MemberID.Equals(userId)) <= 0)
                 {
                     result = 0;
-                    return result;
+                    return Result;
                 }
                 else
                 {
                     var payments = m_model.Payments.Where(P => P.MemberID.Equals(userId));
                     System.Globalization.PersianCalendar persian = new System.Globalization.PersianCalendar();
+                    double sum = 0;
                     foreach (var x in payments)
                     {
                         String[] dates = x.DateOfPayment.Split(new char[] { '/' });
                         DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]), persian);
                         DateTime tempNowDate = GetPersianDateInstance(DateTime.Now);
                         double days = (tempNowDate - tempDateTime).TotalDays;
-                        double moneyWeight = double.Parse(x.Fee) / 100000.0;
+                        double f =  double.Parse(x.Fee);
+                        double moneyWeight = f/ 100000.0;
+                        sum += f;
                         result += days * moneyWeight;
                     }
-                    return Math.Round(result / 100.00, 2); ;
+                    return new KeyValuePair<double, double>(Math.Round(result / 100.00, 2), sum);
                 }
             }
             catch (Exception ex)
             {
-                return 0;
+                return new KeyValuePair<double, double>(0.0, 0.0);
             }
         }
         private long GetPaymentByUser(string userName)
@@ -1358,7 +1362,7 @@ namespace TavooniUT3.Controllers
                                           Rank = p.Rank,
                                           Date = p.CreateDate != null ? p.CreateDate : tempdate,
                                           IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                          TotalPayment = "12"
+                                          TotalPayment = GetPaymentByUser(p.InternationalCode)
                                       }).ToList();
 
                 return Json(new { Status = true, Message = 37, Result}, JsonRequestBehavior.AllowGet);
@@ -1367,92 +1371,6 @@ namespace TavooniUT3.Controllers
             {
                 return Error(ex.Message);
             }
-        }
-        [HttpGet]
-        public ActionResult GetRankList()
-        {
-            try
-            {
-                //   if (m_model.aspnet_Users.Count(P => P.UserName.Equals(userName)) > 0)
-                {
-                    System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
-                    String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
-                    var unsortRankList = (from p in m_model.MembersProfiles where p.IsDisabled == null || p.IsDisabled == false
-                                          select new
-                                          {
-                                              FirstName = p.FirstName,
-                                              LastName = p.LastName,
-                                              userId = p.MemberID,
-                                              NationalityCode = p.InternationalCode,
-                                              Point = CalculateUserPoint((Guid)p.MemberID),
-                                              Date = p.CreateDate != null ? p.CreateDate : tempdate,
-                                              IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
-                                          }).ToList();
-                    var rankList = unsortRankList.OrderByDescending(P => P.Point);
-                    List<RankModel> Result = new List<RankModel>();
-                    for (int i = 0; i < rankList.Count(); i++)
-                    {
-                        var x = rankList.ElementAt(i);
-                        Result.Add(new RankModel
-                        {
-                            FirstName = x.FirstName,
-                            LastName = x.LastName,
-                            UserId = (Guid)x.userId,
-                            UserName = x.NationalityCode,
-                            Point = x.Point,
-                            Rank = i + 1,
-                            IsApproved = x.IsApproved,
-                            Date = x.Date
-                        });
-                    }
-                    return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
-                }
-                //else
-                //{
-                //    return Error(38);
-                //}
-            }
-            catch (Exception ex)
-            {
-                return Error(ex.Message);
-            }
-        }
-        private int GetRankForUser(Guid userId)
-        {
-            System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
-            String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
-            var unsortRankList = (from p in m_model.MembersProfiles
-                                  where p.IsDisabled == null || p.IsDisabled == false
-                                  select new
-                                  {
-                                      FirstName = p.FirstName,
-                                      LastName = p.LastName,
-                                      userId = p.MemberID,
-                                      NationalityCode = p.InternationalCode,
-                                      Point = CalculateUserPoint((Guid)p.MemberID),
-                                      Date = p.CreateDate != null ? p.CreateDate : tempdate,
-                                      IsApproved = p.aspnet_User.aspnet_Membership.IsApproved
-                                  }).ToList();
-            var rankList = unsortRankList.OrderByDescending(P => P.Point);
-            List<RankModel> Result = new List<RankModel>();
-            for (int i = 0; i < rankList.Count(); i++)
-            {
-                var x = rankList.ElementAt(i);
-                Result.Add(new RankModel
-                {
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    UserId = (Guid)x.userId,
-                    UserName = x.NationalityCode,
-                    Point = x.Point,
-                    Rank = i + 1,
-                    IsApproved = x.IsApproved,
-                    Date = x.Date
-                });
-            }
-
-            return Result.Single(P => P.UserId.Equals(userId)).Rank;
-
         }
 
         [HttpGet]
@@ -2232,11 +2150,14 @@ namespace TavooniUT3.Controllers
                 {
                     if (x.IsDisabled == null || x.IsDisabled == false)
                     {
-                        x.Point = CalculateUserPoint((Guid)x.MemberID);
+                        var calced = CalculateUserPoint((Guid)x.MemberID);
+                        x.Point = calced.Key;
+                        x.Payment = calced.Value;
                     }
                     else
                     {
                         x.Point = 0;
+                        x.Payment = 0;
                     }
                 }
                 m_model.SubmitChanges();

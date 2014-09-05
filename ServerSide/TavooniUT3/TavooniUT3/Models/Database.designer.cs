@@ -7087,6 +7087,8 @@ namespace TavooniUT3.Models
 		
 		private System.Nullable<int> _Rank;
 		
+		private System.Nullable<double> _Payment;
+		
 		private EntityRef<aspnet_User> _aspnet_User;
 		
 		private EntityRef<City> _City;
@@ -7129,6 +7131,8 @@ namespace TavooniUT3.Models
     partial void OnPointChanged();
     partial void OnRankChanging(System.Nullable<int> value);
     partial void OnRankChanged();
+    partial void OnPaymentChanging(System.Nullable<double> value);
+    partial void OnPaymentChanged();
     #endregion
 		
 		public MembersProfile()
@@ -7467,6 +7471,26 @@ namespace TavooniUT3.Models
 					this._Rank = value;
 					this.SendPropertyChanged("Rank");
 					this.OnRankChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Payment", DbType="Float")]
+		public System.Nullable<double> Payment
+		{
+			get
+			{
+				return this._Payment;
+			}
+			set
+			{
+				if ((this._Payment != value))
+				{
+					this.OnPaymentChanging(value);
+					this.SendPropertyChanging();
+					this._Payment = value;
+					this.SendPropertyChanged("Payment");
+					this.OnPaymentChanged();
 				}
 			}
 		}
