@@ -48,16 +48,16 @@
                         alert("مرورگر شما Internet Explorer است. لطفا برای استفاده از امکانات سایت از یکی از مرورگر های Firefox، Chrome و یا Opera استفاده نمایید.");
                     }
 
-//                    $('#container').rssfeed('http://taavoniut3.blogfa.com/rss', {
-//                        limit: 20
-//                    });
-
-
-                    $('#container').rssfeed('http://taavoniut3.blogfa.com/rss',{
-                        limit: 10
-                    }, function(e) {
-                        $.zazar.rotate({selector: '#zrotate ul'});
+                    $('#container').rssfeed('http://taavoniut3.blogfa.com/rss', {
+                        limit: 20
                     });
+
+
+//                    $('#container').rssfeed('http://taavoniut3.blogfa.com/rss',{
+//                        limit: 10
+//                    }, function(e) {
+//                        $.zazar.rotate({selector: '#zrotate ul'});
+//                    });
                     walk(document.body, replaceNumbers);
                 }
         );
