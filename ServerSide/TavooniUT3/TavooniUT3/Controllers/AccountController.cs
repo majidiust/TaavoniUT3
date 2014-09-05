@@ -1243,7 +1243,6 @@ namespace TavooniUT3.Controllers
         }
         #endregion
         #region GetListOfMembers
-
         public String GetPersianDate(DateTime now)
         {
             System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
@@ -1257,7 +1256,6 @@ namespace TavooniUT3.Controllers
             String tempdate = jc.GetYear(now) + ":" + jc.GetMonth(now) + ":" + jc.GetDayOfMonth(now);
             return new DateTime(jc.GetYear(now), jc.GetMonth(now), jc.GetDayOfMonth(now), jc);
         }
-
         private double CalculateUserPoint(Guid userId)
         {
             try
@@ -1289,8 +1287,6 @@ namespace TavooniUT3.Controllers
                 return 0;
             }
         }
-
-
         private long GetPaymentByUser(string userName)
         {
             try
@@ -1316,9 +1312,6 @@ namespace TavooniUT3.Controllers
                 return -1;
             }
         }
-
-
-
         [HttpGet]
         public ActionResult GetTotalPaymentByUser(string userName)
         {
@@ -1345,8 +1338,6 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
-
-
         [HttpGet]
         public ActionResult GetListOfMembers()
         {
@@ -1354,47 +1345,29 @@ namespace TavooniUT3.Controllers
             {
                 System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
                 String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
-                var unsortRankList = (from p in m_model.MembersProfiles
+                var Result = (from p in m_model.MembersProfiles
                                       where p.IsDisabled == null || p.IsDisabled == false
                                       select new
                                       {
                                           FirstName = p.FirstName,
                                           LastName = p.LastName,
-                                          userId = p.MemberID,
+                                          UserId = p.MemberID,
+                                          UserName= p.InternationalCode,
                                           NationalityCode = p.InternationalCode,
-                                          Point = CalculateUserPoint((Guid)p.MemberID),
+                                          Point = p.Point,
+                                          Rank = p.Rank,
                                           Date = p.CreateDate != null ? p.CreateDate : tempdate,
                                           IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
                                           TotalPayment = GetPaymentByUser(p.InternationalCode)
                                       }).ToList();
-                var rankList = unsortRankList.OrderByDescending(P => P.Point);
-                List<RankModel> Result = new List<RankModel>();
-                for (int i = 0; i < rankList.Count(); i++)
-                {
-                    var x = rankList.ElementAt(i);
-                    Result.Add(new RankModel
-                    {
-                        FirstName = x.FirstName,
-                        LastName = x.LastName,
-                        UserId = (Guid)x.userId,
-                        UserName = x.NationalityCode,
-                        Point = x.Point,
-                        Rank = i + 1,
-                        IsApproved = x.IsApproved,
-                        Date = x.Date,
-                        TotalPayment = x.TotalPayment
-                    });
-                }
 
-                return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Message = 37}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 return Error(ex.Message);
             }
         }
-
-
         [HttpGet]
         public ActionResult GetRankList()
         {
@@ -1444,9 +1417,6 @@ namespace TavooniUT3.Controllers
                 return Error(ex.Message);
             }
         }
-
-
-
         private int GetRankForUser(Guid userId)
         {
             System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
@@ -1505,7 +1475,8 @@ namespace TavooniUT3.Controllers
                                       LastName = p.LastName,
                                       Date = p.CreateDate != null ? p.CreateDate : tempdate,
                                       IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                      Point = CalculateUserPoint((Guid)p.MemberID),
+                                      Point = p.Point,
+                                      Rank = p.Point,
                                       TotalPayment = GetPaymentByUser(p.InternationalCode)
                                   }).ToList()[0];
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
@@ -2250,6 +2221,42 @@ namespace TavooniUT3.Controllers
         }
 
         #endregion
+        #endregion
+        #region CalcUserPoint
+        [HttpGet]
+        public ActionResult CalcAllPoints()
+        {
+            try
+            {
+                foreach (var x in m_model.MembersProfiles)
+                {
+                    if (x.IsDisabled == false)
+                    {
+                        x.Point = String.Format("{0}",CalculateUserPoint((Guid)x.MemberID));
+                    }
+                    else
+                    {
+                        x.Point = "0";
+                    }
+                }
+                m_model.SubmitChanges();
+
+                var rankList = m_model.MembersProfiles.OrderByDescending(P => P.Point);
+
+                for(int i = 0 ; i < rankList.Count() ; i++)
+                {
+                    rankList.ElementAt(i).Rank = (i + 1).ToString() ;
+                }
+
+                m_model.SubmitChanges();
+
+                return Success(80);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
         #endregion
     }
 }

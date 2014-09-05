@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TavooniUT3" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=94.232.169.195;Initial Catalog=TavooniUT3;User ID=hiva" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=94.232.169.195;Initial Catalog=TavooniUT3;User ID=hiva" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TavooniUT3ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ActionOnMembers" Member="ActionOnMembers">
     <Type Name="ActionOnMember">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -9,17 +9,15 @@
       <Column Name="Action" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Payment" Member="Payments">
-    <Type Name="Payment">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DateOfPayment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="DateofEntry" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Fee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="SourceBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DestinationBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ReceiptID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PaymentMethod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+  <Table Name="hiva.PicOfAlbums" Member="PicOfAlbums">
+    <Type Name="PicOfAlbum">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AlbumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
@@ -287,44 +285,6 @@
       <Association Name="aspnet_User_MemberSponserShip" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.MembersRelations" Member="MembersRelations">
-    <Type Name="MembersRelation">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Relation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="JobPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="hiva.Album" Member="Albums">
-    <Type Name="Album">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="Explanation" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ImageTitlePoster" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="hiva.PicOfAlbums" Member="PicOfAlbums">
-    <Type Name="PicOfAlbum">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AlbumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.MembersProfile" Member="MembersProfiles">
     <Type Name="MembersProfile">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -341,21 +301,51 @@
       <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Point" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Rank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="aspnet_User_MembersProfile" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
       <Association Name="City_MembersProfile" Member="City" ThisKey="CityID" OtherKey="CityId" Type="City" IsForeignKey="true" />
       <Association Name="Degree_MembersProfile" Member="Degree" ThisKey="DegreeID" OtherKey="DegreeId" Type="Degree" IsForeignKey="true" />
     </Type>
   </Table>
-  <Function Name="hiva.GetRankList" Method="GetRankList">
-    <ElementType Name="GetRankListResult">
+  <Table Name="dbo.MembersRelations" Member="MembersRelations">
+    <Type Name="MembersRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="InternationalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Relation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RelationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JobPlace" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MembershipID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payment" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DateOfPayment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateofEntry" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Fee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="MemberID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="TotalFee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="rank" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="hiva.GetRankForUser" Method="GetRankForUser">
-    <Parameter Name="UserId" Parameter="userId" Type="System.Guid" DbType="UniqueIdentifier" />
-    <Parameter Name="Rank" Parameter="rank" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
+      <Column Name="SourceBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DestinationBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ReceiptID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PaymentMethod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="hiva.Album" Member="Albums">
+    <Type Name="Album">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatorId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Explanation" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="State" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ImageTitlePoster" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>
