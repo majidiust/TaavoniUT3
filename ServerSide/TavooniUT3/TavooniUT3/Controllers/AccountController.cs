@@ -1507,7 +1507,7 @@ namespace TavooniUT3.Controllers
                     relation.LastName = NewCausinLastName;
                     relation.InternationalCode = NewCausinInternationalCode;
                     relation.Gender = NewCausinGenderType;
-                    relation.RelationType = 1;
+                    relation.RelationType = 2;
                     relation.Relation = NewCausinRelation;
                     relation.MembershipID = m_model.aspnet_Users.Single(P => P.UserName.Equals(userName)).UserId;
                     m_model.MembersRelations.InsertOnSubmit(relation);
