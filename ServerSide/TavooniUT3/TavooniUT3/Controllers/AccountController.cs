@@ -2241,7 +2241,7 @@ namespace TavooniUT3.Controllers
                 }
                 m_model.SubmitChanges();
 
-                var rankList = m_model.MembersProfiles.OrderByDescending(P => P.Point);
+                var rankList = m_model.MembersProfiles.OrderByDescending(P => Double.Parse(P.Point));
                 int index = 0;
                 foreach (var x in rankList)
                 {
