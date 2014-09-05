@@ -909,6 +909,23 @@ function ShowDetails(nationalityCode) {
 
 }
 
+
+function ReCalculateUserPoints(){
+    CustomBlockingPanel('توجه', 'در حال محاسبه امتیازها .......', -1, null);
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/CalcAllPoints",
+        dataType: 'json',
+        success: function (result) {
+            CustomBlockingPanel('توجه', 'امتیازها محاسبه شد', 500, null);
+        },
+        error: function () {
+            CustomBlockingPanel('توجه', 'خطا در محاسبه امتیازها', 500, null);
+        },
+        async:true
+    });
+}
+
 function ViewUserInRoles(roleName) {
 
     $("#ListOfUserInRolesTable tbody tr").each(function () {
