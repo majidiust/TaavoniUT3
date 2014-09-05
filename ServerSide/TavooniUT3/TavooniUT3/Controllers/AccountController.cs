@@ -597,7 +597,7 @@ namespace TavooniUT3.Controllers
             string NewMemberJob3University, string NewMemberIsargariType, string NewMemberEsratDuration,
             string NewMemberJanbaziPercent, string NewMemberJebheDuration, string NewMemberIsargariIsargarFamilyType,
             string NewMemberPictureName, string NewMemberJobName, string NewMemberJobPlace, bool NewMemberIsAzadeh, string NewMemberOthertype,
-            bool NewMemberIsJanbaz, bool NewMemberIsRazmande, bool NewMemberIsIsargar, bool NewMemberIsFamilyOfShahid, bool NewMemberIsChildOfShahid)
+            bool NewMemberIsJanbaz, bool NewMemberIsRazmande, bool NewMemberIsIsargar, bool NewMemberIsFamilyOfShahid, bool NewMemberIsChildOfShahid, string ProfileDocumentCode)
         {
             try
             {
@@ -627,6 +627,7 @@ namespace TavooniUT3.Controllers
                 profile.Gender = int.Parse(ProfileGender) == 0 ? false : true;
                 profile.IDCard = ProfileShenasnameCode;
                 profile.IDCardPlace = ProfileShenasnamePlace;
+                profile.DocumentCode = ProfileDocumentCode;
                 //profile.InternationalCode = ProfileNationalityCode;
                 //profile.CreateDate = GetPersianDate(DateTime.Now);
                 //m_model.MembersProfiles.InsertOnSubmit(profile);
@@ -1035,7 +1036,8 @@ namespace TavooniUT3.Controllers
                                       Activity = activity,
                                       Point = p.Point,
                                       Rank = p.Rank,
-                                      GuId = p.MemberID
+                                      GuId = p.MemberID,
+                                      documentCode = p.DocumentCode
                                   }).ToList()[0];
                     return Json(new { Status = true, Message = 39, Result }, JsonRequestBehavior.AllowGet);
                 }
@@ -1363,7 +1365,8 @@ namespace TavooniUT3.Controllers
                                           Rank = p.Rank,
                                           Date = p.CreateDate != null ? p.CreateDate : tempdate,
                                           IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                          TotalPayment = p.Payment
+                                          TotalPayment = p.Payment,
+                                          DocumentCode = p.DocumentCode
                                       }).ToList();
 
                 return Json(new { Status = true, Message = 37, Result}, JsonRequestBehavior.AllowGet);
@@ -1396,7 +1399,8 @@ namespace TavooniUT3.Controllers
                                       IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
                                       Point = p.Point,
                                       Rank = p.Rank,
-                                      TotalPayment = p.Payment
+                                      TotalPayment = p.Payment,
+                                      DocumentCode = p.DocumentCode
                                   }).ToList()[0];
                     return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
                 }

@@ -61,6 +61,7 @@ function LoadGeneralInfo(nationalityCode)
 				$("#MemberInfoShenasname").val(result.Result.IDCard);
 				$("#MemberInfoShenasnamePlace").val(result.Result.IDPlacce);
 				$("#MemberInfoPersonID").val(result.Result.PersonalNumber);
+                $("#MemberInfoDocumentCode").val(result.Result.DocumentCode);
 				$("#MemberInfoBirthdateYear option[value="+birthDate[0]+"]").attr("selected", true);
 				$("#MemberInfoBirthdateMonth option[value="+birthDate[1]+"]").attr("selected", true);
 				$("#MemberInfoBirthdateDay option[value="+birthDate[2]+"]").attr("selected", true);
@@ -517,6 +518,7 @@ function SaveProfile()
 		ProfileWorkPhone : $("#MemberInfoWorkPhone").val(),
 		ProfileEmail : $("#MemberInfoEmail").val(),
 		ProfileCity : $("#EditMemberInfoCity").val(),
+        ProfileDocumentCode: $("#MemberInfoDocumentCode").val(),
 		NewMemberEmployeeDateDay : $("#MemberInfoEmployeeDateDay").val(),
 		NewMemberEmployeeDateYear : $("#MemberInfoEmployeeDateYear").val(),
 		NewMemberEmployeeDateMonth : $("#MemberInfoEmployeeDateMonth").val(),

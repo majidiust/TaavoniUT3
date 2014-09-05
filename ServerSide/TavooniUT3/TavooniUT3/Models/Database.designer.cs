@@ -7089,6 +7089,8 @@ namespace TavooniUT3.Models
 		
 		private System.Nullable<double> _Payment;
 		
+		private string _DocumentCode;
+		
 		private EntityRef<aspnet_User> _aspnet_User;
 		
 		private EntityRef<City> _City;
@@ -7133,6 +7135,8 @@ namespace TavooniUT3.Models
     partial void OnRankChanged();
     partial void OnPaymentChanging(System.Nullable<double> value);
     partial void OnPaymentChanged();
+    partial void OnDocumentCodeChanging(string value);
+    partial void OnDocumentCodeChanged();
     #endregion
 		
 		public MembersProfile()
@@ -7491,6 +7495,26 @@ namespace TavooniUT3.Models
 					this._Payment = value;
 					this.SendPropertyChanged("Payment");
 					this.OnPaymentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentCode", DbType="NVarChar(50)")]
+		public string DocumentCode
+		{
+			get
+			{
+				return this._DocumentCode;
+			}
+			set
+			{
+				if ((this._DocumentCode != value))
+				{
+					this.OnDocumentCodeChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentCode = value;
+					this.SendPropertyChanged("DocumentCode");
+					this.OnDocumentCodeChanged();
 				}
 			}
 		}

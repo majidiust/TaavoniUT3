@@ -139,7 +139,6 @@ function LoadGeneralInfoB(nationalityCode){
 				$("#UserPicture").prop("src",ServerURL+"Pics/Users/Thumbnails/" + nationalityCode + ".png?" + new Date().getTime());
 				$("#userTotalPoint").html(result.Result.Point);
                 $("#userRank").html(result.Result.Rank);
-
             }
 			else{
 			}

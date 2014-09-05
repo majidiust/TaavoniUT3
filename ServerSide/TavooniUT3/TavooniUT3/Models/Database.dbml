@@ -344,6 +344,7 @@
       <Column Name="Point" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Rank" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Payment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DocumentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="aspnet_User_MembersProfile" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
       <Association Name="City_MembersProfile" Member="City" ThisKey="CityID" OtherKey="CityId" Type="City" IsForeignKey="true" />
       <Association Name="Degree_MembersProfile" Member="Degree" ThisKey="DegreeID" OtherKey="DegreeId" Type="Degree" IsForeignKey="true" />
