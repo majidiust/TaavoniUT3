@@ -261,6 +261,7 @@ function AddNewEtc() {
         }
     }
     if (hasError == false) {
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         listOfEtc.push(newEtc);
         var index = listOfEtc.length - 1;
         var row = "<tr>";
