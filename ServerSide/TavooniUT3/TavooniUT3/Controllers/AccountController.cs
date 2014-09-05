@@ -1362,7 +1362,7 @@ namespace TavooniUT3.Controllers
                                           Rank = p.Rank,
                                           Date = p.CreateDate != null ? p.CreateDate : tempdate,
                                           IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                          TotalPayment = GetPaymentByUser(p.InternationalCode)
+                                          TotalPayment = p.Payment
                                       }).ToList();
 
                 return Json(new { Status = true, Message = 37, Result}, JsonRequestBehavior.AllowGet);
