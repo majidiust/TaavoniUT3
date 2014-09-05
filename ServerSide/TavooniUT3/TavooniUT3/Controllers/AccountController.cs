@@ -2232,20 +2232,20 @@ namespace TavooniUT3.Controllers
                 {
                     if (x.IsDisabled == null || x.IsDisabled == false)
                     {
-                        x.Point = String.Format("{0}",CalculateUserPoint((Guid)x.MemberID));
+                        x.Point = CalculateUserPoint((Guid)x.MemberID);
                     }
                     else
                     {
-                        x.Point = "0";
+                        x.Point = 0;
                     }
                 }
                 m_model.SubmitChanges();
 
-                var rankList = m_model.MembersProfiles.OrderByDescending(P => Double.Parse(P.Point));
+                var rankList = m_model.MembersProfiles.OrderByDescending(P => P.Point);
                 int index = 0;
                 foreach (var x in rankList)
                 {
-                    x.Rank = index.ToString() ;
+                    x.Rank = index ;
                     index++;
                 }
 
