@@ -249,6 +249,8 @@ function AddNewEtc() {
         hasError = true;
         CustomModalAlert("خطا", "لطفا سن را مشخص نمایید.", null);
     } else {
+        console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+        console.log(listOfEtc);
         for (var i = 0; i < listOfEtc.length; i++) {
             alert(listOfEtc[i].NewCausinInternationalCode + " : " + newEtc.NewCausinInternationalCode);
             if (listOfEtc[i].NewCausinInternationalCode == newEtc.NewCausinInternationalCode) {

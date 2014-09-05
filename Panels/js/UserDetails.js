@@ -9,7 +9,8 @@ function Debug(message)
 
 function LoadUserDetails(nationalityCode, user)
 {
-	selectedMember = nationalityCode;
+    ClearRelationalTable();
+    selectedMember = nationalityCode;
 	ClearRelationalTable();
 	LoadGeneralInfo(nationalityCode);
 	LoadContactInfo(nationalityCode);
@@ -23,7 +24,8 @@ function LoadUserDetails(nationalityCode, user)
 
 function LoadUserDetailsWithoutPayment(nationalityCode)
 {
-	selectedMember = nationalityCode;
+    ClearRelationalTable();
+    selectedMember = nationalityCode;
 	ClearRelationalTable();
 	LoadGeneralInfo(nationalityCode);
 	LoadContactInfo(nationalityCode);
