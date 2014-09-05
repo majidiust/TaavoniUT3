@@ -2242,10 +2242,11 @@ namespace TavooniUT3.Controllers
                 m_model.SubmitChanges();
 
                 var rankList = m_model.MembersProfiles.OrderByDescending(P => P.Point);
-
-                for(int i = 0 ; i < rankList.Count() ; i++)
+                int index = 0;
+                foreach (var x in rankList)
                 {
-                    rankList.ElementAt(i).Rank = (i + 1).ToString() ;
+                    x.Rank = index.ToString() ;
+                    index++;
                 }
 
                 m_model.SubmitChanges();
