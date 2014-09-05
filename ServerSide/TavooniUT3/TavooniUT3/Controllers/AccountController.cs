@@ -2230,7 +2230,7 @@ namespace TavooniUT3.Controllers
             {
                 foreach (var x in m_model.MembersProfiles)
                 {
-                    if (x.IsDisabled == false)
+                    if (x.IsDisabled == null || x.IsDisabled == false)
                     {
                         x.Point = String.Format("{0}",CalculateUserPoint((Guid)x.MemberID));
                     }
