@@ -72,7 +72,7 @@ $(document).ready(function () {
     }
 
     //establish history variables
-    var 
+    var
         History = window.History, // Note: We are using a capital H instead of a lower h
         State = History.getState(),
         $log = $('#log');
@@ -93,17 +93,16 @@ $(document).ready(function () {
 
     //animating menus on hover
     $('ul.main-menu li:not(.nav-header)').hover(function () {
-        $(this).animate({
-            'margin-left': '+=5'
-        }, 300);
-    },
+            $(this).animate({
+                'margin-left': '+=5'
+            }, 300);
+        },
 
         function () {
             $(this).animate({
                 'margin-left': '-=5'
             }, 300);
         });
-
 
 
     PrepareNewMember();
@@ -139,7 +138,8 @@ function DefineModels() {
         IsApproved: { type: 'string', required: true },
         Point: { type: 'string', required: true },
         Rank: { type: 'string', required: false },
-        Payment: { type: 'string', required: false }
+        Payment: { type: 'string', required: false },
+        DocumentCode: { type: 'string', required: false}
     });
     $data.EntityContext.extend("$org.types.utdb", {
         Members: { type: $data.EntitySet, elementType: $org.types.Member }
@@ -196,7 +196,6 @@ function LoadViews() {
         $("#tabs").tabs();
     });
 }
-
 
 
 function PrepareMemberInfo() {
@@ -611,7 +610,8 @@ function ViewUserRoles(userName) {
                 }
 
                 ShowBox("#ListOfUserRoles");
-            } else { }
+            } else {
+            }
         },
         error: function () {
             CustomBlockingPanel('توجه', 'خطای دسترسی', 1000, null);
@@ -624,7 +624,9 @@ function ViewUserRoles(userName) {
 
 function ReCalculateRanking() {
     console.log("ReCalculateRanking");
-    var reordered = $org.context.Members.orderBy(function (item) { return item.Point; }).toArray(function (result) {
+    var reordered = $org.context.Members.orderBy(function (item) {
+        return item.Point;
+    }).toArray(function (result) {
         for (var i = 0; i < result.length; i++) {
             var it = result[i];
             $org.context.Members.attach(it);
@@ -704,7 +706,9 @@ function FetchListOfMembersFromServer() {
                 $org.context.Members.forEach(function (item) {
                     $org.context.Members.remove(item);
                 }).then(function () {
-                    $org.context.saveChanges().then(function () { console.log("Members Data Clean successfully"); });
+                    $org.context.saveChanges().then(function () {
+                        console.log("Members Data Clean successfully");
+                    });
                     members = [];
                     for (var i = 0; i < result.Result.length; i++) {
                         var res = {
@@ -716,7 +720,8 @@ function FetchListOfMembersFromServer() {
                             Point: result.Result[i].Point,
                             NationalityCode: result.Result[i].UserName,
                             Rank: result.Result[i].Rank,
-                            Payment: result.Result[i].TotalPayment
+                            Payment: result.Result[i].TotalPayment,
+                            DocumentCode: result.Result[i].DocumentCode
                         };
                         console.log(res);
                         members.push(res);
@@ -729,12 +734,12 @@ function FetchListOfMembersFromServer() {
                         newSample.CreateDate = res.Date;
                         newSample.Rank = res.Rank;
                         newSample.Payment = res.Payment;
+                        newSample.DocumentCode = res.DocumentCode;
                         $org.context.Members.add(newSample);
-                        //$org.context.Members.removeAll();
-                        //console.log(newSample);
-                        //console.log("Add to database successfully");
                     }
-                    $org.context.saveChanges().then(function () { console.log("done!"); });
+                    $org.context.saveChanges().then(function () {
+                        console.log("done!");
+                    });
                     GetListOfMembers();
                 });
 
@@ -761,16 +766,17 @@ function GetListOfMembers() {
     //var members2 = $org.context.Members.toArray();
     $org.context.Members.forEach(function (user) {
         var res = [
+            user.DocumentCode,
             user.NationalityCode,
             user.FirstName,
             user.LastName,
             user.CreateDate,
             user.IsApproved,
             user.Point,
-			user.Rank,
+            user.Rank,
             remaskPayment(user.Payment),
             user.NationalityCode
-	        ];
+        ];
         console.log("###########################################");
         console.log("Element : " + user);
         console.log("New Record : " + res);
@@ -814,73 +820,77 @@ function GetListOfMembers() {
                 }
             },
             "aaData": results,
-            "bDestroy":true,
+            "bDestroy": true,
             "aoColumns": [
-		{
-		    "sTitle": "کد ملی"
-		},
-		{
-		    "sTitle": "نام"
-		},
-		{
-		    "sTitle": "نام خانوادگی"
-		},
-		{
-		    "sTitle": "تاریخ عضویت"
-		},
-		{
-		    "sTitle": "وضعیت",
-		    "fnRender": function (obj) {
-		        var sReturn = obj.aData[obj.iDataColumn];
-		        Debug("isApproved : " + sReturn);
-		        if (sReturn == true || sReturn == 'true') {
-		            sReturn = '<center><div class="label label-success">تایید شده</div></center>';
-		        } else
-		            sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
-		        return sReturn;
-		    }
-		},
-		{
-		    "sTitle": "امتیاز"
-		},
-		{
-		    "sTitle": "رتبه"
-		},
-        {
-            "sTitle": "مبلغ پرداختی",
-            "bSortable": true,
-            "sType": "payment"
-        },
-		{
-		    "sTitle": "",
-		    "fnRender": function (obj) {
-		        var sReturn = obj.aData[obj.iDataColumn];
-		        sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedRow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
-		        return sReturn;
-		    }
-		}]
+                {
+                    "sTitle": "شماره پرونده"
+                },
+                {
+                    "sTitle": "کد ملی"
+                },
+                {
+                    "sTitle": "نام"
+                },
+                {
+                    "sTitle": "نام خانوادگی"
+                },
+                {
+                    "sTitle": "تاریخ عضویت"
+                },
+                {
+                    "sTitle": "وضعیت",
+                    "fnRender": function (obj) {
+                        var sReturn = obj.aData[obj.iDataColumn];
+                        Debug("isApproved : " + sReturn);
+                        if (sReturn == true || sReturn == 'true') {
+                            sReturn = '<center><div class="label label-success">تایید شده</div></center>';
+                        } else
+                            sReturn = '<center><div class="label label-error">تایید نشده</div></center>';
+                        return sReturn;
+                    }
+                },
+                {
+                    "sTitle": "امتیاز"
+                },
+                {
+                    "sTitle": "رتبه"
+                },
+                {
+                    "sTitle": "مبلغ پرداختی",
+                    "bSortable": true,
+                    "sType": "payment"
+                },
+                {
+                    "sTitle": "",
+                    "fnRender": function (obj) {
+                        var sReturn = obj.aData[obj.iDataColumn];
+                        sReturn = '<table><tr>' + '<td><div title="جزییات" data-rel="tooltip"  class="btn btn-info" onclick="ShowDetails(' + "'" + sReturn + "'" + ');">جزئیات</div></td><td><div title="بروزرسانی" data-rel="tooltip"  class="btn btn-success" onclick="selectedRow = $(this).parent().parent(); RefreshMember(' + "'" + sReturn + "'" + ');">بروزرسانی</div></td>' + '</tr></table>';
+                        return sReturn;
+                    }
+                }
+            ]
         });
 
         ShowBox("#ListOfMembers");
     });
 
     /*var index = 0 ;
-    console.log(members2.length);
-    for(index = 0 ;  index < members2.length ; index ++)
-    {
-    var user = members2[index];
-    var res = [
-    user.NationalityCode,
-    user.FirstName,
-    user.LastName,
-    user.CreateDate,
-    user.IsApproved,
-    user.Point,
-    user.NationalityCode
-    ];
-    results.push(res);
-    };
-    Debug(results);*/
+     console.log(members2.length);
+     for(index = 0 ;  index < members2.length ; index ++)
+     {
+     var user = members2[index];
+     var res = [
+     user.NationalityCode,
+     user.FirstName,
+     user.LastName,
+     user.CreateDate,
+     user.IsApproved,
+     user.Point,
+     user.NationalityCode
+     ];
+     results.push(res);
+     };
+     Debug(results);*/
 
 }
 
@@ -898,9 +908,9 @@ function ShowDetails(nationalityCode) {
             remaskPayment(user.Payment),
             user.NationalityCode
         ];
-        if(user.NationalityCode == nationalityCode)
+        if (user.NationalityCode == nationalityCode)
             selectedUser = user;
-    }).then(function(){
+    }).then(function () {
         PrepareMemberInfo();
         LoadUserDetails(nationalityCode, selectedUser);
         ShowBox("#MemberInfo");
@@ -910,7 +920,7 @@ function ShowDetails(nationalityCode) {
 }
 
 
-function ReCalculateUserPoints(){
+function ReCalculateUserPoints() {
     CustomBlockingPanel('توجه', 'در حال محاسبه امتیازها .......', -1, null);
     $.ajax({
         type: 'GET',
@@ -922,7 +932,7 @@ function ReCalculateUserPoints(){
         error: function () {
             CustomBlockingPanel('توجه', 'خطا در محاسبه امتیازها', 500, null);
         },
-        async:true
+        async: true
     });
 }
 
@@ -1144,55 +1154,56 @@ function ClearAlbumForm() {
     $("#AlbumDesc").val("");
 }
 
-function LoadAlbums(){
-	    $("#AlbumListTable tbody tr").each(function () {
+function LoadAlbums() {
+    $("#AlbumListTable tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
 
-     CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور', -1, null);
-     $.ajax({
-         type: 'GET',
-         url: ServerURL + "Account/getListOfAlbums",
-         dataType: 'json',
-         success: function (result) {
-             if (result.Status == true) {
-                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
-                 console.log(result);
-                 for (var i = 0; i < result.Result.length; i++) {
-                     var row = "<tr>";
-                     row += "<td>" + result.Result[i].Id + "</td>";
-                     row += "<td>" + result.Result[i].Name + "</td>";
-                     row += "<td>" + result.Result[i].State + "</td>";
-                     row += "<td>" + result.Result[i].Explanation + "</td>";
-                     row += '<td><button name="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
-                     row += '<button name="Album"  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button>' +
-                         '' + '<button name="Album" style="width:100%" class="btn btn-large btns" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'"  + ');"> ویرایش </button>'+
-                         '</td></tr>';
-                     Debug(row);
-                     $("#AlbumListTable").append(row);
-                 }
-             }
-             else {
-                 CustomBlockingPanel('خطا', result.Message, 500, null);
-                 Debug(result.Message);
-             }
-         },
-         error: function () { },
-         async: true
-     });
+    CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور', -1, null);
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/getListOfAlbums",
+        dataType: 'json',
+        success: function (result) {
+            if (result.Status == true) {
+                CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+                console.log(result);
+                for (var i = 0; i < result.Result.length; i++) {
+                    var row = "<tr>";
+                    row += "<td>" + result.Result[i].Id + "</td>";
+                    row += "<td>" + result.Result[i].Name + "</td>";
+                    row += "<td>" + result.Result[i].State + "</td>";
+                    row += "<td>" + result.Result[i].Explanation + "</td>";
+                    row += '<td><button name="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbum(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
+                    row += '<button name="Album"  style="width:100%" class="btn btn-large btn-info" onclick="ImagesForAlbum(' + "'" + result.Result[i].Id + "'" + ');"> تصاویر </button>' +
+                        '' + '<button name="Album" style="width:100%" class="btn btn-large btns" onclick="albumDialogType = 2; EditAlbum(' + "'" + result.Result[i].Id + "'," + "'" + result.Result[i].Name + "'," + "'" + result.Result[i].Explanation + "'" + ');"> ویرایش </button>' +
+                        '</td></tr>';
+                    Debug(row);
+                    $("#AlbumListTable").append(row);
+                }
+            }
+            else {
+                CustomBlockingPanel('خطا', result.Message, 500, null);
+                Debug(result.Message);
+            }
+        },
+        error: function () {
+        },
+        async: true
+    });
 
 }
 
 
-var editableAlbumId ;
-function EditAlbum(albumId, albumName, albumDesc){
+var editableAlbumId;
+function EditAlbum(albumId, albumName, albumDesc) {
     editableAlbumId = albumId;
     $("#AlbumName").val(albumName);
     $("#AlbumDesc").val(albumDesc);
     $('#NewAlbum').modal('show');
 }
 
-function doEditAllbum(){
+function doEditAllbum() {
     var albumName = $("#AlbumName").val();
     var albumDesc = $("#AlbumDesc").val();
     console.log(albumName + " : " + albumDesc);
@@ -1211,7 +1222,7 @@ function doEditAllbum(){
             data: {
                 albumName: albumName,
                 albumDesc: albumDesc,
-                albumId : editableAlbumId
+                albumId: editableAlbumId
             },
             dataType: 'json',
             success: function (result) {
@@ -1227,7 +1238,8 @@ function doEditAllbum(){
                     Debug(result.Message);
                 }
             },
-            error: function () { },
+            error: function () {
+            },
             async: true
         });
     }
@@ -1276,96 +1288,99 @@ function AddNewAlbum() {
                     Debug(result.Message);
                 }
             },
-            error: function () { },
+            error: function () {
+            },
             async: true
         });
     }
 }
 
-function DeleteAlbum(aId){
-     CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
+function DeleteAlbum(aId) {
+    CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
     $.ajax({
-         type: 'GET',
-         url: ServerURL + "Account/DeleteAlbum",
-         data : {albumId: aId},
-         dataType: 'json',
-         success: function (result) {
-             if (result.Status == true) {
-                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
-             }
-             else {
-                 CustomBlockingPanel('خطا', result.Message, 500, null);
-                 Debug(result.Message);
-             }
-         },
-         error: function () { },
-         async: true
-     });
+        type: 'GET',
+        url: ServerURL + "Account/DeleteAlbum",
+        data: {albumId: aId},
+        dataType: 'json',
+        success: function (result) {
+            if (result.Status == true) {
+                CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+            }
+            else {
+                CustomBlockingPanel('خطا', result.Message, 500, null);
+                Debug(result.Message);
+            }
+        },
+        error: function () {
+        },
+        async: true
+    });
 }
 
 
-
-function ImagesForAlbum(aId){
+function ImagesForAlbum(aId) {
     albumId = aId;
     ShowBox("#AlbumImageList");
     LoadImageForAlbum(aId);
 }
 
-function LoadImageForAlbum(aId){
-      $("#ImageListTable tbody tr").each(function () {
+function LoadImageForAlbum(aId) {
+    $("#ImageListTable tbody tr").each(function () {
         this.parentNode.removeChild(this);
     });
 
-     CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور', -1, null);
-     $.ajax({
-         type: 'GET',
-         url: ServerURL + "Account/getListOfImages",
-         data : {albumId: aId},
-         dataType: 'json',
-         success: function (result) {
-             if (result.Status == true) {
-                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
-                 console.log(result);
-                 for (var i = 0; i < result.Result.length; i++) {
-                     var row = "<tr>";
-                     row += "<td>" + result.Result[i].Id + "</td>";
-                     row += "<td>" + result.Result[i].Desc + "</td>";
-                     row += "<td>" + result.Result[i].State + "</td>";
-                     row += "<td>" + '<img style="width:100px; height:100px" src="http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path +'" />'+ "</td>";
-                     row += '<td><button nme="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbumImage(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
-                     row += '</td></tr>';
-                     Debug(row);
-                     $("#ImageListTable").append(row);
-                 }
-             }
-             else {
-                 CustomBlockingPanel('خطا', result.Message, 500, null);
-                 Debug(result.Message);
-             }
-         },
-         error: function () { },
-         async: true
-     });
+    CustomBlockingPanel('توجه', 'در حال دریافت اطلاعات از سرور', -1, null);
+    $.ajax({
+        type: 'GET',
+        url: ServerURL + "Account/getListOfImages",
+        data: {albumId: aId},
+        dataType: 'json',
+        success: function (result) {
+            if (result.Status == true) {
+                CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+                console.log(result);
+                for (var i = 0; i < result.Result.length; i++) {
+                    var row = "<tr>";
+                    row += "<td>" + result.Result[i].Id + "</td>";
+                    row += "<td>" + result.Result[i].Desc + "</td>";
+                    row += "<td>" + result.Result[i].State + "</td>";
+                    row += "<td>" + '<img style="width:100px; height:100px" src="http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/' + result.Result[i].Path + '" />' + "</td>";
+                    row += '<td><button nme="Album" style="width:100%" class="btn btn-large btn-error" onclick="$(this).parent().parent().remove(); DeleteAlbumImage(' + "'" + result.Result[i].Id + "'" + ');"> حذف </button>';
+                    row += '</td></tr>';
+                    Debug(row);
+                    $("#ImageListTable").append(row);
+                }
+            }
+            else {
+                CustomBlockingPanel('خطا', result.Message, 500, null);
+                Debug(result.Message);
+            }
+        },
+        error: function () {
+        },
+        async: true
+    });
 }
 
-function DeleteAlbumImage(iId){
+function DeleteAlbumImage(iId) {
     $.ajax({
-         type: 'GET',
-         url: ServerURL + "Account/DeleteImage",
-         data : {imageId: iId},
-         dataType: 'json',
-         success: function (result) {
-             if (result.Status == true) {
-                 CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
-             }
-             else {
-                 CustomBlockingPanel('خطا', result.Message, 500, null);
-                 Debug(result.Message);
-             }
-         },
-         error: function () { },
-         async: true
-     });  
+        type: 'GET',
+        url: ServerURL + "Account/DeleteImage",
+        data: {imageId: iId},
+        dataType: 'json',
+        success: function (result) {
+            if (result.Status == true) {
+                CustomBlockingPanel('توجه', 'اطلاعات با موفقیت دریافت گردید.', 500, null);
+            }
+            else {
+                CustomBlockingPanel('خطا', result.Message, 500, null);
+                Debug(result.Message);
+            }
+        },
+        error: function () {
+        },
+        async: true
+    });
 }
 
 function EditAlbums() {
@@ -1375,7 +1390,7 @@ function EditAlbums() {
 
 
 var albumId;
-function PrepareImageUploadForAlbum(){
+function PrepareImageUploadForAlbum() {
     $('#NewAlbumImageImageInput').fileupload({
         dataType: 'json',
         url: ServerURL + 'Account/AddPictureToAlbum',
@@ -1398,17 +1413,17 @@ function PrepareImageUploadForAlbum(){
             albumId: albumId,
             desc: $("#AlbumImageDesc").val()
         };
-         CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
+        CustomBlockingPanel('توجه', 'در حال ارسال اطلاعات به سرور', -1, null);
     });
 }
 
-function ShowNewImageAlbumForm(){
+function ShowNewImageAlbumForm() {
     albumDialogType = 1;
     alert("ShowNewImageAlbumForm : " + albumDialogType);
     $("#NewAlbumImage").modal('show');
 }
 
-function ClearAlbumImageForm(){
+function ClearAlbumImageForm() {
     alert("ClearAlbumImageForm");
 }
 
@@ -1537,13 +1552,15 @@ function GotoWizard(step) {
             _doOrdinary = false;
             if (CheckStep1Values() == true) {
                 var isExist = IsUserExist($("#ProfileNationalityCode").val(),
-                    function () { },
+                    function () {
+                    },
                     function () {
                         $("div[name=memberWizard]").hide();
                         $("#NewTerminalWizard2").show();
                         currentStep = 2;
                     },
-                    function () { });
+                    function () {
+                    });
             } else {
                 Debug("Has Error");
             }
@@ -1778,8 +1795,6 @@ function docReady() {
     }
 
 
-
-
     $('.btn-close').click(function (e) {
         e.preventDefault();
         $(this).parent().parent().parent().fadeOut();
@@ -1795,8 +1810,6 @@ function docReady() {
         e.preventDefault();
         $('#myModal').modal('show');
     });
-
-
 
 
     //initialize the external events for calender

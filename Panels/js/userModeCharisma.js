@@ -134,6 +134,7 @@ function LoadGeneralInfoB(nationalityCode){
 				console.log(result.Result.FirstName + " " + result.Result.LastName);
 				$("#userFirstName").html(result.Result.FirstName);
                 $("#userLastName").html(result.Result.LastName);
+                $("#userDocumentCode").html(result.Result.DocumentCode);
 				$("#userNationalityCode").html(result.Result.ID);
 				Debug(ServerURL+"Pics/Users/Originals/" + nationalityCode + ".png");
 				$("#UserPicture").prop("src",ServerURL+"Pics/Users/Thumbnails/" + nationalityCode + ".png?" + new Date().getTime());
