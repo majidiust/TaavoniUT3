@@ -292,6 +292,24 @@ namespace TavooniUT3.Controllers
             }
         }
 
+
+        [HttpGet]
+        public ActionResult getTestCallBack()
+        {
+            try
+            {
+                    string callBack =  "Farzad added function that works";
+                    return Json(new { Status = true, callBack}, JsonRequestBehavior.AllowGet);
+                
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+
         [HttpGet]
         public ActionResult IsLoggedIn()
         {
