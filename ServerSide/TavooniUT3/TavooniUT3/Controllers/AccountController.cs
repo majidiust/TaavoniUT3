@@ -292,6 +292,22 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult resetPassword(string username)
+        {
+            try
+            {
+                var user = Membership.GetUser(username);
+                var result = user.ResetPassword();
+                return Json(new { Status = true,  Result = result}, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+
 
         [HttpGet]
         public ActionResult getTestCallBack()
@@ -300,14 +316,14 @@ namespace TavooniUT3.Controllers
             {
                     string callBack =  "Farzad added function that works";
                     return Json(new { Status = true, mg = callBack}, JsonRequestBehavior.AllowGet);
-                
-
             }
             catch (Exception ex)
             {
                 return Error(ex.Message);
             }
         }
+
+ 
 
 
         [HttpGet]
@@ -1338,6 +1354,8 @@ namespace TavooniUT3.Controllers
                 return -1;
             }
         }
+
+
         [HttpGet]
         public ActionResult GetTotalPaymentByUser(string userName)
         {
