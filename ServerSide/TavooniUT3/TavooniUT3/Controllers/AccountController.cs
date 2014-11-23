@@ -299,7 +299,8 @@ namespace TavooniUT3.Controllers
             {
                 var user = Membership.GetUser(username);
                 var result = user.ResetPassword();
-                return Json(new { Status = true,  Result = result}, JsonRequestBehavior.AllowGet);
+                user.ChangePassword(result, username);
+                return Json(new { Status = true,  Result = username}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
