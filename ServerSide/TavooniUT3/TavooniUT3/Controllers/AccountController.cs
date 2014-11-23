@@ -308,6 +308,21 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult unlockUser(string username)
+        {
+            try
+            {
+                var user = Membership.GetUser(username);
+                var result = user.UnlockUser();
+                return Json(new { Status = true, Result = username }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
 
 
         [HttpGet]
