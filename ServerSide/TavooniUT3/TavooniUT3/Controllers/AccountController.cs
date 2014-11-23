@@ -299,7 +299,7 @@ namespace TavooniUT3.Controllers
             try
             {
                     string callBack =  "Farzad added function that works";
-                    return Json(new { Status = true, callBack}, JsonRequestBehavior.AllowGet);
+                    return Json(new { Status = true, mg = callBack}, JsonRequestBehavior.AllowGet);
                 
 
             }
