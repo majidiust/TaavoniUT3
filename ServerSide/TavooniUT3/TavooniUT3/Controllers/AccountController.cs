@@ -9,6 +9,9 @@ using System.Web.Routing;
 using System.Web.Security;
 using TavooniUT3.Models;
 using System.IO;
+using ExcelLibrary.SpreadSheet;
+using OfficeOpenXml;
+using System.Drawing;
 
 namespace TavooniUT3.Controllers
 {
@@ -300,7 +303,7 @@ namespace TavooniUT3.Controllers
                 var user = Membership.GetUser(username);
                 var result = user.ResetPassword();
                 user.ChangePassword(result, username);
-                return Json(new { Status = true,  Result = username}, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Result = username }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -330,8 +333,8 @@ namespace TavooniUT3.Controllers
         {
             try
             {
-                    string callBack =  "Farzad added function that works";
-                    return Json(new { Status = true, mg = callBack}, JsonRequestBehavior.AllowGet);
+                string callBack = "Farzad added function that works";
+                return Json(new { Status = true, mg = callBack }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -339,7 +342,7 @@ namespace TavooniUT3.Controllers
             }
         }
 
- 
+
 
 
         [HttpGet]
@@ -1314,7 +1317,7 @@ namespace TavooniUT3.Controllers
         {
             try
             {
-                KeyValuePair<double, double> Result = new KeyValuePair<double, double>(0.0,0.0);
+                KeyValuePair<double, double> Result = new KeyValuePair<double, double>(0.0, 0.0);
                 double result = 0;
                 if (m_model.Payments.Count(P => P.MemberID.Equals(userId)) <= 0)
                 {
@@ -1332,8 +1335,8 @@ namespace TavooniUT3.Controllers
                         DateTime tempDateTime = new DateTime(int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(dates[2]), persian);
                         DateTime tempNowDate = GetPersianDateInstance(DateTime.Now);
                         double days = (tempNowDate - tempDateTime).TotalDays;
-                        double f =  double.Parse(x.Fee);
-                        double moneyWeight = f/ 100000.0;
+                        double f = double.Parse(x.Fee);
+                        double moneyWeight = f / 100000.0;
                         sum += f;
                         result += days * moneyWeight;
                     }
@@ -1406,23 +1409,23 @@ namespace TavooniUT3.Controllers
                 System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
                 String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
                 var Result = (from p in m_model.MembersProfiles
-                                      where p.IsDisabled == null || p.IsDisabled == false
-                                      select new
-                                      {
-                                          FirstName = p.FirstName,
-                                          LastName = p.LastName,
-                                          UserId = p.MemberID,
-                                          UserName= p.InternationalCode,
-                                          NationalityCode = p.InternationalCode,
-                                          Point = p.Point,
-                                          Rank = p.Rank,
-                                          Date = p.CreateDate != null ? p.CreateDate : tempdate,
-                                          IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
-                                          TotalPayment = p.Payment,
-                                          DocumentCode = p.DocumentCode
-                                      }).ToList();
+                              where p.IsDisabled == null || p.IsDisabled == false
+                              select new
+                              {
+                                  FirstName = p.FirstName,
+                                  LastName = p.LastName,
+                                  UserId = p.MemberID,
+                                  UserName = p.InternationalCode,
+                                  NationalityCode = p.InternationalCode,
+                                  Point = p.Point,
+                                  Rank = p.Rank,
+                                  Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                  IsApproved = p.aspnet_User.aspnet_Membership.IsApproved,
+                                  TotalPayment = p.Payment,
+                                  DocumentCode = p.DocumentCode
+                              }).ToList();
 
-                return Json(new { Status = true, Message = 37, Result}, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Message = 37, Result }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -2001,7 +2004,7 @@ namespace TavooniUT3.Controllers
                                  ImageTitlePoster = GetAlbumPoster(p.Id),
                                  State = p.State
                              };
-                return Json(new { Status = true, Message = 63,  Result}, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Message = 63, Result }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -2225,7 +2228,7 @@ namespace TavooniUT3.Controllers
                 int index = 0;
                 foreach (var x in rankList)
                 {
-                    x.Rank = index ;
+                    x.Rank = index;
                     index++;
                 }
 
@@ -2236,6 +2239,182 @@ namespace TavooniUT3.Controllers
             catch (Exception ex)
             {
                 return Error(ex.Message);
+            }
+        }
+        #endregion
+        #region ReportingSystem
+        public ActionResult GetListOfMembersExcel()
+        {
+            try
+            {
+                using (var excelPackage = new ExcelPackage())
+                {
+                    excelPackage.Workbook.Properties.Author = "Majid Sadeghi Alavijeh";
+                    excelPackage.Workbook.Properties.Title = "لیست اعضا";
+                    var sheet = excelPackage.Workbook.Worksheets.Add("لیست اعضا");
+                    sheet.View.RightToLeft = true;
+                    sheet.Name = "لیست اعضا";
+                    using (ExcelRange r = sheet.Cells["A1:N1"])
+                    {
+                        r.Style.Font.SetFromFont(new Font("Tahoma", 14, FontStyle.Regular));
+                        r.Style.Font.Color.SetColor(Color.White);
+                        r.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.CenterContinuous;
+                        r.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        r.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(23, 55, 93));
+                        r.AutoFitColumns();
+                    }
+                    var rowIndex = 1;
+                    var col = 1;
+                    sheet.Cells[rowIndex, col++].Value = "نام";
+                    sheet.Cells[rowIndex, col++].Value = "نام خانوادگی";
+                    sheet.Cells[rowIndex, col++].Value = "کد";
+                    sheet.Cells[rowIndex, col++].Value = "نام کاربری";
+                    sheet.Cells[rowIndex, col++].Value = "کد ملی";
+                    sheet.Cells[rowIndex, col++].Value = "امتیاز";
+                    sheet.Cells[rowIndex, col++].Value = "رتبه";
+                    sheet.Cells[rowIndex, col++].Value = "تاریخ عضویت";
+                    sheet.Cells[rowIndex, col++].Value = "وضعیت تایید";
+                    sheet.Cells[rowIndex, col++].Value = "کل مبلغ پرداختی" ;
+                    sheet.Cells[rowIndex, col++].Value = "شماره پرونده";
+                    sheet.Cells["A1:N1"].AutoFitColumns();
+                    System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+                    String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
+                    var Result = (from p in m_model.MembersProfiles
+                                  where p.IsDisabled == null || p.IsDisabled == false
+                                  select new
+                                  {
+                                      FirstName = p.FirstName,
+                                      LastName = p.LastName,
+                                      UserId = p.MemberID,
+                                      UserName = p.InternationalCode,
+                                      NationalityCode = p.InternationalCode,
+                                      Point = p.Point,
+                                      Rank = p.Rank,
+                                      Date = p.CreateDate != null ? p.CreateDate : tempdate,
+                                      IsApproved = p.aspnet_User.aspnet_Membership.IsApproved ? "فعال" : "غیر فعال",
+                                      TotalPayment = p.Payment,
+                                      DocumentCode = p.DocumentCode
+                                  }).ToList();
+
+                    foreach (var item in Result)
+                    {
+                        col = 1;
+                        rowIndex++;
+                        sheet.Cells[rowIndex, col++].Value = item.FirstName;
+                        sheet.Cells[rowIndex, col++].Value = item.LastName;
+                        sheet.Cells[rowIndex, col++].Value = item.UserId;
+                        sheet.Cells[rowIndex, col++].Value = item.UserName;
+                        sheet.Cells[rowIndex, col++].Value = item.NationalityCode;
+                        sheet.Cells[rowIndex, col++].Value = item.Point;
+                        sheet.Cells[rowIndex, col++].Value = item.Rank;
+
+                        sheet.Cells[rowIndex, col++].Value = item.Date;
+                        sheet.Cells[rowIndex, col++].Value = item.IsApproved;
+                        sheet.Cells[rowIndex, col++].Value = item.TotalPayment;
+                        sheet.Cells[rowIndex, col++].Value = item.DocumentCode;
+                    }
+
+
+                    Response.ClearContent();
+                    Response.BinaryWrite(excelPackage.GetAsByteArray());
+                    Response.AddHeader("content-disposition", "attachment;filename=resultsss.xlsx");
+                    Response.ContentType = "application/excel";
+                    Response.Flush();
+                    Response.End();
+                    return Json("ok", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetAllPaymentExcel()
+        {
+            try
+            {
+                using (var excelPackage = new ExcelPackage())
+                {
+                    excelPackage.Workbook.Properties.Author = "Majid Sadeghi Alavijeh";
+                    excelPackage.Workbook.Properties.Title = "پرداخت ها";
+                    var sheet = excelPackage.Workbook.Worksheets.Add("لیست پرداخت ها");
+                    sheet.View.RightToLeft = true;
+                    sheet.Name = "لیست پرداخت ها";
+                    using (ExcelRange r = sheet.Cells["A1:N1"])
+                    {
+                        r.Style.Font.SetFromFont(new Font("Tahoma", 14, FontStyle.Regular));
+                        r.Style.Font.Color.SetColor(Color.White);
+                        r.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.CenterContinuous;
+                        r.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        r.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(23, 55, 93));
+                        r.AutoFitColumns();
+                    }
+                    var rowIndex = 1;
+                    var col = 1;
+                    sheet.Cells[rowIndex, col++].Value = "کد";
+                    sheet.Cells[rowIndex, col++].Value = "شناسه پرداخت کننده";
+                    sheet.Cells[rowIndex, col++].Value = "نام کاربری پرداخت کننده";
+                    //sheet.Cells[rowIndex, col++].Value = "تاریخ ورود داده";
+                    sheet.Cells[rowIndex, col++].Value = "تاریخ پرداخت";
+                    sheet.Cells[rowIndex, col++].Value = "مبلغ";
+                    sheet.Cells[rowIndex, col++].Value = "بانک مقصد";
+                    sheet.Cells[rowIndex, col++].Value = "شماره فیش";
+                    sheet.Cells[rowIndex, col++].Value = "بانک مبدا";
+                    sheet.Cells["A1:N1"].AutoFitColumns();
+                    System.Globalization.PersianCalendar jc = new System.Globalization.PersianCalendar();
+                    String tempdate = jc.GetYear((DateTime)DateTime.Now) + ":" + jc.GetMonth((DateTime)DateTime.Now) + ":" + jc.GetDayOfMonth((DateTime)DateTime.Now);
+                    var Result = (from p in m_model.Payments select p).ToList();
+
+                    foreach (var item in Result)
+                    {
+                        col = 1;
+                        rowIndex++;
+                        sheet.Cells[rowIndex, col++].Value = item.ID;
+                        sheet.Cells[rowIndex, col++].Value = item.MemberID;
+                        sheet.Cells[rowIndex, col++].Value = item.aspnet_User.UserName;
+                        //sheet.Cells[rowIndex, col++].Value = item.DateofEntry;
+                        sheet.Cells[rowIndex, col++].Value = item.DateOfPayment;
+                        sheet.Cells[rowIndex, col++].Value = item.Fee;
+                        sheet.Cells[rowIndex, col++].Value = item.DestinationBank;
+                        sheet.Cells[rowIndex, col++].Value = item.ReceiptID;
+                        sheet.Cells[rowIndex, col++].Value = item.SourceBank;
+
+                    }
+
+
+                    Response.ClearContent();
+                    Response.BinaryWrite(excelPackage.GetAsByteArray());
+                    Response.AddHeader("content-disposition", "attachment;filename=resultsss.xlsx");
+                    Response.ContentType = "application/excel";
+                    Response.Flush();
+                    Response.End();
+                    return Json("ok", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+        #endregion
+        #region Utility
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                throw ex;
+            }
+            finally
+            {
+                GC.Collect();
             }
         }
         #endregion

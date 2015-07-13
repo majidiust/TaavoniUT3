@@ -1,4 +1,4 @@
-﻿var BaseURL = "http://taavoniut3.ir";
+﻿var BaseURL = "/TaavoniUT3";
 var ServerURL = BaseURL + "/ServerSide/TavooniUT3/TavooniUT3/";
 var version = 2;
 var peymentMethod;
@@ -26,10 +26,12 @@ var index = -1;
 var Membership;
 var members = new Array();
 var currentStep = 0;
+var listOfVaheds = new Array();
 var listOfChildrens = new Array();
 var listOfMates = new Array();
 var listOfEtc = new Array();
 var listOfPayments = new Array();
+var listOfMoshaat = new Array();
 var selectedTable;
 var temporalPictureName = "default";
 var fee;
@@ -147,7 +149,12 @@ function DefineModels() {
 }
 
 function DataTableify() {
-    $('.datatable').dataTable();
+    $('.datatable').dataTable({
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+        "sSwfPath": "copy_csv_xls_pdf.swf"
+    }}
+    );
 }
 
 function GetTotalPayment() {
@@ -179,7 +186,6 @@ function GetTotalPayment() {
     });
 }
 
-
 function LoadViews() {
     Debug('Loading Views');
     $("#NewMemberContent").load("newMemberView.html");
@@ -192,6 +198,8 @@ function LoadViews() {
     $("#NewCausinContent").load("newCausinView.html");
     $("#ListOfMembersContent").load("listOfMembersView.html");
     $("#NewProjectContent").load("newProjectView.html");
+    $("#NewMoshaatContent").load("newMoshaatView.html");
+    $("#NewVahedContent").load("newVahedView.html");
     $("#MemberInfoContent").load("memberDetailsView.html", function () {
         $("#tabs").tabs();
     });
@@ -1088,7 +1096,7 @@ function SendRecom() {
 
 function LogoutFromServer() {
     $.getJSON(ServerURL + "Account/LogOutOfServer", {}, function (result) {
-        window.location = "http://taavoniut3.ir/Public/index.htm";
+        window.location = "../Public/index.htm";
     });
 }
 

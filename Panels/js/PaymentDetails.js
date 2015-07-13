@@ -227,3 +227,7 @@ function ClearPaymentTable() {
         this.parentNode.removeChild(this);
     });
 }
+
+function GetAllPaymentExcel(){
+    window.location = ServerURL + "Account/GetAllPaymentExcel";
+}

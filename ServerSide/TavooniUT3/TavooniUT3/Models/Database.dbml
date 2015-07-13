@@ -138,6 +138,7 @@
       <Association Name="aspnet_User_MembersIsargari" Member="MembersIsargaris" ThisKey="UserId" OtherKey="MemberID" Type="MembersIsargari" />
       <Association Name="aspnet_User_MemberSponserShip" Member="MemberSponserShips" ThisKey="UserId" OtherKey="MemberID" Type="MemberSponserShip" />
       <Association Name="aspnet_User_MembersProfile" Member="MembersProfiles" ThisKey="UserId" OtherKey="MemberID" Type="MembersProfile" />
+      <Association Name="aspnet_User_Payment" Member="Payments" ThisKey="UserId" OtherKey="MemberID" Type="Payment" />
       <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
     </Type>
   </Table>
@@ -312,6 +313,7 @@
       <Column Name="DestinationBank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ReceiptID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PaymentMethod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="aspnet_User_Payment" Member="aspnet_User" ThisKey="MemberID" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="hiva.Album" Member="Albums">

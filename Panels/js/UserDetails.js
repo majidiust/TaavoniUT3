@@ -707,3 +707,8 @@ function DeActivateMember()
 function LoadUserRank(user){
     $("#EditMemberInfoRank").html('<center> رتیه کاربر : ' + user.Rank + '</center>');
 }
+
+function GetListOfMembersExcel(){
+    window.location = ServerURL + "Account/GetListOfMembersExcel";
+
+}

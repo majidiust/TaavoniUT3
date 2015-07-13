@@ -2811,6 +2811,8 @@ namespace TavooniUT3.Models
 		
 		private EntitySet<MembersProfile> _MembersProfiles;
 		
+		private EntitySet<Payment> _Payments;
+		
 		private EntityRef<aspnet_Application> _aspnet_Application;
 		
     #region Extensibility Method Definitions
@@ -2847,6 +2849,7 @@ namespace TavooniUT3.Models
 			this._MembersIsargaris = new EntitySet<MembersIsargari>(new Action<MembersIsargari>(this.attach_MembersIsargaris), new Action<MembersIsargari>(this.detach_MembersIsargaris));
 			this._MemberSponserShips = new EntitySet<MemberSponserShip>(new Action<MemberSponserShip>(this.attach_MemberSponserShips), new Action<MemberSponserShip>(this.detach_MemberSponserShips));
 			this._MembersProfiles = new EntitySet<MembersProfile>(new Action<MembersProfile>(this.attach_MembersProfiles), new Action<MembersProfile>(this.detach_MembersProfiles));
+			this._Payments = new EntitySet<Payment>(new Action<Payment>(this.attach_Payments), new Action<Payment>(this.detach_Payments));
 			this._aspnet_Application = default(EntityRef<aspnet_Application>);
 			OnCreated();
 		}
@@ -3183,6 +3186,19 @@ namespace TavooniUT3.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Payment", Storage="_Payments", ThisKey="UserId", OtherKey="MemberID")]
+		public EntitySet<Payment> Payments
+		{
+			get
+			{
+				return this._Payments;
+			}
+			set
+			{
+				this._Payments.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Application_aspnet_User", Storage="_aspnet_Application", ThisKey="ApplicationId", OtherKey="ApplicationId", IsForeignKey=true)]
 		public aspnet_Application aspnet_Application
 		{
@@ -3352,6 +3368,18 @@ namespace TavooniUT3.Models
 		}
 		
 		private void detach_MembersProfiles(MembersProfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = null;
+		}
+		
+		private void attach_Payments(Payment entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = this;
+		}
+		
+		private void detach_Payments(Payment entity)
 		{
 			this.SendPropertyChanging();
 			entity.aspnet_User = null;
@@ -6613,6 +6641,8 @@ namespace TavooniUT3.Models
 		
 		private System.Nullable<int> _PaymentMethod;
 		
+		private EntityRef<aspnet_User> _aspnet_User;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -6639,6 +6669,7 @@ namespace TavooniUT3.Models
 		
 		public Payment()
 		{
+			this._aspnet_User = default(EntityRef<aspnet_User>);
 			OnCreated();
 		}
 		
@@ -6733,6 +6764,10 @@ namespace TavooniUT3.Models
 			{
 				if ((this._MemberID != value))
 				{
+					if (this._aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnMemberIDChanging(value);
 					this.SendPropertyChanging();
 					this._MemberID = value;
@@ -6818,6 +6853,40 @@ namespace TavooniUT3.Models
 					this._PaymentMethod = value;
 					this.SendPropertyChanged("PaymentMethod");
 					this.OnPaymentMethodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Payment", Storage="_aspnet_User", ThisKey="MemberID", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User
+		{
+			get
+			{
+				return this._aspnet_User.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User.Entity = null;
+						previousValue.Payments.Remove(this);
+					}
+					this._aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.Payments.Add(this);
+						this._MemberID = value.UserId;
+					}
+					else
+					{
+						this._MemberID = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("aspnet_User");
 				}
 			}
 		}

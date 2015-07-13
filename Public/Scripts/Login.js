@@ -1,4 +1,4 @@
-var BaseURL = "http://taavoniut3.ir";
+var BaseURL = "/Taavoniut3";//http://taavoniut3.ir";
 var ServerURL = BaseURL + "/ServerSide/TavooniUT3/TavooniUT3/";
 var isShowRegisterationForm = false;
 var index = -1;
@@ -28,7 +28,7 @@ function LoginToAccountUp() {
 
         $.ajax({
             type: 'POST',
-            url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOn",
+            url: ServerURL + "Account/LogOn",
             dataType: 'json',
             success: function (result) {
 
@@ -107,7 +107,7 @@ function LoginToAccountCenter() {
 
         $.ajax({
             type: 'POST',
-            url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOn",
+            url:  ServerURL + "Account/LogOn",
             dataType: 'json',
             success: function (result) {
 
@@ -406,7 +406,7 @@ function DetectLoggedInUser() {
     $("#LoginMessage").hide();
     $("#LogInDetails").hide();
 
-    $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn", {}, function (result) {
+    $.getJSON(ServerURL + "Account/IsLoggedIn", {}, function (result) {
         if (result.Status == true) {
 			
 			//alert("user name is : " + userName);
@@ -455,16 +455,16 @@ function GoToPanel() {
     if (userName != "" && userName != undefined) {
 		//alert("user name is : "  + userName + " : " + IsMember);
 		if(IsMember == true)
-        	window.location = "http:///taavoniut3.ir/Panels/user.html";
+        	window.location = "../Panels/user.html";
 		else
-			window.location = "http:///taavoniut3.ir/Panels/blank.html";
+			window.location = "../Panels/blank.html";
     } else {
         DetectLoggedInUser();
     }
 }
 
 function LogOut() {
-    $.getJSON("http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOutOfServer", {}, function (result) {
+    $.getJSON(ServerURL + "Account/LogOutOfServer", {}, function (result) {
         userName = "";
         $("#username").val("");
         $("#password").val("");
@@ -909,7 +909,7 @@ function LogOutNew() {
     ShowModalWindow("توجه", 'در حال اعمال تغییرات ....');
     $.ajax({
         type: 'GET',
-        url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/LogOutOfServer",
+        url: ServerURL + "Account/LogOutOfServer",
         dataType: 'json',
         success: function () {
             ShowModalWindow("موفقیت آمیز", "شما با موفقیت از سیستم خارج شدید");
@@ -939,7 +939,7 @@ function GetUserSummery() {
     ShowModalWindow("توجه", 'در حال دریافت اطلاعات کاربری ....');
     $.ajax({
         type: 'GET',
-        url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/GetUserBriefInfo",
+        url: ServerURL + "Account/GetUserBriefInfo",
         dataType: 'json',
         success: function (result) {
             CloseModalWindow();
@@ -947,7 +947,7 @@ function GetUserSummery() {
                 var userDetails = {};
                 userDetails.username = result.Result.UserName;
                 userDetails.email = result.Result.Email;
-				userDetails.Point = result.Point;
+				userDetails.Point = result.Point.Value;
 				userName = result.Result.UserName;
 				IsMember = result.IsMember;
 				//alert("User name is : " + userName + " : " + IsMember);
@@ -999,7 +999,7 @@ function DetectLoggedInUserNew() {
     ShowModalWindow("توجه", 'در حال دریافت اطلاعات سرور ....');
     $.ajax({
         type: 'GET',
-        url: "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Account/IsLoggedIn",
+        url:  ServerURL + "Account/IsLoggedIn",
         dataType: 'json',
         success: function (result) {
             if (result.Status == true) {
@@ -1585,9 +1585,9 @@ function GetMiddleTagCNew(name, describtion, pic, albumId, time, i)
   var msg = '<center><table style="-webkit-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.75);-moz-box-shadow:    3px 3px 13px 0px rgba(50, 50, 50, 0.75);box-shadow:         3px 3px 13px 0px rgba(50, 50, 50, 0.75);width:80%;">';
 	msg += '<tr>';
     if(pic == 'default')
-        pic = "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Users/album-icon.png";
+        pic = ServerURL + "Pics/Users/album-icon.png";
     else
-        pic = "http://taavoniut3.ir/ServerSide/TavooniUT3/TavooniUT3/Pics/Albums/Thumbnails/" + pic ;
+        pic =  ServerURL + "Pics/Albums/Thumbnails/" + pic ;
     msg += '<td style="border:0;vertical-align:middle;alignment-adjust:central;width:200px;text-align:center;">' +  '<img src="' + pic +'" alt="" style="width:80%; padding: 20px;background: #eeeeee;border: 1px solid #bbbbbb;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;"/>';
     msg += '</td>';
 	msg +=         '<td style="border:0;">';
