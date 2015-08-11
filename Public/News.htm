@@ -42,14 +42,14 @@
                     $.modal.close();
                     LoadPageComponents();
                     DetectLoggedInUser();
-                    var _date = GetCurrentPersianDayString() + ", " + GetCurrentPersianDayOfMonth() + "  " + GetCurrentPersianMonthString() + " ماه  " + "1392";
+                    var _date = GetCurrentPersianDayString() + ", " + GetCurrentPersianDayOfMonth() + "  " + GetCurrentPersianMonthString() + " ماه  " + GetCurrentPersianYear();
                     $("#date").html(_date);
                     if (BrowserDetect.browser.indexOf("Explorer") != -1) {
                         alert("مرورگر شما Internet Explorer است. لطفا برای استفاده از امکانات سایت از یکی از مرورگر های Firefox، Chrome و یا Opera استفاده نمایید.");
                     }
 
                     $('#container').rssfeed('http://taavoniut3.blogfa.com/rss', {
-                        limit: 20
+                        limit: 50
                     });
 
 
@@ -88,7 +88,6 @@
                 <div id="info" style="font-family:Tahoma, Geneva, sans-serif;direction:rtl;float:left;">
                     <ul id="UserInfo" style="display:none;color:#FF9;  font-size:14px;">
                         <li id="UserName">
-                            پست الکترونیکی: sadeghi@rayanhiva.ir
                         </li>
                         <li onclick="GoToPanel();" style="cursor:pointer;color:#FF9; font-size:14px; ">
                             ورود به محیط کاربری

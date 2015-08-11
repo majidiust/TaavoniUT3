@@ -114,6 +114,18 @@ namespace TavooniUT3.Models
     partial void InsertMembersProfile(MembersProfile instance);
     partial void UpdateMembersProfile(MembersProfile instance);
     partial void DeleteMembersProfile(MembersProfile instance);
+    partial void InsertProject(Project instance);
+    partial void UpdateProject(Project instance);
+    partial void DeleteProject(Project instance);
+    partial void InsertUserProject(UserProject instance);
+    partial void UpdateUserProject(UserProject instance);
+    partial void DeleteUserProject(UserProject instance);
+    partial void InsertProjectsShare(ProjectsShare instance);
+    partial void UpdateProjectsShare(ProjectsShare instance);
+    partial void DeleteProjectsShare(ProjectsShare instance);
+    partial void InsertProjectUnit(ProjectUnit instance);
+    partial void UpdateProjectUnit(ProjectUnit instance);
+    partial void DeleteProjectUnit(ProjectUnit instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -367,6 +379,38 @@ namespace TavooniUT3.Models
 			get
 			{
 				return this.GetTable<MembersProfile>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Project> Projects
+		{
+			get
+			{
+				return this.GetTable<Project>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UserProject> UserProjects
+		{
+			get
+			{
+				return this.GetTable<UserProject>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ProjectsShare> ProjectsShares
+		{
+			get
+			{
+				return this.GetTable<ProjectsShare>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ProjectUnit> ProjectUnits
+		{
+			get
+			{
+				return this.GetTable<ProjectUnit>();
 			}
 		}
 	}
@@ -2809,9 +2853,9 @@ namespace TavooniUT3.Models
 		
 		private EntitySet<MemberSponserShip> _MemberSponserShips;
 		
-		private EntitySet<MembersProfile> _MembersProfiles;
-		
 		private EntitySet<Payment> _Payments;
+		
+		private EntitySet<MembersProfile> _MembersProfiles;
 		
 		private EntityRef<aspnet_Application> _aspnet_Application;
 		
@@ -2848,8 +2892,8 @@ namespace TavooniUT3.Models
 			this._MembersEmployees = new EntitySet<MembersEmployee>(new Action<MembersEmployee>(this.attach_MembersEmployees), new Action<MembersEmployee>(this.detach_MembersEmployees));
 			this._MembersIsargaris = new EntitySet<MembersIsargari>(new Action<MembersIsargari>(this.attach_MembersIsargaris), new Action<MembersIsargari>(this.detach_MembersIsargaris));
 			this._MemberSponserShips = new EntitySet<MemberSponserShip>(new Action<MemberSponserShip>(this.attach_MemberSponserShips), new Action<MemberSponserShip>(this.detach_MemberSponserShips));
-			this._MembersProfiles = new EntitySet<MembersProfile>(new Action<MembersProfile>(this.attach_MembersProfiles), new Action<MembersProfile>(this.detach_MembersProfiles));
 			this._Payments = new EntitySet<Payment>(new Action<Payment>(this.attach_Payments), new Action<Payment>(this.detach_Payments));
+			this._MembersProfiles = new EntitySet<MembersProfile>(new Action<MembersProfile>(this.attach_MembersProfiles), new Action<MembersProfile>(this.detach_MembersProfiles));
 			this._aspnet_Application = default(EntityRef<aspnet_Application>);
 			OnCreated();
 		}
@@ -3173,19 +3217,6 @@ namespace TavooniUT3.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile", Storage="_MembersProfiles", ThisKey="UserId", OtherKey="MemberID")]
-		public EntitySet<MembersProfile> MembersProfiles
-		{
-			get
-			{
-				return this._MembersProfiles;
-			}
-			set
-			{
-				this._MembersProfiles.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Payment", Storage="_Payments", ThisKey="UserId", OtherKey="MemberID")]
 		public EntitySet<Payment> Payments
 		{
@@ -3196,6 +3227,19 @@ namespace TavooniUT3.Models
 			set
 			{
 				this._Payments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_MembersProfile", Storage="_MembersProfiles", ThisKey="UserId", OtherKey="MemberID")]
+		public EntitySet<MembersProfile> MembersProfiles
+		{
+			get
+			{
+				return this._MembersProfiles;
+			}
+			set
+			{
+				this._MembersProfiles.Assign(value);
 			}
 		}
 		
@@ -3361,18 +3405,6 @@ namespace TavooniUT3.Models
 			entity.aspnet_User = null;
 		}
 		
-		private void attach_MembersProfiles(MembersProfile entity)
-		{
-			this.SendPropertyChanging();
-			entity.aspnet_User = this;
-		}
-		
-		private void detach_MembersProfiles(MembersProfile entity)
-		{
-			this.SendPropertyChanging();
-			entity.aspnet_User = null;
-		}
-		
 		private void attach_Payments(Payment entity)
 		{
 			this.SendPropertyChanging();
@@ -3380,6 +3412,18 @@ namespace TavooniUT3.Models
 		}
 		
 		private void detach_Payments(Payment entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = null;
+		}
+		
+		private void attach_MembersProfiles(MembersProfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = this;
+		}
+		
+		private void detach_MembersProfiles(MembersProfile entity)
 		{
 			this.SendPropertyChanging();
 			entity.aspnet_User = null;
@@ -7686,6 +7730,878 @@ namespace TavooniUT3.Models
 						this._DegreeID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Degree");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.Project")]
+	public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ProjectName;
+		
+		private string _ProjectAddress;
+		
+		private string _ProjectBeginDate;
+		
+		private string _ProjectEndDate;
+		
+		private string _ProjectLat;
+		
+		private string _ProjectLng;
+		
+		private string _ProjectUsefullEnv;
+		
+		private string _ProjectShare;
+		
+		private string _ProjectUnits;
+		
+		private string _ProjectCode;
+		
+		private int _ProjectId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnProjectNameChanging(string value);
+    partial void OnProjectNameChanged();
+    partial void OnProjectAddressChanging(string value);
+    partial void OnProjectAddressChanged();
+    partial void OnProjectBeginDateChanging(string value);
+    partial void OnProjectBeginDateChanged();
+    partial void OnProjectEndDateChanging(string value);
+    partial void OnProjectEndDateChanged();
+    partial void OnProjectLatChanging(string value);
+    partial void OnProjectLatChanged();
+    partial void OnProjectLngChanging(string value);
+    partial void OnProjectLngChanged();
+    partial void OnProjectUsefullEnvChanging(string value);
+    partial void OnProjectUsefullEnvChanged();
+    partial void OnProjectShareChanging(string value);
+    partial void OnProjectShareChanged();
+    partial void OnProjectUnitsChanging(string value);
+    partial void OnProjectUnitsChanged();
+    partial void OnProjectCodeChanging(string value);
+    partial void OnProjectCodeChanged();
+    partial void OnProjectIdChanging(int value);
+    partial void OnProjectIdChanged();
+    #endregion
+		
+		public Project()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectName", DbType="NVarChar(50)")]
+		public string ProjectName
+		{
+			get
+			{
+				return this._ProjectName;
+			}
+			set
+			{
+				if ((this._ProjectName != value))
+				{
+					this.OnProjectNameChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectName = value;
+					this.SendPropertyChanged("ProjectName");
+					this.OnProjectNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectAddress", DbType="NVarChar(50)")]
+		public string ProjectAddress
+		{
+			get
+			{
+				return this._ProjectAddress;
+			}
+			set
+			{
+				if ((this._ProjectAddress != value))
+				{
+					this.OnProjectAddressChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectAddress = value;
+					this.SendPropertyChanged("ProjectAddress");
+					this.OnProjectAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectBeginDate", DbType="NVarChar(50)")]
+		public string ProjectBeginDate
+		{
+			get
+			{
+				return this._ProjectBeginDate;
+			}
+			set
+			{
+				if ((this._ProjectBeginDate != value))
+				{
+					this.OnProjectBeginDateChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectBeginDate = value;
+					this.SendPropertyChanged("ProjectBeginDate");
+					this.OnProjectBeginDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectEndDate", DbType="NVarChar(50)")]
+		public string ProjectEndDate
+		{
+			get
+			{
+				return this._ProjectEndDate;
+			}
+			set
+			{
+				if ((this._ProjectEndDate != value))
+				{
+					this.OnProjectEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectEndDate = value;
+					this.SendPropertyChanged("ProjectEndDate");
+					this.OnProjectEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLat", DbType="NVarChar(50)")]
+		public string ProjectLat
+		{
+			get
+			{
+				return this._ProjectLat;
+			}
+			set
+			{
+				if ((this._ProjectLat != value))
+				{
+					this.OnProjectLatChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectLat = value;
+					this.SendPropertyChanged("ProjectLat");
+					this.OnProjectLatChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLng", DbType="NVarChar(50)")]
+		public string ProjectLng
+		{
+			get
+			{
+				return this._ProjectLng;
+			}
+			set
+			{
+				if ((this._ProjectLng != value))
+				{
+					this.OnProjectLngChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectLng = value;
+					this.SendPropertyChanged("ProjectLng");
+					this.OnProjectLngChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectUsefullEnv", DbType="NVarChar(50)")]
+		public string ProjectUsefullEnv
+		{
+			get
+			{
+				return this._ProjectUsefullEnv;
+			}
+			set
+			{
+				if ((this._ProjectUsefullEnv != value))
+				{
+					this.OnProjectUsefullEnvChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectUsefullEnv = value;
+					this.SendPropertyChanged("ProjectUsefullEnv");
+					this.OnProjectUsefullEnvChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectShare", DbType="NVarChar(50)")]
+		public string ProjectShare
+		{
+			get
+			{
+				return this._ProjectShare;
+			}
+			set
+			{
+				if ((this._ProjectShare != value))
+				{
+					this.OnProjectShareChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectShare = value;
+					this.SendPropertyChanged("ProjectShare");
+					this.OnProjectShareChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectUnits", DbType="NVarChar(50)")]
+		public string ProjectUnits
+		{
+			get
+			{
+				return this._ProjectUnits;
+			}
+			set
+			{
+				if ((this._ProjectUnits != value))
+				{
+					this.OnProjectUnitsChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectUnits = value;
+					this.SendPropertyChanged("ProjectUnits");
+					this.OnProjectUnitsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectCode", DbType="NVarChar(50)")]
+		public string ProjectCode
+		{
+			get
+			{
+				return this._ProjectCode;
+			}
+			set
+			{
+				if ((this._ProjectCode != value))
+				{
+					this.OnProjectCodeChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectCode = value;
+					this.SendPropertyChanged("ProjectCode");
+					this.OnProjectCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ProjectId
+		{
+			get
+			{
+				return this._ProjectId;
+			}
+			set
+			{
+				if ((this._ProjectId != value))
+				{
+					this.OnProjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectId = value;
+					this.SendPropertyChanged("ProjectId");
+					this.OnProjectIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.UserProjects")]
+	public partial class UserProject : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _ProjectId;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProjectIdChanging(System.Nullable<int> value);
+    partial void OnProjectIdChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    #endregion
+		
+		public UserProject()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectId", DbType="Int")]
+		public System.Nullable<int> ProjectId
+		{
+			get
+			{
+				return this._ProjectId;
+			}
+			set
+			{
+				if ((this._ProjectId != value))
+				{
+					this.OnProjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectId = value;
+					this.SendPropertyChanged("ProjectId");
+					this.OnProjectIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.ProjectsShare")]
+	public partial class ProjectsShare : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _ProjectId;
+		
+		private string _ShareName;
+		
+		private string _ShareValue;
+		
+		private System.Nullable<int> _ShareId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProjectIdChanging(System.Nullable<int> value);
+    partial void OnProjectIdChanged();
+    partial void OnShareNameChanging(string value);
+    partial void OnShareNameChanged();
+    partial void OnShareValueChanging(string value);
+    partial void OnShareValueChanged();
+    partial void OnShareIdChanging(System.Nullable<int> value);
+    partial void OnShareIdChanged();
+    #endregion
+		
+		public ProjectsShare()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectId", DbType="Int")]
+		public System.Nullable<int> ProjectId
+		{
+			get
+			{
+				return this._ProjectId;
+			}
+			set
+			{
+				if ((this._ProjectId != value))
+				{
+					this.OnProjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectId = value;
+					this.SendPropertyChanged("ProjectId");
+					this.OnProjectIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShareName", DbType="NVarChar(50)")]
+		public string ShareName
+		{
+			get
+			{
+				return this._ShareName;
+			}
+			set
+			{
+				if ((this._ShareName != value))
+				{
+					this.OnShareNameChanging(value);
+					this.SendPropertyChanging();
+					this._ShareName = value;
+					this.SendPropertyChanged("ShareName");
+					this.OnShareNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShareValue", DbType="NVarChar(50)")]
+		public string ShareValue
+		{
+			get
+			{
+				return this._ShareValue;
+			}
+			set
+			{
+				if ((this._ShareValue != value))
+				{
+					this.OnShareValueChanging(value);
+					this.SendPropertyChanging();
+					this._ShareValue = value;
+					this.SendPropertyChanged("ShareValue");
+					this.OnShareValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShareId", DbType="Int")]
+		public System.Nullable<int> ShareId
+		{
+			get
+			{
+				return this._ShareId;
+			}
+			set
+			{
+				if ((this._ShareId != value))
+				{
+					this.OnShareIdChanging(value);
+					this.SendPropertyChanging();
+					this._ShareId = value;
+					this.SendPropertyChanged("ShareId");
+					this.OnShareIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.ProjectUnits")]
+	public partial class ProjectUnit : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _ProjectId;
+		
+		private System.Nullable<int> _UnitId;
+		
+		private System.Nullable<double> _UnitValue;
+		
+		private System.Nullable<int> _UnitTrus;
+		
+		private System.Nullable<double> _UnitWareHousValue;
+		
+		private System.Nullable<double> _UnitInternalWareHouseValue;
+		
+		private System.Nullable<int> _UnitParking;
+		
+		private string _UnitLocation;
+		
+		private System.Nullable<int> _UnitGreenLoby;
+		
+		private System.Nullable<int> _UnitNumberOfBeds;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProjectIdChanging(System.Nullable<int> value);
+    partial void OnProjectIdChanged();
+    partial void OnUnitIdChanging(System.Nullable<int> value);
+    partial void OnUnitIdChanged();
+    partial void OnUnitValueChanging(System.Nullable<double> value);
+    partial void OnUnitValueChanged();
+    partial void OnUnitTrusChanging(System.Nullable<int> value);
+    partial void OnUnitTrusChanged();
+    partial void OnUnitWareHousValueChanging(System.Nullable<double> value);
+    partial void OnUnitWareHousValueChanged();
+    partial void OnUnitInternalWareHouseValueChanging(System.Nullable<double> value);
+    partial void OnUnitInternalWareHouseValueChanged();
+    partial void OnUnitParkingChanging(System.Nullable<int> value);
+    partial void OnUnitParkingChanged();
+    partial void OnUnitLocationChanging(string value);
+    partial void OnUnitLocationChanged();
+    partial void OnUnitGreenLobyChanging(System.Nullable<int> value);
+    partial void OnUnitGreenLobyChanged();
+    partial void OnUnitNumberOfBedsChanging(System.Nullable<int> value);
+    partial void OnUnitNumberOfBedsChanged();
+    #endregion
+		
+		public ProjectUnit()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectId", DbType="Int")]
+		public System.Nullable<int> ProjectId
+		{
+			get
+			{
+				return this._ProjectId;
+			}
+			set
+			{
+				if ((this._ProjectId != value))
+				{
+					this.OnProjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectId = value;
+					this.SendPropertyChanged("ProjectId");
+					this.OnProjectIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitId", DbType="Int")]
+		public System.Nullable<int> UnitId
+		{
+			get
+			{
+				return this._UnitId;
+			}
+			set
+			{
+				if ((this._UnitId != value))
+				{
+					this.OnUnitIdChanging(value);
+					this.SendPropertyChanging();
+					this._UnitId = value;
+					this.SendPropertyChanged("UnitId");
+					this.OnUnitIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitValue", DbType="Float")]
+		public System.Nullable<double> UnitValue
+		{
+			get
+			{
+				return this._UnitValue;
+			}
+			set
+			{
+				if ((this._UnitValue != value))
+				{
+					this.OnUnitValueChanging(value);
+					this.SendPropertyChanging();
+					this._UnitValue = value;
+					this.SendPropertyChanged("UnitValue");
+					this.OnUnitValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitTrus", DbType="Int")]
+		public System.Nullable<int> UnitTrus
+		{
+			get
+			{
+				return this._UnitTrus;
+			}
+			set
+			{
+				if ((this._UnitTrus != value))
+				{
+					this.OnUnitTrusChanging(value);
+					this.SendPropertyChanging();
+					this._UnitTrus = value;
+					this.SendPropertyChanged("UnitTrus");
+					this.OnUnitTrusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitWareHousValue", DbType="Float")]
+		public System.Nullable<double> UnitWareHousValue
+		{
+			get
+			{
+				return this._UnitWareHousValue;
+			}
+			set
+			{
+				if ((this._UnitWareHousValue != value))
+				{
+					this.OnUnitWareHousValueChanging(value);
+					this.SendPropertyChanging();
+					this._UnitWareHousValue = value;
+					this.SendPropertyChanged("UnitWareHousValue");
+					this.OnUnitWareHousValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitInternalWareHouseValue", DbType="Float")]
+		public System.Nullable<double> UnitInternalWareHouseValue
+		{
+			get
+			{
+				return this._UnitInternalWareHouseValue;
+			}
+			set
+			{
+				if ((this._UnitInternalWareHouseValue != value))
+				{
+					this.OnUnitInternalWareHouseValueChanging(value);
+					this.SendPropertyChanging();
+					this._UnitInternalWareHouseValue = value;
+					this.SendPropertyChanged("UnitInternalWareHouseValue");
+					this.OnUnitInternalWareHouseValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitParking", DbType="Int")]
+		public System.Nullable<int> UnitParking
+		{
+			get
+			{
+				return this._UnitParking;
+			}
+			set
+			{
+				if ((this._UnitParking != value))
+				{
+					this.OnUnitParkingChanging(value);
+					this.SendPropertyChanging();
+					this._UnitParking = value;
+					this.SendPropertyChanged("UnitParking");
+					this.OnUnitParkingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitLocation", DbType="NVarChar(50)")]
+		public string UnitLocation
+		{
+			get
+			{
+				return this._UnitLocation;
+			}
+			set
+			{
+				if ((this._UnitLocation != value))
+				{
+					this.OnUnitLocationChanging(value);
+					this.SendPropertyChanging();
+					this._UnitLocation = value;
+					this.SendPropertyChanged("UnitLocation");
+					this.OnUnitLocationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitGreenLoby", DbType="Int")]
+		public System.Nullable<int> UnitGreenLoby
+		{
+			get
+			{
+				return this._UnitGreenLoby;
+			}
+			set
+			{
+				if ((this._UnitGreenLoby != value))
+				{
+					this.OnUnitGreenLobyChanging(value);
+					this.SendPropertyChanging();
+					this._UnitGreenLoby = value;
+					this.SendPropertyChanged("UnitGreenLoby");
+					this.OnUnitGreenLobyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitNumberOfBeds", DbType="Int")]
+		public System.Nullable<int> UnitNumberOfBeds
+		{
+			get
+			{
+				return this._UnitNumberOfBeds;
+			}
+			set
+			{
+				if ((this._UnitNumberOfBeds != value))
+				{
+					this.OnUnitNumberOfBedsChanging(value);
+					this.SendPropertyChanging();
+					this._UnitNumberOfBeds = value;
+					this.SendPropertyChanged("UnitNumberOfBeds");
+					this.OnUnitNumberOfBedsChanged();
 				}
 			}
 		}

@@ -2399,6 +2399,155 @@ namespace TavooniUT3.Controllers
             }
         }
         #endregion
+        #region Projects    
+        //Success code 120+
+        [HttpPost]
+        [Authorize]
+        public ActionResult CreateProject(String projectName, String address, String beginDate, String endDate, String usefull, String share, String nou)
+        {
+            try
+            {
+                Project project = new Project();
+                project.ProjectAddress = address;
+                project.ProjectBeginDate = beginDate;
+                project.ProjectEndDate = endDate;
+                project.ProjectUsefullEnv = usefull;
+                project.ProjectShare = share;
+                project.ProjectUnits = nou;
+                project.ProjectName = projectName;
+                m_model.Projects.InsertOnSubmit(project);
+                m_model.SubmitChanges();
+                return Json(new { Status = true, Message = 120,  projectId = project.ProjectId}, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetListOfProjects()
+        {
+            try
+            {
+                return Json(new { Status = true, Message = 121, Projects = m_model.Projects }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddShareToProject(String projectId, String id, String name, String value)
+        {
+            try
+            {
+                var count = m_model.Projects.Count(P=>P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    ProjectsShare share = new ProjectsShare();
+                    share.ProjectId = int.Parse(projectId);
+                    share.ShareId = int.Parse(id);
+                    share.ShareName = name;
+                    share.ShareValue = value;
+                    m_model.ProjectsShares.InsertOnSubmit(share);
+                    m_model.SubmitChanges();
+                    return Json(new { Status = true, Message = "Added", Id = share.Id }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddUnitToProject(String projectId, String unitId, String value, String trus, String wareHouseValue, String internalWareHouse, String Parking, String Location, String greenloby, String nob)
+        {
+            try
+            {
+                var count = m_model.Projects.Count(P => P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    ProjectUnit unit = new ProjectUnit();
+                    unit.ProjectId = int.Parse(projectId);
+                    unit.UnitGreenLoby = int.Parse(greenloby);
+                    unit.UnitId = int.Parse(unitId);
+                    unit.UnitInternalWareHouseValue = double.Parse(internalWareHouse);
+                    unit.UnitLocation = Location;
+                    unit.UnitNumberOfBeds = int.Parse(nob);
+                    unit.UnitParking = int.Parse(Parking);
+                    unit.UnitTrus = int.Parse(trus);
+                    unit.UnitValue = double.Parse( value);
+                    unit.UnitWareHousValue = double.Parse(wareHouseValue);
+                    m_model.ProjectUnits.InsertOnSubmit(unit);
+                    m_model.SubmitChanges();
+                    return Json(new { Status = true, Message = "Added", Id = unit.Id }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetProjectShares(String projectId)
+        {
+            try{
+                var count = m_model.Projects.Count(P=>P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    var result = m_model.ProjectsShares.Where(P => P.ProjectId == int.Parse(projectId)).ToList();
+                    return Json(new { Status = true, Message = "Successfully fetched", shares = result }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetProjectUnits(String projectId)
+        {
+            try
+            {
+                var count = m_model.Projects.Count(P => P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    var result = m_model.ProjectUnits.Where(P => P.ProjectId == int.Parse(projectId)).ToList();
+                    return Json(new { Status = true, Message = "Successfully fetched", units = result }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+        #endregion
         #region Utility
         private void releaseObject(object obj)
         {
