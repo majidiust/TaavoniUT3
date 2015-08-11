@@ -1217,6 +1217,42 @@
     </div>
 </div>
 <!-- End Of Causin -->
+<!-- New SMS -->
+<div class="modal hide fade" id="SMSDialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            &nbsp; × &nbsp;
+        </button>
+        <h3>
+            ارسال پیامک به کاربر
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" style="float:right;">
+متن پیامک
+                    </label>
+                    <div class="controls">
+                        <textarea  id="SMSMessage" rows="5" >
+                        </textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" onClick="SendSMSToUser();">
+                        ذخیره سازی
+                    </button>
+                    <button type="reset" class="btn"  onClick="$('#SMSDialog').modal('hide');">
+                        انصراف
+                    </button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<!-- End Of SMS -->
+
 <div class="modal hide fade" id="FindPersonDialog">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">

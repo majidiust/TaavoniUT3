@@ -704,6 +704,36 @@ function DeActivateMember()
 	 });
 }
 
+
+function SendSMSToUser(){
+    $('#SMSDialog').modal('hide');
+    CustomBlockingPanel('توجه','در حال ارسال پیامک به کاربر ....', -1, null);
+    var ProfileNationalityCode = $("#MemberInfoInternationalCode").val();
+    $.ajax({
+        type: 'POST',
+        url: ServerURL + "Account/SendSmsToUser",
+        dataType: 'json',
+        data : {message: $("#SMSMessage").val(), nationalityCode : ProfileNationalityCode},
+        success: function (result) {
+            if(result.Status == true){
+                CustomAlert('توجه', 'ارسال گردید', null);
+            }
+            else{
+                CustomAlert('توجه', 'ارسال با خطا روبرو گردید', null);
+            }
+        },
+        error: function(){
+            CustomAlert('توجه', 'ارسال با خطا روبرو گردید', null);
+        },
+        async : true
+    });
+}
+
+function ShowSMSDialog(){
+    $("#SMSMessage").val(' ')
+    $('#SMSDialog').modal('show');
+}
+
 function LoadUserRank(user){
     $("#EditMemberInfoRank").html('<center> رتیه کاربر : ' + user.Rank + '</center>');
 }

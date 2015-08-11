@@ -126,6 +126,9 @@ namespace TavooniUT3.Models
     partial void InsertProjectUnit(ProjectUnit instance);
     partial void UpdateProjectUnit(ProjectUnit instance);
     partial void DeleteProjectUnit(ProjectUnit instance);
+    partial void InsertSMSProvider(SMSProvider instance);
+    partial void UpdateSMSProvider(SMSProvider instance);
+    partial void DeleteSMSProvider(SMSProvider instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -411,6 +414,14 @@ namespace TavooniUT3.Models
 			get
 			{
 				return this.GetTable<ProjectUnit>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SMSProvider> SMSProviders
+		{
+			get
+			{
+				return this.GetTable<SMSProvider>();
 			}
 		}
 	}
@@ -8602,6 +8613,164 @@ namespace TavooniUT3.Models
 					this._UnitNumberOfBeds = value;
 					this.SendPropertyChanged("UnitNumberOfBeds");
 					this.OnUnitNumberOfBedsChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.SMSProviders")]
+	public partial class SMSProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _username;
+		
+		private string _password;
+		
+		private string _number;
+		
+		private string _providerName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnusernameChanging(string value);
+    partial void OnusernameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnnumberChanging(string value);
+    partial void OnnumberChanged();
+    partial void OnproviderNameChanging(string value);
+    partial void OnproviderNameChanged();
+    #endregion
+		
+		public SMSProvider()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="NVarChar(50)")]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this.OnusernameChanging(value);
+					this.SendPropertyChanging();
+					this._username = value;
+					this.SendPropertyChanged("username");
+					this.OnusernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="NVarChar(50)")]
+		public string number
+		{
+			get
+			{
+				return this._number;
+			}
+			set
+			{
+				if ((this._number != value))
+				{
+					this.OnnumberChanging(value);
+					this.SendPropertyChanging();
+					this._number = value;
+					this.SendPropertyChanged("number");
+					this.OnnumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_providerName", DbType="NVarChar(50)")]
+		public string providerName
+		{
+			get
+			{
+				return this._providerName;
+			}
+			set
+			{
+				if ((this._providerName != value))
+				{
+					this.OnproviderNameChanging(value);
+					this.SendPropertyChanging();
+					this._providerName = value;
+					this.SendPropertyChanged("providerName");
+					this.OnproviderNameChanged();
 				}
 			}
 		}

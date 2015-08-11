@@ -398,4 +398,13 @@
       <Column Name="UnitNumberOfBeds" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="hiva.SMSProviders" Member="SMSProviders">
+    <Type Name="SMSProvider">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="number" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="providerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

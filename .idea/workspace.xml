@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ac3a91e-5031-48f9-b59d-db64f419ea5e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TempPE/Models.Database.designer.cs.dll" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TempPE/Models.Database.designer.cs.dll" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/bin/TavooniUT3.dll" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/bin/TavooniUT3.dll" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.dll" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.dll" />
@@ -12,11 +13,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Models/Database.dbml.layout" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Models/Database.dbml.layout" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Models/Database.dbml" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Models/Database.dbml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Models/Database.designer.cs" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/Models/Database.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Public/News.htm" afterPath="$PROJECT_DIR$/Public/News.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Public/albums.htm" afterPath="$PROJECT_DIR$/Public/albums.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Public/index.htm" afterPath="$PROJECT_DIR$/Public/index.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/js/projects.js" afterPath="$PROJECT_DIR$/Panels/js/projects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/obj/Debug/TavooniUT3.csproj.FileListAbsolute.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/TavooniUT3.csproj.user" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/TavooniUT3.csproj.user" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/TavooniUT3.csproj" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/TavooniUT3.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/js/UserDetails.js" afterPath="$PROJECT_DIR$/Panels/js/UserDetails.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/blank.html" afterPath="$PROJECT_DIR$/Panels/blank.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Panels/memberDetailsView.html" afterPath="$PROJECT_DIR$/Panels/memberDetailsView.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/web.config" afterPath="$PROJECT_DIR$/ServerSide/TavooniUT3/TavooniUT3/web.config" />
     </list>
     <ignored path="TaavoniUT3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,33 +42,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="News.htm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Public/News.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0769231" vertical-offset="1255" max-vertical-offset="7004">
-              <caret line="77" column="51" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
-              <folding>
-                <element signature="e#1701#2779#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="memberPaymentList.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Panels/memberPaymentList.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="newProjectView.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Panels/newProjectView.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923" vertical-offset="8823" max-vertical-offset="10268">
-              <caret line="526" column="86" selection-start-line="526" selection-start-column="86" selection-end-line="526" selection-end-column="86" />
+            <state vertical-scroll-proportion="-1.3076923" vertical-offset="8823" max-vertical-offset="10268">
+              <caret line="521" column="75" selection-start-line="521" selection-start-column="75" selection-end-line="521" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -74,8 +55,8 @@
       <file leaf-file-name="projects.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Panels/js/projects.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="5831">
-              <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+            <state vertical-scroll-proportion="-7.071429" vertical-offset="3831" max-vertical-offset="5831">
+              <caret line="237" column="24" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="24" />
               <folding>
                 <element signature="n#!!block;n#Debug#0" expanded="true" />
                 <element signature="n#!!block;n#GetListOfProjects#0" expanded="true" />
@@ -92,7 +73,6 @@
                 <element signature="n#!!block;n#AddNewVahed#0" expanded="true" />
                 <element signature="n#!!block;n#GotoProjectWizard#0" expanded="true" />
                 <element signature="n#!!block;n#ShowNewMoshaatForm#0" expanded="true" />
-                <element signature="n#!!block;n#ShowNewVahedsForm#0" expanded="true" />
                 <element signature="n#!!block;n#DeleteMoshaat#0" expanded="true" />
                 <element signature="n#!!block;n#DeleteVahed#0" expanded="true" />
                 <element signature="n#!!block;n#SaveProjectToServer#0" expanded="true" />
@@ -105,63 +85,100 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newMemberView.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="newMemberView.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Panels/newMemberView.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43669724" vertical-offset="25755" max-vertical-offset="28798">
+            <state vertical-scroll-proportion="-9.153846" vertical-offset="25755" max-vertical-offset="28798">
               <caret line="1529" column="14" selection-start-line="1529" selection-start-column="14" selection-end-line="1529" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserDetails.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="UserDetails.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Panels/js/UserDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="2380">
-              <caret line="391" column="0" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.50513697" vertical-offset="2697" max-vertical-offset="3298">
+              <caret line="729" column="1" selection-start-line="729" selection-start-column="1" selection-end-line="729" selection-end-column="1" />
               <folding>
                 <element signature="n#!!block;n#SaveProfile#0" expanded="true" />
+                <element signature="n#!!block;n#ActivateMember#0" expanded="true" />
+                <element signature="n#!!block;n#DeActivateMember#0" expanded="true" />
+                <element signature="n#!!block;n#SendSMSToUser#0" expanded="true" />
+                <element signature="e#25782#26007#0" expanded="true" />
+                <element signature="e#26034#26112#0" expanded="true" />
+                <element signature="n#!!block;n#ShowSMSDialog#0" expanded="true" />
                 <element signature="n#!!block;n#GetListOfMembersExcel#0" expanded="true" />
+                <marker date="1439333222714" expanded="true" signature="8702:8712" placeholder="..." />
+                <marker date="1439333222714" expanded="true" signature="10418:10428" placeholder="..." />
+                <marker date="1439333222714" expanded="true" signature="12318:12327" placeholder="..." />
+                <marker date="1439333222714" expanded="true" signature="15711:15721" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="albums.htm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Public/albums.htm">
+      <file leaf-file-name="memberDetailsView.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/memberDetailsView.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="6647">
-              <caret line="50" column="158" selection-start-line="50" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-3.018868" vertical-offset="1438" max-vertical-offset="29155">
+              <caret line="94" column="61" selection-start-line="94" selection-start-column="61" selection-end-line="94" selection-end-column="61" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="confirmation.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Public/confirmation.html">
+      <file leaf-file-name="blank.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/blank.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="7259">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-9.923077" vertical-offset="20856" max-vertical-offset="29274">
+              <caret line="1242" column="82" selection-start-line="1242" selection-start-column="82" selection-end-line="1242" selection-end-column="82" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#0;n#fieldset#0;n#div#0;n#div#1;n#div#7;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1439331914887" expanded="true" signature="8481:8493" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dilogs.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Public/dilogs.html">
+      <file leaf-file-name="newPaymentView.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/newPaymentView.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3502">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="3723">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="footer.htm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Public/footer.htm">
+      <file leaf-file-name="newMoshaatView.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/newMoshaatView.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+            <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="425">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="suggestionView.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/suggestionView.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.65384614" vertical-offset="0" max-vertical-offset="459">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="21" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Untitled-1.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Panels/js/Untitled-1.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -181,7 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Panels/memberDetailsView.html" />
         <option value="$PROJECT_DIR$/Panels/js/FamilyDetails.js" />
         <option value="$PROJECT_DIR$/Panels/user.html" />
         <option value="$PROJECT_DIR$/Panels/js/userModeCharisma.js" />
@@ -192,13 +208,14 @@
         <option value="$PROJECT_DIR$/Panels/newProjectView.html" />
         <option value="$PROJECT_DIR$/Panels/newVahedView.html" />
         <option value="$PROJECT_DIR$/Panels/js/charisma.js" />
-        <option value="$PROJECT_DIR$/Panels/js/UserDetails.js" />
-        <option value="$PROJECT_DIR$/Panels/blank.html" />
         <option value="$PROJECT_DIR$/Panels/js/PaymentDetails.js" />
         <option value="$PROJECT_DIR$/Public/albums.htm" />
         <option value="$PROJECT_DIR$/Public/index.htm" />
         <option value="$PROJECT_DIR$/Public/News.htm" />
         <option value="$PROJECT_DIR$/Panels/js/projects.js" />
+        <option value="$PROJECT_DIR$/Panels/memberDetailsView.html" />
+        <option value="$PROJECT_DIR$/Panels/blank.html" />
+        <option value="$PROJECT_DIR$/Panels/js/UserDetails.js" />
       </list>
     </option>
   </component>
@@ -344,7 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1378" height="744" extended-state="1" />
+    <frame x="-8" y="0" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -413,30 +430,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Panels/js/PaymentDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="3978">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding>
-            <marker date="1436823186306" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/js/charisma.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13902" max-vertical-offset="32844">
-          <caret line="837" column="22" selection-start-line="837" selection-start-column="22" selection-end-line="837" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/memberDetailsView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="28934">
-          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Panels/js/UserDetails.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="11900" max-vertical-offset="12070">
@@ -564,13 +557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/memberDetailsView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28473413" vertical-offset="1721" max-vertical-offset="29155">
-          <caret line="111" column="13" selection-start-line="111" selection-start-column="9" selection-end-line="111" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Panels/user.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="7769" max-vertical-offset="18938">
@@ -633,13 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/newMoshaatView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="425">
-          <caret line="13" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Panels/newVahedView.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
@@ -658,13 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.571429" vertical-offset="1731" max-vertical-offset="5304">
           <caret line="150" column="25" selection-start-line="150" selection-start-column="25" selection-end-line="150" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/blank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.4528303" vertical-offset="7529" max-vertical-offset="28730">
-          <caret line="463" column="64" selection-start-line="463" selection-start-column="46" selection-end-line="463" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -747,7 +719,7 @@
         <state vertical-scroll-proportion="-2.0769231" vertical-offset="1255" max-vertical-offset="7004">
           <caret line="77" column="51" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
           <folding>
-            <element signature="e#1701#2779#0" expanded="true" />
+            <element signature="e#1701#2779#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -770,29 +742,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/js/UserDetails.js">
+    <entry file="file://$PROJECT_DIR$/Panels/newMemberView.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="2380">
-          <caret line="391" column="0" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.153846" vertical-offset="25755" max-vertical-offset="28798">
+          <caret line="1529" column="14" selection-start-line="1529" selection-start-column="14" selection-end-line="1529" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/js/Untitled-1.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/newPaymentView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3723">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/newMoshaatView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="425">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/suggestionView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614" vertical-offset="0" max-vertical-offset="459">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="21" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/memberDetailsView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.018868" vertical-offset="1438" max-vertical-offset="29155">
+          <caret line="94" column="61" selection-start-line="94" selection-start-column="61" selection-end-line="94" selection-end-column="61" />
           <folding>
-            <element signature="n#!!block;n#SaveProfile#0" expanded="true" />
-            <element signature="n#!!block;n#GetListOfMembersExcel#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Panels/newProjectView.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923" vertical-offset="8823" max-vertical-offset="10268">
-          <caret line="526" column="86" selection-start-line="526" selection-start-column="86" selection-end-line="526" selection-end-column="86" />
+        <state vertical-scroll-proportion="-1.3076923" vertical-offset="8823" max-vertical-offset="10268">
+          <caret line="521" column="75" selection-start-line="521" selection-start-column="75" selection-end-line="521" selection-end-column="75" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Panels/js/projects.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.928572" vertical-offset="0" max-vertical-offset="5831">
-          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        <state vertical-scroll-proportion="-7.071429" vertical-offset="3831" max-vertical-offset="5831">
+          <caret line="237" column="24" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="24" />
           <folding>
             <element signature="n#!!block;n#Debug#0" expanded="true" />
             <element signature="n#!!block;n#GetListOfProjects#0" expanded="true" />
@@ -809,7 +820,6 @@
             <element signature="n#!!block;n#AddNewVahed#0" expanded="true" />
             <element signature="n#!!block;n#GotoProjectWizard#0" expanded="true" />
             <element signature="n#!!block;n#ShowNewMoshaatForm#0" expanded="true" />
-            <element signature="n#!!block;n#ShowNewVahedsForm#0" expanded="true" />
             <element signature="n#!!block;n#DeleteMoshaat#0" expanded="true" />
             <element signature="n#!!block;n#DeleteVahed#0" expanded="true" />
             <element signature="n#!!block;n#SaveProjectToServer#0" expanded="true" />
@@ -821,11 +831,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Panels/newMemberView.html">
+    <entry file="file://$PROJECT_DIR$/Panels/blank.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43669724" vertical-offset="25755" max-vertical-offset="28798">
-          <caret line="1529" column="14" selection-start-line="1529" selection-start-column="14" selection-end-line="1529" selection-end-column="14" />
-          <folding />
+        <state vertical-scroll-proportion="-9.923077" vertical-offset="20856" max-vertical-offset="29274">
+          <caret line="1242" column="82" selection-start-line="1242" selection-start-column="82" selection-end-line="1242" selection-end-column="82" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#fieldset#0;n#div#0;n#div#1;n#div#7;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1439331914887" expanded="true" signature="8481:8493" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Panels/js/UserDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.50513697" vertical-offset="2697" max-vertical-offset="3298">
+          <caret line="729" column="1" selection-start-line="729" selection-start-column="1" selection-end-line="729" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!block;n#SaveProfile#0" expanded="true" />
+            <element signature="n#!!block;n#ActivateMember#0" expanded="true" />
+            <element signature="n#!!block;n#DeActivateMember#0" expanded="true" />
+            <element signature="n#!!block;n#SendSMSToUser#0" expanded="true" />
+            <element signature="e#25782#26007#0" expanded="true" />
+            <element signature="e#26034#26112#0" expanded="true" />
+            <element signature="n#!!block;n#ShowSMSDialog#0" expanded="true" />
+            <element signature="n#!!block;n#GetListOfMembersExcel#0" expanded="true" />
+            <marker date="1439333222714" expanded="true" signature="8702:8712" placeholder="..." />
+            <marker date="1439333222714" expanded="true" signature="10418:10428" placeholder="..." />
+            <marker date="1439333222714" expanded="true" signature="12318:12327" placeholder="..." />
+            <marker date="1439333222714" expanded="true" signature="15711:15721" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

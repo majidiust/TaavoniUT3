@@ -427,6 +427,17 @@ namespace TavooniUT3.Controllers
             }
         }
 
+        public ActionResult Debug(String msg)
+        {
+            try
+            {
+                return Json(new { Status = true, Message = msg }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #region Active/Inactive Members
         [HttpGet]
@@ -2567,5 +2578,81 @@ namespace TavooniUT3.Controllers
             }
         }
         #endregion
+        #region SMSUtility
+        [HttpPost]
+        [Authorize]
+        public ActionResult SendSmsToUser(String message, String nationalityCode)
+        {
+            try
+            {
+                String userName = nationalityCode;
+                var user = Membership.GetUser(userName);
+                if (user == null)
+                {
+                    return Error(38);
+                }
+                var userId = m_model.aspnet_Users.Single(P => P.UserName.Equals(user.UserName)).UserId;
+                //return Debug(userId.ToString());
+                var mobileNumber = m_model.MemberContacts.Single(P=>P.MemberID.Equals(userId)).MobilePhone;
+                SMSUtlity.SendSMS(mobileNumber, message, "FARAPAYAMAK");
+                return Success(140);
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+        public class SMSUtlity
+        {
+            public static void SendSMS(String to, String message, String op)
+            {
+                try
+                {
+
+                   if (op.ToUpper().Equals("FARAPAYAMAK"))
+                    {
+                        try
+                        {
+                            FarapayamakSendSoap.ArrayOfString recv = new FarapayamakSendSoap.ArrayOfString();
+                            recv.Add(ClearifyCellNumber(to));
+                            FarapayamakSendSoap.SendSoapClient fpSendSMS = new FarapayamakSendSoap.SendSoapClient();
+                            fpSendSMS.SendSimpleSMS("username", "password", recv, "from", message, false);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Err:" + ex.Message);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error  : " + ex.Message);
+                }
+            }
+
+            public static string ClearifyCellNumber(String number)
+            {
+                if (number != "")
+                {
+                    if (number[0] == '+')
+                    {
+                        number = number.Substring(1, number.Length);
+                        return "0" + number;
+                    }
+                    else if (number.Length == "9197343303".Length)
+                    {
+                        return "0" + number;
+                    }
+                    else return number;
+
+                }
+                else
+                    return null;
+            }
+        }
+        #endregion
     }
+
+   
 }
