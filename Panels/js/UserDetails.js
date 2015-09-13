@@ -730,7 +730,7 @@ function SendSMSToUser(){
 }
 
 function ShowSMSDialog(){
-    $("#SMSMessage").val(' ')
+    $("#SMSMessage").val(' ');
     $('#SMSDialog').modal('show');
 }
 
@@ -740,5 +740,4 @@ function LoadUserRank(user){
 
 function GetListOfMembersExcel(){
     window.location = ServerURL + "Account/GetListOfMembersExcel";
-
 }

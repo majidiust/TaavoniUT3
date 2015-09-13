@@ -2414,7 +2414,7 @@ namespace TavooniUT3.Controllers
         //Success code 120+
         [HttpPost]
         [Authorize]
-        public ActionResult CreateProject(String projectName, String address, String beginDate, String endDate, String usefull, String share, String nou)
+        public ActionResult CreateProject(String projectName, String address, String beginDate, String endDate, String usefull, String share, String nou, String nop)
         {
             try
             {
@@ -2426,6 +2426,7 @@ namespace TavooniUT3.Controllers
                 project.ProjectShare = share;
                 project.ProjectUnits = nou;
                 project.ProjectName = projectName;
+                project.ProjectNumberOfParking = int.Parse(nop);
                 m_model.Projects.InsertOnSubmit(project);
                 m_model.SubmitChanges();
                 return Json(new { Status = true, Message = 120,  projectId = project.ProjectId}, JsonRequestBehavior.AllowGet);
@@ -2481,7 +2482,7 @@ namespace TavooniUT3.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddUnitToProject(String projectId, String unitId, String value, String trus, String wareHouseValue, String internalWareHouse, String Parking, String Location, String greenloby, String nob)
+        public ActionResult AddUnitToProject(String projectId, String unitId, String value, String trus, String wareHouseValue, String internalWareHouse, String Parking, String Location, String greenloby, String nob, String quantity)
         {
             try
             {
@@ -2499,6 +2500,7 @@ namespace TavooniUT3.Controllers
                     unit.UnitTrus = int.Parse(trus);
                     unit.UnitValue = double.Parse( value);
                     unit.UnitWareHousValue = double.Parse(wareHouseValue);
+                    unit.UnitCount = int.Parse(quantity);
                     m_model.ProjectUnits.InsertOnSubmit(unit);
                     m_model.SubmitChanges();
                     return Json(new { Status = true, Message = "Added", Id = unit.Id }, JsonRequestBehavior.AllowGet);
@@ -2555,6 +2557,105 @@ namespace TavooniUT3.Controllers
             }
             catch (Exception ex)
             {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetProjectInfo(String projectId)
+        {
+            try
+            {
+                var count = m_model.Projects.Count(P => P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    var result = m_model.Projects.Single(P => P.ProjectId == int.Parse(projectId));
+                    var units = m_model.ProjectUnits.Where(P => P.ProjectId == int.Parse(projectId)).ToList();
+                    var shares = m_model.ProjectsShares.Where(P => P.ProjectId == int.Parse(projectId)).ToList();
+                    return Json(new { Status = true, Message = "Successfully fetched", project = result, units = units, shares = shares }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch(Exception ex){
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult RemoveProjectUnit(String projectId, String UnitId)
+        {
+            try
+            {
+                var count = m_model.Projects.Count(P => P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    var result = m_model.Projects.Single(P => P.ProjectId == int.Parse(projectId));
+                    var nosh = m_model.ProjectUnits.Count(P => P.ProjectId == int.Parse(projectId) && P.UnitId == int.Parse(UnitId));
+                    if (nosh > 0)
+                    {
+                        var unit = m_model.ProjectUnits.Single(P => P.ProjectId == int.Parse(projectId) && P.UnitId == int.Parse(UnitId));
+                        var uinuCount = m_model.UserInUnits.Count(P => P.UinUProjectId == result.ProjectId && P.UinUUnitId == unit.UnitId);
+                        if (uinuCount <= 0)
+                        {
+                            m_model.ProjectUnits.DeleteOnSubmit(unit);
+                            m_model.SubmitChanges();
+                            return Json(new { Status = true, Message = "Successfully Deleted", unit = unit }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            return Json(new { Status = false, Message = "This unit belong to some users", unit = unit }, JsonRequestBehavior.AllowGet);
+                        }    
+                    }
+                    else
+                    {
+                        throw new Exception("Share Not Found");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult RemoveProjectShare(String projectId, String ShareId)
+        {
+            try
+            {
+                var count = m_model.Projects.Count(P => P.ProjectId == int.Parse(projectId));
+                if (count > 0)
+                {
+                    var result = m_model.Projects.Single(P => P.ProjectId == int.Parse(projectId));
+                    var nosh = m_model.ProjectsShares.Count(P => P.ProjectId == int.Parse(projectId) && P.ShareId == int.Parse(ShareId));
+                    if (nosh > 0)
+                    {
+                        var share = m_model.ProjectsShares.Single(P => P.ProjectId == int.Parse(projectId) && P.ShareId == int.Parse(ShareId));
+                        m_model.ProjectsShares.DeleteOnSubmit(share);
+                        m_model.SubmitChanges();
+                        return Json(new { Status = true, Message = "Successfully Deleted", share = share}, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        throw new Exception("Share Not Found");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Project Not Found");
+                }
+            }
+            catch(Exception ex){
                 return Error(ex.Message);
             }
         }
@@ -2616,7 +2717,7 @@ namespace TavooniUT3.Controllers
                             FarapayamakSendSoap.ArrayOfString recv = new FarapayamakSendSoap.ArrayOfString();
                             recv.Add(ClearifyCellNumber(to));
                             FarapayamakSendSoap.SendSoapClient fpSendSMS = new FarapayamakSendSoap.SendSoapClient();
-                            fpSendSMS.SendSimpleSMS("username", "password", recv, "from", message, false);
+                            fpSendSMS.SendSimpleSMS("majidsadeghi", "6442", recv, "50001000729183", message, false);
                         }
                         catch (Exception ex)
                         {

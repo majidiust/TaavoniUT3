@@ -114,21 +114,24 @@ namespace TavooniUT3.Models
     partial void InsertMembersProfile(MembersProfile instance);
     partial void UpdateMembersProfile(MembersProfile instance);
     partial void DeleteMembersProfile(MembersProfile instance);
-    partial void InsertProject(Project instance);
-    partial void UpdateProject(Project instance);
-    partial void DeleteProject(Project instance);
     partial void InsertUserProject(UserProject instance);
     partial void UpdateUserProject(UserProject instance);
     partial void DeleteUserProject(UserProject instance);
     partial void InsertProjectsShare(ProjectsShare instance);
     partial void UpdateProjectsShare(ProjectsShare instance);
     partial void DeleteProjectsShare(ProjectsShare instance);
-    partial void InsertProjectUnit(ProjectUnit instance);
-    partial void UpdateProjectUnit(ProjectUnit instance);
-    partial void DeleteProjectUnit(ProjectUnit instance);
     partial void InsertSMSProvider(SMSProvider instance);
     partial void UpdateSMSProvider(SMSProvider instance);
     partial void DeleteSMSProvider(SMSProvider instance);
+    partial void InsertProject(Project instance);
+    partial void UpdateProject(Project instance);
+    partial void DeleteProject(Project instance);
+    partial void InsertProjectUnit(ProjectUnit instance);
+    partial void UpdateProjectUnit(ProjectUnit instance);
+    partial void DeleteProjectUnit(ProjectUnit instance);
+    partial void InsertUserInUnit(UserInUnit instance);
+    partial void UpdateUserInUnit(UserInUnit instance);
+    partial void DeleteUserInUnit(UserInUnit instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -385,14 +388,6 @@ namespace TavooniUT3.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Project> Projects
-		{
-			get
-			{
-				return this.GetTable<Project>();
-			}
-		}
-		
 		public System.Data.Linq.Table<UserProject> UserProjects
 		{
 			get
@@ -409,6 +404,22 @@ namespace TavooniUT3.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<SMSProvider> SMSProviders
+		{
+			get
+			{
+				return this.GetTable<SMSProvider>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Project> Projects
+		{
+			get
+			{
+				return this.GetTable<Project>();
+			}
+		}
+		
 		public System.Data.Linq.Table<ProjectUnit> ProjectUnits
 		{
 			get
@@ -417,11 +428,11 @@ namespace TavooniUT3.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<SMSProvider> SMSProviders
+		public System.Data.Linq.Table<UserInUnit> UserInUnits
 		{
 			get
 			{
-				return this.GetTable<SMSProvider>();
+				return this.GetTable<UserInUnit>();
 			}
 		}
 	}
@@ -7766,308 +7777,6 @@ namespace TavooniUT3.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.Project")]
-	public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _ProjectName;
-		
-		private string _ProjectAddress;
-		
-		private string _ProjectBeginDate;
-		
-		private string _ProjectEndDate;
-		
-		private string _ProjectLat;
-		
-		private string _ProjectLng;
-		
-		private string _ProjectUsefullEnv;
-		
-		private string _ProjectShare;
-		
-		private string _ProjectUnits;
-		
-		private string _ProjectCode;
-		
-		private int _ProjectId;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnProjectNameChanging(string value);
-    partial void OnProjectNameChanged();
-    partial void OnProjectAddressChanging(string value);
-    partial void OnProjectAddressChanged();
-    partial void OnProjectBeginDateChanging(string value);
-    partial void OnProjectBeginDateChanged();
-    partial void OnProjectEndDateChanging(string value);
-    partial void OnProjectEndDateChanged();
-    partial void OnProjectLatChanging(string value);
-    partial void OnProjectLatChanged();
-    partial void OnProjectLngChanging(string value);
-    partial void OnProjectLngChanged();
-    partial void OnProjectUsefullEnvChanging(string value);
-    partial void OnProjectUsefullEnvChanged();
-    partial void OnProjectShareChanging(string value);
-    partial void OnProjectShareChanged();
-    partial void OnProjectUnitsChanging(string value);
-    partial void OnProjectUnitsChanged();
-    partial void OnProjectCodeChanging(string value);
-    partial void OnProjectCodeChanged();
-    partial void OnProjectIdChanging(int value);
-    partial void OnProjectIdChanged();
-    #endregion
-		
-		public Project()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectName", DbType="NVarChar(50)")]
-		public string ProjectName
-		{
-			get
-			{
-				return this._ProjectName;
-			}
-			set
-			{
-				if ((this._ProjectName != value))
-				{
-					this.OnProjectNameChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectName = value;
-					this.SendPropertyChanged("ProjectName");
-					this.OnProjectNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectAddress", DbType="NVarChar(50)")]
-		public string ProjectAddress
-		{
-			get
-			{
-				return this._ProjectAddress;
-			}
-			set
-			{
-				if ((this._ProjectAddress != value))
-				{
-					this.OnProjectAddressChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectAddress = value;
-					this.SendPropertyChanged("ProjectAddress");
-					this.OnProjectAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectBeginDate", DbType="NVarChar(50)")]
-		public string ProjectBeginDate
-		{
-			get
-			{
-				return this._ProjectBeginDate;
-			}
-			set
-			{
-				if ((this._ProjectBeginDate != value))
-				{
-					this.OnProjectBeginDateChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectBeginDate = value;
-					this.SendPropertyChanged("ProjectBeginDate");
-					this.OnProjectBeginDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectEndDate", DbType="NVarChar(50)")]
-		public string ProjectEndDate
-		{
-			get
-			{
-				return this._ProjectEndDate;
-			}
-			set
-			{
-				if ((this._ProjectEndDate != value))
-				{
-					this.OnProjectEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectEndDate = value;
-					this.SendPropertyChanged("ProjectEndDate");
-					this.OnProjectEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLat", DbType="NVarChar(50)")]
-		public string ProjectLat
-		{
-			get
-			{
-				return this._ProjectLat;
-			}
-			set
-			{
-				if ((this._ProjectLat != value))
-				{
-					this.OnProjectLatChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectLat = value;
-					this.SendPropertyChanged("ProjectLat");
-					this.OnProjectLatChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLng", DbType="NVarChar(50)")]
-		public string ProjectLng
-		{
-			get
-			{
-				return this._ProjectLng;
-			}
-			set
-			{
-				if ((this._ProjectLng != value))
-				{
-					this.OnProjectLngChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectLng = value;
-					this.SendPropertyChanged("ProjectLng");
-					this.OnProjectLngChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectUsefullEnv", DbType="NVarChar(50)")]
-		public string ProjectUsefullEnv
-		{
-			get
-			{
-				return this._ProjectUsefullEnv;
-			}
-			set
-			{
-				if ((this._ProjectUsefullEnv != value))
-				{
-					this.OnProjectUsefullEnvChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectUsefullEnv = value;
-					this.SendPropertyChanged("ProjectUsefullEnv");
-					this.OnProjectUsefullEnvChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectShare", DbType="NVarChar(50)")]
-		public string ProjectShare
-		{
-			get
-			{
-				return this._ProjectShare;
-			}
-			set
-			{
-				if ((this._ProjectShare != value))
-				{
-					this.OnProjectShareChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectShare = value;
-					this.SendPropertyChanged("ProjectShare");
-					this.OnProjectShareChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectUnits", DbType="NVarChar(50)")]
-		public string ProjectUnits
-		{
-			get
-			{
-				return this._ProjectUnits;
-			}
-			set
-			{
-				if ((this._ProjectUnits != value))
-				{
-					this.OnProjectUnitsChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectUnits = value;
-					this.SendPropertyChanged("ProjectUnits");
-					this.OnProjectUnitsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectCode", DbType="NVarChar(50)")]
-		public string ProjectCode
-		{
-			get
-			{
-				return this._ProjectCode;
-			}
-			set
-			{
-				if ((this._ProjectCode != value))
-				{
-					this.OnProjectCodeChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectCode = value;
-					this.SendPropertyChanged("ProjectCode");
-					this.OnProjectCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ProjectId
-		{
-			get
-			{
-				return this._ProjectId;
-			}
-			set
-			{
-				if ((this._ProjectId != value))
-				{
-					this.OnProjectIdChanging(value);
-					this.SendPropertyChanging();
-					this._ProjectId = value;
-					this.SendPropertyChanged("ProjectId");
-					this.OnProjectIdChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.UserProjects")]
 	public partial class UserProject : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8336,6 +8045,490 @@ namespace TavooniUT3.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.SMSProviders")]
+	public partial class SMSProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _username;
+		
+		private string _password;
+		
+		private string _number;
+		
+		private string _providerName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnusernameChanging(string value);
+    partial void OnusernameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnnumberChanging(string value);
+    partial void OnnumberChanged();
+    partial void OnproviderNameChanging(string value);
+    partial void OnproviderNameChanged();
+    #endregion
+		
+		public SMSProvider()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="NVarChar(50)")]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this.OnusernameChanging(value);
+					this.SendPropertyChanging();
+					this._username = value;
+					this.SendPropertyChanged("username");
+					this.OnusernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="NVarChar(50)")]
+		public string number
+		{
+			get
+			{
+				return this._number;
+			}
+			set
+			{
+				if ((this._number != value))
+				{
+					this.OnnumberChanging(value);
+					this.SendPropertyChanging();
+					this._number = value;
+					this.SendPropertyChanged("number");
+					this.OnnumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_providerName", DbType="NVarChar(50)")]
+		public string providerName
+		{
+			get
+			{
+				return this._providerName;
+			}
+			set
+			{
+				if ((this._providerName != value))
+				{
+					this.OnproviderNameChanging(value);
+					this.SendPropertyChanging();
+					this._providerName = value;
+					this.SendPropertyChanged("providerName");
+					this.OnproviderNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.Project")]
+	public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ProjectName;
+		
+		private string _ProjectAddress;
+		
+		private string _ProjectBeginDate;
+		
+		private string _ProjectEndDate;
+		
+		private string _ProjectLat;
+		
+		private string _ProjectLng;
+		
+		private string _ProjectUsefullEnv;
+		
+		private string _ProjectShare;
+		
+		private string _ProjectUnits;
+		
+		private string _ProjectCode;
+		
+		private int _ProjectId;
+		
+		private System.Nullable<int> _ProjectNumberOfParking;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnProjectNameChanging(string value);
+    partial void OnProjectNameChanged();
+    partial void OnProjectAddressChanging(string value);
+    partial void OnProjectAddressChanged();
+    partial void OnProjectBeginDateChanging(string value);
+    partial void OnProjectBeginDateChanged();
+    partial void OnProjectEndDateChanging(string value);
+    partial void OnProjectEndDateChanged();
+    partial void OnProjectLatChanging(string value);
+    partial void OnProjectLatChanged();
+    partial void OnProjectLngChanging(string value);
+    partial void OnProjectLngChanged();
+    partial void OnProjectUsefullEnvChanging(string value);
+    partial void OnProjectUsefullEnvChanged();
+    partial void OnProjectShareChanging(string value);
+    partial void OnProjectShareChanged();
+    partial void OnProjectUnitsChanging(string value);
+    partial void OnProjectUnitsChanged();
+    partial void OnProjectCodeChanging(string value);
+    partial void OnProjectCodeChanged();
+    partial void OnProjectIdChanging(int value);
+    partial void OnProjectIdChanged();
+    partial void OnProjectNumberOfParkingChanging(System.Nullable<int> value);
+    partial void OnProjectNumberOfParkingChanged();
+    #endregion
+		
+		public Project()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectName", DbType="NVarChar(50)")]
+		public string ProjectName
+		{
+			get
+			{
+				return this._ProjectName;
+			}
+			set
+			{
+				if ((this._ProjectName != value))
+				{
+					this.OnProjectNameChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectName = value;
+					this.SendPropertyChanged("ProjectName");
+					this.OnProjectNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectAddress", DbType="NVarChar(50)")]
+		public string ProjectAddress
+		{
+			get
+			{
+				return this._ProjectAddress;
+			}
+			set
+			{
+				if ((this._ProjectAddress != value))
+				{
+					this.OnProjectAddressChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectAddress = value;
+					this.SendPropertyChanged("ProjectAddress");
+					this.OnProjectAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectBeginDate", DbType="NVarChar(50)")]
+		public string ProjectBeginDate
+		{
+			get
+			{
+				return this._ProjectBeginDate;
+			}
+			set
+			{
+				if ((this._ProjectBeginDate != value))
+				{
+					this.OnProjectBeginDateChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectBeginDate = value;
+					this.SendPropertyChanged("ProjectBeginDate");
+					this.OnProjectBeginDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectEndDate", DbType="NVarChar(50)")]
+		public string ProjectEndDate
+		{
+			get
+			{
+				return this._ProjectEndDate;
+			}
+			set
+			{
+				if ((this._ProjectEndDate != value))
+				{
+					this.OnProjectEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectEndDate = value;
+					this.SendPropertyChanged("ProjectEndDate");
+					this.OnProjectEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLat", DbType="NVarChar(50)")]
+		public string ProjectLat
+		{
+			get
+			{
+				return this._ProjectLat;
+			}
+			set
+			{
+				if ((this._ProjectLat != value))
+				{
+					this.OnProjectLatChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectLat = value;
+					this.SendPropertyChanged("ProjectLat");
+					this.OnProjectLatChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLng", DbType="NVarChar(50)")]
+		public string ProjectLng
+		{
+			get
+			{
+				return this._ProjectLng;
+			}
+			set
+			{
+				if ((this._ProjectLng != value))
+				{
+					this.OnProjectLngChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectLng = value;
+					this.SendPropertyChanged("ProjectLng");
+					this.OnProjectLngChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectUsefullEnv", DbType="NVarChar(50)")]
+		public string ProjectUsefullEnv
+		{
+			get
+			{
+				return this._ProjectUsefullEnv;
+			}
+			set
+			{
+				if ((this._ProjectUsefullEnv != value))
+				{
+					this.OnProjectUsefullEnvChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectUsefullEnv = value;
+					this.SendPropertyChanged("ProjectUsefullEnv");
+					this.OnProjectUsefullEnvChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectShare", DbType="NVarChar(50)")]
+		public string ProjectShare
+		{
+			get
+			{
+				return this._ProjectShare;
+			}
+			set
+			{
+				if ((this._ProjectShare != value))
+				{
+					this.OnProjectShareChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectShare = value;
+					this.SendPropertyChanged("ProjectShare");
+					this.OnProjectShareChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectUnits", DbType="NVarChar(50)")]
+		public string ProjectUnits
+		{
+			get
+			{
+				return this._ProjectUnits;
+			}
+			set
+			{
+				if ((this._ProjectUnits != value))
+				{
+					this.OnProjectUnitsChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectUnits = value;
+					this.SendPropertyChanged("ProjectUnits");
+					this.OnProjectUnitsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectCode", DbType="NVarChar(50)")]
+		public string ProjectCode
+		{
+			get
+			{
+				return this._ProjectCode;
+			}
+			set
+			{
+				if ((this._ProjectCode != value))
+				{
+					this.OnProjectCodeChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectCode = value;
+					this.SendPropertyChanged("ProjectCode");
+					this.OnProjectCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ProjectId
+		{
+			get
+			{
+				return this._ProjectId;
+			}
+			set
+			{
+				if ((this._ProjectId != value))
+				{
+					this.OnProjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectId = value;
+					this.SendPropertyChanged("ProjectId");
+					this.OnProjectIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectNumberOfParking", DbType="Int")]
+		public System.Nullable<int> ProjectNumberOfParking
+		{
+			get
+			{
+				return this._ProjectNumberOfParking;
+			}
+			set
+			{
+				if ((this._ProjectNumberOfParking != value))
+				{
+					this.OnProjectNumberOfParkingChanging(value);
+					this.SendPropertyChanging();
+					this._ProjectNumberOfParking = value;
+					this.SendPropertyChanged("ProjectNumberOfParking");
+					this.OnProjectNumberOfParkingChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.ProjectUnits")]
 	public partial class ProjectUnit : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8364,6 +8557,8 @@ namespace TavooniUT3.Models
 		
 		private System.Nullable<int> _UnitNumberOfBeds;
 		
+		private System.Nullable<int> _UnitCount;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -8390,6 +8585,8 @@ namespace TavooniUT3.Models
     partial void OnUnitGreenLobyChanged();
     partial void OnUnitNumberOfBedsChanging(System.Nullable<int> value);
     partial void OnUnitNumberOfBedsChanged();
+    partial void OnUnitCountChanging(System.Nullable<int> value);
+    partial void OnUnitCountChanged();
     #endregion
 		
 		public ProjectUnit()
@@ -8617,6 +8814,26 @@ namespace TavooniUT3.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitCount", DbType="Int")]
+		public System.Nullable<int> UnitCount
+		{
+			get
+			{
+				return this._UnitCount;
+			}
+			set
+			{
+				if ((this._UnitCount != value))
+				{
+					this.OnUnitCountChanging(value);
+					this.SendPropertyChanging();
+					this._UnitCount = value;
+					this.SendPropertyChanged("UnitCount");
+					this.OnUnitCountChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8638,139 +8855,163 @@ namespace TavooniUT3.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.SMSProviders")]
-	public partial class SMSProvider : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="hiva.UserInUnit")]
+	public partial class UserInUnit : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _UinUId;
 		
-		private string _username;
+		private System.Nullable<System.Guid> _UinUUserId;
 		
-		private string _password;
+		private System.Nullable<int> _UinUUnitId;
 		
-		private string _number;
+		private string _UinUAssignDate;
 		
-		private string _providerName;
+		private System.Nullable<bool> _UinUIsActive;
+		
+		private System.Nullable<int> _UinUProjectId;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnusernameChanging(string value);
-    partial void OnusernameChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void OnnumberChanging(string value);
-    partial void OnnumberChanged();
-    partial void OnproviderNameChanging(string value);
-    partial void OnproviderNameChanged();
+    partial void OnUinUIdChanging(int value);
+    partial void OnUinUIdChanged();
+    partial void OnUinUUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUinUUserIdChanged();
+    partial void OnUinUUnitIdChanging(System.Nullable<int> value);
+    partial void OnUinUUnitIdChanged();
+    partial void OnUinUAssignDateChanging(string value);
+    partial void OnUinUAssignDateChanged();
+    partial void OnUinUIsActiveChanging(System.Nullable<bool> value);
+    partial void OnUinUIsActiveChanged();
+    partial void OnUinUProjectIdChanging(System.Nullable<int> value);
+    partial void OnUinUProjectIdChanged();
     #endregion
 		
-		public SMSProvider()
+		public UserInUnit()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UinUId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UinUId
 		{
 			get
 			{
-				return this._Id;
+				return this._UinUId;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._UinUId != value))
 				{
-					this.OnIdChanging(value);
+					this.OnUinUIdChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._UinUId = value;
+					this.SendPropertyChanged("UinUId");
+					this.OnUinUIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="NVarChar(50)")]
-		public string username
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UinUUserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UinUUserId
 		{
 			get
 			{
-				return this._username;
+				return this._UinUUserId;
 			}
 			set
 			{
-				if ((this._username != value))
+				if ((this._UinUUserId != value))
 				{
-					this.OnusernameChanging(value);
+					this.OnUinUUserIdChanging(value);
 					this.SendPropertyChanging();
-					this._username = value;
-					this.SendPropertyChanged("username");
-					this.OnusernameChanged();
+					this._UinUUserId = value;
+					this.SendPropertyChanged("UinUUserId");
+					this.OnUinUUserIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50)")]
-		public string password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UinUUnitId", DbType="Int")]
+		public System.Nullable<int> UinUUnitId
 		{
 			get
 			{
-				return this._password;
+				return this._UinUUnitId;
 			}
 			set
 			{
-				if ((this._password != value))
+				if ((this._UinUUnitId != value))
 				{
-					this.OnpasswordChanging(value);
+					this.OnUinUUnitIdChanging(value);
 					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
+					this._UinUUnitId = value;
+					this.SendPropertyChanged("UinUUnitId");
+					this.OnUinUUnitIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="NVarChar(50)")]
-		public string number
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UinUAssignDate", DbType="NVarChar(50)")]
+		public string UinUAssignDate
 		{
 			get
 			{
-				return this._number;
+				return this._UinUAssignDate;
 			}
 			set
 			{
-				if ((this._number != value))
+				if ((this._UinUAssignDate != value))
 				{
-					this.OnnumberChanging(value);
+					this.OnUinUAssignDateChanging(value);
 					this.SendPropertyChanging();
-					this._number = value;
-					this.SendPropertyChanged("number");
-					this.OnnumberChanged();
+					this._UinUAssignDate = value;
+					this.SendPropertyChanged("UinUAssignDate");
+					this.OnUinUAssignDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_providerName", DbType="NVarChar(50)")]
-		public string providerName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UinUIsActive", DbType="Bit")]
+		public System.Nullable<bool> UinUIsActive
 		{
 			get
 			{
-				return this._providerName;
+				return this._UinUIsActive;
 			}
 			set
 			{
-				if ((this._providerName != value))
+				if ((this._UinUIsActive != value))
 				{
-					this.OnproviderNameChanging(value);
+					this.OnUinUIsActiveChanging(value);
 					this.SendPropertyChanging();
-					this._providerName = value;
-					this.SendPropertyChanged("providerName");
-					this.OnproviderNameChanged();
+					this._UinUIsActive = value;
+					this.SendPropertyChanged("UinUIsActive");
+					this.OnUinUIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UinUProjectId", DbType="Int")]
+		public System.Nullable<int> UinUProjectId
+		{
+			get
+			{
+				return this._UinUProjectId;
+			}
+			set
+			{
+				if ((this._UinUProjectId != value))
+				{
+					this.OnUinUProjectIdChanging(value);
+					this.SendPropertyChanging();
+					this._UinUProjectId = value;
+					this.SendPropertyChanged("UinUProjectId");
+					this.OnUinUProjectIdChanged();
 				}
 			}
 		}

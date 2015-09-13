@@ -189,8 +189,10 @@ function GetTotalPayment() {
 function LoadViews() {
     Debug('Loading Views');
     $("#NewMemberContent").load("newMemberView.html");
+   
     $("#SuggestionContent").load("suggestionView.html");
     $("#ListOfRolesContent").load("listOfRolesView.html");
+    $("#ListOfProjectsContent").load("listOfProjects.html");
     $("#ForgotPasswordContent").load("forgotPasswordView.html");
     $("#NewChildContent").load("newChildView.html");
     $("#NewPaymentContent").load("newPaymentView.html");
@@ -202,6 +204,9 @@ function LoadViews() {
     $("#NewVahedContent").load("newVahedView.html");
     $("#MemberInfoContent").load("memberDetailsView.html", function () {
         $("#tabs").tabs();
+    });
+    $("#ProjectDetailsContent").load("projectDetailsView.html", function () {
+        $("#projectTabs").tabs();
     });
 }
 
